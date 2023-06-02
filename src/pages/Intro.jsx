@@ -7,6 +7,7 @@ export const Intro = () => {
     <div>
       <IntroComp/>
       <Link to={`main`}>Main</Link>
+      <p>야호</p>
     </div>
   )
 }
