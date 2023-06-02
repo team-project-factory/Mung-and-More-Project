@@ -6,7 +6,7 @@ export const Intro = () => {
   return (
     <div>
       <IntroComp/>
-      <Link to={`main`}>Main</Link>
+      <Link to={`/`}>Main</Link>
     </div>
   )
 }
