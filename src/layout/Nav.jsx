@@ -19,7 +19,7 @@ export const Nav = () => {
     <div style={navbar}>
       <ul style={{padding:`30px`}}>
         <li>
-          <img src="/img/LOGO.svg" alt="" width={"100px"} />
+          <img src="/img/LOGO.svg" alt="" width={"110px"} />
         </li>
       </ul>
       <ul style={{display:'flex', justifyContent: 'left', textAlign:`center`, flexDirection:'row',marginLeft:'-33%'}}>
