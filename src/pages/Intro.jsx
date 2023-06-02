@@ -6,7 +6,11 @@ export const Intro = () => {
   return (
     <div>
       <IntroComp/>
+
+      <Link to={`/`}>Main</Link>
+=======
       <Link to={`main`}>Main</Link>
+
     </div>
   )
 }

@@ -32,7 +32,7 @@ export const Nav = () => {
         ><Link to={`/community`}>Community</Link></li>
         <li
         style={{padding:`20px`}}
-        ><Link to={`/noctice`}>Noctice</Link></li>
+        ><Link to={`/notice`}>Notice</Link></li>
       </ul>
       <ul style={{backgroundColor: `black`, padding:`20px 50px`, borderRadius:`50px`}}>
         <li><Link to={`/login`}
