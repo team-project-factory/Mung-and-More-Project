@@ -13,7 +13,7 @@ import { Shopping } from './pages/Main/Shopping/Shopping';
 import { Information } from './pages/Main/Shopping/Information';
 import { Location } from './pages/Main/Location';
 import { Community } from './pages/Main/Community';
-import { Noctice } from './pages/Main/Noctice';
+import { Notice } from './pages/Main/Notice';
 
 function App() {
   return (
@@ -35,7 +35,7 @@ function App() {
         <Route path='/information' element={<Information/>}/>
         <Route path='/location' element={<Location/>}/>
         <Route path='/community' element={<Community/>}/>
-        <Route path='/noctice' element={<Noctice/>}/>
+        <Route path='/notice' element={<Notice/>}/>
       </Routes>
     </div>
   );
