@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const InformationComp = () => {
+export default function InformationComp() {
   return (
     <div>InformationComp</div>
   )
