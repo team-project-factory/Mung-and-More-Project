@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
-export const NoticeComp = () => {
-  return (
-    <div>NoticeComp</div>
-  )
+export default function NoticeComp() {
+  return <div>NoticeComp</div>;
 }

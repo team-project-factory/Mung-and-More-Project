@@ -1,10 +1,12 @@
-import React from 'react'
-import { NoticeComp } from '../../components/main/notice/NoticeComp'
+import React from "react";
+import { NoticeNavComp } from "../../components/main/notice/NoticeNavComp";
+import SearchComp from "../../components/main/notice/SearchComp";
 
 export const Notice = () => {
   return (
     <div>
-      <NoticeComp/>
+      <NoticeNavComp />
+      <SearchComp />
     </div>
-  )
-}
+  );
+};

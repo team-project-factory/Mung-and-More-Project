@@ -14,6 +14,7 @@ import { Information } from "./pages/Main/Shopping/Information";
 import { Location } from "./pages/Main/Location";
 import { Community } from "./pages/Main/Community";
 import { Notice } from "./pages/Main/Notice";
+import { Nav } from "./layout/Nav";
 
 function App() {
   return (
@@ -22,7 +23,6 @@ function App() {
         {/** nav바 없음 */}
         <Route path="/login" element={<Login />} />
         <Route path="/joinmember" element={<JoinMember />} />
-
         {/** nav바 있음 */}
         <Route path="/" element={<Main />} />
         <Route path="/mypage" element={<MyPage />} />
