@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
+
+/**
+메인 폰트
+font-family: 'Montserrat', sans-serif;
+
+font-weight로 조절
+*/
+
+
+
+*{ margin:0; padding: 0;}
+
+#root{
+}
+
+
+ul{ list-style-type: none; }
+a{
+  text-decoration: none; color: black;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+a:hover{color: red;}
