@@ -24,7 +24,7 @@ function App() {
         <Route path='/joinmember' element={<JoinMember/>}/>
 
         {/** nav바 있음 */}
-        <Route path='/main' element={<Main/>}/>
+        <Route path='/' element={<Main/>}/>
         <Route path='/mypage' element={<MyPage/>}/>
         <Route path='/orderlist' element={<OrderList/>}/>
         <Route path='/edit' element={<Edit/>}/>
