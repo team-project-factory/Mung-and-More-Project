@@ -18,9 +18,9 @@ export const Nav = () => {
   return (
     <div style={navbar}>
       <ul style={{padding:`30px`}}>
-        <li>
+        <Link to={`/`}>
           <img src="/img/LOGO.svg" alt="" width={"55%"} />
-        </li>
+        </Link>
       </ul>
       <ul style={{display:'flex', justifyContent: 'left', textAlign:`center`, flexDirection:'row',marginLeft:'-33%'}}>
         <li
