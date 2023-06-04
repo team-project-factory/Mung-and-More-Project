@@ -14,7 +14,6 @@ import { Information } from './pages/Main/Shopping/Information';
 import { Location } from './pages/Main/Location';
 import { Community } from './pages/Main/Community';
 import { Notice } from './pages/Main/Notice';
-import { Nav } from './layout/Nav';
 
 function App() {
   return (

@@ -1,45 +1,29 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+//css
+import style from './Nav.module.scss'
+
 export const Nav = () => {
-  
-  const navbar = {
-    display: 'flex', 
-    justifyContent:'space-between', 
-    alignItems:'center',
-    height:`60px`, 
-    backgroundColor:`white`,
-    borderRadius : `80px`,
-    padding :`20px`,
-    width: `1280px`,
-    margin: `auto`,
-  }
 
   return (
-    <div style={navbar}>
-      <ul style={{padding:`30px`}}>
+    <div className={style.navbar}>
+      {/** 로고 */}
+      <ul className={style.navbar_logo}>
         <Link to={`/`}>
-          <img src="/img/LOGO.svg" alt="" width={"55%"} />
+          <img src="/img/LOGO.svg" alt="" />
         </Link>
       </ul>
-      <ul style={{display:'flex', justifyContent: 'left', textAlign:`center`, flexDirection:'row',marginLeft:'-33%'}}>
-        <li
-        style={{padding:`20px`}}
-        ><Link to={`/shopping`}>Shopping</Link></li>
-        <li
-        style={{padding:`20px`}}
-        ><Link to={`/location`}>Loaction</Link></li>
-        <li
-        style={{padding:`20px`}}
-        ><Link to={`/community`}>Community</Link></li>
-        <li
-        style={{padding:`20px`}}
-        ><Link to={`/notice`}>Notice</Link></li>
+      {/** 메뉴 */}
+      <ul className={style.navbar_menu}>
+        <li><Link to={`/shopping`}>Shopping</Link></li>
+        <li><Link to={`/location`}>Loaction</Link></li>
+        <li><Link to={`/community`}>Community</Link></li>
+        <li><Link to={`/notice`}>Notice</Link></li>
       </ul>
-      <ul style={{backgroundColor: `black`, padding:`20px 50px`, borderRadius:`50px`}}>
-        <li><Link to={`/login`}
-        style={{color : `white`, fontSize:`1.2rem`}}
-        >Login</Link></li>
+      {/** 로그인  */}
+      <ul className={style.navbar_login}>
+        <li><Link to={`/login`}>Login</Link></li>
       </ul>
     </div>
   )
