@@ -4,7 +4,6 @@
   .shoppingBox{
     width: 1640px;
     margin: auto;
-    border: 2px solid black;
     .shoppingBox_menu{
       display: flex;
       padding: 2%;
@@ -38,6 +37,7 @@
           background-color: beige;
           width: 260px;
           height: 340px;
+          border-radius: 20px;
           .imgBox{
             background-color: aqua;
             width: 260px;
