@@ -4,7 +4,6 @@
   .shoppingBox{
     width: 1640px;
     margin: auto;
-    border: 2px solid black;
     .shoppingBox_menu{
       display: flex;
       padding: 2%;
@@ -26,14 +25,33 @@
       }
     }
     .shoppingBox_itemList{
+      width: 1400px;
       margin: auto;
-      width: 1100px;
       display: flex;
-      background-color: aliceblue;
+      flex-wrap: wrap;
       li{
-        background-color: beige;
         width: 300px;
         height: 400px;
+        padding: 20px;
+        .card{
+          background-color: beige;
+          width: 260px;
+          height: 340px;
+          border-radius: 20px;
+          .imgBox{
+            background-color: aqua;
+            border-radius: 20px 20px 0 0;
+            width: 260px;
+            height: 200px;
+          }
+          .textBox{
+            width: 230px;
+            height: 160px;
+            display: flex;
+            margin: auto;
+            padding: 20px;
+          }
+        }
       }
     }
   }
