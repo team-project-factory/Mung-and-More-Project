@@ -26,14 +26,28 @@
       }
     }
     .shoppingBox_itemList{
+      width: 1400px;
       margin: auto;
-      width: 1100px;
       display: flex;
-      background-color: aliceblue;
+      flex-wrap: wrap;
       li{
-        background-color: beige;
         width: 300px;
         height: 400px;
+        padding: 20px;
+        div{
+          background-color: beige;
+          width: 260px;
+          height: 340px;
+          .imgBox{
+            background-color: aqua;
+            width: 260px;
+            height: 180px;
+          }
+          .textBox{
+            width: 230px;
+            height: 160px;
+          }
+        }
       }
     }
   }
