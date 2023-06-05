@@ -240,7 +240,7 @@ export const LocationComp = () => {
           <li key={index}>
             <h3>{path.name}</h3>
             <p>Content: {path.content}</p>
-            <p>Place: {path.place}</p>
+            <p>장소: {path.place}</p>
           </li>
         ))}
       </ul>
