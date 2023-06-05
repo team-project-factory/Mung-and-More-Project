@@ -24,11 +24,13 @@ export default function SearchComp() {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 570px;
-    background-color: white;
+    width: 850px;
+    background-color: #ffffff;
+    border: solid black 1px;
     margin: auto;
-    height: 45px;
+    height: 55px;
     border-radius: 7px;
+    margin-top: 40px;
   `;
 
   const SearchBar = styled.input.attrs({
@@ -46,11 +48,13 @@ export default function SearchComp() {
     margin: auto;
     margin-top: 10px;
     margin-bottom: 12px;
-    width: 530px;
-    height: 40px;
+    padding-left: 30px;
+    width: 800px;
+    height: 50px;
     border-radius: 7px;
     border: 0;
     font-family: "SUITE-Regular";
+    font-size: 1.15rem;
     text-align: center;
   `;
 
@@ -58,8 +62,9 @@ export default function SearchComp() {
     border: 0;
     background-color: white;
     height: 40px;
-    width: 20px;
-    margin-right: 15px;
+    width: 15px;
+    margin-right: 30px;
+    font-size: 1.3rem;
   `;
 
   return (
