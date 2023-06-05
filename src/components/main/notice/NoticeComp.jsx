@@ -23,39 +23,50 @@ export const NoticeComp = () => {
   const NoticeNav = styled.div`
     font-family: "Montserrat", sans-serif;
     font-weight: bold;
+    font-size: 1.4rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    height: 25px;
-    background-color: white;
+    height: 80px;
+    background-color: #ebebeb;
     border-radius: 80px;
-    padding: 20px;
-    width: 545px;
+    width: 880px;
     margin: auto;
-    margin-top: 250px;
+    margin-top: 120px;
     margin-bottom: 10px;
   `;
 
-  // Navbar 각각의 카테고리를 감싸는 ul
-  const Categories = styled.ul`
+  // Navbar 각각의 카테고리를 감싸는 div
+  const Categories = styled.div`
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
     text-align: center;
-    flex-direction: row;
   `;
 
-  // Navbar 각각의 카테고리에 해당하는 li
-  const Category = styled.li`
-    padding: 20px;
-    margin-left: 103px;
-
-    &:first-child {
-      margin-left: 45px;
-    }
+  // Navbar 각각의 카테고리에 해당하는 div
+  const Category = styled.div`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 110px;
+    margin: auto;
+    width: 65px;
 
     &:hover {
       cursor: pointer;
     }
+  `;
+
+  // 각각의 카테고리가 활성화됐을 때 적용할 스타일
+  const ActiveCategory = styled(Category)`
+    margin: auto;
+    background-color: white;
+    height: 65px;
+    border-radius: 85px;
+    width: 65px;
+    text-align: center;
   `;
 
   return (
@@ -65,6 +76,7 @@ export const NoticeComp = () => {
           <Category
             onClick={() => handleCatClick("FAQ")}
             className={activeCat === "FAQ" ? "active" : ""}
+            as={activeCat === "FAQ" ? ActiveCategory : undefined}
           >
             FAQ
           </Category>
@@ -72,6 +84,7 @@ export const NoticeComp = () => {
           <Category
             onClick={() => handleCatClick("Notice")}
             className={activeCat === "Notice" ? "active" : ""}
+            as={activeCat === "Notice" ? ActiveCategory : undefined}
           >
             Notice
           </Category>
@@ -79,6 +92,7 @@ export const NoticeComp = () => {
           <Category
             onClick={() => handleCatClick("Event")}
             className={activeCat === "Event" ? "active" : ""}
+            as={activeCat === "Event" ? ActiveCategory : undefined}
           >
             Event
           </Category>
