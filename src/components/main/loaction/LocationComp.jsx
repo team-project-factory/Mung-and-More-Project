@@ -1,11 +1,42 @@
 import React, { useEffect, useState } from "react";
 
+// 파이어스토어 데이터 읽기
+import { collection,doc,getDoc,getDocs } from 'firebase/firestore';
+import { db } from '../../../data/firebase';
+
+
+
 // script로 kakao map을 들고오면 window 전역 객체에 들어가기 떄문에
 // 함수형 컴포넌트에서 인식하지 못함
 // 따라서 아래와 같이 window에서 kakao 객체를 뽑아서 사용
+
+
+
+const {kakao} = window;
+
 const { kakao } = window;
 
+
 export const LocationComp = () => {
+
+  const [cafes,setCafes] = useState("")
+  const [pathes,setPathes] = useState("")
+  const [hospitals,setHospitals] = useState("")
+  const [type,setType] = useState("path")
+
+  useEffect(()=>{
+    const getLocationList = async() =>{
+      const querySnapshot2 = await getDoc(doc(db, "location","path"));
+      setPathes(querySnapshot2.data().pathList);
+      const querySnapshot3 = await getDoc(doc(db, "location","hospital"));
+      setHospitals(querySnapshot3.data().hospitalList);
+      const querySnapshot1 = await getDoc(doc(db, "location","cafe"));
+      setCafes(querySnapshot1.data().cafeList);
+    }
+    getLocationList();
+  },[])
+  
+
   const [map, setMap] = useState(null);
 
   useEffect(() => {
@@ -23,9 +54,14 @@ export const LocationComp = () => {
       createPathMarkers();
       createHospitalMarkers();
       createCafeMarkers();
+
+      changeMarker(type, map);
+
       changeMarker("path", map);
+
     }
   }, [map]);
+
 
   // 산책로 마커가 표시될 좌표 배열
   const pathPositions = [
@@ -166,6 +202,20 @@ export const LocationComp = () => {
       cafeMarkers[i].setMap(map);
     }
   }
+
+
+  
+  function changeMarker(type) {
+    const pathMenu = document.getElementById('pathMenu');
+    const hospitalMenu = document.getElementById('hospitalMenu');
+    const cafeMenu = document.getElementById('cafeMenu');
+    //산책로 클릭시 발생
+    if (type === 'path') {
+      pathMenu.className = 'menu_selected';
+      hospitalMenu.className = '';
+      cafeMenu.className = '';
+      setPathMarkers(map);
+
   function changeMarker(type, newMap) {
     const pathMenu = document.getElementById("pathMenu");
     const hospitalMenu = document.getElementById("hospitalMenu");
@@ -176,6 +226,7 @@ export const LocationComp = () => {
       hospitalMenu.className = "";
       cafeMenu.className = "";
       setPathMarkers(newMap);
+
       setHospitalMarkers(null);
       setCafeMarkers(null);
     }
@@ -186,10 +237,16 @@ export const LocationComp = () => {
       cafeMenu.className = "";
 
       setPathMarkers(null);
-      setHospitalMarkers(newMap);
+      setHospitalMarkers(map);
       setCafeMarkers(null);
     }
     //애견카페 클릭시 발생
+
+    else if (type === 'cafe') {
+      pathMenu.className = '';
+      hospitalMenu.className = '';
+      cafeMenu.className = 'menu_selected';
+
     else if (type === "cafe") {
       pathMenu.className = "";
       hospitalMenu.className = "";
@@ -197,7 +254,7 @@ export const LocationComp = () => {
 
       setPathMarkers(null);
       setHospitalMarkers(null);
-      setCafeMarkers(newMap);
+      setCafeMarkers(map);
     }
   }
 
@@ -217,6 +274,18 @@ export const LocationComp = () => {
         <button id="cafeMenu" onClick={() => changeMarker("cafe", map)}>
           애견카페
         </button>
+      </div>
+      <div style={{margin : '10%'}}>
+      <ul>
+        {pathes && pathes.map((path,index) => (
+          <li key={index}>
+            <h3>{path.name}</h3>
+            <p>Content: {path.content}</p>
+            <p>Place: {path.place}</p>
+          </li>
+        ))}
+      </ul>
+
       </div>
     </div>
   );
