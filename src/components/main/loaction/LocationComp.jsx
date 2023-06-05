@@ -7,6 +7,8 @@ const {kakao} = window;
 
 export const LocationComp = () => {
   const [map, setMap] = useState(null);
+
+
   useEffect(() => {
     const container = document.getElementById('map');
     const options = {
