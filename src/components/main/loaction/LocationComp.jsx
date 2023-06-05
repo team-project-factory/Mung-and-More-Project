@@ -7,6 +7,7 @@ const { kakao } = window;
 
 export const LocationComp = () => {
   const [map, setMap] = useState(null);
+
   useEffect(() => {
     const container = document.getElementById("map");
     const options = {
@@ -90,7 +91,7 @@ export const LocationComp = () => {
     return marker;
   }
 
-  // 산책로 마커를 생ㅅ
+  // 산책로 마커를 생성
   function createPathMarkers() {
     for (let i = 0; i < pathPositions.length; i++) {
       const imageSize = new window.kakao.maps.Size(22, 26);
@@ -165,12 +166,11 @@ export const LocationComp = () => {
       cafeMarkers[i].setMap(map);
     }
   }
-
   function changeMarker(type, newMap) {
     const pathMenu = document.getElementById("pathMenu");
     const hospitalMenu = document.getElementById("hospitalMenu");
     const cafeMenu = document.getElementById("cafeMenu");
-
+    //산책로 클릭시 발생
     if (type === "path") {
       pathMenu.className = "menu_selected";
       hospitalMenu.className = "";
@@ -178,7 +178,9 @@ export const LocationComp = () => {
       setPathMarkers(newMap);
       setHospitalMarkers(null);
       setCafeMarkers(null);
-    } else if (type === "hospital") {
+    }
+    // 동물병원 클릭시 발생
+    else if (type === "hospital") {
       pathMenu.className = "";
       hospitalMenu.className = "menu_selected";
       cafeMenu.className = "";
@@ -186,7 +188,9 @@ export const LocationComp = () => {
       setPathMarkers(null);
       setHospitalMarkers(newMap);
       setCafeMarkers(null);
-    } else if (type === "cafe") {
+    }
+    //애견카페 클릭시 발생
+    else if (type === "cafe") {
       pathMenu.className = "";
       hospitalMenu.className = "";
       cafeMenu.className = "menu_selected";

@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+//파이어 베이스
+import './data/firebase'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
