@@ -1,66 +1,75 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from "react";
 
 // script로 kakao map을 들고오면 window 전역 객체에 들어가기 떄문에
 // 함수형 컴포넌트에서 인식하지 못함
 // 따라서 아래와 같이 window에서 kakao 객체를 뽑아서 사용
-const {kakao} = window;
+const { kakao } = window;
 
 export const LocationComp = () => {
   const [map, setMap] = useState(null);
   useEffect(() => {
-    const container = document.getElementById('map');
+    const container = document.getElementById("map");
     const options = {
-      center: new kakao.maps.LatLng(37.498004414546934, 127.02770621963765),
-      level: 3
+      center: new kakao.maps.LatLng(35.154488, 129.059278),
+      level: 9,
     };
     const newMap = new kakao.maps.Map(container, options);
     setMap(newMap);
-    
   }, []);
-  
+
   useEffect(() => {
     if (map) {
       createPathMarkers();
       createHospitalMarkers();
       createCafeMarkers();
-      changeMarker('path', map);
+      changeMarker("path", map);
     }
   }, [map]);
 
   // 산책로 마커가 표시될 좌표 배열
   const pathPositions = [
-    new window.kakao.maps.LatLng(37.499590490909185, 127.0263723554437),
-    new window.kakao.maps.LatLng(37.499427948430814, 127.02794423197847),
-    new window.kakao.maps.LatLng(37.498553760499505, 127.02882598822454),
-    new window.kakao.maps.LatLng(37.497625593121384, 127.02935713582038),
-    new window.kakao.maps.LatLng(37.49646391248451, 127.02675574250912),
-    new window.kakao.maps.LatLng(37.49629291770947, 127.02587362608637),
-    new window.kakao.maps.LatLng(37.49754540521486, 127.02546694890695)
+    new window.kakao.maps.LatLng(35.1641542, 129.0648058),
+    new window.kakao.maps.LatLng(35.1681608, 129.0573853),
+    new window.kakao.maps.LatLng(35.1845903, 129.090778),
+    new window.kakao.maps.LatLng(35.1687484, 128.9735403),
+    new window.kakao.maps.LatLng(35.1531696, 129.118666),
+    new window.kakao.maps.LatLng(35.1564651, 129.0783217),
+    new window.kakao.maps.LatLng(35.1706486, 129.1254273),
+    new window.kakao.maps.LatLng(35.1269223, 129.1008906),
+    new window.kakao.maps.LatLng(35.1154525, 129.1234207),
+    new window.kakao.maps.LatLng(35.1228826, 129.1238165),
   ];
 
   // 동물병원 마커가 표시될 좌표 배열
   const hospitalPositions = [
-    new window.kakao.maps.LatLng(37.497535461505684, 127.02948149502778),
-    new window.kakao.maps.LatLng(37.49671536281186, 127.03020491448352),
-    new window.kakao.maps.LatLng(37.496201943633714, 127.02959405469642),
-    new window.kakao.maps.LatLng(37.49640072567703, 127.02726459882308),
-    new window.kakao.maps.LatLng(37.49640098874988, 127.02609983175294),
-    new window.kakao.maps.LatLng(37.49932849491523, 127.02935780247945),
-    new window.kakao.maps.LatLng(37.49996818951873, 127.02943721562295)
+    new window.kakao.maps.LatLng(35.1688269, 129.0668249),
+    new window.kakao.maps.LatLng(35.1908029, 129.0779383),
+    new window.kakao.maps.LatLng(35.1579972, 129.0545914),
+    new window.kakao.maps.LatLng(35.161707, 129.062766),
+    new window.kakao.maps.LatLng(35.097581, 128.922045),
+    new window.kakao.maps.LatLng(35.1353224, 129.0907874),
+    new window.kakao.maps.LatLng(35.1236559, 129.0435712),
+    new window.kakao.maps.LatLng(35.2110324, 129.0755413),
+    new window.kakao.maps.LatLng(35.1778839, 129.0479764),
+    new window.kakao.maps.LatLng(35.1516122, 129.0124815),
   ];
 
   // 애견카페 마커가 표시될 좌표 배열입니다
   const cafePositions = [
-    new window.kakao.maps.LatLng(37.49966168796031, 127.03007039430118),
-    new window.kakao.maps.LatLng(37.499463762912974, 127.0288828824399),
-    new window.kakao.maps.LatLng(37.49896834100913, 127.02833986892401),
-    new window.kakao.maps.LatLng(37.49893267508434, 127.02673400572665),
-    new window.kakao.maps.LatLng(37.49872543597439, 127.02676785815386),
-    new window.kakao.maps.LatLng(37.49813096097184, 127.02591949495914),
-    new window.kakao.maps.LatLng(37.497680616783086, 127.02518427952202)
+    new window.kakao.maps.LatLng(35.0480138, 128.9668879),
+    new window.kakao.maps.LatLng(35.0989232, 129.0286563),
+    new window.kakao.maps.LatLng(35.153639, 129.065654),
+    new window.kakao.maps.LatLng(35.09934, 129.0317647),
+    new window.kakao.maps.LatLng(35.1547761, 129.1201317),
+    new window.kakao.maps.LatLng(35.1766136, 129.1264725),
+    new window.kakao.maps.LatLng(35.1796538, 129.1986063),
+    new window.kakao.maps.LatLng(35.191141, 129.2135967),
+    new window.kakao.maps.LatLng(35.1989641, 129.0761268),
+    new window.kakao.maps.LatLng(35.1193245, 129.1157462),
   ];
 
-  const markerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png';
+  const markerImageSrc =
+    "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png";
   const pathMarkers = []; // 산책로 마커 객체를 가지고 있을 배열
   const hospitalMarkers = []; // 동물병원 마커 객체를 가지고 있을 배열
   const cafeMarkers = []; // 애견카페 마커 객체를 가지고 있을 배열
@@ -75,7 +84,7 @@ export const LocationComp = () => {
   function createMarker(position, image) {
     const marker = new window.kakao.maps.Marker({
       position: position,
-      image: image
+      image: image,
     });
 
     return marker;
@@ -87,10 +96,14 @@ export const LocationComp = () => {
       const imageSize = new window.kakao.maps.Size(22, 26);
       const imageOptions = {
         spriteOrigin: new window.kakao.maps.Point(10, 0),
-        spriteSize: new window.kakao.maps.Size(36, 98)
+        spriteSize: new window.kakao.maps.Size(36, 98),
       };
 
-      const markerImage = createMarkerImage(markerImageSrc, imageSize, imageOptions);
+      const markerImage = createMarkerImage(
+        markerImageSrc,
+        imageSize,
+        imageOptions
+      );
       const marker = createMarker(pathPositions[i], markerImage);
 
       pathMarkers.push(marker);
@@ -108,10 +121,14 @@ export const LocationComp = () => {
       const imageSize = new window.kakao.maps.Size(22, 26);
       const imageOptions = {
         spriteOrigin: new window.kakao.maps.Point(10, 36),
-        spriteSize: new window.kakao.maps.Size(36, 98)
+        spriteSize: new window.kakao.maps.Size(36, 98),
       };
 
-      const markerImage = createMarkerImage(markerImageSrc, imageSize, imageOptions);
+      const markerImage = createMarkerImage(
+        markerImageSrc,
+        imageSize,
+        imageOptions
+      );
       const marker = createMarker(hospitalPositions[i], markerImage);
 
       hospitalMarkers.push(marker);
@@ -129,10 +146,14 @@ export const LocationComp = () => {
       const imageSize = new window.kakao.maps.Size(22, 26);
       const imageOptions = {
         spriteOrigin: new window.kakao.maps.Point(10, 72),
-        spriteSize: new window.kakao.maps.Size(36, 98)
+        spriteSize: new window.kakao.maps.Size(36, 98),
       };
 
-      const markerImage = createMarkerImage(markerImageSrc, imageSize, imageOptions);
+      const markerImage = createMarkerImage(
+        markerImageSrc,
+        imageSize,
+        imageOptions
+      );
       const marker = createMarker(cafePositions[i], markerImage);
 
       cafeMarkers.push(marker);
@@ -145,53 +166,54 @@ export const LocationComp = () => {
     }
   }
 
-  function changeMarker(type,newMap) {
-    const pathMenu = document.getElementById('pathMenu');
-    const hospitalMenu = document.getElementById('hospitalMenu');
-    const cafeMenu = document.getElementById('cafeMenu');
+  function changeMarker(type, newMap) {
+    const pathMenu = document.getElementById("pathMenu");
+    const hospitalMenu = document.getElementById("hospitalMenu");
+    const cafeMenu = document.getElementById("cafeMenu");
 
-    if (type === 'path') {
-      pathMenu.className = 'menu_selected';
-      hospitalMenu.className = '';
-      cafeMenu.className = '';
+    if (type === "path") {
+      pathMenu.className = "menu_selected";
+      hospitalMenu.className = "";
+      cafeMenu.className = "";
       setPathMarkers(newMap);
       setHospitalMarkers(null);
       setCafeMarkers(null);
-    } else if (type === 'hospital') {
-      pathMenu.className = '';
-      hospitalMenu.className = 'menu_selected';
-      cafeMenu.className = '';
-  
+    } else if (type === "hospital") {
+      pathMenu.className = "";
+      hospitalMenu.className = "menu_selected";
+      cafeMenu.className = "";
+
       setPathMarkers(null);
       setHospitalMarkers(newMap);
       setCafeMarkers(null);
-    } else if (type === 'cafe') {
-      pathMenu.className = '';
-      hospitalMenu.className = '';
-      cafeMenu.className = 'menu_selected';
-  
+    } else if (type === "cafe") {
+      pathMenu.className = "";
+      hospitalMenu.className = "";
+      cafeMenu.className = "menu_selected";
+
       setPathMarkers(null);
       setHospitalMarkers(null);
       setCafeMarkers(newMap);
     }
   }
 
-
-
   return (
-    <div style={{ display: 'flex', justifyContent: 'left' }}>
-      <div id="map" style={{ width: '500px', height: '400px' ,margin:'10%' }}></div>
-      <div style={{marginTop:'10%', marginLeft:'-5%'}}>
-        <button id="pathMenu" onClick={() => changeMarker('path',map)}>
+    <div style={{ display: "flex", justifyContent: "left" }}>
+      <div
+        id="map"
+        style={{ width: "500px", height: "400px", margin: "10%" }}
+      ></div>
+      <div style={{ marginTop: "10%", marginLeft: "-5%" }}>
+        <button id="pathMenu" onClick={() => changeMarker("path", map)}>
           산책로
         </button>
-        <button id="hospitalMenu" onClick={() => changeMarker('hospital',map)}>
+        <button id="hospitalMenu" onClick={() => changeMarker("hospital", map)}>
           동물병원
         </button>
-        <button id="cafeMenu" onClick={() => changeMarker('cafe',map)}>
+        <button id="cafeMenu" onClick={() => changeMarker("cafe", map)}>
           애견카페
         </button>
       </div>
     </div>
   );
-  }
+};
