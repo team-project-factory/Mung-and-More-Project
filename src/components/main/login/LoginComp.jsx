@@ -11,12 +11,13 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 export const LoginComp = () => {
   const navigater = useNavigate(); 
 
-
-
   //로그인 정보
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  //로그인 실패시
+  const [fail, setFail] = useState(true);
 
+  //로그인 버튼 이벤트
   const login = (e)=>{
     e.preventDefault();
     const auth = getAuth();
@@ -30,6 +31,7 @@ export const LoginComp = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        setFail(false)
       });
   }
 
@@ -38,9 +40,9 @@ export const LoginComp = () => {
     <div className={style.loginList}>
       <div className={style.loginList_imgBox}>img 나올곳</div>
       <div className={style.loginList_LoginBox}>
-        <div>
+        <div className={style.loginList_LoginBox_div}>
           <ul>
-            <h1>LOGO</h1>
+            <Link to={`/`}><img src="/img/LOGO.svg" alt="" width={`35%`}/></Link>
             <h2>한줄 소개가 들어갈 공간</h2>
             <form onSubmit={login}>
               <li>
@@ -53,6 +55,9 @@ export const LoginComp = () => {
                   onChange={(e)=>{setPassword(e.target.value)}}
                 />
               </li>
+              <div className={style.failBox}
+              style={fail ? {display:'none'}:{display:''}}
+              >이메일 주소 또는 비밀번호를 확인해주세요</div>
               <li>
                 <input type="submit" value={'Login'}/>
               </li>

@@ -106,11 +106,15 @@ export const ShoppingComp = () => {
           <ul className={style.shoppingBox_itemList}>
             {printItems && printItems.map((item)=>(
               <li key={item.name}>
-                <div>
+                <div className={style.card}>
                   <div className={style.imgBox}></div>
-                  <div className={style.textBox}>
-                    <p>{item.name}</p>
-                  </div>
+                  <ul className={style.textBox}>
+                    <li>
+                      <p>{item.name}</p>
+                      <p>{item.price}</p>
+                    </li>
+                    <li>장바구니</li>
+                  </ul>
                 </div>
               </li>
             ))}
