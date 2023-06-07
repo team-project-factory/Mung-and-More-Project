@@ -20,6 +20,7 @@ export const LocationComp = () => {
   const [hospitals,setHospitals] = useState("")
   const [type,setType] = useState("path")
 
+  // 아래 내용은 firebase에 작성한 데이터를 불러와 사용하는 내용
   useEffect(()=>{
     const getLocationList = async() =>{
       const querySnapshot2 = await getDoc(doc(db, "location","path"));
@@ -46,8 +47,6 @@ export const LocationComp = () => {
     setMap(newMap);
     
   }, []);
-
-  
   
   useEffect(() => {
     if (map) {
@@ -57,8 +56,6 @@ export const LocationComp = () => {
       changeMarker(type, map);
     }
   }, [map]);
-
-  
 
 
   // 산책로 마커가 표시될 좌표 배열
@@ -104,12 +101,9 @@ export const LocationComp = () => {
   ];
 
   const markerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png';
-  const pathMarkers = []; // 산책로 마커 객체를 가지고 있을 배열
-  const hospitalMarkers = []; // 동물병원 마커 객체를 가지고 있을 배열
-  const cafeMarkers = []; // 애견카페 마커 객체를 가지고 있을 배열
-
-
-  
+  const [pathMarkers] = useState([]); // 산책로 마커 객체를 가지고 있을 배열
+  const [hospitalMarkers] = useState([]); // 동물병원 마커 객체를 가지고 있을 배열
+  const [cafeMarkers] = useState([]); // 애견카페 마커 객체를 가지고 있을 배열
 
   // 마커 이미지의 주소와, 크기, 옵션으로 마커 이미지를 생성하여 리턴하는 함수
   function createMarkerImage(src, size, options) {
@@ -192,7 +186,8 @@ export const LocationComp = () => {
   }
 
   
-  function changeMarker(type,map) {
+  function changeMarker(type) {
+    setType(type)
     const pathMenu = document.getElementById('pathMenu');
     const hospitalMenu = document.getElementById('hospitalMenu');
     const cafeMenu = document.getElementById('cafeMenu');
@@ -214,7 +209,7 @@ export const LocationComp = () => {
       setPathMarkers(null);
       setHospitalMarkers(map);
       setCafeMarkers(null);
-    } 
+    }
     //애견카페 클릭시 발생
     else if (type === 'cafe') {
       pathMenu.className = '';
@@ -231,18 +226,19 @@ export const LocationComp = () => {
   return (
     <div style={{ display: 'flex', justifyContent: 'left' }}>
       <div id="map" style={{ width: '500px', height: '400px' ,margin:'10%' }}></div>
-      <div style={{marginTop:'10%', marginLeft:'-5%'}}>
-        <button id="pathMenu" onClick={() => changeMarker('path')}>
+      <div style={{marginTop:'10%', marginLeft:'-10%' }}>
+        <button id="pathMenu" onClick={() => changeMarker('path',map)}>
           산책로
         </button>
-        <button id="hospitalMenu" onClick={() => changeMarker('hospital')}>
+        <button id="hospitalMenu" onClick={() => changeMarker('hospital',map)}>
           동물병원
         </button>
-        <button id="cafeMenu" onClick={() => changeMarker('cafe')}>
+        <button id="cafeMenu" onClick={() => changeMarker('cafe',map)}>
           애견카페
         </button>
       </div>
       <div style={{margin : '10%'}}>
+      {type === 'path' && (
       <ul>
         {pathes && pathes.map((path,index) => (
           <li key={index}>
@@ -252,6 +248,29 @@ export const LocationComp = () => {
           </li>
         ))}
       </ul>
+      )}
+      {type === 'hospital' && (
+      <ul>
+        {hospitals && hospitals.map((hospital,index) => (
+          <li key={index}>
+            <h3>{hospital.name}</h3>
+            <p>Content: {hospital.content}</p>
+            <p>장소: {hospital.place}</p>
+          </li>
+        ))}
+      </ul>
+      )}
+      {type === 'cafe' && (
+      <ul>
+        {cafes && cafes.map((cafe,index) => (
+          <li key={index}>
+            <h3>{cafe.name}</h3>
+            <p>Content: {cafe.content}</p>
+            <p>장소: {cafe.place}</p>
+          </li>
+        ))}
+      </ul>
+      )}
 
       </div>
     </div>
