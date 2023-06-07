@@ -28,9 +28,10 @@ export const LocationComp = () => {
       setHospitals(querySnapshot3.data().hospitalList);
       const querySnapshot1 = await getDoc(doc(db, "location","cafe"));
       setCafes(querySnapshot1.data().cafeList);
+      getLocationList();
     }
-    getLocationList();
   },[])
+  
   
 
   const [map, setMap] = useState(null);
