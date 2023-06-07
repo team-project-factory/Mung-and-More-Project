@@ -1,0 +1,58 @@
+.shopping_backgrd{
+  min-height: 70vh;
+  padding-top: 110px;
+  .shoppingBox{
+    width: 1640px;
+    margin: auto;
+    .shoppingBox_menu{
+      display: flex;
+      padding: 2%;
+      padding-left: 10%;
+      padding-bottom: 3%;
+      li{
+        text-align: center;
+        font-size: 1.2rem;
+        background-color: lightgray;
+        padding: 1.2%;
+        margin: 1%;
+        min-width: 90px;
+        width: 6%;
+        border-radius: 50px;
+        cursor: pointer;
+      }
+      .active{
+        background-color: #C2DCF4;
+      }
+    }
+    .shoppingBox_itemList{
+      width: 1400px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      li{
+        width: 300px;
+        height: 400px;
+        padding: 20px;
+        .card{
+          background-color: beige;
+          width: 260px;
+          height: 340px;
+          border-radius: 20px;
+          .imgBox{
+            background-color: aqua;
+            border-radius: 20px 20px 0 0;
+            width: 260px;
+            height: 200px;
+          }
+          .textBox{
+            width: 230px;
+            height: 160px;
+            display: flex;
+            margin: auto;
+            padding: 20px;
+          }
+        }
+      }
+    }
+  }
+}
