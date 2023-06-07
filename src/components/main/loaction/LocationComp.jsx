@@ -28,8 +28,8 @@ export const LocationComp = () => {
       setHospitals(querySnapshot3.data().hospitalList);
       const querySnapshot1 = await getDoc(doc(db, "location","cafe"));
       setCafes(querySnapshot1.data().cafeList);
-      getLocationList();
     }
+    getLocationList();
   },[])
   
   
@@ -46,6 +46,8 @@ export const LocationComp = () => {
     setMap(newMap);
     
   }, []);
+
+  
   
   useEffect(() => {
     if (map) {
@@ -55,6 +57,8 @@ export const LocationComp = () => {
       changeMarker(type, map);
     }
   }, [map]);
+
+  
 
 
   // 산책로 마커가 표시될 좌표 배열
@@ -103,6 +107,9 @@ export const LocationComp = () => {
   const pathMarkers = []; // 산책로 마커 객체를 가지고 있을 배열
   const hospitalMarkers = []; // 동물병원 마커 객체를 가지고 있을 배열
   const cafeMarkers = []; // 애견카페 마커 객체를 가지고 있을 배열
+
+
+  
 
   // 마커 이미지의 주소와, 크기, 옵션으로 마커 이미지를 생성하여 리턴하는 함수
   function createMarkerImage(src, size, options) {
@@ -185,7 +192,7 @@ export const LocationComp = () => {
   }
 
   
-  function changeMarker(type) {
+  function changeMarker(type,map) {
     const pathMenu = document.getElementById('pathMenu');
     const hospitalMenu = document.getElementById('hospitalMenu');
     const cafeMenu = document.getElementById('cafeMenu');
@@ -207,7 +214,7 @@ export const LocationComp = () => {
       setPathMarkers(null);
       setHospitalMarkers(map);
       setCafeMarkers(null);
-    }
+    } 
     //애견카페 클릭시 발생
     else if (type === 'cafe') {
       pathMenu.className = '';
@@ -225,13 +232,13 @@ export const LocationComp = () => {
     <div style={{ display: 'flex', justifyContent: 'left' }}>
       <div id="map" style={{ width: '500px', height: '400px' ,margin:'10%' }}></div>
       <div style={{marginTop:'10%', marginLeft:'-5%'}}>
-        <button id="pathMenu" onClick={() => changeMarker('path',map)}>
+        <button id="pathMenu" onClick={() => changeMarker('path')}>
           산책로
         </button>
-        <button id="hospitalMenu" onClick={() => changeMarker('hospital',map)}>
+        <button id="hospitalMenu" onClick={() => changeMarker('hospital')}>
           동물병원
         </button>
-        <button id="cafeMenu" onClick={() => changeMarker('cafe',map)}>
+        <button id="cafeMenu" onClick={() => changeMarker('cafe')}>
           애견카페
         </button>
       </div>
