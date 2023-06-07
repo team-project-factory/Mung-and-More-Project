@@ -100,7 +100,7 @@ export const LocationComp = () => {
     new window.kakao.maps.LatLng(35.1193245, 129.1157462),
   ];
 
-  const markerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png';
+  const markerImageSrc = 'https://ifh.cc/g/M8V764.png';
   const [pathMarkers] = useState([]); // 산책로 마커 객체를 가지고 있을 배열
   const [hospitalMarkers] = useState([]); // 동물병원 마커 객체를 가지고 있을 배열
   const [cafeMarkers] = useState([]); // 애견카페 마커 객체를 가지고 있을 배열
@@ -226,7 +226,7 @@ export const LocationComp = () => {
   return (
     <div style={{ display: 'flex', justifyContent: 'left' }}>
       <div id="map" style={{ width: '500px', height: '400px' ,margin:'10%' }}></div>
-      <div style={{marginTop:'10%', marginLeft:'-10%' }}>
+      <div style={{marginTop:'5%', marginLeft:'5%' }}>
         <button id="pathMenu" onClick={() => changeMarker('path',map)}>
           산책로
         </button>
@@ -237,14 +237,14 @@ export const LocationComp = () => {
           애견카페
         </button>
       </div>
-      <div style={{margin : '10%'}}>
+      <div style={{margin : '10%',marginLeft:'-10%', overflow:"scroll", height:'400px', width:'400px'}}>
       {type === 'path' && (
       <ul>
         {pathes && pathes.map((path,index) => (
           <li key={index}>
             <h3>{path.name}</h3>
-            <p>Content: {path.content}</p>
-            <p>장소: {path.place}</p>
+            <p>{path.content}</p>
+            <p>{path.place}</p>
           </li>
         ))}
       </ul>
@@ -254,8 +254,8 @@ export const LocationComp = () => {
         {hospitals && hospitals.map((hospital,index) => (
           <li key={index}>
             <h3>{hospital.name}</h3>
-            <p>Content: {hospital.content}</p>
-            <p>장소: {hospital.place}</p>
+            <p>{hospital.content}</p>
+            <p>{hospital.place}</p>
           </li>
         ))}
       </ul>
@@ -265,8 +265,8 @@ export const LocationComp = () => {
         {cafes && cafes.map((cafe,index) => (
           <li key={index}>
             <h3>{cafe.name}</h3>
-            <p>Content: {cafe.content}</p>
-            <p>장소: {cafe.place}</p>
+            <p>{cafe.content}</p>
+            <p>{cafe.place}</p>
           </li>
         ))}
       </ul>
