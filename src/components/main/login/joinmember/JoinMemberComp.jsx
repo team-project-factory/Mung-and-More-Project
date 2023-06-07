@@ -142,10 +142,10 @@ export default function JoinMemberComp() {
     return (
         <ThemeProvider theme={theme}>
             <Wrap>
-                <JoinWrap src="../assets/img/login.png" />
+                <JoinWrap src="../img/login.png" />
                 <Jointext>
                     <TextWrap>
-                        <LogoImage src="../assets/img/logo.svg" alt="" />
+                        <LogoImage src="../img/logo.svg" alt="" />
                         <Aglog>
                             <StyledText isEnglish={isEnglish}>회원가입</StyledText>
                             <Text>

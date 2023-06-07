@@ -24,6 +24,7 @@ export const TextSpan = styled.span`
 export const Wrap = styled.div`
     display: flex;
     height: 100vh;
+    text-align: center;
 `
 export const JoinWrap = styled.img`
     /* flex: 1.3 1 auto; */
@@ -192,4 +193,17 @@ export const SubmitBtn = styled.button`
     font-size: 16px;
     font-weight: 300;
     border-radius: 5px;
+
+   /* 활성화된 버튼 스타일 */
+    ${({ enabled }) => enabled && `
+    /* 활성화된 버튼에 대한 스타일 */
+    background-color: #000;
+    cursor : pointer;
+    `}
+
+  /* 비활성화된 버튼 스타일 */
+    ${({ enabled }) => !enabled && `
+    /* 비활성화된 버튼에 대한 스타일 */
+    background-color: #C2C4C7;
+    `}
 `
