@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 // import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider, createTheme  } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 import {
     Wrap, JoinWrap, Jointext, LogoImage, TextWrap, StyledText, Aglog, Text, TextSpan, StyleForm
@@ -144,15 +144,25 @@ export default function JoinMemberComp() {
                 // 여기에서 원하는 추가 동작 수행 가능
 
                 // 회원가입 후 자동으로 로그인 처리
-                signInWithEmailAndPassword(auth, email, password)
+                signInWithEmailAndPassword(auth, email, password, name)
                     .then((userCredential) => {
                         // 로그인에 성공한 경우
                         const user = userCredential.user;
                         console.log('로그인에 성공했습니다.');
                         // 여기에서 원하는 추가 동작 수행 가능
-                        
+                        updateProfile(auth.currentUser, {
+                            displayName: name
+                        }).then(() => {
+                            // Profile updated!
+                            // ...
+                        }).catch((error) => {
+                            // An error occurred
+                            // ...
+                        });
+
                         // 로그인 후 페이지 이동
                         navigate('/');
+
                     })
                     .catch((error) => {
                         // 로그인에 실패한 경우
