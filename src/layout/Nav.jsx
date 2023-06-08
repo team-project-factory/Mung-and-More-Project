@@ -68,6 +68,7 @@ export const Nav = () => {
 
             <MenuUtil>
               {/* 로그인 안된 경우 */}
+              
               <Link to={'/login'}>
                 <LoginBtn>Login</LoginBtn>
               </Link>
