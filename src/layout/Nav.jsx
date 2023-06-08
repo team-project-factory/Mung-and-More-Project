@@ -21,7 +21,6 @@ export const Nav = () => {
   // add
   const [isCommunityHovered, setCommunityHovered] = useState(false);
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const getUser =  JSON.parse(sessionStorage.getItem('user'));
   
 
