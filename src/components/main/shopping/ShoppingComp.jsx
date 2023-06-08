@@ -107,7 +107,12 @@ export const ShoppingComp = () => {
             {printItems && printItems.map((item)=>(
               <li key={item.name}>
                 <div className={style.card}>
-                  <div className={style.imgBox}></div>
+                  <div className={style.imgBox}>
+                    <div
+                    className={style.likeBtn}
+                    >{item.like ? `하트`:`빈하트`}
+                    </div>
+                  </div>
                   <ul className={style.textBox}>
                     <li>
                       <p>{item.name}</p>
