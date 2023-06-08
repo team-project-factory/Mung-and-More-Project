@@ -51,6 +51,7 @@ export const TextWrap = styled.div`
 
 export const StyleForm = styled.form`
     width: 360px;
+    margin: 0 auto;
 `
 export const Aglog = styled.div`
     display: flex;
