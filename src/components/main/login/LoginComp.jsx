@@ -38,7 +38,9 @@ export const LoginComp = () => {
 
   return (
     <div className={style.loginList}>
-      <div className={style.loginList_imgBox}>img 나올곳</div>
+      <div className={style.loginList_imgBox}>
+        <img src='./img/login.png'></img>
+      </div>
       <div className={style.loginList_LoginBox}>
         <div className={style.loginList_LoginBox_div}>
           <ul>
