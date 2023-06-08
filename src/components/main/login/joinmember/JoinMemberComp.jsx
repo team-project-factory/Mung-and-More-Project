@@ -106,7 +106,7 @@ export default function JoinMemberComp() {
 
     // 회원가입 버튼
     // 모든 입력값이 채워졌을 때 버튼을 활성화하는 상태
-    const isButtonEnabled = email && password && confirmPassword && name && !emailError && !passwordError && isAllChecked;
+    const isButtonEnabled = email && password && confirmPassword && name && !emailError && !passwordError && (checked[0] || checked[1]);
 
 
     const handleChange2 = (event) => {
