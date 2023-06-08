@@ -63,8 +63,8 @@ export const LoginComp = () => {
 
   return (
     <div className={style.loginList}>
-      <div className={style.loginList_imgBox}>
-        <img src='./img/login.png'></img>
+      <div className={style.loginList_imgBox} style={{backgroundImage:"url(./img/login.png)", backgroundSize:"cover"}}>
+        
       </div>
       <div className={style.loginList_LoginBox}>
         <div className={style.loginList_LoginBox_div}>
