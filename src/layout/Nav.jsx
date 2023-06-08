@@ -22,6 +22,9 @@ export const Nav = () => {
   const [isCommunityHovered, setCommunityHovered] = useState(false);
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const getUser =  JSON.parse(sessionStorage.getItem('user'));
+  
+
 
   const handleCommunityHover = () => {
     setCommunityHovered(true);
@@ -29,7 +32,6 @@ export const Nav = () => {
   const handleCommunityLeave = () => {
     setCommunityHovered(false);
   }
-
   const handleLogin = () => {
     dispatch({ type: 'LOGIN' });
   };
@@ -76,7 +78,7 @@ export const Nav = () => {
             </MenuItems>
 
             <MenuUtil>
-              {isLoggedIn ? (
+              {getUser ? (
                 <>
                   <MenuItems_item>
                     <p>My Like</p>
