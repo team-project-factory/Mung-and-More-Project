@@ -9,7 +9,6 @@ font-weight로 조절
 */
 
 
-
 *{ margin:0; padding: 0;}
 
 
@@ -21,3 +20,20 @@ a{
   font-size: 1.1rem;
 }
 a:hover{color: red;}
+
+@font-face {
+  font-family: 'SUITE-Regular';
+  src: url('./fonts/SUITE-Regular.ttf')
+}
+@font-face {
+  font-family: 'SUITE-Medium';
+  src: url('./fonts/SUITE-Medium.ttf');
+}
+@font-face {
+  font-family: 'SUITE-SemiBold';
+  src: url('./fonts/SUITE-SemiBold.ttf');
+}
+@font-face {
+  font-family: 'SUITE-Bold';
+  src: url('./fonts/SUITE-Bold.ttf');
+}
