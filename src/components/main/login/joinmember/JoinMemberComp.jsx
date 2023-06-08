@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { ThemeProvider, createTheme  } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from '../../../../data/firebase';
 
 import {
     Wrap, JoinWrap, Jointext, LogoImage, TextWrap, StyledText, Aglog, Text, TextSpan, StyleForm
@@ -142,6 +144,7 @@ export default function JoinMemberComp() {
                 const user = userCredential.user;
                 console.log('회원가입에 성공했습니다.');
                 // 여기에서 원하는 추가 동작 수행 가능
+                
                 //회원가입 성공시 displayName에 이름 넣기
                 updateProfile(auth.currentUser, {
                     displayName: name
@@ -152,6 +155,21 @@ export default function JoinMemberComp() {
                     // An error occurred
                     // ...
                 });
+
+                //회원가입 성공시 firestore에 유저 데이터 생성
+                const setData = async() =>{
+                    const docRef = doc(db, "users", user.uid);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                    } else {
+                    // docSnap.data() will be undefined in this case
+                    await setDoc(doc(db, "users", user.uid), {
+                        email : user.email
+                        });
+                    }
+                }
+                setData();
+
 
                 // 회원가입 후 자동으로 로그인 처리
                 signInWithEmailAndPassword(auth, email, password)

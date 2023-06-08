@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from 'react'
 
 // 파이어스토어 데이터 읽기
-import { collection,doc,getDoc,getDocs } from 'firebase/firestore';
+import {doc,getDoc} from 'firebase/firestore';
 import { db } from '../../../data/firebase';
 
 
@@ -105,6 +105,9 @@ export const LocationComp = () => {
   const [hospitalMarkers] = useState([]); // 동물병원 마커 객체를 가지고 있을 배열
   const [cafeMarkers] = useState([]); // 애견카페 마커 객체를 가지고 있을 배열
 
+  // click한 marker의 index
+  const [index,setIndex] = useState("");
+
   // 마커 이미지의 주소와, 크기, 옵션으로 마커 이미지를 생성하여 리턴하는 함수
   function createMarkerImage(src, size, options) {
     const markerImage = new window.kakao.maps.MarkerImage(src, size, options);
@@ -132,7 +135,10 @@ export const LocationComp = () => {
 
       const markerImage = createMarkerImage(markerImageSrc, imageSize, imageOptions);
       const marker = createMarker(pathPositions[i], markerImage);
-
+      // 아래 내용은 마커에 클릭 이벤트를 추가하여 인덱스값을 할당하는 내용
+      kakao.maps.event.addListener(marker, 'click', function(){
+        setIndex(i)
+      });
       pathMarkers.push(marker);
     }
   }
@@ -153,7 +159,10 @@ export const LocationComp = () => {
 
       const markerImage = createMarkerImage(markerImageSrc, imageSize, imageOptions);
       const marker = createMarker(hospitalPositions[i], markerImage);
-
+      // 아래 내용은 마커에 클릭 이벤트를 추가하여 인덱스값을 할당하는 내용
+      kakao.maps.event.addListener(marker, 'click', function(){
+        setIndex(i)
+      });
       hospitalMarkers.push(marker);
     }
   }
@@ -174,7 +183,10 @@ export const LocationComp = () => {
 
       const markerImage = createMarkerImage(markerImageSrc, imageSize, imageOptions);
       const marker = createMarker(cafePositions[i], markerImage);
-
+      // 아래 내용은 마커에 클릭 이벤트를 추가하여 인덱스값을 할당하는 내용
+      kakao.maps.event.addListener(marker, 'click', function(){
+        setIndex(i)
+      });
       cafeMarkers.push(marker);
     }
   }
@@ -187,6 +199,8 @@ export const LocationComp = () => {
 
   
   function changeMarker(type) {
+    // index에 빈값을 넣어 전체가 다시 출력되게 설정
+    setIndex("")
     setType(type)
     const pathMenu = document.getElementById('pathMenu');
     const hospitalMenu = document.getElementById('hospitalMenu');
@@ -238,38 +252,62 @@ export const LocationComp = () => {
         </button>
       </div>
       <div style={{margin : '10%',marginLeft:'-10%', overflow:"scroll", height:'400px', width:'400px'}}>
-      {type === 'path' && (
+      {/* 아래 내용은 중첩 삼항 연산자를 사용하여 작성
+      path와 index값을 둘다 충족해야 클릭한 해당 항목(div)만 출력 
+      path는 있지만 index 값이 0이거나 false일 떄는 전체 내용(ul)을 출력,*/}
+      {type === 'path' && (index ? (
+      <div> 
+        <h3>{pathes[index].name}</h3>
+        <p>{pathes[index].content}</p>
+        <a href={pathes[index].url} target='blank'>{pathes[index].place}</a>
+      </div>) : (
       <ul>
         {pathes && pathes.map((path,index) => (
           <li key={index}>
             <h3>{path.name}</h3>
             <p>{path.content}</p>
-            <p>{path.place}</p>
+            <a href={path.url}target='blank'>{path.place}</a>
           </li>
         ))}
-      </ul>
+      </ul>)
       )}
-      {type === 'hospital' && (
+
+      
+      {type === 'hospital' && (index ? (
+        <div>
+          <h3>{hospitals[index].name}</h3>
+          <p>{hospitals[index].content}</p>
+          <a href={hospitals[index].url} target='blank'>{hospitals[index].place}</a>
+        </div>
+      ) : (
       <ul>
         {hospitals && hospitals.map((hospital,index) => (
           <li key={index}>
             <h3>{hospital.name}</h3>
             <p>{hospital.content}</p>
-            <p>{hospital.place}</p>
+            <a href={hospital.url}target='blank'>{hospital.place}</a>
           </li>
         ))}
-      </ul>
+      </ul>)
       )}
-      {type === 'cafe' && (
+
+
+      {type === 'cafe' && (index ? (
+        <div>
+          <h3>{cafes[index].name}</h3>
+          <p>{cafes[index].content}</p>
+          <a href={cafes[index].url} target='blank'>{cafes[index].place}</a>
+        </div>
+      ) : (
       <ul>
         {cafes && cafes.map((cafe,index) => (
           <li key={index}>
             <h3>{cafe.name}</h3>
             <p>{cafe.content}</p>
-            <p>{cafe.place}</p>
+            <a href={cafe.url}target='blank'>{cafe.place}</a>
           </li>
         ))}
-      </ul>
+      </ul>)
       )}
 
       </div>
