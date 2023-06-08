@@ -9,7 +9,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import {
   Wrap, MypageProfileWrap, MyProfile, MyProfileInfo, MyName, MyEmail, MyprofileIcon, StyledFieldset
   , StyledLabel, StyledWrapper, StyledInput, StyledInputPw, PwButton, StyleForm, ErrorMsg, SaveBtn
-  , LineStyle, Withdrawal, OutBtn, WithdrawalText, UlStyle, LiStyle, LogoutBtn
+  , LineStyle, Withdrawal, OutBtn, WithdrawalText, UlStyle, LiStyle, LogoutBtn, ContentWrap
 } from './styles/MyPageStylecomp'
 import { Nav } from '../../../../layout/Nav';
 
@@ -71,6 +71,7 @@ export default function MyPageComp() {
       <div style={{position:"relative", top:"50px"}}>
         <Nav/>
       </div>
+      <ContentWrap>
       <MypageProfileWrap>
         <MyProfile />
         <MyProfileInfo>
@@ -212,6 +213,7 @@ export default function MyPageComp() {
           <LiStyle>배송지 수정</LiStyle>
         </UlStyle>
       </MypageProfileWrap>
+      </ContentWrap>
     </Wrap>
   )
 }
