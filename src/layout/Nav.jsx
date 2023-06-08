@@ -37,7 +37,6 @@ export const Nav = () => {
           <Link to={'/'}>
             <LogoImage src="./img/logo.svg" />
           </Link>
-
           {/** 메뉴 */}
           <MenuStyle>
             <MenuItems>
