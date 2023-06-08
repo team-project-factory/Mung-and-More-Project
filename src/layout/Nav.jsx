@@ -85,7 +85,9 @@ export const Nav = () => {
                   <MenuItems_item>
                     <p>Cart</p>
                   </MenuItems_item>
-                  <ProfileImg />
+                  <Link to={'/mypage'}>
+                    <ProfileImg />
+                  </Link>
                 </>
               ) : (
                 <Link to={"/login"}>
