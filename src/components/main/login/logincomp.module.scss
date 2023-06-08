@@ -1,38 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap");
 
-*{
-  font-family: 'Montserrat', sans-serif;
+* {
+  font-family: "Montserrat", "SUITE-Regular";
   font-weight: 500;
 }
 
-.loginList{
+.loginList {
   display: flex;
   min-height: 100vh;
-  .loginList_imgBox{
+  .loginList_imgBox {
     width: 60%;
     min-width: 860px;
     background-color: azure;
   }
 
-  .loginList_LoginBox{
+  .loginList_LoginBox {
     width: 40%;
     min-width: 560px;
     padding-top: 15%;
-    .loginList_LoginBox_div{
+    .loginList_LoginBox_div {
       width: 30%;
       margin: auto;
       min-width: 480px;
-      ul{
+      ul {
         width: 70%;
         min-width: 400px;
         margin: auto;
-        h2{
+        h2 {
           margin: 7% 0;
         }
-        form{
-          li{
+        form {
+          li {
             padding: 5px 0;
-            input{
+            input {
               display: block;
               border: none;
               background-color: whitesmoke;
@@ -41,7 +41,7 @@
               height: 48px;
               font-size: 0.8rem;
               padding: 0 10px;
-              &[type = 'submit']{
+              &[type="submit"] {
                 width: 304px;
                 margin-top: 20px;
                 background-color: black;
@@ -52,11 +52,11 @@
             }
           }
         }
-        p{
+        p {
           margin-top: 15%;
           font-size: 1rem;
           text-align: center;
-          a{
+          a {
             font-size: 1rem;
             text-decoration: underline;
             font-weight: 550;
@@ -67,10 +67,10 @@
   }
 }
 
-.failBox{
+.failBox {
   margin-top: 5px;
   border-radius: 5px;
-  background-color: #CC5B5B;
+  background-color: #cc5b5b;
   color: white;
   padding-top: 4%;
   font-size: 0.9rem;
