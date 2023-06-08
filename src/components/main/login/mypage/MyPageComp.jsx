@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
@@ -7,7 +7,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { useNavigate } from 'react-router-dom';
 
 //파이어베이스
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signOut, onAuthStateChanged  } from "firebase/auth";
+
+import { useDispatch } from 'react-redux';
 
 
 import {
@@ -19,13 +21,30 @@ import { Nav } from '../../../../layout/Nav';
 
 
 export default function MyPageComp() {
-  const navigater = useNavigate()
+  const navigater = useNavigate();
+  const dispatch = useDispatch();
 
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 추가: 로그인 상태
+
+
+  useEffect(() => {
+    // 추가: 로그인 상태 변경 감지
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+        setName(user.displayName || '');
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+  }, []);
+
 
   // name
   const handleInputChangeName = (event) => {
