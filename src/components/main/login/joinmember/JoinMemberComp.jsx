@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 // import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider, createTheme  } from '@material-ui/core/styles';
-import { Link, useNavigate } from 'react-router-dom'
-import { auth } from '../../../../data/firebase'
+import { useNavigate } from 'react-router-dom'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 import {
@@ -151,7 +150,7 @@ export default function JoinMemberComp() {
                         const user = userCredential.user;
                         console.log('로그인에 성공했습니다.');
                         // 여기에서 원하는 추가 동작 수행 가능
-
+                        
                         // 로그인 후 페이지 이동
                         navigate('/');
                     })
@@ -201,7 +200,7 @@ export default function JoinMemberComp() {
                             <StyledText isEnglish={isEnglish}>회원가입</StyledText>
                             <Text>
                                 이미 계정이 있으신가요?
-                                <TextSpan>로그인</TextSpan>
+                                <TextSpan onClick={()=>{navigate('/login')}}>로그인</TextSpan>
                             </Text>
                         </Aglog>
                     </TextWrap>
