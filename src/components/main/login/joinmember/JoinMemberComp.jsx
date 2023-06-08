@@ -142,6 +142,7 @@ export default function JoinMemberComp() {
                 const user = userCredential.user;
                 console.log('회원가입에 성공했습니다.');
                 // 여기에서 원하는 추가 동작 수행 가능
+                //회원가입 성공시 displayName에 이름 넣기
                 updateProfile(auth.currentUser, {
                     displayName: name
                 }).then(() => {
