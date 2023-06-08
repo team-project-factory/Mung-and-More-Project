@@ -68,13 +68,14 @@
 }
 
 .failBox{
-  border-radius: 10px;
-  background-color: tomato;
+  margin-top: 5px;
+  border-radius: 5px;
+  background-color: #CC5B5B;
   color: white;
   padding-top: 4%;
-  font-size: 1.1rem;
-  width: 400px;
-  height: 40px;
-  margin: auto;
+  font-size: 0.9rem;
+  width: 304px;
+  height: 25px;
   text-align: center;
+  line-height: 10px;
 }

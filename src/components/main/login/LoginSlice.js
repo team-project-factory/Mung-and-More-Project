@@ -6,7 +6,7 @@ const LoginSlice = createSlice({
   initialState : {},
   reducers :{
     loginUser : (state, action)=>{
-      console.log(action.payload);
+      sessionStorage.setItem('user',JSON.stringify(action.payload));
     }
   }
 })

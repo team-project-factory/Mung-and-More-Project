@@ -10,7 +10,7 @@ export const HeaderStyle = styled.header`
 `
 export const InnerStyle = styled.div`
     width: 100%;
-    max-width: 1700px;
+    max-width: 1600px;
     display: flex;
     border-radius: 5.2023121387vw;
     background-color: #fff;
