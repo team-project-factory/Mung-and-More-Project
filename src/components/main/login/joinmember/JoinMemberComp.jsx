@@ -19,12 +19,14 @@ import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../LoginSlice';
 
 const theme = createTheme ();
 
 export default function JoinMemberComp() {
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
     const isEnglish = false;
 
     // 회원가입 정보
@@ -170,7 +172,6 @@ export default function JoinMemberComp() {
                 }
                 setData();
 
-
                 // 회원가입 후 자동으로 로그인 처리
                 signInWithEmailAndPassword(auth, email, password)
                     .then((userCredential) => {
@@ -178,7 +179,15 @@ export default function JoinMemberComp() {
                         const user = userCredential.user;
                         console.log('로그인에 성공했습니다.');
                         // 여기에서 원하는 추가 동작 수행 가능
-
+                        const uid = user.uid;
+                        const username = user.displayName;
+                        const photo = user.photoURL;
+                        const imfor = {
+                            uid : uid,
+                            name : username,
+                            photo : photo
+                            }
+                        dispatch(loginUser(imfor))
                         // 로그인 후 페이지 이동
                         navigate('/');
 

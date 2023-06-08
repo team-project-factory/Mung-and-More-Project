@@ -39,12 +39,14 @@ export const LoginComp = () => {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         const uid = user.uid;
-        const name = user.displayName;
+        const username = user.displayName;
+        const photo = user.photoURL;
         // ...
         console.log(user);
         const imfor = {
           uid : uid,
-          name : name
+          name : username,
+          photo : photo
         }
         dispatch(loginUser(imfor))
       } 
