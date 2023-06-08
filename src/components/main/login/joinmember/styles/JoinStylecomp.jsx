@@ -49,7 +49,7 @@ export const TextWrap = styled.div`
     text-align: initial;
 `
 
-export const styleForm = styled.form`
+export const StyleForm = styled.form`
     width: 360px;
 `
 export const Aglog = styled.div`

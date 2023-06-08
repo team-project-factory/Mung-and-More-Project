@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 // import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider, createTheme  } from '@material-ui/core/styles';
+import { Link, useNavigate } from 'react-router-dom'
+import { auth } from '../../../../data/firebase'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 import {
-    Wrap, JoinWrap, Jointext, LogoImage, TextWrap, StyledText, Aglog, Text, TextSpan, styleForm
+    Wrap, JoinWrap, Jointext, LogoImage, TextWrap, StyledText, Aglog, Text, TextSpan, StyleForm
     , StyledInput, StyledFieldset, StyledLabel, StyledWrapper, StyledIconButton, StyledInputPw, PwButton,
     CheckStyle, FormControlStyle, SubmitBtn, ErrorMsg
 } from './styles/JoinStylecomp'
@@ -16,10 +19,14 @@ import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-const theme = createMuiTheme();
+const theme = createTheme ();
 
 export default function JoinMemberComp() {
+    const navigate = useNavigate();
+
     const isEnglish = false;
+
+    // 회원가입 정보
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState(false);
 
@@ -88,7 +95,7 @@ export default function JoinMemberComp() {
 
 
     // 약관동의
-    
+
 
     const handleChange1 = (event) => {
         const isChecked = event.target.checked;
@@ -119,7 +126,51 @@ export default function JoinMemberComp() {
         setAllChecked(checked[0] && checked[1] && isChecked);
     };
 
-    
+    // 회원가입 버튼 클릭 시
+    const signUp = (e) => {
+        e.preventDefault();
+        const auth = getAuth();
+
+        if (password !== confirmPassword) {
+            // 비밀번호가 일치하지 않을 경우 에러 처리
+            console.log('비밀번호가 일치하지 않습니다.');
+            return;
+        }
+
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // 회원가입에 성공한 경우
+                const user = userCredential.user;
+                console.log('회원가입에 성공했습니다.');
+                // 여기에서 원하는 추가 동작 수행 가능
+
+                // 회원가입 후 자동으로 로그인 처리
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        // 로그인에 성공한 경우
+                        const user = userCredential.user;
+                        console.log('로그인에 성공했습니다.');
+                        // 여기에서 원하는 추가 동작 수행 가능
+
+                        // 로그인 후 페이지 이동
+                        navigate('/');
+                    })
+                    .catch((error) => {
+                        // 로그인에 실패한 경우
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        console.log('로그인에 실패했습니다.', errorMessage);
+                        // 여기에서 원하는 실패 처리 수행 가능
+                    });
+            })
+            .catch((error) => {
+                // 회원가입에 실패한 경우
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log('회원가입에 실패했습니다.', errorMessage);
+                // 여기에서 원하는 실패 처리 수행 가능
+            });
+    };
 
 
     const children = (
@@ -154,7 +205,7 @@ export default function JoinMemberComp() {
                             </Text>
                         </Aglog>
                     </TextWrap>
-                    <styleForm>
+                    <StyleForm onSubmit={signUp}>
                         {/* 이메일 */}
                         <StyledFieldset>
                             <StyledLabel>이메일</StyledLabel>
@@ -170,7 +221,7 @@ export default function JoinMemberComp() {
                                     }}
                                     error={emailError}
                                     variant="outlined"
-                                    helperText={emailError ? '유효한 이메일 주소를 입력해주세요' : ''}
+                                    helpertext={emailError ? '유효한 이메일 주소를 입력해주세요' : ''}
                                     value={email}
                                     onChange={handleInputChange}
                                 >
@@ -218,7 +269,7 @@ export default function JoinMemberComp() {
                                         value={confirmPassword}
                                         onChange={handleConfirmPasswordChange}
                                         error={passwordError}
-                                        helperText={confirmPasswordErrorMessage}
+                                        helpertext={confirmPasswordErrorMessage}
                                         endAdornment={
                                             <InputAdornment position="end">
                                                 <PwButton
@@ -284,7 +335,7 @@ export default function JoinMemberComp() {
                             enabled={isButtonEnabled}>
                             회원가입
                         </SubmitBtn>
-                    </styleForm>
+                    </StyleForm>
                 </Jointext>
             </Wrap>
         </ThemeProvider>
