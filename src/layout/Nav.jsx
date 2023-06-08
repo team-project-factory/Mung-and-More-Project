@@ -42,27 +42,27 @@ export const Nav = () => {
           <MenuStyle>
             <MenuItems>
               <MenuItems_item>
-                <p>Shopping</p>
+                <Link to={'/shopping'}>Shopping</Link>
               </MenuItems_item>
               <MenuItems_item>
-                <p>Place</p>
+                <Link to={"/location"}>Location</Link>
               </MenuItems_item>
               <MenuItems_item_slide
                 onMouseEnter={handleCommunityHover}
                 onMouseLeave={handleCommunityLeave}
               >
-                <p>Community</p>
+                <Link to={"/community"}>Community</Link>
                 {
                   isCommunityHovered ? (<ArrowDropUpSharpIcon />)
                     : (<ArrowDropDownIcon />)
                 }
                 <SubItems>
-                  <SubLink>Mungstagram</SubLink>
-                  <SubLink>Mung's News</SubLink>
+                  <Link><SubLink>Mungstagram</SubLink></Link>
+                  <Link><SubLink>Mung's News</SubLink></Link>
                 </SubItems>
               </MenuItems_item_slide>
               <MenuItems_item>
-                <p>Notice</p>
+                <Link to={"/notice"}>Notice</Link>
               </MenuItems_item>
             </MenuItems>
 
