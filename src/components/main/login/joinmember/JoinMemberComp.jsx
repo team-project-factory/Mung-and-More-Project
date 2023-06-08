@@ -136,29 +136,29 @@ export default function JoinMemberComp() {
             return;
         }
 
-        createUserWithEmailAndPassword(auth, email, password)
+        createUserWithEmailAndPassword(auth, email, password, name)
             .then((userCredential) => {
                 // 회원가입에 성공한 경우
                 const user = userCredential.user;
                 console.log('회원가입에 성공했습니다.');
                 // 여기에서 원하는 추가 동작 수행 가능
+                updateProfile(auth.currentUser, {
+                    displayName: name
+                }).then(() => {
+                    // Profile updated!
+                    // ...
+                }).catch((error) => {
+                    // An error occurred
+                    // ...
+                });
 
                 // 회원가입 후 자동으로 로그인 처리
-                signInWithEmailAndPassword(auth, email, password, name)
+                signInWithEmailAndPassword(auth, email, password)
                     .then((userCredential) => {
                         // 로그인에 성공한 경우
                         const user = userCredential.user;
                         console.log('로그인에 성공했습니다.');
                         // 여기에서 원하는 추가 동작 수행 가능
-                        updateProfile(auth.currentUser, {
-                            displayName: name
-                        }).then(() => {
-                            // Profile updated!
-                            // ...
-                        }).catch((error) => {
-                            // An error occurred
-                            // ...
-                        });
 
                         // 로그인 후 페이지 이동
                         navigate('/');
