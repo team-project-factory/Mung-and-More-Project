@@ -100,7 +100,7 @@ export const LocationComp = () => {
     new window.kakao.maps.LatLng(35.1193245, 129.1157462),
   ];
 
-  const markerImageSrc = 'https://ifh.cc/g/M8V764.png';
+  const markerImageSrc = 'https://ifh.cc/g/aD6NXr.png';
   const [pathMarkers] = useState([]); // 산책로 마커 객체를 가지고 있을 배열
   const [hospitalMarkers] = useState([]); // 동물병원 마커 객체를 가지고 있을 배열
   const [cafeMarkers] = useState([]); // 애견카페 마커 객체를 가지고 있을 배열
