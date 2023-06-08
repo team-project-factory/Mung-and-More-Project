@@ -5,11 +5,13 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
 
+
 import {
   Wrap, MypageProfileWrap, MyProfile, MyProfileInfo, MyName, MyEmail, MyprofileIcon, StyledFieldset
   , StyledLabel, StyledWrapper, StyledInput, StyledInputPw, PwButton, StyleForm, ErrorMsg, SaveBtn
   , LineStyle, Withdrawal, OutBtn, WithdrawalText, UlStyle, LiStyle, LogoutBtn
 } from './styles/MyPageStylecomp'
+import { Nav } from '../../../../layout/Nav';
 
 
 export default function MyPageComp() {
@@ -66,7 +68,9 @@ export default function MyPageComp() {
 
   return (
     <Wrap>
-        
+      <div style={{position:"relative", top:"50px"}}>
+        <Nav/>
+      </div>
       <MypageProfileWrap>
         <MyProfile />
         <MyProfileInfo>
