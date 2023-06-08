@@ -17,7 +17,7 @@ export const MypageProfileWrap = styled.div`
     background-color: #fff;
     margin: 0 auto;
     position: relative;
-    top: 190px;
+    top: 140px;
     border-radius: 12px;
     padding: 25px 50px;
     display: flex;
@@ -53,11 +53,10 @@ export const StyleForm = styled.form`
     margin: 0 auto;
     background-color: #fff;
     position: relative;
-    top: 190px;
+    top: 120px;
     border-radius: 12px;
     padding: 25px 50px;
     text-align: end;
-    margin-bottom: 17px;
 `
 
 export const MyName = styled.p`
