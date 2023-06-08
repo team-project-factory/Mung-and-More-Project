@@ -4,6 +4,10 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
+import { useNavigate } from 'react-router-dom';
+
+//파이어베이스
+import { getAuth, signOut } from "firebase/auth";
 
 import {
   Wrap, MypageProfileWrap, MyProfile, MyProfileInfo, MyName, MyEmail, MyprofileIcon, StyledFieldset
@@ -13,6 +17,7 @@ import {
 
 
 export default function MyPageComp() {
+  const navigater = useNavigate()
 
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -64,6 +69,16 @@ export default function MyPageComp() {
 
   const isButtonEnable = password && (name || (newPassword && confirmPassword));
 
+  const handleLogOut = () =>{
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      sessionStorage.removeItem('user');
+      navigater('/')
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
+
   return (
     <Wrap>
         
@@ -75,7 +90,7 @@ export default function MyPageComp() {
         </MyProfileInfo>
         <MyprofileIcon />
       </MypageProfileWrap>
-      <LogoutBtn>로그아웃</LogoutBtn>
+      <LogoutBtn onClick={handleLogOut}>로그아웃</LogoutBtn>
       <StyleForm>
         {/* name */}
         <StyledFieldset>
