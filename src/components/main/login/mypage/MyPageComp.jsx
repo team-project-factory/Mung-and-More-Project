@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
@@ -7,7 +7,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { useNavigate } from 'react-router-dom';
 
 //파이어베이스
-import { getAuth, signOut } from "firebase/auth";
+import { db } from '../../../../data/firebase';
+import { getAuth, signOut,  deleteUser, onAuthStateChanged } from "firebase/auth";
+import { doc, deleteDoc } from "firebase/firestore";
 
 
 import {
@@ -19,13 +21,15 @@ import { Nav } from '../../../../layout/Nav';
 
 
 export default function MyPageComp() {
-  const navigater = useNavigate()
+  const navigater = useNavigate();
 
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
+
+  const [userImfor, setUserImfor] = useState('')
 
   // name
   const handleInputChangeName = (event) => {
@@ -71,6 +75,7 @@ export default function MyPageComp() {
 
   const isButtonEnable = password && (name || (newPassword && confirmPassword));
 
+  //로그아웃
   const handleLogOut = () =>{
     const auth = getAuth();
     signOut(auth).then(() => {
@@ -78,6 +83,38 @@ export default function MyPageComp() {
       navigater('/')
     }).catch((error) => {
       // An error happened.
+    });
+  }
+
+  useEffect(()=>{
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        setUserImfor(uid);
+        // ...
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+  },[])
+
+  console.log(userImfor);
+  //회원탈퇴
+  const handleDeleteUser = () =>{
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    deleteUser(user).then(() => {
+      // User deleted.
+      sessionStorage.removeItem('user');
+      navigater('/');
+    }).catch((error) => {
+      // An error ocurred
+      // ...
     });
   }
 
@@ -214,7 +251,7 @@ export default function MyPageComp() {
           <WithdrawalText>
             회원탈퇴 시 모든 데이터가 삭제됩니다.
             </WithdrawalText>
-          <OutBtn>
+          <OutBtn onClick={handleDeleteUser}>
             회원탈퇴
           </OutBtn>
         </Withdrawal>
