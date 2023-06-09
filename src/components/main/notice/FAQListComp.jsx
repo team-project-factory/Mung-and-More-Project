@@ -19,18 +19,23 @@ export default function FAQListComp() {
   };
 
   // styled-components로 컴포넌트 정의
+
+  // 전체를 감싸는 div
   const FAQ = styled.div`
     display: flex;
     justify-content: space-between;
+    margin: auto;
     font-family: "Montserrat", "SUITE-Regular";
     margin-top: 50px;
     font-size: 1.25rem;
   `;
 
+  // FAQ 항목 전체를 감싸는 div(없애면 정렬이 이상해져서 있어야 함)
   const ListSet = styled.div`
     margin: auto;
   `;
 
+  // FAQ 각각의 항목
   const List = styled.div`
     display: flex;
     justify-content: space-between;
@@ -49,6 +54,7 @@ export default function FAQListComp() {
     }
   `;
 
+  // FAQ 각각의 항목 상세설명
   const ListMore = styled.div`
     width: 815px;
     padding: 20px;
@@ -59,23 +65,29 @@ export default function FAQListComp() {
     background-color: #c2dcf475;
   `;
 
+  // FAQ 각각의 항목 제목
   const Content = styled.div``;
+
+  // FAQ 각각의 항목 펼치기(상세보기) 버튼
+  const Button = styled.div``;
 
   // Button에 적용될 애니메이션
   const BtnAnimation = keyframes`from {transform: rotate(0deg);} to {transform: rotate(180deg);}
   `;
 
-  const Button = styled.div`
-    transition: transform 0.2s linear;
-    transform: ${(props) => (props.active ? "rotate(180deg)" : "rotate(0deg)")};
-    animation: ${(props) =>
-      props.active
-        ? css`
-            ${BtnAnimation} 0.3s linear
-          `
-        : "none"};
+  const ActiveAni = styled(Button)`
+    animation: ${BtnAnimation} 0.3s linear;
+    animation-fill-mode: forwards; /* 애니메이션이 종료된 후의 상태를 유지 */
+    animation-iteration-count: 1; /* 애니메이션을 한 번만 실행 */
   `;
 
+  const DeactiveAni = styled(Button)`
+    animation: ${BtnAnimation} 0.3s linear reverse;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+  `;
+
+  // List의 active, deactive 상태에 따라 적용될 스타일
   const ActiveList = styled(List)`
     font-family: "SUITE-Bold";
     font-weight: bold;
@@ -97,7 +109,10 @@ export default function FAQListComp() {
           as={activeMore[0] === true ? ActiveList : DeactiveList}
         >
           <Content>FAQ 첫 번째 내용입니다</Content>
-          <Button active={activeMore[0]}>
+          <Button
+            active={activeMore[0]}
+            as={activeMore[0] === true ? ActiveAni : DeactiveAni}
+          >
             <FontAwesomeIcon icon={faAngleDown} />
           </Button>
         </List>
