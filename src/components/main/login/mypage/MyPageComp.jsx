@@ -48,9 +48,6 @@ export default function MyPageComp() {
     });
   }, []);
 
-
-  const [userImfor, setUserImfor] = useState('')
-
   // name
   const handleInputChangeName = (event) => {
     const inputValue = event.target.value;
