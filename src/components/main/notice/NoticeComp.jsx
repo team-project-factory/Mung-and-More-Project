@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 // SearchBar 컴포넌트 불러오기
@@ -36,7 +35,7 @@ export const NoticeComp = () => {
     margin-bottom: 10px;
   `;
 
-  // Navbar 각각의 카테고리를 감싸는 div
+  // Navbar 각각의 카테고리(FAQ, Notice, Event)를 감싸는 div
   const Categories = styled.div`
     display: flex;
     justify-content: space-around;
@@ -45,7 +44,7 @@ export const NoticeComp = () => {
     text-align: center;
   `;
 
-  // Navbar 각각의 카테고리에 해당하는 div
+  // Navbar 각각의 카테고리(FAQ, Notice, Event)에 해당하는 div
   const Category = styled.div`
     display: flex;
     justify-content: space-around;
@@ -59,7 +58,7 @@ export const NoticeComp = () => {
     }
   `;
 
-  // 각각의 카테고리가 활성화됐을 때 적용할 스타일
+  // 각각의 카테고리(FAQ, Notice, Event)가 활성화(클릭)됐을 때 적용할 스타일
   const ActiveCategory = styled(Category)`
     margin: auto;
     background-color: white;

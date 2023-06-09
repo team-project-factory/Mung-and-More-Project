@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 //css
 import style from './logincomp.module.scss'
 
+//파이어베이스
 //로그인 인증
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 

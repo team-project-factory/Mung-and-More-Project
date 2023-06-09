@@ -166,7 +166,9 @@ export default function JoinMemberComp() {
                     } else {
                     // docSnap.data() will be undefined in this case
                     await setDoc(doc(db, "users", user.uid), {
-                        email : user.email
+                        email : user.email,
+                        likeList : [],
+                        cartList : []
                         });
                     }
                 }
