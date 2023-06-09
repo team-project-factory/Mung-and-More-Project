@@ -315,7 +315,7 @@ export default function MyPageComp() {
             <WithdrawalText>
               회원탈퇴 시 모든 데이터가 삭제됩니다.
             </WithdrawalText>
-            <OutBtn>
+            <OutBtn onClick={handleDeleteUser}>
               회원탈퇴
             </OutBtn>
           </Withdrawal>
