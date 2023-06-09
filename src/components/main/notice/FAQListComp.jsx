@@ -10,6 +10,7 @@ export default function FAQListComp() {
   // useState를 이용해 각 리스트를 클릭했을 때 상세 내용 표시
   // activeMore: 각 리스트 아이템의 표시/숨김 상태를 저장
   const [activeMore, setActiveMore] = useState({});
+  
 
   const handleMoreClick = (id) => {
     setActiveMore((prevState) => ({

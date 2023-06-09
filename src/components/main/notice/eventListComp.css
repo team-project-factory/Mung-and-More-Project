@@ -1,27 +1,44 @@
-/* EventListComp.css */
+.event-slide {
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    position: relative;
+    margin-left: 26%;
+    margin-top: 5%;
+    
+}
 
-.slick-prev, .slick-next {
+.event-slide-img {
+    width: 20%;
+    height: 30vh;
+    padding: 10px;
+}
+
+
+.slide-btn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.prev-btn, .next-btn {
+    font-size: 24px;
+    margin: 0 ;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
     position: absolute;
     top: 50%;
-    font-size: 50px;
-    color: #333333;
-    cursor: pointer;
-    z-index: 10;
+    transform: translateY(-50%);
+    background-color: transparent;
+    font-size: 4rem;
+    text-shadow: 2px 2px 2px gray;
 }
 
-
-.slick-prev {
-    left: 5%;
+.prev-btn {
+    left: -10%;
+}
+.next-btn {
+    right: 28%;
 }
 
-.slick-next {
-    right: 5%;
-}
-
-.imgBox {
-    width: 400px;
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
