@@ -22,6 +22,7 @@ function App() {
         {/** nav바 없음 */}
         <Route path="/login" element={<Login />} />
         <Route path="/joinmember" element={<JoinMember />} />
+
         {/** nav바 있음 */}
         <Route path="/" element={<Main />} />
         <Route path="/mypage" element={<MyPage />} />
@@ -35,6 +36,10 @@ function App() {
         <Route path="/location" element={<Location />} />
         <Route path="/community" element={<Community />} />
         <Route path="/notice" element={<Notice />} />
+
+        {/** 로그인 성공했을 때 */}
+        <Route path="/mylike" element={<LikeList />} />
+        <Route path="/cart" element={<CartList />} />
       </Routes>
     </div>
   );
