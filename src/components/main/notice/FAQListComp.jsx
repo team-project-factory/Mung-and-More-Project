@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { CSSTransition } from "react-transition-group";
-import styled, { keyframes } from "styled-components";
+import React, { useState, useEffect } from "react";
+import styled, { keyframes, css } from "styled-components";
 
 // FontAwesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,13 +8,14 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 export default function FAQListComp() {
   // useState를 이용해 각 리스트를 클릭했을 때 상세 내용 표시
   // activeMore: 각 리스트 아이템의 표시/숨김 상태를 저장
-  const [activeMore, setActiveMore] = useState({});
+  const [activeMore, setActiveMore] = useState([]);
 
-  const handleMoreClick = (id) => {
-    setActiveMore((prevState) => ({
-      ...prevState,
-      [id]: !prevState[id],
-    }));
+  const handleMoreClick = (index) => {
+    setActiveMore((prevActiveMore) => {
+      const updatedActiveMore = [...prevActiveMore];
+      updatedActiveMore[index] = !prevActiveMore[index];
+      return updatedActiveMore;
+    });
   };
 
   // styled-components로 컴포넌트 정의
@@ -62,14 +62,18 @@ export default function FAQListComp() {
   const Content = styled.div``;
 
   // Button에 적용될 애니메이션
-  const BtnAnimation = keyframes`
-    from{transform: rotate(0deg);} to{transform: rotate(180deg);}
+  const BtnAnimation = keyframes`from {transform: rotate(0deg);} to {transform: rotate(180deg);}
   `;
 
   const Button = styled.div`
-    animation: ${BtnAnimation} 0.5s linear;
-    transform: ${(props) =>
-      props.active ? "rotate(180deg)" : "rotate(360deg)"};
+    transition: transform 0.2s linear;
+    transform: ${(props) => (props.active ? "rotate(180deg)" : "rotate(0deg)")};
+    animation: ${(props) =>
+      props.active
+        ? css`
+            ${BtnAnimation} 0.3s linear
+          `
+        : "none"};
   `;
 
   const ActiveList = styled(List)`
@@ -88,17 +92,17 @@ export default function FAQListComp() {
     <FAQ>
       <ListSet>
         <List
-          onClick={() => handleMoreClick(1)}
-          className={activeMore[1] ? "active" : ""}
-          as={activeMore[1] === true ? ActiveList : DeactiveList}
+          onClick={() => handleMoreClick(0)}
+          className={activeMore[0] ? "active" : ""}
+          as={activeMore[0] === true ? ActiveList : DeactiveList}
         >
           <Content>FAQ 첫 번째 내용입니다</Content>
-          <Button active={activeMore[1]}>
+          <Button active={activeMore[0]}>
             <FontAwesomeIcon icon={faAngleDown} />
           </Button>
         </List>
 
-        <ListMore active={activeMore[1]}>
+        <ListMore active={activeMore[0]}>
           있는 같이, 아름답고 열락의 뛰노는 있으랴? 사라지지 품었기 가는 뛰노는
           말이다. 열락의 이것은 이상 인생을 무한한 뼈 끝에 우리는 기관과
           쓸쓸하랴? 쓸쓸한 이상 곳으로 있는 실로 용기가 굳세게 보라. 이상
@@ -113,16 +117,16 @@ export default function FAQListComp() {
         </ListMore>
 
         <List
-          onClick={() => handleMoreClick(2)}
-          className={activeMore[2] ? "active" : ""}
-          as={activeMore[2] === true ? ActiveList : DeactiveList}
+          onClick={() => handleMoreClick(1)}
+          className={activeMore[1] ? "active" : ""}
+          as={activeMore[1] === true ? ActiveList : DeactiveList}
         >
           <Content>FAQ 두 번째 내용입니다</Content>
-          <Content>
+          <Button active={activeMore[1]}>
             <FontAwesomeIcon icon={faAngleDown} />
-          </Content>
+          </Button>
         </List>
-        <ListMore active={activeMore[2]}>
+        <ListMore active={activeMore[1]}>
           희망의 찾아 관현악이며, 못하다 산야에 보이는 장식하는 타오르고 힘있다.
           피어나기 어디 원대하고, 오직 보이는 대고, 설산에서 것이다. 있을 그들의
           돋고, 가진 봄바람이다. 인간에 청춘의 온갖 아니한 두기 눈에 우는 심장의
@@ -137,16 +141,16 @@ export default function FAQListComp() {
         </ListMore>
 
         <List
-          onClick={() => handleMoreClick(3)}
-          className={activeMore[3] ? "active" : ""}
-          as={activeMore[3] === true ? ActiveList : DeactiveList}
+          onClick={() => handleMoreClick(2)}
+          className={activeMore[2] ? "active" : ""}
+          as={activeMore[2] === true ? ActiveList : DeactiveList}
         >
           <Content>FAQ 세 번째 내용입니다</Content>
           <Content>
             <FontAwesomeIcon icon={faAngleDown} />
           </Content>
         </List>
-        <ListMore active={activeMore[3]}>
+        <ListMore active={activeMore[2]}>
           예가 따뜻한 인도하겠다는 청춘이 것이다. 위하여, 인생을 얼마나 무엇이
           평화스러운 길지 몸이 간에 창공에 사막이다. 과실이 희망의 끓는 미묘한
           보라. 만물은 심장의 보배를 있으며, 더운지라 이것이다. 끝에 목숨을
@@ -159,16 +163,16 @@ export default function FAQListComp() {
         </ListMore>
 
         <List
-          onClick={() => handleMoreClick(4)}
-          className={activeMore[4] ? "active" : ""}
-          as={activeMore[4] === true ? ActiveList : DeactiveList}
+          onClick={() => handleMoreClick(3)}
+          className={activeMore[3] ? "active" : ""}
+          as={activeMore[3] === true ? ActiveList : DeactiveList}
         >
           <Content>FAQ 네 번째 내용입니다</Content>
           <Content>
             <FontAwesomeIcon icon={faAngleDown} />
           </Content>
         </List>
-        <ListMore active={activeMore[4]}>
+        <ListMore active={activeMore[3]}>
           이 넣는 얼음 인생을 운다. 그들에게 밥을 봄바람을 이것이다. 구하기 어디
           그들의 그들은 가진 소담스러운 내려온 충분히 끓는다. 크고 풍부하게
           위하여, 뭇 너의 속잎나고, 봄날의 이상의 살았으며, 사막이다. 구할
@@ -183,16 +187,16 @@ export default function FAQListComp() {
         </ListMore>
 
         <List
-          onClick={() => handleMoreClick(5)}
-          className={activeMore[5] ? "active" : ""}
-          as={activeMore[5] === true ? ActiveList : DeactiveList}
+          onClick={() => handleMoreClick(4)}
+          className={activeMore[4] ? "active" : ""}
+          as={activeMore[4] === true ? ActiveList : DeactiveList}
         >
           <Content>FAQ 다섯 번째 내용입니다</Content>
           <Content>
             <FontAwesomeIcon icon={faAngleDown} />
           </Content>
         </List>
-        <ListMore active={activeMore[5]}>
+        <ListMore active={activeMore[4]}>
           발휘하기 더운지라 별과 뭇 꽃 현저하게 오직 불어 뿐이다. 아니더면, 오직
           품으며, 너의 칼이다. 얼음이 앞이 인생에 따뜻한 되려니와, 힘차게 끓는
           말이다. 속잎나고, 얼음에 타오르고 뼈 때문이다. 아니더면, 이상의
