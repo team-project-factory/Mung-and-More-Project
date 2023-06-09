@@ -23,7 +23,6 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-daum-postcode": "^3.1.1",
-    "react-daumpost-hook": "^1.1.8",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.7",
     "react-router-dom": "^6.11.2",

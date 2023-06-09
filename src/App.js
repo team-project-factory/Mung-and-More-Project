@@ -14,6 +14,8 @@ import { Information } from "./pages/Main/Shopping/Information";
 import { Location } from "./pages/Main/Location";
 import { Community } from "./pages/Main/Community";
 import { Notice } from "./pages/Main/Notice";
+import { Mungstagram } from "./pages/Main/Mungstagram";
+import { MungsNews } from "./pages/Main/MungsNews";
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
         {/** nav바 없음 */}
         <Route path="/login" element={<Login />} />
         <Route path="/joinmember" element={<JoinMember />} />
+
         {/** nav바 있음 */}
         <Route path="/" element={<Main />} />
         <Route path="/mypage" element={<MyPage />} />
@@ -35,6 +38,12 @@ function App() {
         <Route path="/location" element={<Location />} />
         <Route path="/community" element={<Community />} />
         <Route path="/notice" element={<Notice />} />
+        <Route path="/mungstagram" element={<Mungstagram/>}/>
+        <Route path="/mungsnews" element={<MungsNews/>}/>
+
+        {/** 로그인 성공했을 때 */}
+        <Route path="/mylike" element={<LikeList />} />
+        <Route path="/cart" element={<CartList />} />
       </Routes>
     </div>
   );
