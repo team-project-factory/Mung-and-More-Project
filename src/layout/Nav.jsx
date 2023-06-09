@@ -1,58 +1,65 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-import style from './Nav.module.scss'
-import { useSelector, useDispatch  } from 'react-redux';
+import style from "./Nav.module.scss";
+import { useSelector, useDispatch } from "react-redux";
 //css
 
 // import style from './Nav.module.scss'
 
 // add
 import {
-  HeaderStyle, InnerStyle, LogoImage, MenuStyle, MenuItems, MenuUtil, MenuItems_item
-  , MenuItems_item_slide, ProfileImg, SubItems, SubLink, LoginBtn
-} from './styles/NavStylecomp'
+  HeaderStyle,
+  InnerStyle,
+  LogoImage,
+  MenuStyle,
+  MenuItems,
+  MenuUtil,
+  MenuItems_item,
+  MenuItems_item_slide,
+  ProfileImg,
+  SubItems,
+  SubLink,
+  LoginBtn,
+} from "./styles/NavStylecomp";
 
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ArrowDropUpSharpIcon from '@mui/icons-material/ArrowDropUpSharp';
-
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDropUpSharpIcon from "@mui/icons-material/ArrowDropUpSharp";
 
 export const Nav = () => {
   // add
   const [isCommunityHovered, setCommunityHovered] = useState(false);
   const dispatch = useDispatch();
-  const getUser =  JSON.parse(sessionStorage.getItem('user'));
-  
-
+  const getUser = JSON.parse(sessionStorage.getItem("user"));
 
   const handleCommunityHover = () => {
     setCommunityHovered(true);
   };
   const handleCommunityLeave = () => {
     setCommunityHovered(false);
-  }
+  };
   const handleLogin = () => {
-    dispatch({ type: 'LOGIN' });
+    dispatch({ type: "LOGIN" });
   };
 
   const handleLogout = () => {
-    dispatch({ type: 'LOGOUT' });
+    dispatch({ type: "LOGOUT" });
   };
 
-  return(
+  return (
     <div>
       {/** add */}
       <HeaderStyle>
         <InnerStyle>
           {/** 로고 */}
-          <Link to={'/'}>
+          <Link to={"/"}>
             <LogoImage src="./img/logo.svg" />
           </Link>
           {/** 메뉴 */}
           <MenuStyle>
             <MenuItems>
               <MenuItems_item>
-                <Link to={'/shopping'}>Shopping</Link>
+                <Link to={"/shopping"}>Shopping</Link>
               </MenuItems_item>
               <MenuItems_item>
                 <Link to={"/location"}>Location</Link>
@@ -62,13 +69,18 @@ export const Nav = () => {
                 onMouseLeave={handleCommunityLeave}
               >
                 <Link to={"/community"}>Community</Link>
-                {
-                  isCommunityHovered ? (<ArrowDropUpSharpIcon />)
-                    : (<ArrowDropDownIcon />)
-                }
+                {isCommunityHovered ? (
+                  <ArrowDropUpSharpIcon />
+                ) : (
+                  <ArrowDropDownIcon />
+                )}
                 <SubItems>
-                  <Link><SubLink>Mungstagram</SubLink></Link>
-                  <Link><SubLink>Mung's News</SubLink></Link>
+                  <Link>
+                    <SubLink>Mungstagram</SubLink>
+                  </Link>
+                  <Link>
+                    <SubLink>Mung's News</SubLink>
+                  </Link>
                 </SubItems>
               </MenuItems_item_slide>
               <MenuItems_item>
@@ -80,12 +92,12 @@ export const Nav = () => {
               {getUser ? (
                 <>
                   <MenuItems_item>
-                    <p>My Like</p>
+                    <Link to={"/mylike"}>My Like</Link>
                   </MenuItems_item>
                   <MenuItems_item>
-                    <p>Cart</p>
+                    <Link to={"/cart"}>Cart</Link>
                   </MenuItems_item>
-                  <Link to={'/mypage'}>
+                  <Link to={"/mypage"}>
                     <ProfileImg />
                   </Link>
                 </>
@@ -99,22 +111,17 @@ export const Nav = () => {
         </InnerStyle>
       </HeaderStyle>
     </div>
-  )
-}
-
-
-
+  );
+};
 
 // export const Nav2 = () => {
 //   // 로그인
 //   const [Login, setLogin] = useState(false);
 //   //버튼 토글
 //   const [btn, setBtn] = useState(false);
-  
+
 //   const user = useSelector((state)=>(state));
 //   console.log(user);
-
-
 
 //   return (
 //     <div>
@@ -129,7 +136,7 @@ export const Nav = () => {
 //         <li><Link to={`/shopping`}>Shopping</Link></li>
 //         <li><Link to={`/location`}>Loaction</Link></li>
 //         <li>
-//           <Link to={`/community`}>Community</Link> 
+//           <Link to={`/community`}>Community</Link>
 //           <span onClick={()=>{setBtn(!btn)}}>
 //             {btn ? '🔽':'🔼'}
 //           </span>
@@ -150,7 +157,6 @@ export const Nav = () => {
 //         <li><Link to={`/login`}>Login</Link></li>
 //       </ul> */}
 
-      
 //     </div>
 //   )
 // }

@@ -1,39 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap");
 
 /**
 메인 폰트
-font-family: 'Montserrat', sans-serif;
+font-family: 'Montserrat', "SUITE-Regular";
 
 font-weight로 조절
 */
 
+* {
+  margin: 0;
+  padding: 0;
+}
 
-*{ margin:0; padding: 0;}
-
-
-ul{ list-style-type: none; }
-a{
-  text-decoration: none; color: black;
-  font-family: 'Montserrat', sans-serif;
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+  color: black;
+  font-family: "Montserrat", "SUITE-Regular";
   font-weight: 600;
   font-size: 1.1rem;
 }
-a:hover{color: red;}
+a:hover {
+  color: red;
+}
 
 @font-face {
-  font-family: 'SUITE-Regular';
-  src: url('./fonts/SUITE-Regular.ttf')
+  font-family: "SUITE-Regular";
+  src: url("./fonts/SUITE-Regular.ttf");
 }
 @font-face {
-  font-family: 'SUITE-Medium';
-  src: url('./fonts/SUITE-Medium.ttf');
+  font-family: "SUITE-Medium";
+  src: url("./fonts/SUITE-Medium.ttf");
 }
 @font-face {
-  font-family: 'SUITE-SemiBold';
-  src: url('./fonts/SUITE-SemiBold.ttf');
+  font-family: "SUITE-SemiBold";
+  src: url("./fonts/SUITE-SemiBold.ttf");
 }
 @font-face {
-  font-family: 'SUITE-Bold';
-  src: url('./fonts/SUITE-Bold.ttf');
+  font-family: "SUITE-Bold";
+  src: url("./fonts/SUITE-Bold.ttf");
 }

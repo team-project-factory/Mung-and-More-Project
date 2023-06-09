@@ -7,17 +7,30 @@ export const Wrap = styled.div`
     background-color: #F3F5F6;
     height: 115vh;
 `
+export const ContentWrap = styled.div`
+    max-width: 1000px;
+    margin: 0 auto;
+`
 export const LogoutBtn = styled.button`
-    position: relative;
-    top: 190px;
-    right: 0;
+    position: absolute;
+    top: 228px;
+    right: 400px;
+    color: #fff;
+    border: none;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    font-family: ${({ isEnglish }) => (isEnglish ? 'Montserrat' : 'SUITE-Regular')};
+    font-size: 16px;
+    background-color: #B4CCE3;
+    cursor: pointer;
 `
 export const MypageProfileWrap = styled.div`
     max-width: 500px;
     background-color: #fff;
     margin: 0 auto;
     position: relative;
-    top: 140px;
+    top: 130px;
     border-radius: 12px;
     padding: 25px 50px;
     display: flex;
@@ -53,10 +66,11 @@ export const StyleForm = styled.form`
     margin: 0 auto;
     background-color: #fff;
     position: relative;
-    top: 120px;
+    top: 132px;
     border-radius: 12px;
     padding: 25px 50px;
     text-align: end;
+    margin-bottom: 20px;
 `
 
 export const MyName = styled.p`

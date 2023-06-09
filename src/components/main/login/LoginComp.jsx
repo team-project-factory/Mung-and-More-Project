@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 //css
 import style from './logincomp.module.scss'
 
 //로그인 인증
-import { auth } from '../../../data/firebase'
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
 //redux
@@ -15,6 +14,19 @@ import { loginUser } from './LoginSlice';
 export const LoginComp = () => {
   const navigater = useNavigate();
   const dispatch = useDispatch(); 
+
+  const [Num , setNum] = useState('');
+
+  //사진 배열
+  const photo = [
+    './img/login.png','./img/login2.png','./img/login3.png',
+    './img/login4.png','./img/login5.png','./img/login6.png',
+    './img/login7.png','./img/login8.png'
+  ]
+  useEffect(()=>{
+    const randomNum = Math.floor(Math.random()*photo.length);
+    setNum(randomNum);
+  },[]) 
 
   //로그인 정보
   const [email, setEmail] = useState('');
@@ -65,8 +77,7 @@ export const LoginComp = () => {
 
   return (
     <div className={style.loginList}>
-      <div className={style.loginList_imgBox} style={{backgroundImage:"url(./img/login.png)", backgroundSize:"cover"}}>
-        
+      <div className={style.loginList_imgBox} style={{backgroundImage:`url(${photo[Num]})`, backgroundSize:"cover"}}>     
       </div>
       <div className={style.loginList_LoginBox}>
         <div className={style.loginList_LoginBox_div}>
