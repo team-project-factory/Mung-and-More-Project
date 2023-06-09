@@ -4,22 +4,37 @@ import styled, { keyframes, css } from "styled-components";
 // FontAwesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import FAQComp from "./FAQComp";
 
 export default function FAQListComp() {
   // useState를 이용해 각 리스트를 클릭했을 때 상세 내용 표시
   // activeMore: 각 리스트 아이템의 표시/숨김 상태를 저장
-  const [activeMore, setActiveMore] = useState([]);
+  const [activeMore0, setActiveMore0] = useState(false);
+  const [activeMore1, setActiveMore1] = useState(false);
+  const [activeMore2, setActiveMore2] = useState(false);
+  const [activeMore3, setActiveMore3] = useState(false);
+  const [activeMore4, setActiveMore4] = useState(false);
 
+  // 클릭된 항목의 activeMore값을 반전시키는 역할 수행
   const handleMoreClick = (index) => {
-    setActiveMore((prevActiveMore) => {
-      const updatedActiveMore = [...prevActiveMore];
-      updatedActiveMore[index] = !prevActiveMore[index];
-      return updatedActiveMore;
-    });
+    if (index === 0) {
+      setActiveMore0((prevActiveMore) => !prevActiveMore);
+    } else if (index === 1) {
+      setActiveMore1((prevActiveMore) => !prevActiveMore);
+    } else if (index === 2) {
+      setActiveMore1((prevActiveMore) => !prevActiveMore);
+    } else if (index === 3) {
+      setActiveMore1((prevActiveMore) => !prevActiveMore);
+    } else if (index === 4) {
+      setActiveMore1((prevActiveMore) => !prevActiveMore);
+    }
   };
 
-  // styled-components로 컴포넌트 정의
+  useEffect(() => {
+    // 페이지가 새로고침될 때 애니메이션 초기화를 막기 위해 아무 작업도 하지 않음
+  }, []);
 
+  // styled-components로 컴포넌트 정의
   // 전체를 감싸는 div
   const FAQ = styled.div`
     display: flex;
@@ -105,19 +120,19 @@ export default function FAQListComp() {
       <ListSet>
         <List
           onClick={() => handleMoreClick(0)}
-          className={activeMore[0] ? "active" : ""}
-          as={activeMore[0] === true ? ActiveList : DeactiveList}
+          className={activeMore0 ? "active" : ""}
+          as={activeMore0 === true ? ActiveList : DeactiveList}
         >
           <Content>FAQ 첫 번째 내용입니다</Content>
           <Button
-            active={activeMore[0]}
-            as={activeMore[0] === true ? ActiveAni : DeactiveAni}
+            active={activeMore0}
+            as={activeMore0 === true ? ActiveAni : DeactiveAni}
           >
             <FontAwesomeIcon icon={faAngleDown} />
           </Button>
         </List>
 
-        <ListMore active={activeMore[0]}>
+        <ListMore active={activeMore0}>
           있는 같이, 아름답고 열락의 뛰노는 있으랴? 사라지지 품었기 가는 뛰노는
           말이다. 열락의 이것은 이상 인생을 무한한 뼈 끝에 우리는 기관과
           쓸쓸하랴? 쓸쓸한 이상 곳으로 있는 실로 용기가 굳세게 보라. 이상
@@ -133,15 +148,18 @@ export default function FAQListComp() {
 
         <List
           onClick={() => handleMoreClick(1)}
-          className={activeMore[1] ? "active" : ""}
-          as={activeMore[1] === true ? ActiveList : DeactiveList}
+          className={activeMore1 ? "active" : ""}
+          as={activeMore1 === true ? ActiveList : DeactiveList}
         >
           <Content>FAQ 두 번째 내용입니다</Content>
-          <Button active={activeMore[1]}>
+          <Button
+            active={activeMore1}
+            as={activeMore1 === true ? ActiveAni : DeactiveAni}
+          >
             <FontAwesomeIcon icon={faAngleDown} />
           </Button>
         </List>
-        <ListMore active={activeMore[1]}>
+        <ListMore active={activeMore1}>
           희망의 찾아 관현악이며, 못하다 산야에 보이는 장식하는 타오르고 힘있다.
           피어나기 어디 원대하고, 오직 보이는 대고, 설산에서 것이다. 있을 그들의
           돋고, 가진 봄바람이다. 인간에 청춘의 온갖 아니한 두기 눈에 우는 심장의
@@ -157,15 +175,15 @@ export default function FAQListComp() {
 
         <List
           onClick={() => handleMoreClick(2)}
-          className={activeMore[2] ? "active" : ""}
-          as={activeMore[2] === true ? ActiveList : DeactiveList}
+          className={activeMore2 ? "active" : ""}
+          as={activeMore2 === true ? ActiveList : DeactiveList}
         >
           <Content>FAQ 세 번째 내용입니다</Content>
           <Content>
             <FontAwesomeIcon icon={faAngleDown} />
           </Content>
         </List>
-        <ListMore active={activeMore[2]}>
+        <ListMore active={activeMore2}>
           예가 따뜻한 인도하겠다는 청춘이 것이다. 위하여, 인생을 얼마나 무엇이
           평화스러운 길지 몸이 간에 창공에 사막이다. 과실이 희망의 끓는 미묘한
           보라. 만물은 심장의 보배를 있으며, 더운지라 이것이다. 끝에 목숨을
@@ -179,15 +197,15 @@ export default function FAQListComp() {
 
         <List
           onClick={() => handleMoreClick(3)}
-          className={activeMore[3] ? "active" : ""}
-          as={activeMore[3] === true ? ActiveList : DeactiveList}
+          className={activeMore3 ? "active" : ""}
+          as={activeMore3 === true ? ActiveList : DeactiveList}
         >
           <Content>FAQ 네 번째 내용입니다</Content>
           <Content>
             <FontAwesomeIcon icon={faAngleDown} />
           </Content>
         </List>
-        <ListMore active={activeMore[3]}>
+        <ListMore active={activeMore3}>
           이 넣는 얼음 인생을 운다. 그들에게 밥을 봄바람을 이것이다. 구하기 어디
           그들의 그들은 가진 소담스러운 내려온 충분히 끓는다. 크고 풍부하게
           위하여, 뭇 너의 속잎나고, 봄날의 이상의 살았으며, 사막이다. 구할
@@ -203,15 +221,15 @@ export default function FAQListComp() {
 
         <List
           onClick={() => handleMoreClick(4)}
-          className={activeMore[4] ? "active" : ""}
-          as={activeMore[4] === true ? ActiveList : DeactiveList}
+          className={activeMore4 ? "active" : ""}
+          as={activeMore4 === true ? ActiveList : DeactiveList}
         >
           <Content>FAQ 다섯 번째 내용입니다</Content>
           <Content>
             <FontAwesomeIcon icon={faAngleDown} />
           </Content>
         </List>
-        <ListMore active={activeMore[4]}>
+        <ListMore active={activeMore4}>
           발휘하기 더운지라 별과 뭇 꽃 현저하게 오직 불어 뿐이다. 아니더면, 오직
           품으며, 너의 칼이다. 얼음이 앞이 인생에 따뜻한 되려니와, 힘차게 끓는
           말이다. 속잎나고, 얼음에 타오르고 뼈 때문이다. 아니더면, 이상의
@@ -222,6 +240,8 @@ export default function FAQListComp() {
           피어나는 뿐이다. 꽃이 사랑의 가는 청춘은 불러 시들어 있는 그들에게
           싸인 봄바람이다. 무엇을 인생을 청춘의 아름답고 오아이스도 보라.
         </ListMore>
+        <FAQComp active={true}>123222222</FAQComp>
+        <FAQComp>123</FAQComp>
       </ListSet>
     </FAQ>
   );
