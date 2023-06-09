@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 //파이어베이스
 import { db } from '../../../../data/firebase';
-import { getAuth, signOut, deleteUser } from "firebase/auth";
+import { getAuth, signOut, onAuthStateChanged, updateProfile, updatePassword, deleteUser } from "firebase/auth";
 import { doc, deleteDoc } from "firebase/firestore";
 import { useDispatch } from 'react-redux';
 
@@ -140,6 +140,46 @@ export default function MyPageComp() {
     sessionStorage.removeItem('user');
     navigater('/');
   }
+
+  const handleSave = () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    // 사용자 이름 업데이트
+    updateProfile(user, {
+      displayName: name,
+    })
+      .then(() => {
+        // 업데이트 성공
+        console.log('이름 업데이트 성공');
+      })
+      .catch((error) => {
+        // 업데이트 실패
+        console.error('이름 업데이트 실패:', error);
+      });
+
+    // 비밀번호 변경
+    if (newPassword && confirmPassword) {
+      if (newPassword === confirmPassword) {
+        updatePassword(user, newPassword)
+          .then(() => {
+            // 비밀번호 업데이트 성공
+            console.log('비밀번호 업데이트 성공');
+            setPassword(''); // 비밀번호 필드 초기화
+            setNewPassword(''); // 새 비밀번호 필드 초기화
+            setConfirmPassword(''); // 비밀번호 확인 필드 초기화
+          })
+          .catch((error) => {
+            // 비밀번호 업데이트 실패
+            console.error('비밀번호 업데이트 실패:', error);
+          });
+      } else {
+        // 비밀번호가 일치하지 않음
+        console.error('비밀번호가 일치하지 않음');
+      }
+    }
+  }
+
 
   return (
     <Wrap>
