@@ -8,6 +8,7 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 export default function FAQListComp() {
   // useState를 이용해 각 리스트를 클릭했을 때 상세 내용 표시
+  // activeMore: 각 리스트 아이템의 표시/숨김 상태를 저장
   const [activeMore, setActiveMore] = useState({});
 
   const handleMoreClick = (id) => {
@@ -38,7 +39,6 @@ export default function FAQListComp() {
     border-top: 0.7px solid #c9c9c9;
     margin-bottom: 5px;
     padding-top: 25px;
-    font-weight: normal;
 
     &:hover {
       cursor: pointer;
@@ -68,15 +68,18 @@ export default function FAQListComp() {
 
   const Button = styled.div`
     animation: ${BtnAnimation} 0.5s linear;
-    transform: ${(props) => (props.active ? "rotate(180deg)" : "rotate(0deg)")};
+    transform: ${(props) =>
+      props.active ? "rotate(180deg)" : "rotate(360deg)"};
   `;
 
   const ActiveList = styled(List)`
+    font-family: "SUITE-Bold";
     font-weight: bold;
   `;
 
   const DeactiveList = styled(List)`
     &:hover {
+      font-family: "SUITE-Bold";
       font-weight: bold;
     }
   `;
