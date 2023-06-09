@@ -15,14 +15,18 @@ import {
   AddressBtn,
   AddWrap,
   PostCodeStyle,
-  ModalStyle
+  ModalStyle,
+  ModalInfo
 } from './styles/EditStylecomp';
-
-
 
 export const EditComp = () => {
   const [addressDetail, setAddressDetail] = useState('');
   const [isOpenPost, setIsOpenPost] = useState(false);
+  const ref = useRef(null);
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const onChangeOpenPost = () => {
     setIsOpenPost((prevIsOpenPost) => !prevIsOpenPost);
@@ -45,25 +49,17 @@ export const EditComp = () => {
 
     setAddressDetail(fullAddr);
     setIsOpenPost(false);
-  };
 
-  // 다음 api
-  const ref = useRef(null);
+    if (ref.current) {
+      ref.current.style.display = 'none';
+    }
+  };
 
   const postConfig = {
     ref: ref,
-    onComplete: (data) => {
-      console.log(data);
-      // 검색후 해당 컴포넌트를 다시 안보이게 하는 부분
-      //ref.current.style.display = "none";
-    }
+    onComplete: onCompletePost
   };
   const postCode = ReactDaumPost(postConfig);
-
-
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   return (
     <Wrap>
@@ -91,21 +87,19 @@ export const EditComp = () => {
                 onChange={(e) => setAddressDetail(e.target.value)}
               />
             </StyledWrapper>
-            <AddressBtn onClick={postCode}>
-              우편번호
-            </AddressBtn>
-            <button onClick={handleOpen}>Open modal</button>
+            <AddressBtn onClick={postCode}>우편번호</AddressBtn>
             <ModalStyle
               open={open}
               onClose={handleClose}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <p>냥냥냥ㄴ얀얀얀얀야야~~~
-              </p>
+              <ModalInfo>
+                <div ref={ref}></div>
+                <p>dididi</p>
+              </ModalInfo>
             </ModalStyle>
           </AddWrap>
-          <div ref={ref}></div>
         </StyledFieldset>
       </ContentWrap>
     </Wrap>

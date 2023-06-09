@@ -103,3 +103,11 @@ export const ModalStyle = styled(Modal)`
     border: 2px solid #000;
     box-shadow: "24";
 `
+export const ModalInfo = styled.div`
+    width: 500px;
+    height: 500px;
+    background-color: #fff;
+    position: relative;
+    top: 30%;
+    margin: 0 auto;
+`
