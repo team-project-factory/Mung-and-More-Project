@@ -8,8 +8,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { useNavigate } from 'react-router-dom';
 
 //파이어베이스
-import { getAuth, signOut } from "firebase/auth";
-
+import { db } from '../../../../data/firebase';
+import { getAuth, signOut, deleteUser } from "firebase/auth";
+import { doc, deleteDoc } from "firebase/firestore";
 import { useDispatch } from 'react-redux';
 
 
@@ -31,7 +32,8 @@ export default function MyPageComp() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 추가: 로그인 상태
-
+  //로그인 uid state
+  const [userImfor, setUserImfor] = useState('')
 
   useEffect(() => {
     // 추가: 로그인 상태 변경 감지
@@ -93,7 +95,7 @@ export default function MyPageComp() {
 
   const isButtonEnable = password && (name || (newPassword && confirmPassword));
 
-  const handleLogOut = () =>{
+  const handleLogOut = () => {
     const auth = getAuth();
     signOut(auth).then(() => {
       sessionStorage.removeItem('user');
@@ -101,6 +103,46 @@ export default function MyPageComp() {
     }).catch((error) => {
       // An error happened.
     });
+  }
+  
+  //회원탈퇴
+  useEffect(()=>{
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        setUserImfor(uid);
+        // ...
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+  },[])
+
+  console.log(userImfor);
+  //회원탈퇴
+  const handleDeleteUser = () =>{
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    deleteUser(user).then(() => {
+      // User deleted.
+    }).catch((error) => {
+      // An error ocurred
+      // ...
+    });
+
+    //컬렉션 안의 유저 데이터 삭제
+    const DeleteUserData = async() =>{
+      await deleteDoc(doc(db, "users", userImfor));
+    }
+    DeleteUserData();
+    //세션정보 삭제
+    sessionStorage.removeItem('user');
+    navigater('/');
   }
 
   return (
@@ -237,20 +279,20 @@ export default function MyPageComp() {
             <WithdrawalText>
               회원탈퇴 시 모든 데이터가 삭제됩니다.
             </WithdrawalText>
-          <OutBtn>
-            회원탈퇴
-          </OutBtn>
-        </Withdrawal>
-      </StyleForm>
-      <MypageProfileWrap>
-        <UlStyle>
-          <LiStyle>주문내역</LiStyle>
-          <LineStyle />
-          <LiStyle>작성한 게시물</LiStyle>
-          <LineStyle />
-          <LiStyle>배송지 수정</LiStyle>
-        </UlStyle>
-      </MypageProfileWrap>
+            <OutBtn>
+              회원탈퇴
+            </OutBtn>
+          </Withdrawal>
+        </StyleForm>
+        <MypageProfileWrap>
+          <UlStyle>
+            <LiStyle>주문내역</LiStyle>
+            <LineStyle />
+            <LiStyle>작성한 게시물</LiStyle>
+            <LineStyle />
+            <LiStyle>배송지 수정</LiStyle>
+          </UlStyle>
+        </MypageProfileWrap>
       </ContentWrap>
     </Wrap>
   )
