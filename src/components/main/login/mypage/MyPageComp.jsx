@@ -47,7 +47,6 @@ export default function MyPageComp() {
     });
   }, []);
 
-
   // name
   const handleInputChangeName = (event) => {
     const inputValue = event.target.value;
@@ -91,8 +90,7 @@ export default function MyPageComp() {
   const confirmPasswordErrorMessage = passwordError ? '비밀번호가 일치하지 않습니다.' : '';
 
   const isButtonEnable = password && (name || (newPassword && confirmPassword));
-  
-  //로그아웃
+
   const handleLogOut = () => {
     const auth = getAuth();
     signOut(auth).then(() => {
@@ -181,8 +179,6 @@ export default function MyPageComp() {
       }
     }
   }
-
-
 
 
   return (
@@ -319,7 +315,7 @@ export default function MyPageComp() {
             <WithdrawalText>
               회원탈퇴 시 모든 데이터가 삭제됩니다.
             </WithdrawalText>
-            <OutBtn onClick={handleDeleteUser}>
+            <OutBtn>
               회원탈퇴
             </OutBtn>
           </Withdrawal>
