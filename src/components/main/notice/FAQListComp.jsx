@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes, css } from "styled-components";
+import faqList from '../../../data/faqList.json'
 
 // FontAwesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -114,7 +115,9 @@ export default function FAQListComp() {
       font-weight: bold;
     }
   `;
+  
 
+  
   return (
     <FAQ>
       <ListSet>
@@ -123,7 +126,15 @@ export default function FAQListComp() {
           className={activeMore0 ? "active" : ""}
           as={activeMore0 === true ? ActiveList : DeactiveList}
         >
-          <Content>FAQ 첫 번째 내용입니다</Content>
+
+            {
+              faqList.map(faq=>(
+                <Content key={faq.id}>
+                    {faq.name}
+                  </Content>
+              ))
+            }
+
           <Button
             active={activeMore0}
             as={activeMore0 === true ? ActiveAni : DeactiveAni}

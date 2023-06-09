@@ -1,58 +1,41 @@
-import React from 'react'
-import Slider from 'react-slick';
+import React, { useState } from 'react';
 import './eventListComp.css'
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
-export default function EventListComp() {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    prevArrow: <PrevArrow />,
-    nextArrow: <NextArrow />,
-    centerMode : true,
-    centerPadding : 0
-  };
+function EventListComp() {
+  const [imageIndex, setImageIndex] = useState(0);
 
-  function PrevArrow(props) {
-    const { onClick } = props;
-    return (
-      <button className="slick-prev" onClick={onClick}>
-        &lt;
-      </button>
-    );
+  // 아래 배열 묶음은 한 화면에 출력됨(3장씩)
+  const images = [
+    ["./img/post.jpg","./img/post1.jpg","./img/post2.jpg"],
+    ["./img/login.png","./img/login2.png","./img/login3.png"],
+    ["./img/login4.png","./img/login5.png","./img/login6.png"]
+  ];
+
+  function btnPrev() {
+    setImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   }
-
-  function NextArrow(props) {
-    const { onClick } = props;
-    return (
-      <button className="slick-next" onClick={onClick}>
-        &gt;
-      </button>
-    );
+  
+  function btnNext() {
+    setImageIndex((prevIndex) => (prevIndex + 1) % images.length);
   }
-
 
   return (
-    <div>
-      <h2>슬라이더 예제</h2>
-        <Slider {...settings}>
-            <div>
-              <img className='imgBox' src="./img/post.jpg" />
-            </div>
-            <div>
-              <img className='imgBox' src="./img/post.jpg" />
-            </div>
-            <div>
-              <img className='imgBox' src="./img/post.jpg" />
-            </div>
-            <div>
-              <img className='imgBox' src="./img/post.jpg" />
-          </div>
-        </Slider>
+    <div className='event-slide'>
+      {images[imageIndex].map((image, index) => (
+        <img
+          key={index}
+          className='event-slide-img'
+          src={image}
+          alt={`Image ${imageIndex + 1}`}
+        />
+      ))}
+      <div className='slide-btn'>
+        <button className='prev-btn' onClick={btnPrev}>{'<'}</button>
+        <button className='next-btn' onClick={btnNext}>{'>'}</button>
+      </div>
     </div>
-  )
+  );
 }
+
+export default EventListComp;
+
