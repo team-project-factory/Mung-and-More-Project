@@ -110,12 +110,18 @@ export default function MyPageComp() {
 
     deleteUser(user).then(() => {
       // User deleted.
-      sessionStorage.removeItem('user');
-      navigater('/');
     }).catch((error) => {
       // An error ocurred
       // ...
     });
+    
+    //컬렉션 안의 유저 데이터 삭제
+    const DeleteUserData = async() =>{
+      await deleteDoc(doc(db, "users", userImfor));
+    }
+    DeleteUserData();
+    sessionStorage.removeItem('user');
+    navigater('/');
   }
 
   return (
