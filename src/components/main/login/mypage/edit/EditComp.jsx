@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { Nav } from '../../../../../layout/Nav';
 import DaumPostCode from 'react-daum-postcode';
-import ReactDaumPost from 'react-daumpost-hook';
+import ReactDaumPost  from 'react-daumpost-hook';
 import Modal from '@mui/material/Modal';
 
-import {
+import { 
   Wrap,
   ContentWrap,
   Title,
@@ -16,7 +16,7 @@ import {
   AddWrap,
   PostCodeStyle,
   ModalStyle,
-  ModalInfo
+  ModalInfo 
 } from './styles/EditStylecomp';
 
 export const EditComp = () => {
