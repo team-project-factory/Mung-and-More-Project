@@ -18,6 +18,8 @@ export const NoticePageComp = () => {
   };
 
   // styled-components로 컴포넌트 정의
+  //
+
   // Notice page Navbar 전체를 감싸는 div
   const NoticeNav = styled.div`
     font-family: "Montserrat", sans-serif;
@@ -69,7 +71,7 @@ export const NoticePageComp = () => {
   `;
 
   return (
-    <>
+    <div>
       <NoticeNav>
         <Categories>
           <Category
@@ -101,6 +103,6 @@ export const NoticePageComp = () => {
       {activeCat === "FAQ" && <FAQListComp />}
       {activeCat === "Notice" && <NoticeListComp />}
       {activeCat === "Event" && <EventListComp />}
-    </>
+    </div>
   );
 };
