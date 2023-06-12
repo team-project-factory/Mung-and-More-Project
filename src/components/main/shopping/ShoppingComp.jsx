@@ -11,7 +11,7 @@ import style from'./shoppingcomp.module.scss'
 
 export const ShoppingComp = () => {
   //유저 uid 생성
-  const [userUID, setUserUID] = useState('')
+  const [userUID, setUserUID] = useState('');
   //버튼 배경색 변경
   const [btnBool1, setBtnBool1] = useState(true);
   const [btnBool2, setBtnBool2] = useState(false);
@@ -67,7 +67,6 @@ export const ShoppingComp = () => {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const likeList = docSnap.data().likeList
-      console.log(likeList);
     } 
     else {
       // docSnap.data() will be undefined in this case
@@ -132,7 +131,14 @@ export const ShoppingComp = () => {
   //좋아요 버튼
   const likeBtn = (item) =>{
     if(userUID){
-      console.log(item);
+      const setLikeList = async() =>{
+        const washingtonRef = doc(db, "users", userUID);
+        await updateDoc(washingtonRef, {
+          likeList: arrayUnion(item)
+        });
+      }
+      setLikeList()
+      alert('좋아용!');
     }
     else{
       alert('로그인해주세요!');
