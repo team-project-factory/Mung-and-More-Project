@@ -10,11 +10,11 @@ export const HeaderStyle = styled.header`
 `
 export const InnerStyle = styled.div`
     width: 100%;
-    max-width: 1600px;
+    max-width: 1570px;
     display: flex;
     border-radius: 5.2023121387vw;
     background-color: #fff;
-    padding: 18px 30px;
+    padding: 25px 30px;
     margin: 0 auto;
     
 `
@@ -33,7 +33,9 @@ export const MenuStyle = styled.div`
     justify-content: space-between;
     height: 100%;
     margin-left: 70px;
-    font-size: 18px;
+    font-size: 21px;
+    font-weight: 500;
+
 `
 export const SubItems = styled.div`
     display: none;

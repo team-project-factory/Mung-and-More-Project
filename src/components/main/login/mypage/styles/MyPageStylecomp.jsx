@@ -13,7 +13,7 @@ export const ContentWrap = styled.div`
 `
 export const LogoutBtn = styled.button`
     position: absolute;
-    top: 228px;
+    top: 240px;
     right: 400px;
     color: #fff;
     border: none;

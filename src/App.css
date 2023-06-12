@@ -19,11 +19,11 @@ a {
   text-decoration: none;
   color: black;
   font-family: "Montserrat", "SUITE-Regular";
-  font-weight: 600;
-  font-size: 1.1rem;
+  /* font-weight: 600; */
+  /* font-size: 1.1rem; */
 }
 a:hover {
-  color: red;
+  /* color: red; */
 }
 
 @font-face {
