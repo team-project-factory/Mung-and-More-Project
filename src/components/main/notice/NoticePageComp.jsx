@@ -9,7 +9,7 @@ import FAQListComp from "./FAQListComp";
 import NoticeListComp from "./NoticeListComp";
 import EventListComp from "./EventListComp";
 
-export const NoticeComp = () => {
+export const NoticePageComp = () => {
   // useState를 이용해 각 카테고리를 클릭했을 때 해당되는 리스트만 표시
   const [activeCat, setActiveCat] = useState("FAQ");
 
@@ -31,7 +31,7 @@ export const NoticeComp = () => {
     border-radius: 80px;
     width: 880px;
     margin: auto;
-    margin-top: 120px;
+    margin-top: 150px;
     margin-bottom: 10px;
   `;
 
@@ -97,8 +97,6 @@ export const NoticeComp = () => {
           </Category>
         </Categories>
       </NoticeNav>
-
-      <SearchComp />
 
       {activeCat === "FAQ" && <FAQListComp />}
       {activeCat === "Notice" && <NoticeListComp />}

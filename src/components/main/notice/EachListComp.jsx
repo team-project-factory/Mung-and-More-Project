@@ -5,7 +5,7 @@ import styled, { keyframes } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
-export default function FAQComp({ children, ...rest }) {
+export default function ListComp({ children, content, bgColor, ...rest }) {
   // useState를 이용해 각 리스트를 클릭했을 때 상세 내용 표시
   // activeMore: 각 리스트 아이템의 표시/숨김 상태를 저장
   const [activeMore, setActiveMore] = useState(false);
@@ -15,10 +15,6 @@ export default function FAQComp({ children, ...rest }) {
   const handleMoreClick = (index) => {
     setActiveMore((prevActiveMore) => !prevActiveMore);
   };
-
-  useEffect(() => {
-    // 페이지가 새로고침될 때 애니메이션 초기화를 막기 위해 아무 작업도 하지 않음
-  }, []);
 
   // styled-components로 컴포넌트 정의
   // FAQ 항목 전체를 감싸는 div(없애면 정렬이 이상해져서 있어야 함)
@@ -50,7 +46,7 @@ export default function FAQComp({ children, ...rest }) {
     margin-bottom: 30px;
     display: ${(props) => (props.active ? "block" : "none")};
     font-size: 1.1rem;
-    background-color: #c2dcf475;
+    background-color: ${(props) => props.bgColor || "#c2dcf475"};
   `;
 
   // FAQ 각각의 항목 제목
@@ -95,7 +91,7 @@ export default function FAQComp({ children, ...rest }) {
         className={activeMore ? "active" : ""}
         as={activeMore === true ? ActiveList : DeactiveList}
       >
-        <Content>FAQ 첫 번째 내용입니다</Content>
+        <Content>{content}</Content>
         <Button
           active={activeMore}
           as={activeMore === true ? ActiveAni : DeactiveAni}
@@ -104,7 +100,9 @@ export default function FAQComp({ children, ...rest }) {
         </Button>
       </List>
 
-      <ListMore active={activeMore}>{children}</ListMore>
+      <ListMore active={activeMore} bgColor={bgColor}>
+        {children}
+      </ListMore>
     </ListSet>
   );
 }
