@@ -86,7 +86,7 @@ export const LocationComp = () => {
     new window.kakao.maps.LatLng(35.1516122, 129.0124815),
   ];
 
-  // 애견카페 마커가 표시될 좌표 배열입니다
+  // 애견카페 마커가 표시될 좌표 배열입니다.
   const cafePositions = [
     new window.kakao.maps.LatLng(35.0480138, 128.9668879),
     new window.kakao.maps.LatLng(35.0989232, 129.0286563),
