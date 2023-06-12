@@ -30,8 +30,8 @@ function EventListComp() {
         />
       ))}
       <div className='slide-btn'>
-        <button className='prev-btn' onClick={btnPrev}>{'<'}</button>
-        <button className='next-btn' onClick={btnNext}>{'>'}</button>
+        <button className='prev-button' onClick={btnPrev}>{'<'}</button>
+        <button className='next-button' onClick={btnNext}>{'>'}</button>
       </div>
     </div>
   );

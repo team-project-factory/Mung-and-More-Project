@@ -21,7 +21,7 @@
     margin-top: 10px;
 }
 
-.prev-btn, .next-btn {
+.prev-button, .next-button {
     font-size: 24px;
     margin: 0 ;
     border: none;
@@ -35,10 +35,10 @@
     text-shadow: 2px 2px 2px gray;
 }
 
-.prev-btn {
+.prev-button {
     left: -10%;
 }
-.next-btn {
-    right: 28%;
+.next-button {
+    right: 25%;
 }
 

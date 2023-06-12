@@ -1,21 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './instagramComp.css'
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
 import { faHeart, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 import { faComment, faPaperPlane, faBookmark } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function InstagramComp() {
+    const [imageIndex, setImageIndex] = useState(0);
 
-        const settings = {
-            dots: true,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-        };
+  const images = ["./img/login.png","./img/login2.png","./img/login3.png","./img/login4.png","./img/login5.png"];
+
+  function btnPrev() {
+    setImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  }
+  
+  function btnNext() {
+    setImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  }
 
 return (
     <div className='body'>
@@ -32,23 +32,17 @@ return (
                 </div>
             </div>
             <div className='imgBx'>
-                <Slider {...settings}>
-                    <div>
-                        <img  src="./img/post.jpg" style={{width:'360px'}}/>
-                    </div>
-                    <div>
-                        <img  src="./img/post1.jpg" style={{width:'360px'}}/>
-                    </div>
-                    <div>
-                        <img  src="./img/post2.jpg" style={{width:'360px'}}/>
-                    </div>
-                    <div>
-                        <img  src="./img/post3.jpg" style={{width:'360px'}}/>
-                    </div>
-                    <div>
-                        <img  src="./img/post4.jpg" style={{width:'360px'}}/>
-                    </div>
-                </Slider>
+            <img
+                className='event-slide-img'
+                src={images[imageIndex]}
+                alt={`Image ${imageIndex + 1}`}
+                style={{width:'340px'}}
+            />
+
+        <div className='slide-btn'>
+            <button className='prev-btn' onClick={btnPrev}>{'<'}</button>
+            <button className='next-btn' onClick={btnNext}>{'>'}</button>
+        </div>
                 
             </div>
             <div className='actionBtns'>
@@ -65,6 +59,7 @@ return (
                 <h4 className='likes'>2,800 likes</h4>
                 <h4 className='message'><b>우리 강아지 자랑글1</b> 자랑글 예시내용입니다@@ ( 위의 사진과는 무관함) <span>#멈무1</span><span>#멈무2</span><span>#멈무3</span></h4>
         </div>
+        
     </div>
   )
 }

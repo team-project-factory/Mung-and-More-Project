@@ -105,3 +105,38 @@
     color: #1d92ff;
     cursor: pointer;
 }
+
+.event-slide-img {
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    position: relative;
+}
+
+.slide-btn {
+    display: flex;
+    justify-content: space-between;
+}
+
+.next-btn, .prev-btn {
+    font-size: 24px;
+    margin: 0 ;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    font-size: 3rem;
+}
+
+.slide-btn .next-btn {
+    top: 40%;
+    right: -3.5%;
+}
+.slide-btn .prev-btn {
+    top: 40%;
+    left: -3.5%;
+}
+
