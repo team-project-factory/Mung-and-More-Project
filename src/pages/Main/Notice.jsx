@@ -4,7 +4,7 @@ import { Nav } from "../../layout/Nav";
 
 export const Notice = () => {
   return (
-    <div>
+    <div style={{ backgroundColor: "white", minHeight: "100vh" }}>
       <div style={{ width: `100%`, position: `relative`, top: "50px" }}>
         <Nav />
       </div>
