@@ -98,8 +98,6 @@ export default function JoinMemberComp() {
 
 
     // 약관동의
-
-
     const handleChange1 = (event) => {
         const isChecked = event.target.checked;
         setChecked([isChecked, isChecked, isChecked]);
@@ -260,7 +258,7 @@ export default function JoinMemberComp() {
                                     }}
                                     error={emailError}
                                     variant="outlined"
-                                    helpertext={emailError ? '유효한 이메일 주소를 입력해주세요' : ''}
+                                    helperText={emailError ? '유효한 이메일 주소를 입력해주세요' : ''}
                                     value={email}
                                     onChange={handleInputChange}
                                 >

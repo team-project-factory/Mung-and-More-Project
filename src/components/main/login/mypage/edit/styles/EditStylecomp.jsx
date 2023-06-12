@@ -26,7 +26,6 @@ export const ContentWrap = styled.div`
     top: 150px;
     border-radius: 12px;
     padding: 25px 50px;
-    display: flex;
     align-items: center;
     text-align: initial;
     justify-content: space-between;
@@ -110,4 +109,40 @@ export const ModalInfo = styled.div`
     position: relative;
     top: 30%;
     margin: 0 auto;
+`
+export const StyledInputInfo = styled(TextField)`
+    width: 500px;
+    height: 45px;
+    background-color: #F9FAFB;
+    border-radius: 5px;
+    position: relative;
+    
+    & .MuiOutlinedInput-root {
+    border: none;
+    font-size: 14px;
+    font-family: ${({ isEnglish }) => (isEnglish ? 'Montserrat' : 'SUITE-Regular')};
+    font-weight: 400;
+    height: 45px;
+    }
+    & .MuiOutlinedInput-notchedOutline {
+    border: none;
+    }
+    &:hover{
+        background-color: #f7f8fa;
+    }
+    &:focus-within {
+        border: 1px solid #000000;
+    }
+`
+export const Submit = styled.button`    
+    border: none;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-family: ${({ isEnglish }) => (isEnglish ? 'Montserrat' : 'SUITE-Regular')};
+    font-size: 16px;
+    background-color: #B4CCE3;
+    color: #fff;
+    cursor: pointer;
 `
