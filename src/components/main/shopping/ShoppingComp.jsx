@@ -3,13 +3,18 @@ import React, { useEffect, useState } from 'react'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, updateDoc, arrayUnion, arrayRemove, getDocs, collection, getDoc  } from "firebase/firestore";
 import { db, auth } from '../../../data/firebase';
+
 //css
-import style from'./shoppingcomp.module.scss'
+import style from './shoppingcomp.module.scss';
+import { Outlet, useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 
 
 
 export const ShoppingComp = () => {
+  const navigater = useNavigate();
+  const userInfor = JSON.parse(sessionStorage.getItem("user"));
   //유저 uid 생성
   const [userUID, setUserUID] = useState('');
   //버튼 배경색 변경
@@ -39,7 +44,7 @@ export const ShoppingComp = () => {
   //유저 기본 들고오기
   const getUser = () =>{
     onAuthStateChanged(auth, (user) => {
-      if (user) {
+      if (user && userInfor) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
         const uid = user.uid;
@@ -60,7 +65,7 @@ export const ShoppingComp = () => {
     getShoppingItems();
     getUser();
   },[]);
-
+  console.log(`유저 uid ${userUID}`);
   //문서들고오기
   const getUserData = async() =>{
     const docRef = doc(db, "users", userUID); 
@@ -86,7 +91,7 @@ export const ShoppingComp = () => {
     setBtnBool2(false);
     setBtnBool3(false);
     setBtnBool4(false);
-    getShoppingItems();
+    setPrintItems(items);
   }
   //의류 버튼
   const active2 = () =>{
@@ -145,23 +150,6 @@ export const ShoppingComp = () => {
     }
   }
 
-  //장바구니 버튼
-  const cartListBtn = (item) =>{
-    if(userUID){
-      const setCartList = async() =>{
-        const washingtonRef = doc(db, "users", userUID);
-        await updateDoc(washingtonRef, {
-          cartList: arrayUnion(item)
-        });
-      }
-      setCartList()
-      alert('장바구니에 추가되었습니다');
-    }
-    else{
-      alert('로그인해주세요!');
-    }
-  }
-
   return (
     <div className={style.shopping_backgrd}>
       <div className={style.shoppingBox}>
@@ -180,6 +168,7 @@ export const ShoppingComp = () => {
           >장난감</li>
         </ul>
         <div>
+          <Outlet context = {items && items}/>
           <ul className={style.shoppingBox_itemList}>
             {printItems && printItems.map((item)=>(
               <li key={item.name}>
@@ -198,10 +187,18 @@ export const ShoppingComp = () => {
                       <p>{item.price}</p>
                     </li>
                     <li>
+                    {
+                      userInfor ? <Link to={`/shopping/${item.name}`}>
+                        <span
+                        style={{cursor:'pointer'}}
+                        >장바구니</span>
+                      </Link>
+                      :
                       <span
-                      onClick={()=>cartListBtn(item)}
-                      style={{cursor:'pointer'}}
-                      >장바구니</span>
+                        onClick={()=>{alert('로그인 해주세요!'); navigater('/login')}}
+                        style={{cursor:'pointer'}}
+                        >장바구니</span>
+                    }
                     </li>
                   </ul>
                 </div>

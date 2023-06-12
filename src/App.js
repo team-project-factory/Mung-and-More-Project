@@ -33,8 +33,9 @@ function App() {
         <Route path="/likelist" element={<LikeList />} />
         <Route path="/cartlist" element={<CartList />} />
         <Route path="/payment" element={<Payment />} />
-        <Route path="/shopping" element={<Shopping />} />
-        <Route path="/information" element={<Information />} />
+        <Route path="/shopping" element={<Shopping />}>
+          <Route path="/shopping/:name" element={<Information />} />
+        </Route>
         <Route path="/location" element={<Location />} />
         <Route path="/community" element={<Community />} />
         <Route path="/notice" element={<Notice />} />
