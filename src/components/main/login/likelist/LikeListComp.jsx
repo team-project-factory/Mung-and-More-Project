@@ -61,7 +61,7 @@ if(likeList){
     <div>
       LikeListComp
       <ul>
-        {likeList.map((item)=>(
+        {likeList && likeList.map((item)=>(
           <li>{item.name}</li>
         ))}
       </ul>

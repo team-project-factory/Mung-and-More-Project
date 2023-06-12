@@ -1,0 +1,24 @@
+
+
+.infor_modal{
+  text-align: center;
+  position: fixed;
+  width: 800px;
+  height: 500px;
+  border: 3px solid black ;
+  left: 50%;
+  transform: translate(-50%, 0);
+  display: flex;
+  background-color: white;
+  padding: 20px;
+  .infor_modal_cart{
+    width: 600px;
+    display: flex;
+  }
+  li{
+    width: 50%;
+  }
+  .infro_modal_setCart{
+
+  }
+}

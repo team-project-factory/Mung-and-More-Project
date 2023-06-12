@@ -51,10 +51,7 @@ export const CartListComp = () => {
     }
   },[userUID]);
   
-  if(cartList){
-    console.log(cartList[0].name);
-  }
-
+  
 
   return (
     <div>
