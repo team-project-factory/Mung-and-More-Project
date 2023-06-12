@@ -4,7 +4,8 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
-import { useNavigate } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
+
 
 //파이어베이스
 import { db } from '../../../../data/firebase';
@@ -326,7 +327,10 @@ export default function MyPageComp() {
             <LineStyle />
             <LiStyle>작성한 게시물</LiStyle>
             <LineStyle />
-            <LiStyle>배송지 수정</LiStyle>
+            <Link to={'/edit'}>
+              <LiStyle>배송지 수정</LiStyle>
+            </Link>
+            
           </UlStyle>
         </MypageProfileWrap>
       </ContentWrap>
