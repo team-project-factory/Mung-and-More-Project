@@ -1,10 +1,14 @@
 import React, { useState, useRef } from 'react';
 import { Nav } from '../../../../../layout/Nav';
 import DaumPostCode from 'react-daum-postcode';
-import ReactDaumPost  from 'react-daumpost-hook';
+import ReactDaumPost from 'react-daumpost-hook';
 import Modal from '@mui/material/Modal';
+import { AddressModal } from '../../../Modals/Modal';
+import { collection, addDoc } from "firebase/firestore";
+import { db } from '../../../../../data/firebase';
 
-import { 
+
+import {
   Wrap,
   ContentWrap,
   Title,
@@ -16,11 +20,14 @@ import {
   AddWrap,
   PostCodeStyle,
   ModalStyle,
-  ModalInfo 
+  ModalInfo,
+  StyledInputInfo, Submit
 } from './styles/EditStylecomp';
 
 export const EditComp = () => {
   const [addressDetail, setAddressDetail] = useState('');
+  const [infoAddress, setInfoAddress] = useState('');
+
   const [isOpenPost, setIsOpenPost] = useState(false);
   const ref = useRef(null);
   const [open, setOpen] = React.useState(false);
@@ -61,6 +68,23 @@ export const EditComp = () => {
   };
   const postCode = ReactDaumPost(postConfig);
 
+  const saveAddress = (address) => {
+    try {
+      const addressCollection = collection(db, "addresses");
+      addDoc(addressCollection, address);
+    } catch (error) {
+      console.error("Error saving address:", error);
+    }
+  };
+
+  const handleSaveAddress = () => {
+    const address = {
+      postalCode: addressDetail,
+      detail: infoAddress
+    };
+    saveAddress(address);
+  };
+
   return (
     <Wrap>
       <div style={{ position: 'relative', top: '50px' }}>
@@ -95,12 +119,39 @@ export const EditComp = () => {
               aria-describedby="modal-modal-description"
             >
               <ModalInfo>
-                <div ref={ref}></div>
                 <p>dididi</p>
               </ModalInfo>
             </ModalStyle>
           </AddWrap>
+          <div ref={ref}></div>
         </StyledFieldset>
+        {/* 상세주소 1 */}
+        <StyledFieldset>
+          <StyledLabel>상세주소</StyledLabel>
+          <AddWrap>
+            <StyledWrapper>
+              <StyledInputInfo
+                id="email"
+                aria-invalid="false"
+                autoComplete="username"
+                placeholder="상세주소를 입력해주세요"
+                inputProps={{
+                  maxLength: 60,
+                  autoComplete: 'off',
+                }}
+                variant="outlined"
+                value={infoAddress}
+                onChange={(e) => setInfoAddress(e.target.value)}
+              />
+            </StyledWrapper>
+          </AddWrap>
+          <div ref={ref}></div>
+        </StyledFieldset>
+        
+        <div style={{textAlign:"right"}}>
+          <Submit>저장하기</Submit>
+        </div>
+        
       </ContentWrap>
     </Wrap>
   );
