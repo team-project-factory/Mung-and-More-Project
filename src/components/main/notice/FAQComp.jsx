@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Children } from "react";
-import styled, { keyframes, css } from "styled-components";
+import React, { useState, useEffect } from "react";
+import styled, { keyframes } from "styled-components";
 
 // FontAwesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,11 +8,12 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 export default function FAQComp({ children, ...rest }) {
   // useState를 이용해 각 리스트를 클릭했을 때 상세 내용 표시
   // activeMore: 각 리스트 아이템의 표시/숨김 상태를 저장
-  const [activeMore0, setActiveMore0] = useState(false);
+  const [activeMore, setActiveMore] = useState(false);
+  const { removeBorderTop, ...otherProps } = rest;
 
   // 클릭된 항목의 activeMore값을 반전시키는 역할 수행
   const handleMoreClick = (index) => {
-    setActiveMore0((prevActiveMore) => !prevActiveMore);
+    setActiveMore((prevActiveMore) => !prevActiveMore);
   };
 
   useEffect(() => {
@@ -20,16 +21,6 @@ export default function FAQComp({ children, ...rest }) {
   }, []);
 
   // styled-components로 컴포넌트 정의
-  // 전체를 감싸는 div
-  const FAQ = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin: auto;
-    font-family: "Montserrat", "SUITE-Regular";
-    margin-top: 50px;
-    font-size: 1.25rem;
-  `;
-
   // FAQ 항목 전체를 감싸는 div(없애면 정렬이 이상해져서 있어야 함)
   const ListSet = styled.div`
     margin: auto;
@@ -41,16 +32,13 @@ export default function FAQComp({ children, ...rest }) {
     justify-content: space-between;
     width: 815px;
     padding: 20px;
-    border-top: 0.7px solid #c9c9c9;
+    border-top: ${(props) =>
+      removeBorderTop ? "none" : "0.7px solid #c9c9c9"};
     margin-bottom: 5px;
     padding-top: 25px;
 
     &:hover {
       cursor: pointer;
-    }
-
-    &:first-child {
-      border: none;
     }
   `;
 
@@ -101,22 +89,22 @@ export default function FAQComp({ children, ...rest }) {
   `;
 
   return (
-    <div>
+    <ListSet>
       <List
         onClick={() => handleMoreClick(0)}
-        className={activeMore0 ? "active" : ""}
-        as={activeMore0 === true ? ActiveList : DeactiveList}
+        className={activeMore ? "active" : ""}
+        as={activeMore === true ? ActiveList : DeactiveList}
       >
         <Content>FAQ 첫 번째 내용입니다</Content>
         <Button
-          active={activeMore0}
-          as={activeMore0 === true ? ActiveAni : DeactiveAni}
+          active={activeMore}
+          as={activeMore === true ? ActiveAni : DeactiveAni}
         >
           <FontAwesomeIcon icon={faAngleDown} />
         </Button>
       </List>
 
-      <ListMore active={activeMore0}>{children}</ListMore>
-    </div>
+      <ListMore active={activeMore}>{children}</ListMore>
+    </ListSet>
   );
 }
