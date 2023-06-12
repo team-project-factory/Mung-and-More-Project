@@ -16,6 +16,7 @@ import { Community } from "./pages/Main/Community";
 import { Notice } from "./pages/Main/Notice";
 import { Mungstagram } from "./pages/Main/Mungstagram";
 import { MungsNews } from "./pages/Main/MungsNews";
+import CreatePost from "./pages/Main/CreatePost";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route path="/notice" element={<Notice />} />
         <Route path="/mungstagram" element={<Mungstagram/>}/>
         <Route path="/mungsnews" element={<MungsNews/>}/>
+        <Route path="/createpostcomp" element={<CreatePost/>}/>
 
         {/** 로그인 성공했을 때 */}
         <Route path="/mylike" element={<LikeList />} />
