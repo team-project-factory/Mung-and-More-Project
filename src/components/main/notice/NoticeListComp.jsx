@@ -11,7 +11,7 @@ export default function NoticeListComp() {
     display: flex;
     justify-content: space-between;
     font-family: "Montserrat", "SUITE-Regular";
-    margin-top: 70px;
+    margin-top: 50px;
     font-size: 1.25rem;
   `;
 
