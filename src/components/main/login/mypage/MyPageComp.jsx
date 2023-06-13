@@ -377,7 +377,9 @@ export default function MyPageComp() {
         </StyleForm>
         <MypageProfileWrap>
           <UlStyle>
-            <LiStyle>주문내역</LiStyle>
+            <Link to={'/orderlist'}>
+              <LiStyle>주문내역</LiStyle>
+            </Link>
             <LineStyle />
             <LiStyle>작성한 게시물</LiStyle>
             <LineStyle />
