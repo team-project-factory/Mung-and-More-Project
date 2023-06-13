@@ -26,19 +26,49 @@ export const ShoppingComp = () => {
   const [items, setitems] = useState('');
   //아이템 출력할 state
   const [printItems, setPrintItems] = useState('');
+  
+  //좋아요 배열
+  const [likeList, setLikeList] = useState('');
+  const [newItemList, setNewItemList] = useState();
+
 
 
   //아이템 배열
   const itemList = [];
+
+
+  useEffect(()=>{
+    if(items && likeList){
+      const newList2 =[];
+      items.forEach((i)=>{
+        const newList = likeList.find((like)=>(i.name === like.name));
+        if(newList){
+          newList2.push(newList);
+        }
+        else{
+          newList2.push(i);
+        }
+      })
+      setNewItemList(newList2);
+    }
+  },[likeList]);
+
+  useEffect(()=>{
+    if(userUID && newItemList){
+      setPrintItems(newItemList)
+    }
+  },[newItemList])
+
 
   //데이터 들고오기
   const getShoppingItems = async() =>{
     const querySnapshot = await getDocs(collection(db, "shopping_item"));
     querySnapshot.forEach((doc) => {
       itemList.push(...doc.data().itemlist);
-      setitems(itemList);
-      setPrintItems(itemList);
     });
+    const newItemList = itemList.sort((a,b)=> (a.name - b.name));
+    setitems(newItemList);
+    setPrintItems(newItemList);
   }
   
   //유저 기본 들고오기
@@ -65,13 +95,14 @@ export const ShoppingComp = () => {
     getShoppingItems();
     getUser();
   },[]);
-  console.log(`유저 uid ${userUID}`);
-  //문서들고오기
+
+  //likelist 문서들고오기
   const getUserData = async() =>{
     const docRef = doc(db, "users", userUID); 
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const likeList = docSnap.data().likeList
+      setLikeList(likeList);
     } 
     else {
       // docSnap.data() will be undefined in this case
@@ -80,8 +111,8 @@ export const ShoppingComp = () => {
 
   useEffect(()=>{
     if(userUID){
-      getUserData();
       console.log(userUID);
+      getUserData();
     }
   },[userUID]);
 
@@ -91,7 +122,12 @@ export const ShoppingComp = () => {
     setBtnBool2(false);
     setBtnBool3(false);
     setBtnBool4(false);
-    setPrintItems(items);
+    if(newItemList){
+      setPrintItems(newItemList);
+    }
+    else{
+      setPrintItems(items);
+    }
   }
   //의류 버튼
   const active2 = () =>{
@@ -100,11 +136,21 @@ export const ShoppingComp = () => {
     setBtnBool3(false);
     setBtnBool4(false);
     const newList = []
-    const clothList = items.filter((c)=>(
-      c.category === 'clothes'
-    ));
-    newList.push(...clothList);
-    setPrintItems(newList);
+
+    if(newItemList){
+      const clothList = newItemList.filter((c)=>(
+        c.category === 'clothes'
+      ));
+      newList.push(...clothList);
+      setPrintItems(newList);
+    }
+    else{
+      const clothList = items.filter((c)=>(
+        c.category === 'clothes'
+      ));
+      newList.push(...clothList);
+      setPrintItems(newList);
+    }
   }
   //식품 버튼
   const active3 = () =>{
@@ -113,11 +159,20 @@ export const ShoppingComp = () => {
     setBtnBool3(true);
     setBtnBool4(false);
     const newList = []
-    const foodList = items.filter((c)=>(
-      c.category === 'foods'
-    ));
-    newList.push(...foodList);
-    setPrintItems(newList);
+    if(newItemList){
+      const clothList = newItemList.filter((c)=>(
+        c.category === 'foods'
+      ));
+      newList.push(...clothList);
+      setPrintItems(newList);
+    }
+    else{
+      const clothList = items.filter((c)=>(
+        c.category === 'foods'
+      ));
+      newList.push(...clothList);
+      setPrintItems(newList);
+    }
   }
   //장난감 버튼
   const active4 = () =>{
@@ -126,11 +181,20 @@ export const ShoppingComp = () => {
     setBtnBool3(false);
     setBtnBool4(true);
     const newList = []
-    const toyList = items.filter((c)=>(
-      c.category === 'toys'
-    ));
-    newList.push(...toyList);
-    setPrintItems(newList);
+    if(newItemList){
+      const clothList = newItemList.filter((c)=>(
+        c.category === 'toys'
+      ));
+      newList.push(...clothList);
+      setPrintItems(newList);
+    }
+    else{
+      const clothList = items.filter((c)=>(
+        c.category === 'toys'
+      ));
+      newList.push(...clothList);
+      setPrintItems(newList);
+    }
   }
 
   //좋아요 버튼
@@ -138,11 +202,13 @@ export const ShoppingComp = () => {
     if(userUID){
       const setLikeList = async() =>{
         const washingtonRef = doc(db, "users", userUID);
+        item.like = true ;
         await updateDoc(washingtonRef, {
           likeList: arrayUnion(item)
         });
       }
-      setLikeList()
+      setLikeList();
+      getUserData();
       alert('좋아용!');
     }
     else{
