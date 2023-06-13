@@ -1,0 +1,25 @@
+.mungsList {
+    width: 1600px;
+    margin: auto;
+    margin-top: 100px;
+    border: 2px solid black;
+    min-height: 75vh;
+    display: flex;
+    text-align: center;
+
+    div {
+        margin: 20px;
+    }
+
+    .mungsList_menu {
+        margin-right: 10px;
+        width: 30%;
+        border: 2px solid green;
+    }
+
+    .mungsList_news {
+        margin-left: 10px;
+        width: 70%;
+        border: 2px solid blue;
+    }
+}

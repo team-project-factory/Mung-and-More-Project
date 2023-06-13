@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+// 게시글 컴포넌트
+import ListComp from "./EachListComp";
+
 export default function NoticeListComp() {
-  // useState를 이용해 각 리스트를 클릭했을 때 상세 내용 표시
-  const [activeMore, setActiveMore] = useState({});
-
-  const handleMoreClick = (id) => {
-    setActiveMore((prevState) => ({
-      ...prevState,
-      [id]: !prevState[id],
-    }));
-  };
-
   // styled-components로 컴포넌트 정의
+  // 전체를 감싸는 div
   const Notice = styled.div`
     display: flex;
     justify-content: space-between;
@@ -21,158 +15,97 @@ export default function NoticeListComp() {
     font-size: 1.25rem;
   `;
 
+  // Notice 항목 전체를 감싸는 div
   const ListSet = styled.div`
     margin: auto;
-  `;
-
-  const List = styled.div`
-    display: flex;
-    justify-content: space-between;
-    width: 815px;
-    padding: 20px;
-    border-top: 0.7px solid #c9c9c9;
-    margin-bottom: 5px;
-    padding-top: 25px;
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    &:first-child {
-      border: none;
-    }
-  `;
-
-  const ListMore = styled.div`
-    width: 815px;
-    padding: 20px;
-    background-color: #fff49386;
-    border-radius: 7px;
-    margin-bottom: 30px;
-    display: ${(props) => (props.active ? "block" : "none")};
-    font-size: 1.1rem;
-  `;
-
-  const Content = styled.div``;
-
-  const ActiveList = styled(List)`
-    font-weight: bold;
-  `;
-
-  const DeactiveList = styled(List)`
-    &:hover {
-      font-weight: bold;
-    }
   `;
 
   return (
     <Notice>
       <ListSet>
-        <List
-          onClick={() => handleMoreClick(1)}
-          className={activeMore[1] ? "active" : ""}
-          as={activeMore[1] === true ? ActiveList : DeactiveList}
+        <ListComp
+          content="Notice 게시판의 첫 번째 내용입니다."
+          bgColor="#fff49386"
+          removeBorderTop
         >
-          <Content>Notice 첫 번째 내용입니다</Content>
-          <Content>+</Content>
-        </List>
-        <ListMore active={activeMore[1]}>
-          있는 같이, 아름답고 열락의 뛰노는 있으랴? 사라지지 품었기 가는 뛰노는
-          말이다. 열락의 이것은 이상 인생을 무한한 뼈 끝에 우리는 기관과
-          쓸쓸하랴? 쓸쓸한 이상 곳으로 있는 실로 용기가 굳세게 보라. 이상
-          이것이야말로 것은 예수는 품에 돋고, 교향악이다. 착목한는 있는 청춘은
-          심장은 아니한 오아이스도 주는 목숨이 보라. 인도하겠다는 돋고, 이상
-          사랑의 대한 무엇이 가치를 것은 봄바람을 위하여서. 속에서 것은 얼마나
-          같은 이것이다. 수 노래하며 불어 위하여서, 못할 그들의 뜨고, 위하여
-          부패뿐이다. 하였으며, 힘차게 못하다 어디 그들은 과실이 이것이다. 별과
-          그와 찾아다녀도, 되는 붙잡아 그들에게 속에 사막이다. 위하여서
-          원대하고, 튼튼하며, 풀이 밝은 것이다. 보는 석가는 가진 그들의
-          위하여서.
-        </ListMore>
-
-        <List
-          onClick={() => handleMoreClick(2)}
-          className={activeMore[2] ? "active" : ""}
-          as={activeMore[2] === true ? ActiveList : DeactiveList}
+          우리는 안고, 청춘의 것이다. 이상의 피가 못할 대한 천지는 그림자는
+          튼튼하며, 속잎나고, 품으며, 것이다. 얼마나 얼마나 이상은 그리하였는가?
+          인간에 위하여 보이는 갑 것이다. 그들은 위하여서, 영원히 천하를 못할
+          하는 이성은 고행을 것이다. 넣는 귀는 위하여서, 기관과 것이다. 굳세게
+          가슴에 대고, 곳으로 인간은 위하여, 천지는 말이다. 가슴이 거친 끓는 뼈
+          이 대중을 천고에 아름다우냐? 할지니, 그들에게 군영과 운다. 남는 인생을
+          우리 부패를 그들은 영락과 이상은 피다. 내려온 얼음과 인간의 우는
+          이것이다. 우리 충분히 피가 그러므로 끝에 때에, 것이다. 속잎나고,
+          이상을 천고에 보내는 대한 봄바람을 그들은 거선의 이것이다. 웅대한 내는
+          투명하되 있으랴? 내려온 우리의 살 들어 가치를 실로 그들은 이상은
+          인간은 뿐이다.
+        </ListComp>
+        <ListComp
+          content="Notice 게시판의 두 번째 내용입니다."
+          bgColor="#fff49386"
         >
-          <Content>Notice 두 번째 내용입니다</Content>
-          <Content>+</Content>
-        </List>
-        <ListMore active={activeMore[2]}>
-          희망의 찾아 관현악이며, 못하다 산야에 보이는 장식하는 타오르고 힘있다.
-          피어나기 어디 원대하고, 오직 보이는 대고, 설산에서 것이다. 있을 그들의
-          돋고, 가진 봄바람이다. 인간에 청춘의 온갖 아니한 두기 눈에 우는 심장의
-          못할 이것이다. 할지니, 오직 풀이 눈이 얼음에 영락과 설레는 찾아다녀도,
-          것이다. 청춘의 없으면, 이는 소리다.이것은 천하를 오직 사막이다. 끝까지
-          천지는 어디 눈이 그들의 원대하고, 돋고, 사랑의 쓸쓸하랴? 있으며,
-          청춘을 청춘의 공자는 불러 반짝이는 끓는다. 행복스럽고 가지에 예수는
-          사람은 넣는 그들의 칼이다. 꽃이 동산에는 얼음이 열락의 것이다. 같은
-          얼마나 가치를 찾아다녀도, 방황하여도, 하였으며, 풍부하게 못하다 가장
-          그리하였는가? 봄날의 주며, 우리 위하여, 하여도 사막이다. 사랑의 피부가
-          놀이 청춘의 불어 하는 목숨을 뜨거운지라, 그들은 뿐이다.
-        </ListMore>
-
-        <List
-          onClick={() => handleMoreClick(3)}
-          className={activeMore[3] ? "active" : ""}
-          as={activeMore[3] === true ? ActiveList : DeactiveList}
+          이상이 든 만물은 생생하며, 것이다. 하는 가지에 청춘은 인간은 방지하는
+          무엇을 그들의 뭇 있는 것이다. 이상의 방지하는 보는 그들은 듣는다.
+          발휘하기 별과 역사를 무엇을 끝까지 돋고, 그들에게 뿐이다. 것이 천고에
+          끓는 풍부하게 이상의 꽃 피다. 청춘의 긴지라 같이 사라지지 청춘의
+          소담스러운 바로 부패뿐이다. 남는 곳이 눈이 아니더면, 쓸쓸하랴? 같으며,
+          열매를 것은 때에, 그들의 황금시대를 이상 있는가? 유소년에게서 보는
+          가슴에 되려니와, 공자는 약동하다. 붙잡아 생명을 청춘의 따뜻한 장식하는
+          우리 힘있다. 천지는 사람은 그러므로 우리의 장식하는 생명을 이상의
+          있으랴? 발휘하기 위하여 이상이 보이는 천고에 그들에게 힘차게 실로
+          굳세게 쓸쓸하랴? 피는 이는 그들은 풍부하게 청춘은 발휘하기 그들의
+          운다. 인간이 뛰노는 못하다 이상의 사막이다. 꾸며 위하여서 품으며, 청춘
+          일월과 예수는 봄바람이다. 갑 바이며, 열락의 위하여서. 청춘 뛰노는
+          열락의 있을 아니다.
+        </ListComp>
+        <ListComp
+          content="Notice 게시판의 세 번째 내용입니다."
+          bgColor="#fff49386"
         >
-          <Content>Notice 세 번째 내용입니다</Content>
-          <Content>+</Content>
-        </List>
-        <ListMore active={activeMore[3]}>
-          예가 따뜻한 인도하겠다는 청춘이 것이다. 위하여, 인생을 얼마나 무엇이
-          평화스러운 길지 몸이 간에 창공에 사막이다. 과실이 희망의 끓는 미묘한
-          보라. 만물은 심장의 보배를 있으며, 더운지라 이것이다. 끝에 목숨을
-          얼마나 자신과 아름다우냐? 인간의 보배를 천자만홍이 끓는 인류의
-          장식하는 피에 방황하여도, 꽃 것이다. 청춘이 이 가는 것은 따뜻한
-          부패뿐이다. 너의 불러 같으며, 원질이 피고 황금시대다. 끓는 가치를 새가
-          있는 것이다. 가치를 없으면 품으며, 꾸며 구하지 설레는 것이다. 인생에
-          같은 불러 이상 곳이 같으며, 있으랴? 보배를 우리 뛰노는 모래뿐일
-          것이다. 구할 뼈 품에 밝은 무엇을 전인 같이 얼마나 이것이야말로 듣는다
-        </ListMore>
-
-        <List
-          onClick={() => handleMoreClick(4)}
-          className={activeMore[4] ? "active" : ""}
-          as={activeMore[4] === true ? ActiveList : DeactiveList}
+          어디 있으며, 스며들어 뛰노는 사막이다. 무한한 그들은 없으면, 광야에서
+          충분히 갑 오직 과실이 용기가 사막이다. 그들에게 청춘이 인간이 청춘
+          무엇을 이것이다. 타오르고 일월과 그들에게 얼마나 보는 끓는 아니다.
+          미인을 앞이 수 사랑의 불러 그들은 용기가 봄바람이다. 무한한 살 피는 곧
+          어디 뜨거운지라, 것이다. 속에서 열락의 곳이 못하다 물방아 인간이
+          것이다. 작고 들어 생의 품으며, 얼마나 위하여서, 인생을 원질이 목숨을
+          봄바람이다. 놀이 청춘을 광야에서 소담스러운 그들의 열매를 가는
+          천자만홍이 이것이다. 황금시대를 청춘에서만 용기가 끓는 오아이스도 피가
+          그리하였는가? 그림자는 뜨거운지라, 그것을 얼마나 동력은 찬미를 우리의
+          이 사막이다. 속에서 맺어, 우리는 산야에 들어 있는 이것이야말로 곳으로
+          길지 것이다. 하여도 온갖 그들은 청춘을 우리의 군영과 것이다.
+        </ListComp>
+        <ListComp
+          content="Notice 게시판의 네 번째 내용입니다."
+          bgColor="#fff49386"
         >
-          <Content>Notice 네 번째 내용입니다</Content>
-          <Content>+</Content>
-        </List>
-        <ListMore active={activeMore[4]}>
-          이 넣는 얼음 인생을 운다. 그들에게 밥을 봄바람을 이것이다. 구하기 어디
-          그들의 그들은 가진 소담스러운 내려온 충분히 끓는다. 크고 풍부하게
-          위하여, 뭇 너의 속잎나고, 봄날의 이상의 살았으며, 사막이다. 구할
-          생명을 같이, 않는 얼마나 소담스러운 때문이다. 청춘 얼마나 얼마나 끓는
-          우리의 청춘에서만 인간의 청춘을 따뜻한 것이다. 긴지라 만물은 맺어,
-          교향악이다. 하는 것은 품에 방지하는 없으면 튼튼하며, 고행을 풍부하게
-          원대하고, 아니다. 거친 이것을 기쁘며, 속잎나고, 그러므로 길을
-          그리하였는가? 무엇을 오직 수 것이다. 싸인 사람은 그들은 그림자는
-          되려니와, 무한한 청춘의 찾아 보라. 이것은 천지는 사랑의 그들은 봄날의
-          힘차게 피에 품고 말이다. 일월과 뜨고, 대중을 기쁘며, 구하지 온갖
-          이것이다.
-        </ListMore>
-
-        <List
-          onClick={() => handleMoreClick(5)}
-          className={activeMore[5] ? "active" : ""}
-          as={activeMore[5] === true ? ActiveList : DeactiveList}
+          거친 것은 천하를 예수는 사람은 붙잡아 넣는 끝에 가치를 있다. 소금이라
+          따뜻한 이상 이것을 구하지 것이다. 무엇을 힘차게 하여도 아니다. 가진
+          군영과 힘차게 못하다 불러 이상이 부패를 끓는 더운지라 있으랴? 품에
+          꾸며 이 쓸쓸하랴? 예수는 눈에 희망의 어디 부패뿐이다. 아니더면,
+          위하여서 목숨을 넣는 뜨거운지라, 미묘한 속에 칼이다. 않는 석가는
+          대중을 속잎나고, 인간의 커다란 속에 타오르고 열락의 약동하다. 지혜는
+          웅대한 동산에는 앞이 노년에게서 가지에 곧 쓸쓸하랴? 생의 보는 이상의
+          현저하게 청춘이 가치를 별과 붙잡아 찾아 보라. 많이 커다란 인생에 우리
+          기관과 인간의 있는가? 기관과 어디 두기 우리의 얼마나 이상 이것은
+          이것이야말로 모래뿐일 있다. 끓는 꽃 사람은 있음으로써 그리하였는가?
+        </ListComp>
+        <ListComp
+          content="Notice 게시판의 다섯 번째 내용입니다."
+          bgColor="#fff49386"
         >
-          <Content>Notice 다섯 번째 내용입니다</Content>
-          <Content>+</Content>
-        </List>
-        <ListMore active={activeMore[5]}>
-          발휘하기 더운지라 별과 뭇 꽃 현저하게 오직 불어 뿐이다. 아니더면, 오직
-          품으며, 너의 칼이다. 얼음이 앞이 인생에 따뜻한 되려니와, 힘차게 끓는
-          말이다. 속잎나고, 얼음에 타오르고 뼈 때문이다. 아니더면, 이상의
-          노래하며 위하여서. 밝은 영락과 이상의 아니더면, 봄바람이다. 얼마나
-          보이는 피어나는 구하지 인간이 우리 피고 못할 보는 보라. 풀밭에 이것은
-          찾아 피에 아니다. 너의 쓸쓸한 보이는 얼음 사라지지 없으면 끓는다. 길지
-          이것을 그것을 피고 고행을 살았으며, 인간에 새 쓸쓸하랴? 반짝이는 청춘
-          피어나는 뿐이다. 꽃이 사랑의 가는 청춘은 불러 시들어 있는 그들에게
-          싸인 봄바람이다. 무엇을 인생을 청춘의 아름답고 오아이스도 보라.
-        </ListMore>
+          더운지라 바이며, 위하여 미묘한 부패를 이상의 싸인 말이다. 인간에
+          설레는 피가 것이다. 굳세게 싹이 구하기 피가 찬미를 품었기 곳으로
+          기쁘며, 부패뿐이다. 이상 피가 인생에 것이다. 얼음에 품고 위하여,
+          날카로우나 우리의 평화스러운 아니한 이것이다. 되는 천고에 위하여,
+          그들은 석가는 힘차게 청춘의 청춘은 청춘 끓는다. 따뜻한 역사를 가장
+          많이 이성은 이는 봄바람이다. 인도하겠다는 인간의 인생을 우리의 곳으로
+          바로 아니다. 보이는 하여도 착목한는 가치를 같은 심장은 놀이 가장
+          위하여서, 위하여서. 위하여서, 우리의 튼튼하며, 기관과 그들은 소금이라
+          산야에 그들은 구하지 부패뿐이다. 열락의 청춘 아니더면, 이상 하여도
+          부패뿐이다. 온갖 설산에서 예수는 그들은 싶이 피어나기 청춘 가는 거선의
+          끓는다. 피가 천지는 피가 인생에 곳으로 품에 싹이 발휘하기 것이다.
+          인생의 굳세게 우는 칼이다. 얼마나 길을 주며, 청춘의 때에, 피다.
+        </ListComp>
       </ListSet>
     </Notice>
   );

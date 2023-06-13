@@ -107,6 +107,7 @@ export const LocationComp = () => {
 
   // click한 marker의 index
   const [index,setIndex] = useState("");
+  
 
   // 마커 이미지의 주소와, 크기, 옵션으로 마커 이미지를 생성하여 리턴하는 함수
   function createMarkerImage(src, size, options) {
@@ -219,7 +220,6 @@ export const LocationComp = () => {
       pathMenu.className = '';
       hospitalMenu.className = 'menu_selected';
       cafeMenu.className = '';
-  
       setPathMarkers(null);
       setHospitalMarkers(map);
       setCafeMarkers(null);
