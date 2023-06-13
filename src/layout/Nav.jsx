@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import style from "./Nav.module.scss";
 import { useSelector, useDispatch } from "react-redux";
@@ -27,10 +28,26 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpSharpIcon from "@mui/icons-material/ArrowDropUpSharp";
 
 export const Nav = () => {
-  // add
   const [isCommunityHovered, setCommunityHovered] = useState(false);
   const dispatch = useDispatch();
   const getUser = JSON.parse(sessionStorage.getItem("user"));
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 추가: 로그인 상태
+  const [photo, setPhoto] = useState('');
+  const [selectedImage, setSelectedImage] = useState(null);
+  
+  useEffect(() => {
+    // 추가: 로그인 상태 변경 감지
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+        setPhoto(user.photoURL || '');
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+  }, []);
 
   const handleCommunityHover = () => {
     setCommunityHovered(true);
@@ -98,7 +115,9 @@ export const Nav = () => {
                     <Link to={"/cart"}>Cart</Link>
                   </MenuItems_item>
                   <Link to={"/mypage"}>
-                    <ProfileImg />
+                    <ProfileImg>
+                    <img src={selectedImage ? URL.createObjectURL(selectedImage) : photo} alt="Selected" style={{width:"100%", height:"100%"}}/>
+                    </ProfileImg>
                   </Link>
                 </>
               ) : (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
@@ -12,6 +12,7 @@ import { db } from '../../../../data/firebase';
 import { getAuth, signOut, onAuthStateChanged, updateProfile, updatePassword, deleteUser } from "firebase/auth";
 import { doc, deleteDoc } from "firebase/firestore";
 import { useDispatch } from 'react-redux';
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 
 
 import {
@@ -20,6 +21,7 @@ import {
   , LineStyle, Withdrawal, OutBtn, WithdrawalText, UlStyle, LiStyle, LogoutBtn, ContentWrap
 } from './styles/MyPageStylecomp'
 import { Nav } from '../../../../layout/Nav';
+import { loginUser } from '../LoginSlice';
 
 
 export default function MyPageComp() {
@@ -27,11 +29,13 @@ export default function MyPageComp() {
   const dispatch = useDispatch();
 
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 추가: 로그인 상태
+  const [photo, setPhoto] = useState('');
   //로그인 uid state
   const [userImfor, setUserImfor] = useState('')
 
@@ -42,6 +46,8 @@ export default function MyPageComp() {
       if (user) {
         setIsLoggedIn(true);
         setName(user.displayName || '');
+        setEmail(user.email || '');
+        setPhoto(user.photoURL || '');
       } else {
         setIsLoggedIn(false);
       }
@@ -53,6 +59,8 @@ export default function MyPageComp() {
     const inputValue = event.target.value;
     setName(inputValue);
   }
+
+  const storage = getStorage();
 
   // password
   const handleInputPw = (event) => {
@@ -181,7 +189,41 @@ export default function MyPageComp() {
     }
   }
 
+  // 이미지 업로드
+  const auth = getAuth();
+  const [selectedImage, setSelectedImage] = useState(null);
+  const fileInputRef = useRef(null);
 
+  // 이미지 업로드 함수
+  const uploadProfileImage = async (file) => {
+    const storageRef = ref(storage, 'profile_images/' + file.name);
+    await uploadBytes(storageRef, file);
+    console.log('프로필 이미지 업로드 완료');
+
+    // 업로드한 이미지의 다운로드 url 가져오기
+    const downloadURL = await getDownloadURL(storageRef);
+    return downloadURL;
+  }
+
+  const handleImageUpload = async(e) => {
+    const file = e.target.files[0];
+    setSelectedImage(file);
+    const imageUrl = await uploadProfileImage(file);
+
+    // Firebase 사용자 프로필 업데이트
+    updateProfile(auth.currentUser, {
+      photoURL : imageUrl
+    }).then(()=>{
+      console.log('프로필 이미지 업데이트')
+      
+    }).catch((error)=>{
+      console.log('프로필 이미지 업데이트 실패', error)
+    })
+
+  }
+  const handleIconClick = () => {
+    fileInputRef.current.click();
+};
   return (
     <Wrap>
       <div style={{ position: "relative", top: "50px" }}>
@@ -189,12 +231,24 @@ export default function MyPageComp() {
       </div>
       <ContentWrap>
         <MypageProfileWrap>
-          <MyProfile />
+          <MyProfile>
+            <img src={selectedImage ? URL.createObjectURL(selectedImage) : photo} alt="Selected" style={{width:"100%", height:"100%"}}/>
+          </MyProfile>
           <MyProfileInfo>
-            <MyName>UserName</MyName>
-            <MyEmail>email@gmail.com</MyEmail>
+            <MyName>{name}</MyName>
+            <MyEmail>{email}</MyEmail>
           </MyProfileInfo>
-          <MyprofileIcon />
+          <div onClick={handleIconClick}>
+            <MyprofileIcon></MyprofileIcon>
+            <input
+            ref={fileInputRef}
+            id="imageInput"
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            style={{ display: 'none' }}
+          />
+          </div>
         </MypageProfileWrap>
         <LogoutBtn onClick={handleLogOut}>로그아웃</LogoutBtn>
         <StyleForm>
