@@ -4,6 +4,8 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 //파이어 스토어
 import { getFirestore } from "firebase/firestore";
+//스토리지
+import { getStorage } from "firebase/storage"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -23,3 +25,6 @@ export const auth = getAuth(app);
 //파이어스토어
 //page에 import 할것!
 export const db = getFirestore(app);
+//스토리지
+//page에 import 할것!
+export const storage = getStorage(app);
