@@ -202,14 +202,13 @@ export const ShoppingComp = () => {
     if(userUID){
       const setLikeList = async() =>{
         const washingtonRef = doc(db, "users", userUID);
-        item.like = true ;
+        item.like = !item.like ;
         await updateDoc(washingtonRef, {
           likeList: arrayUnion(item)
         });
       }
       setLikeList();
       getUserData();
-      alert('좋아용!');
     }
     else{
       alert('로그인해주세요!');
