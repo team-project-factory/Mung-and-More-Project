@@ -48,6 +48,8 @@ export const MyProfile = styled.div`
     background-color: #f5f5f5;
     border-radius: 50%;
     flex-shrink: 0;
+    overflow: hidden;
+    margin: 0 auto;
 `
 export const MyProfileInfo = styled.div`
     flex-grow: 2.6;

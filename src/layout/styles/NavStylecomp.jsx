@@ -99,11 +99,12 @@ export const MenuItems_item_slide = styled.div`
         display: block;
     }
 `
-export const ProfileImg = styled.img`
+export const ProfileImg = styled.div`
     width: 56px;
     height: 56px;
     background-color: #f2f2f2;
-    border: 1px solid;
+    border: 1px solid #f5f5f5;
     border-radius: 50%;
     margin-left: 23px;
+    overflow: hidden;
 `
