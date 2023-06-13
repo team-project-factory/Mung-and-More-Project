@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { db,auth } from '../../../../data/firebase';
+import { db,auth,storage } from '../../../../data/firebase';
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
-
+import { getStorage, ref,uploadBytes } from "firebase/storage";
 
 export default function CreatePostComp() {
   const navigator = useNavigate();
@@ -13,7 +13,9 @@ export default function CreatePostComp() {
   const [inputSub, setInputSub] = useState('');
   const [inputLocation, setInputLocation] = useState('');
   const [uid,setUid] = useState('');
+  const [file,setFile] = useState([]);
   
+  // 게시글 작성 날짜 사용 변수
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth() + 1; // getMonth()는 0부터 시작하므로 1을 더함
@@ -30,9 +32,6 @@ export default function CreatePostComp() {
     }
   });
   },[])
-  if(uid){
-    console.log(uid)
-  }
   
 
   const handleTitleChange = (e) => {
@@ -50,17 +49,41 @@ export default function CreatePostComp() {
   const handleLocationChange = (e) => {
     setInputLocation(e.target.value);
   };
+  const handleFile = (e) => {
+    // 업로드 된 파일들을 배열로 관리하기 위함
+    const files = e.target.files;
+    const filesArray = Array.from(files);
+    setFile((prevFiles) => [...prevFiles, ...filesArray])
+    console.log(files)
+  }
+
+  // 사진 파일 업로드 하는 함수
+  const uploadFiles = async () => {
+    const storageRef = ref(storage,"slide_images");
+    const uploadPromises = file.map((file) => {
+      const fileRef = ref(storageRef, file.name);
+      return uploadBytes(fileRef, file);
+    });
+  
+    try {
+      await Promise.all(uploadPromises);
+      alert('사진 업로드 완료');
+    } catch (error) {
+      alert('업로드 실패', error);
+    }
+  };
+
+
+
 
   // firebase에 input에 작성한 내용 배열로 등록하기
   function addPost(){
-    
     const docRef = doc(db, "Post", uid);
     
     const setData = async() =>{
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
       } else {
-      // docSnap.data() will be undefined in this case
       await setDoc(doc(db, "Post", uid), {
           postList : []
           });
@@ -70,15 +93,22 @@ export default function CreatePostComp() {
   
   // firebase 등록 양식 설정
   const upadteDoc = async() =>{
+
+    // 이미지 파일 업로드
+    const imageName = await uploadFiles();
+    const imagesUrls = [imageName];
+
     // Atomically add a new region to the "regions" array field.
     await updateDoc(docRef, {
       postList: arrayUnion({
+        id : docRef.id, // 게시물 ID 추가
         title : inputTitle,
         sub : inputSub,
         hash : inputHash,
         des : inputDes,
         location : inputLocation,
         date: `${year}-${month}-${day}`,
+        //images : imagesUrls
       })
     });
   }
@@ -110,6 +140,10 @@ export default function CreatePostComp() {
       <input 
       style={{padding:"20px", marginTop:"50px"}}
       type="text" value={inputDes} onChange={handleDesChange} />
+      images : 
+      <input 
+      style={{padding:"20px", marginTop:"50px"}}
+      type="file" multiple={true} onChange={handleFile} />
 
       <button onClick={addPost}>작성 완료</button>
     </div>
