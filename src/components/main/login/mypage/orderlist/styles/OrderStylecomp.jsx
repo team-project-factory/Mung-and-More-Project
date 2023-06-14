@@ -49,8 +49,39 @@ export const ProductImg = styled.div`
 `
 export const ProductInfo = styled.div`
     flex-grow: 2;
+    display: grid;
+    height: 120px;
+    grid-template-rows: 0.6fr 1fr 2fr;
+    align-content: stretch;
+    align-items: end;
+    /* height: 120px; */
 `
 export const ProductState = styled.div`
     flex-grow: 1;
     text-align: right;
+    display: grid;
+    height: 120px;
+    align-content: space-between;
+`
+export const Brand = styled.p`
+    color: #B2B3B4;
+    font-family: ${({ isEnglish }) => (isEnglish ? 'Montserrat' : 'SUITE-Medium')};
+`
+export const Name = styled.p`
+    font-size: 18px;
+`
+export const NumWrap = styled.div`
+    display: flex;
+`
+export const Num = styled.p`
+    font-size: 16px;
+    font-family: ${({ isEnglish }) => (isEnglish ? 'Montserrat' : 'SUITE-Medium')};
+    font-weight: 300;
+`
+export const Date = styled.p`
+
+`
+export const Delev = styled.p`
+    font-size: 18px;
+    font-family: ${({ isEnglish }) => (isEnglish ? 'Montserrat' : 'SUITE-Medium')};
 `
