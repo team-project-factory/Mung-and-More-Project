@@ -12,6 +12,10 @@ import { json, useNavigate } from "react-router-dom";
 // scss
 import style from "./cartListComp.module.scss";
 
+// font Awesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+
 export const CartListComp = () => {
   const navigater = useNavigate();
   const dispatch = useDispatch();
@@ -89,22 +93,50 @@ export const CartListComp = () => {
       <div className={style.Layout}>
         <div className={style.CartBox}>
           <h1>Cart</h1>
-          <ul className={style.ListSet}>
+          <div className={style.ListSet}>
             {cartList &&
               cartList.map((item) => (
-                <li className={style.CartList}>
-                  <input
-                    type="checkbox"
-                    value={JSON.stringify(item)}
-                    onChange={(e) => {
-                      onCheck(e.target.checked, e.target.value);
-                    }}
-                  />
-                  <p>{item.name}</p>
-                  <p>{item.price}원</p>
-                </li>
+                <div className={style.EachList}>
+                  <div className={style.Btns}>
+                    <input
+                      type="checkbox"
+                      value={JSON.stringify(item)}
+                      onChange={(e) => {
+                        onCheck(e.target.checked, e.target.value);
+                      }}
+                      className={style.CheckBtn}
+                    />
+                    <button className={style.DeleteBtn}>
+                      <FontAwesomeIcon icon={faXmark} />
+                    </button>
+                  </div>
+                  <div className={style.CartList}>
+                    <img src="" className={style.itemImg} />
+                    <div className={style.Texts}>
+                      <div
+                        style={{
+                          marginLeft: "20px",
+                          marginTop: "10px",
+                          fontSize: "1.1rem",
+                        }}
+                      >
+                        {item.name}
+                      </div>
+                      <div>수량</div>
+                    </div>
+                    <div
+                      style={{
+                        width: "150px",
+                        marginTop: "80px",
+                        marginLeft: "200px",
+                      }}
+                    >
+                      PRICE: {item.price}₩
+                    </div>
+                  </div>
+                </div>
               ))}
-          </ul>
+          </div>
           <button onClick={goPayment}>구매하기</button>
         </div>
       </div>
