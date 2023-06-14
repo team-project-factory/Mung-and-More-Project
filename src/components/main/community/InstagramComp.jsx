@@ -5,9 +5,9 @@ import { faHeart, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 import { faComment, faPaperPlane, faBookmark } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { doc, updateDoc, arrayRemove, collection, getDocs } from 'firebase/firestore';
-import { auth, db } from '../../../data/firebase';
+import { auth, db,storage } from '../../../data/firebase';
 import { onAuthStateChanged } from 'firebase/auth'
-import { getDownloadURL, getStorage } from 'firebase/storage'
+import { ref,deleteObject} from 'firebase/storage'
 
 export default function InstagramComp() {
   const userInfor = JSON.parse(sessionStorage.getItem("user"));
@@ -48,16 +48,35 @@ export default function InstagramComp() {
 
   // 게시글 삭제 함수
   const deletePost = async (postId) => {
-    const post = newList2.find((post)=>(post = postId))
+    const post = newList2.find((post) => post === postId);
+    // 파일 삭제 함수 정의
+    const deleteFiles = async () => {
+      // 각 파일에 대해 삭제 작업 수행
+      const deletePromises = post.images.map((imageUrl) => {
+        const fileRef = ref(storage, imageUrl);
+        return deleteObject(fileRef);
+      });
+  
+      try {
+        await Promise.all(deletePromises);
+        console.log("파일 삭제 완료");
+      } catch (error) {
+        console.error("파일 삭제 중 오류가 발생했습니다:", error);
+      }
+    };
+      // DB 삭제 작업 수행
     try {
       await updateDoc(doc(db, "Post", uid), {
         postList: arrayRemove(post)
       });
+      await deleteFiles(); // 파일 삭제 함수 호출
       alert("게시물이 삭제되었습니다.");
     } catch (error) {
       console.error("게시물 삭제 중 오류가 발생했습니다:", error);
-    } 
+    }
   };
+  
+
   // 게시글 삭제 실행 함수
   const handleDeletePost = (postId) => {
     deletePost(postId);
@@ -67,16 +86,15 @@ export default function InstagramComp() {
   
 
 
-
-  const images = ["./img/login.png", "./img/login2.png", "./img/login3.png", "./img/login4.png", "./img/login5.png"];
-
   // 아래는 슬라이드에 이전, 다음 버튼 함수
-  function btnPrev() {
-    setImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  function btnPrev(images) {
+    const index = (imageIndex - 1 + images.length) % images.length;
+    setImageIndex(index);
   }
-
-  function btnNext() {
-    setImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  
+  function btnNext(images) {
+    const index = (imageIndex + 1) % images.length;
+    setImageIndex(index);
   }
 
   return (
@@ -113,14 +131,14 @@ export default function InstagramComp() {
               <div className='imgBx'>
                 <img
                   className='event-slide-img'
-                  src={images[imageIndex]}
+                  src={post.images[imageIndex]}
                   alt={`Image ${imageIndex + 1}`}
                   style={{ width: '340px' }}
                 />
 
                 <div className='slide-btn'>
-                  <button className='prev-btn' onClick={btnPrev}>{'<'}</button>
-                  <button className='next-btn' onClick={btnNext}>{'>'}</button>
+                  <button className='prev-btn' onClick={() => btnPrev(post.images)}>{'<'}</button>
+                  <button className='next-btn' onClick={() => btnNext(post.images)}>{'>'}</button>
                 </div>
 
               </div>
