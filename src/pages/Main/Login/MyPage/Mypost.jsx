@@ -1,11 +1,11 @@
 import React from 'react'
-import {Mypostcomp} from "../../../../components/main/login/mypage/mypost/Mypostcomp"
+import PostComp from '../../../../components/main/login/mypage/mypost/PostComp'
 
 
 export const Mypost=() =>{
     return (
         <div>
-            <Mypostcomp/>
+            <PostComp/>          
         </div>
     )
 }

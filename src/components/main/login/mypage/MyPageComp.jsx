@@ -381,7 +381,9 @@ export default function MyPageComp() {
               <LiStyle>주문내역</LiStyle>
             </Link>
             <LineStyle />
-            <LiStyle>작성한 게시물</LiStyle>
+            <Link to={'/mypost'}>
+              <LiStyle>작성한 게시물</LiStyle>
+            </Link>
             <LineStyle />
             <Link to={'/edit'}>
               <LiStyle>배송지 수정</LiStyle>
