@@ -3,7 +3,7 @@ import { db,auth,storage } from '../../../../data/firebase';
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
-import { getStorage, ref,uploadBytes } from "firebase/storage";
+import { getStorage, ref,uploadBytes,getDownloadURL } from "firebase/storage";
 
 export default function CreatePostComp() {
   const navigator = useNavigate();
@@ -54,24 +54,28 @@ export default function CreatePostComp() {
     const files = e.target.files;
     const filesArray = Array.from(files);
     setFile((prevFiles) => [...prevFiles, ...filesArray])
-    console.log(files)
   }
 
   // 사진 파일 업로드 하는 함수
-  const uploadFiles = async () => {
-    const storageRef = ref(storage,"slide_images");
-    const uploadPromises = file.map((file) => {
-      const fileRef = ref(storageRef, file.name);
-      return uploadBytes(fileRef, file);
-    });
+    // 사진 파일 업로드 하는 함수
+    const uploadFiles = async () => {
+      const storageRef = ref(storage, "slide_images");
+      const uploadPromises = file.map((file) => {
+        const fileRef = ref(storageRef, file.name);
+        return uploadBytes(fileRef, file)
+          .then(() => getDownloadURL(fileRef))
+          .then((downloadURL) => downloadURL);
+      });
   
-    try {
-      await Promise.all(uploadPromises);
-      alert('사진 업로드 완료');
-    } catch (error) {
-      alert('업로드 실패', error);
-    }
-  };
+      try {
+        const downloadURLs = await Promise.all(uploadPromises);
+        alert('게시글 작성 완료');
+        return downloadURLs;
+      } catch (error) {
+        alert('업로드 실패', error);
+        return [];
+      }
+    };
 
 
 
@@ -88,6 +92,7 @@ export default function CreatePostComp() {
           postList : []
           });
       }
+      // addPost 실행하면 게시글작성 페이지에서 원래 페이지로 돌아가게끔
       navigator("/community");
   }
   
@@ -95,8 +100,7 @@ export default function CreatePostComp() {
   const upadteDoc = async() =>{
 
     // 이미지 파일 업로드
-    const imageName = await uploadFiles();
-    const imagesUrls = [imageName];
+    const imagesUrls = await uploadFiles();
 
     // Atomically add a new region to the "regions" array field.
     await updateDoc(docRef, {
@@ -108,7 +112,7 @@ export default function CreatePostComp() {
         des : inputDes,
         location : inputLocation,
         date: `${year}-${month}-${day}`,
-        //images : imagesUrls
+        images : imagesUrls
       })
     });
   }
