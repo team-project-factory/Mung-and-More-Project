@@ -5,6 +5,7 @@ import { JoinMember } from "./pages/Main/Login/JoinMember";
 import { Main } from "./pages/Main/Main";
 import { MyPage } from "./pages/Main/Login/MyPage/MyPage";
 import { OrderList } from "./pages/Main/Login/MyPage/OrderList";
+import { Mypost } from "./pages/Main/Login/MyPage/Mypost"
 import { Edit } from "./pages/Main/Login/MyPage/Edit";
 import { LikeList } from "./pages/Main/Login/LikeList";
 import { CartList } from "./pages/Main/Login/CartList/CartList";
@@ -30,6 +31,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/orderlist" element={<OrderList />} />
+        <Route path="/mypost" element={<Mypost/>}></Route>
         <Route path="/edit" element={<Edit />} />
         <Route path="/likelist" element={<LikeList />} />
         <Route path="/cartlist" element={<CartList />} />
