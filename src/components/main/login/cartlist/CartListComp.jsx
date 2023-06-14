@@ -9,8 +9,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCartData } from "./CartListSlice";
 import { json, useNavigate } from "react-router-dom";
 
-// styled-components
-import styled from "styled-components";
+// scss
+import style from "./cartListComp.module.scss";
+
+// font Awesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 export const CartListComp = () => {
   const navigater = useNavigate();
@@ -68,11 +72,10 @@ export const CartListComp = () => {
   const onCheck = (check, item) => {
     if (check) {
       setCheckList([...checkList, item]);
-    } 
-    else{
-      setCheckList(checkList.filter(c => c !== item))
+    } else {
+      setCheckList(checkList.filter((c) => c !== item));
     }
-  }
+  };
 
   if (checkList) {
     console.log(checkList);
@@ -85,58 +88,58 @@ export const CartListComp = () => {
     }
   };
 
-  // styled-components로 컴포넌트 정의
-  const CartComp = styled.div`
-    display: flex;
-    width: 100%;
-  `;
-
-  const Layout = styled.div`
-    margin: auto;
-    margin-top: 135px;
-    display: flex;
-  `;
-
-  const CartBox = styled.div`
-    padding: 50px;
-    width: 450px;
-    height: 630px;
-    border-radius: 15px;
-    background-color: white;
-  `;
-
-  const ListSet = styled.ul`
-    margin: 40px 0;
-  `;
-
-  const CartList = styled.li`
-    margin-top: 20px;
-  `;
-
   return (
-    <CartComp>
-      <Layout>
-        <CartBox>
+    <div className={style.CartComp}>
+      <div className={style.Layout}>
+        <div className={style.CartBox}>
           <h1>Cart</h1>
-          <ListSet>
+          <div className={style.ListSet}>
             {cartList &&
               cartList.map((item) => (
-                <CartList>
-                  <input
-                    type="checkbox"
-                    value={JSON.stringify(item)}
-                    onChange={(e) => {
-                      onCheck(e.target.checked, e.target.value);
-                    }}
-                  />
-                  <p>{item.name}</p>
-                  <p>{item.price}</p>
-                </CartList>
+                <div className={style.EachList}>
+                  <div className={style.Btns}>
+                    <input
+                      type="checkbox"
+                      value={JSON.stringify(item)}
+                      onChange={(e) => {
+                        onCheck(e.target.checked, e.target.value);
+                      }}
+                      className={style.CheckBtn}
+                    />
+                    <button className={style.DeleteBtn}>
+                      <FontAwesomeIcon icon={faXmark} />
+                    </button>
+                  </div>
+                  <div className={style.CartList}>
+                    <img src="" className={style.itemImg} />
+                    <div className={style.Texts}>
+                      <div
+                        style={{
+                          marginLeft: "20px",
+                          marginTop: "10px",
+                          fontSize: "1.1rem",
+                        }}
+                      >
+                        {item.name}
+                      </div>
+                      <div>수량</div>
+                    </div>
+                    <div
+                      style={{
+                        width: "150px",
+                        marginTop: "80px",
+                        marginLeft: "200px",
+                      }}
+                    >
+                      PRICE: {item.price}₩
+                    </div>
+                  </div>
+                </div>
               ))}
-          </ListSet>
+          </div>
           <button onClick={goPayment}>구매하기</button>
-        </CartBox>
-      </Layout>
-    </CartComp>
+        </div>
+      </div>
+    </div>
   );
 };
