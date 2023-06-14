@@ -12,6 +12,48 @@ import { json, useNavigate } from "react-router-dom";
 // styled-components
 import styled from "styled-components";
 
+
+
+
+export const CartComp = styled.div`
+    display: flex;
+    width: 100%;
+  `;
+
+  const Layout = styled.div`
+    margin: auto;
+    margin-top: 135px;
+    display: flex;
+  `;
+
+  const CartBox = styled.div`
+    padding: 50px;
+    width: 450px;
+    height: 630px;
+    border-radius: 15px;
+    background-color: white;
+  `;
+
+  const ListSet = styled.ul`
+    margin: 40px 0;
+  `;
+
+  const CartList = styled.li`
+    margin-top: 20px;
+  `;
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const CartListComp = () => {
   const navigater = useNavigate();
   const dispatch = useDispatch();
@@ -86,32 +128,6 @@ export const CartListComp = () => {
   };
 
   // styled-components로 컴포넌트 정의
-  const CartComp = styled.div`
-    display: flex;
-    width: 100%;
-  `;
-
-  const Layout = styled.div`
-    margin: auto;
-    margin-top: 135px;
-    display: flex;
-  `;
-
-  const CartBox = styled.div`
-    padding: 50px;
-    width: 450px;
-    height: 630px;
-    border-radius: 15px;
-    background-color: white;
-  `;
-
-  const ListSet = styled.ul`
-    margin: 40px 0;
-  `;
-
-  const CartList = styled.li`
-    margin-top: 20px;
-  `;
 
   return (
     <CartComp>
