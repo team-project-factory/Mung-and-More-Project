@@ -4,19 +4,19 @@ import './instagramComp.css'
 import { faHeart, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 import { faComment, faPaperPlane, faBookmark } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
+import { doc, updateDoc, arrayRemove, collection, getDocs } from 'firebase/firestore';
 import { auth, db } from '../../../data/firebase';
 import { onAuthStateChanged } from 'firebase/auth'
+import { getDownloadURL, getStorage } from 'firebase/storage'
 
 export default function InstagramComp() {
   const userInfor = JSON.parse(sessionStorage.getItem("user"));
   const [imageIndex, setImageIndex] = useState(0);
-  const [post, setPost] = useState('');
   const [uid, setUid] = useState('');
-
   const [newList2, setNewList2] = useState('');
+  const [deleteId, setDeleteId] = useState('');
 
-  // 아래 getPostList에서 UID 값이 있을 때 실행하도록 하기 위해 작성
+  // 아래 getData에서 UID 값이 있을 때 실행하도록 하기 위해 작성
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -27,31 +27,46 @@ export default function InstagramComp() {
     });
   }, [])
 
-
   // Post 컬렉션에서 문서이름을 UID로 해놓았기 때문에
   // "컬렉션이름",uid 형태로 집어넣어 사용
+  const getData = async () => {
+    const querySnapshot = await getDocs(collection(db, "Post"));
+    const newList = [];
+    querySnapshot.forEach((doc) => {
+      const data = doc.data()
+      // data.postList 배열을 newList에 추가 ...를 통해 배열 확장하여 요소를 개별 추가
+      newList.push(...data.postList);
+    });
+    // newList2라는 상태 변수 사용 가능
+    setNewList2(newList)
+  }
+
+
   useEffect(() => {
-    /**if (uid) {
-      const getPostList = async () => {
-        const querySnapshot2 = await getDoc(doc(db, "Post", uid));
-        setPost(querySnapshot2.data().postList);
-      }
-      getPostList();
-    }*/
-    const getData = async () => {
-      const querySnapshot = await getDocs(collection(db, "Post"));
-      const newList = [];
-      querySnapshot.forEach((doc) => {
-        const data = doc.data()
-        newList.push(...data.postList);
-      });
-      setNewList2(newList)
-    }
     getData();
   }, [])
-  if (newList2) {
-    console.log(newList2);
+
+  // 게시글 삭제 함수
+  const deletePost = async (postId) => {
+    const post = newList2.find((post)=>(post = postId))
+    try {
+      await updateDoc(doc(db, "Post", uid), {
+        postList: arrayRemove(post)
+      });
+      alert("게시물이 삭제되었습니다.");
+    } catch (error) {
+      console.error("게시물 삭제 중 오류가 발생했습니다:", error);
+    } 
+  };
+  // 게시글 삭제 실행 함수
+  const handleDeletePost = (postId) => {
+    deletePost(postId);
+    getData("");
   }
+
+  
+
+
 
   const images = ["./img/login.png", "./img/login2.png", "./img/login3.png", "./img/login4.png", "./img/login5.png"];
 
@@ -77,8 +92,22 @@ export default function InstagramComp() {
                   </div>
                   <h3> {post.title} <br /><span> {post.location} </span></h3>
                 </div>
-                <div>
-                  <FontAwesomeIcon icon={faEllipsisVertical} size='2xl' className='dot' />
+                <div
+                  style={{width:'50px', height:'50px', zIndex:'10'}}
+                  onMouseEnter={()=>setDeleteId(post.id)}
+                  onMouseLeave={()=>setDeleteId("")}>
+                  <FontAwesomeIcon 
+                    icon={faEllipsisVertical} size='2xl' className='dot'
+                  />
+                  {deleteId === post.id && (
+                    <button
+                      style={{padding:'10px'}}
+                      className='delete-btn'
+                      onClick={()=>handleDeletePost(post)}
+                    >
+                      삭제
+                    </button>
+                  )}
                 </div>
               </div>
               <div className='imgBx'>
@@ -112,7 +141,9 @@ export default function InstagramComp() {
           </div>
         ))}
       </div>
-      <Link to={"/createpostcomp"}>게시글 작성</Link>
+      {userInfor &&
+        <Link to={"/createpostcomp"}>게시글 작성</Link>
+      }
     </div>
   )
 }
