@@ -1,23 +1,31 @@
-//파이어베이스
+// 파이어베이스
 import { auth, db } from "../../../../data/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-//리액트
-import React, { useEffect, useState } from 'react'
+
+// 리액트
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartData } from "./CartListSlice";
 import { json, useNavigate } from "react-router-dom";
+
+// scss
+import style from "./cartListComp.module.scss";
+
+// font Awesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 export const CartListComp = () => {
   const navigater = useNavigate();
   const dispatch = useDispatch();
 
   //user UID 담을 state
-  const [userUID,setUserUID] = useState('');
+  const [userUID, setUserUID] = useState("");
   //cartList 담을 state
-  const [cartList, setCartList] = useState('');
+  const [cartList, setCartList] = useState("");
 
-  const [checkList, setCheckList] = useState('');
+  const [checkList, setCheckList] = useState("");
 
   //유저 데이터 들고오기
   const getUserData = () => {
@@ -33,17 +41,18 @@ export const CartListComp = () => {
         // ...
       }
     });
-  }
+  };
+
   //화면 출력하자마자 유저데이터 들고오기
-  useEffect(()=>{
+  useEffect(() => {
     getUserData();
-  },[])
+  }, []);
   //유저가지고 있는 데이터 들고오기
-  const getData = async() =>{
+  const getData = async () => {
     const docRef = doc(db, "users", userUID);
     const docSnap = await getDoc(docRef);
     const cart = docSnap.data().cartList;
-    
+
     if (docSnap.exists()) {
       console.log("Document data:", cart);
       setCartList(cart);
@@ -51,51 +60,86 @@ export const CartListComp = () => {
       // docSnap.data() will be undefined in this case
       console.log("No such document!");
     }
-  }  
-  
-  useEffect(()=>{
-    if(userUID){
+  };
+
+  useEffect(() => {
+    if (userUID) {
       getData();
     }
-  },[userUID]);
+  }, [userUID]);
 
   // 체크된 item들 checkList에 넣기
-  const onCheck =(check, item) =>{
-    if(check){
+  const onCheck = (check, item) => {
+    if (check) {
       setCheckList([...checkList, item]);
+    } else {
+      setCheckList(checkList.filter((c) => c !== item));
     }
-    else{
-      console.log('체크 해제!');
-    }
-  }
-  if(checkList){
+  };
+
+  if (checkList) {
     console.log(checkList);
   }
 
-
-  const goPayment = () =>{
-    if(cartList){
+  const goPayment = () => {
+    if (cartList) {
       dispatch(getCartData(checkList));
-      navigater('/payment');
+      navigater("/payment");
     }
-  }
-
+  };
 
   return (
-    <div>
-      <h1>CartListComp</h1>
-      <ul>
-        {cartList && cartList.map((item)=>(
-          <li>
-            <input type="checkbox" value={JSON.stringify(item)} onChange={(e)=>{onCheck(e.target.checked,e.target.value)}} />
-            <p>{item.name}</p>
-            <p>{item.price}</p>
-          </li>
-        ))}
-      </ul>
-      <button
-      onClick={goPayment}
-      >구매하기</button>
+    <div className={style.CartComp}>
+      <div className={style.Layout}>
+        <div className={style.CartBox}>
+          <h1>Cart</h1>
+          <div className={style.ListSet}>
+            {cartList &&
+              cartList.map((item) => (
+                <div className={style.EachList}>
+                  <div className={style.Btns}>
+                    <input
+                      type="checkbox"
+                      value={JSON.stringify(item)}
+                      onChange={(e) => {
+                        onCheck(e.target.checked, e.target.value);
+                      }}
+                      className={style.CheckBtn}
+                    />
+                    <button className={style.DeleteBtn}>
+                      <FontAwesomeIcon icon={faXmark} />
+                    </button>
+                  </div>
+                  <div className={style.CartList}>
+                    <img src="" className={style.itemImg} />
+                    <div className={style.Texts}>
+                      <div
+                        style={{
+                          marginLeft: "20px",
+                          marginTop: "10px",
+                          fontSize: "1.1rem",
+                        }}
+                      >
+                        {item.name}
+                      </div>
+                      <div>수량</div>
+                    </div>
+                    <div
+                      style={{
+                        width: "150px",
+                        marginTop: "80px",
+                        marginLeft: "200px",
+                      }}
+                    >
+                      PRICE: {item.price}₩
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </div>
+          <button onClick={goPayment}>구매하기</button>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};

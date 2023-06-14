@@ -50,6 +50,7 @@ export const ShoppingComp = () => {
         }
       })
       setNewItemList(newList2);
+      console.log(newList2);
     }
   },[likeList]);
 
@@ -124,6 +125,7 @@ export const ShoppingComp = () => {
     setBtnBool4(false);
     if(newItemList){
       setPrintItems(newItemList);
+      console.log(newItemList);
     }
     else{
       setPrintItems(items);
@@ -143,6 +145,7 @@ export const ShoppingComp = () => {
       ));
       newList.push(...clothList);
       setPrintItems(newList);
+      console.log(newList);
     }
     else{
       const clothList = items.filter((c)=>(
@@ -239,7 +242,9 @@ export const ShoppingComp = () => {
             {printItems && printItems.map((item)=>(
               <li key={item.name}>
                 <div className={style.card}>
-                  <div className={style.imgBox}>
+                  <div className={style.imgBox}
+                  style={{backgroundImage:`url(${item.url})`}}
+                  >
                     <div
                     className={style.likeBtn}
                     onClick={()=>likeBtn(item)}
