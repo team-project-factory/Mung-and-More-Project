@@ -29,8 +29,9 @@ export const DogCircle = styled.div`
     right: 0;
     bottom: 20px;
 `
-export const Main2Title = styled.h2`
+export const MainTitle = styled.h2`
     padding: 50px 0;
+    margin-top: ;
     text-align: center;
     font-size: 45px;
     font-weight: 700;
@@ -48,5 +49,5 @@ export const ImageWrap = styled.div`
     position: relative;
     top: 12%;
     margin: 0 auto;
-
+    border-radius: 500px;
 `
