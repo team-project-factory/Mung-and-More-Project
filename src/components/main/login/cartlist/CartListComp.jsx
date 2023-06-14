@@ -65,9 +65,10 @@ export const CartListComp = () => {
       setCheckList([...checkList, item]);
     }
     else{
-      console.log('체크 해제!');
+      setCheckList(checkList.filter(c => c !== item))
     }
   }
+
   if(checkList){
     console.log(checkList);
   }
