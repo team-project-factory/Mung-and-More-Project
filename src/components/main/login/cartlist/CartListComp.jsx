@@ -74,8 +74,6 @@ export const CartListComp = () => {
     }
   }
 
-  if(checkList){
-  };
   if (checkList) {
     console.log(checkList);
   }
