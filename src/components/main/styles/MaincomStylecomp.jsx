@@ -31,7 +31,6 @@ export const DogCircle = styled.div`
 `
 export const MainTitle = styled.h2`
     padding: 50px 0;
-    margin-top: ;
     text-align: center;
     font-size: 45px;
     font-weight: 700;

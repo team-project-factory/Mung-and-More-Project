@@ -236,7 +236,7 @@ export const ShoppingComp = () => {
           onClick={active4}
           >장난감</li>
         </ul>
-        <div>
+        <div style={{maxWidth:"1337px", margin:"0 auto"}}>
           <Outlet context = {items && items}/>
           <ul className={style.shoppingBox_itemList}>
             {printItems && printItems.map((item)=>(
