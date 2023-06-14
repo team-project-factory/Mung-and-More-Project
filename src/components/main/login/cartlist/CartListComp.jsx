@@ -4,12 +4,20 @@ import { doc, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 //리액트
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from "react-redux";
+import { getCartData } from "./CartListSlice";
+import { json, useNavigate } from "react-router-dom";
 
 export const CartListComp = () => {
+  const navigater = useNavigate();
+  const dispatch = useDispatch();
+
   //user UID 담을 state
   const [userUID,setUserUID] = useState('');
   //cartList 담을 state
   const [cartList, setCartList] = useState('');
+
+  const [checkList, setCheckList] = useState('');
 
   //유저 데이터 들고오기
   const getUserData = () => {
@@ -50,8 +58,28 @@ export const CartListComp = () => {
       getData();
     }
   },[userUID]);
-  
-  
+
+  // 체크된 item들 checkList에 넣기
+  const onCheck =(check, item) =>{
+    if(check){
+      setCheckList([...checkList, item]);
+    }
+    else{
+      console.log('체크 해제!');
+    }
+  }
+  if(checkList){
+    console.log(checkList);
+  }
+
+
+  const goPayment = () =>{
+    if(cartList){
+      dispatch(getCartData(checkList));
+      navigater('/payment');
+    }
+  }
+
 
   return (
     <div>
@@ -59,11 +87,15 @@ export const CartListComp = () => {
       <ul>
         {cartList && cartList.map((item)=>(
           <li>
+            <input type="checkbox" value={JSON.stringify(item)} onChange={(e)=>{onCheck(e.target.checked,e.target.value)}} />
             <p>{item.name}</p>
             <p>{item.price}</p>
           </li>
         ))}
       </ul>
+      <button
+      onClick={goPayment}
+      >구매하기</button>
     </div>
   )
 }
