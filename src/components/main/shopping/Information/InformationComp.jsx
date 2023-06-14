@@ -79,13 +79,13 @@ export default function InformationComp() {
           });
         }
         setCartList();
-        setSuccessBtn(!successBtn);
+        setSuccessBtn(true);
     }
   }
 
   const cartBtn = () =>{
     if(user){
-      navigater(-1);
+      navigater('/cartlist');
     }
   }
 

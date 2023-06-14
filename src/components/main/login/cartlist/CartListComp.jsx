@@ -68,10 +68,12 @@ export const CartListComp = () => {
   const onCheck = (check, item) => {
     if (check) {
       setCheckList([...checkList, item]);
-    } else {
-      console.log("체크 해제!");
+    } 
+    else{
+      setCheckList(checkList.filter(c => c !== item))
     }
-  };
+  }
+
   if (checkList) {
     console.log(checkList);
   }
