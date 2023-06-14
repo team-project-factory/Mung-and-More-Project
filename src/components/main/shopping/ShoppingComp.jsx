@@ -212,6 +212,7 @@ export const ShoppingComp = () => {
     }
     else{
       alert('로그인해주세요!');
+      navigater('/login');
     }
   }
 
