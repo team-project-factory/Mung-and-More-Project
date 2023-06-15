@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { db,auth,storage } from '../../../../data/firebase';
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
-import { getStorage, ref,uploadBytes,getDownloadURL } from "firebase/storage";
+import { ref,uploadBytes,getDownloadURL } from "firebase/storage";
 
 export default function CreatePostComp() {
   const navigator = useNavigate();
