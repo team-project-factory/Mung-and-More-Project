@@ -110,3 +110,34 @@
   color: black;
   font-size: 1rem;
 }
+
+.ItemPrice {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  margin-bottom: 15px;
+}
+
+.ShipPrice {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.TotalPrice {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.BuyBtn {
+  border: none;
+  border-radius: 7px;
+  background-color: #c2dcf4a9;
+  height: 50px;
+  font-size: 1rem;
+}
+
+.BuyBtn:hover {
+  cursor: pointer;
+}

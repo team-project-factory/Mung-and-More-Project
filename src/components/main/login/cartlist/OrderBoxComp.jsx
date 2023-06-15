@@ -135,25 +135,27 @@ export const OrderBoxComp = () => {
           />
 
           {/* 총 상품금액: 선택한 상품 금액 합계 표시 */}
-          <div className={style.TotalItemPrice}>
+          <div className={style.ItemPrice}>
             <p>총 상품금액</p>
             <p>000₩</p>
           </div>
 
           {/* 배송비 */}
-          <div>
+          <div className={style.ShipPrice}>
             <p>배송비</p>
             <p>000₩</p>
           </div>
 
           {/* 총 결제금액 */}
-          <div>
+          <div className={style.TotalPrice}>
             <p>총 결제금액</p>
             <p>000₩</p>
           </div>
 
           {/* 구매 버튼 */}
-          <button onClick={goPayment}>Buy Now!</button>
+          <button onClick={goPayment} className={style.BuyBtn}>
+            Buy Now!
+          </button>
         </div>
       </div>
     </div>
