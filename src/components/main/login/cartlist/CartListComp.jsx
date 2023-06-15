@@ -6,7 +6,14 @@ import { OrderBoxComp } from "./OrderBoxComp";
 
 export const CartListComp = () => {
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        width: "62%",
+        margin: "auto",
+      }}
+    >
       <CartBoxComp />
       <OrderBoxComp />
     </div>
