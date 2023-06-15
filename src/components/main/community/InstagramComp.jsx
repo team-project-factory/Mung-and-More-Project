@@ -53,6 +53,7 @@ export default function InstagramComp() {
   const deletePost = async (postId) => {
     const post = newList2.find((post) => post.id === postId);
     // 파일 삭제 함수 정의
+    if(uid===postId) {
     const deleteFiles = async () => {
       // 각 파일에 대해 삭제 작업 수행
       const deletePromises = post.images.map((imageUrl) => {
@@ -62,9 +63,9 @@ export default function InstagramComp() {
   
       try {
         await Promise.all(deletePromises);
-        console.log("파일 삭제 완료");
+        alert("게시글 삭제 완료");
       } catch (error) {
-        console.error("파일 삭제 중 오류가 발생했습니다:", error);
+        alert("직접 작성한 글만 삭제 할 수 있습니다.", error);
       }
     };
       // DB 삭제 작업 수행
@@ -75,17 +76,20 @@ export default function InstagramComp() {
         postList: arrayRemove(post)
       });
       await deleteFiles(); // 파일 삭제 함수 호출
-      alert("게시물이 삭제되었습니다.");
+      console.log("사진 파일이 삭제되었습니다.");
     } catch (error) {
-      console.error("게시물 삭제 중 오류가 발생했습니다:", error);
+      console.error("사진 파일 삭제 오류가 발생했습니다:", error);
     }
-  };
-  
+  }
+  else {
+    alert("작성자만 삭제 할 수 있습니다.")
+  }
+}
 
   // 게시글 삭제 실행 함수
   const handleDeletePost = (postId) => {
+    getData()
     deletePost(postId);
-    getData();
   }
 
   
