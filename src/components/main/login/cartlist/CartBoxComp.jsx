@@ -121,7 +121,6 @@ export const CartBoxComp = () => {
                 </div>
               ))}
           </div>
-          <button onClick={goPayment}>구매하기</button>
         </div>
       </div>
     </div>
