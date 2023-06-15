@@ -51,7 +51,7 @@ export default function InstagramComp() {
 
   // 게시글 삭제 함수
   const deletePost = async (postId) => {
-    const post = newList2.find((post) => post === postId);
+    const post = newList2.find((post) => post.id === postId);
     // 파일 삭제 함수 정의
     const deleteFiles = async () => {
       // 각 파일에 대해 삭제 작업 수행
@@ -138,9 +138,9 @@ export default function InstagramComp() {
                     <button
                       style={{padding:'10px'}}
                       className='delete-btn'
-                      onClick={()=>handleDeletePost(post)}
+                      onClick={()=>handleDeletePost(post.id)}
                     >
-                      삭제
+                      삭 제
                     </button>
                   )}
                 </div>
