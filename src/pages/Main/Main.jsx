@@ -11,7 +11,7 @@ export const Main = () => {
   return (
     <div style={{backgroundColor: `#C2DCF4`}}>
       <div>
-        <div style={{width : `100%`,position :'sticky', top:'50px'}}>
+        <div style={{width : `100%`,position :'sticky', top:'50px', paddingBottom: "100px", zIndex:"100"}}>
           <Nav/>
         </div>
         <MainComp1/>
