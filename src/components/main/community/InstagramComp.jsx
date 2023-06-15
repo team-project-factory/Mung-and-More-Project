@@ -140,7 +140,7 @@ export default function InstagramComp() {
                       className='delete-btn'
                       onClick={()=>handleDeletePost(post.id)}
                     >
-                      삭제
+                      삭 제
                     </button>
                   )}
                 </div>
