@@ -86,7 +86,7 @@ export default function InstagramComp() {
   }
 }
 
-  // 게시글 삭제 실행 함수
+  // 게시글 삭제 실행 함수.
   const handleDeletePost = (postId) => {
     getData()
     deletePost(postId);
