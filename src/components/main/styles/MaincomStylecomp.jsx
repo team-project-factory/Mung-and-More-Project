@@ -32,7 +32,7 @@ export const DogCircle = styled.div`
 export const MainTitle = styled.h2`
     padding: 50px 0;
     text-align: center;
-    font-size: 45px;
+    font-size: 60px;
     font-weight: 700;
 `
 export const Main2Subtitld = styled.p`
