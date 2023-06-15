@@ -100,6 +100,15 @@ export const OrderBoxComp = () => {
             placeholder="   이름"
             className={style.NameInput}
           />
+          <p className={style.Text2}>배송지</p>
+          <div className={style.PostCode}>
+            <input
+              type="text"
+              placeholder="   우편번호"
+              className={style.PostCodeInput}
+            />
+            <button>찾기</button>
+          </div>
         </div>
       </div>
     </div>

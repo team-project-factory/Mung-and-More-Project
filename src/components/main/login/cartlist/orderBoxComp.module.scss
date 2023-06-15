@@ -54,3 +54,22 @@
   color: black;
   font-size: 1rem;
 }
+
+.PostCodeInput {
+  border: none;
+  border-radius: 7px;
+  background-color: #f9fafb;
+  height: 45px;
+  width: 270px;
+}
+
+.PostCodeInput::placeholder {
+  color: black;
+  font-size: 1rem;
+}
+
+.PostCode {
+  display: flex;
+  justify-content: center;
+  width: 400px;
+}
