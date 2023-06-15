@@ -55,7 +55,7 @@ export default function CreatePostComp() {
     const filesArray = Array.from(files);
     setFile((prevFiles) => [...prevFiles, ...filesArray])
   }
-
+  
   // 사진 파일 업로드 하는 함수
     // 사진 파일 업로드 하는 함수
     const uploadFiles = async () => {
@@ -79,7 +79,6 @@ export default function CreatePostComp() {
 
 
 
-
   // firebase에 input에 작성한 내용 배열로 등록하기
   function addPost(){
     const docRef = doc(db, "Post", uid);
@@ -92,29 +91,29 @@ export default function CreatePostComp() {
           postList : []
           });
       }
-      // addPost 실행하면 게시글작성 페이지에서 원래 페이지로 돌아가게끔
+    }
+    
+    // firebase 등록 양식 설정
+    const upadteDoc = async() =>{
+      
+      // 이미지 파일 업로드
+      const imagesUrls = await uploadFiles();
+      
+      // Atomically add a new region to the "regions" array field.
+      await updateDoc(docRef, {
+        postList: arrayUnion({
+          id : docRef.id, // 게시물 ID 추가
+          title : inputTitle,
+          sub : inputSub,
+          hash : inputHash,
+          des : inputDes,
+          location : inputLocation,
+          date: `${year}-${month}-${day}`,
+          images : imagesUrls
+        })
+      });
+      // addPost 실행하면 게시글작성 페이지에서 원래 페이지로 돌아가게끔 (비동기 안에서 처리)
       navigator("/community");
-  }
-  
-  // firebase 등록 양식 설정
-  const upadteDoc = async() =>{
-
-    // 이미지 파일 업로드
-    const imagesUrls = await uploadFiles();
-
-    // Atomically add a new region to the "regions" array field.
-    await updateDoc(docRef, {
-      postList: arrayUnion({
-        id : docRef.id, // 게시물 ID 추가
-        title : inputTitle,
-        sub : inputSub,
-        hash : inputHash,
-        des : inputDes,
-        location : inputLocation,
-        date: `${year}-${month}-${day}`,
-        images : imagesUrls
-      })
-    });
   }
   setData();
   upadteDoc();
