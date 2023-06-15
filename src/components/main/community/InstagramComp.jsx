@@ -11,9 +11,9 @@ import { ref,deleteObject} from 'firebase/storage'
 
 export default function InstagramComp() {
   const userInfor = JSON.parse(sessionStorage.getItem("user"));
-  const [imageIndex, setImageIndex] = useState(0);
   const [uid, setUid] = useState('');
-  const [newList2, setNewList2] = useState('');
+  // 게시물 마다 독립적으로 관리하기 위해 객체 형태로 변경
+  const [newList2, setNewList2] = useState([]);
   const [deleteId, setDeleteId] = useState('');
 
   // 아래 getData에서 UID 값이 있을 때 실행하도록 하기 위해 작성
@@ -33,9 +33,12 @@ export default function InstagramComp() {
     const querySnapshot = await getDocs(collection(db, "Post"));
     const newList = [];
     querySnapshot.forEach((doc) => {
-      const data = doc.data()
-      // data.postList 배열을 newList에 추가 ...를 통해 배열 확장하여 요소를 개별 추가
-      newList.push(...data.postList);
+      const data = doc.data();
+      data.postList.forEach((post) => {
+        // getData 함수에서 게시물 데이터를 가져올 때 post 안에 imageIndex 상태 추가
+        post.imageIndex = 0; // 초기 슬라이드 인덱스 설정
+        newList.push(post);
+      });
     });
     // newList2라는 상태 변수 사용 가능
     setNewList2(newList)
@@ -66,6 +69,8 @@ export default function InstagramComp() {
     };
       // DB 삭제 작업 수행
     try {
+      // firebase에 있는 모양을 유지하기 위해 이미지 옮기는데 사용한 imageIndex를 삭제
+      delete post.imageIndex
       await updateDoc(doc(db, "Post", uid), {
         postList: arrayRemove(post)
       });
@@ -80,22 +85,34 @@ export default function InstagramComp() {
   // 게시글 삭제 실행 함수
   const handleDeletePost = (postId) => {
     deletePost(postId);
-    getData("");
+    getData();
   }
 
   
 
 
   // 아래는 슬라이드에 이전, 다음 버튼 함수
-  function btnPrev(images) {
-    const index = (imageIndex - 1 + images.length) % images.length;
-    setImageIndex(index);
+  // 게시물 객체인 post를 인자로 받아 해당 게시물의 슬라이드 index를 변경하고 변경된 리스트를 상태로 업데이트
+  function btnPrev(post) {
+    if (post.images && post.images.length > 0) {
+      // (현재 슬라이드 인덱스) -1 + (게시물의 이미지 배열의 길이) % (게시물의 이미지 배열의 길이로 나눈 나머지 값)
+      // % 하는 이유 : 계산된 인덱스가 음수인 경우 배열의 마지막 인덱스로 순환하도록 하기 위함.
+      const index = (post.imageIndex - 1 + post.images.length) % post.images.length;
+      post.imageIndex = index;
+      // 전체 게시물 리스트(newList2)를 새 배열로 복사하여 등록한 게시물 객체를 포함하도록 설정
+      setNewList2([...newList2]);
+    }
+  }
+  // 위와 동일
+  function btnNext(post) {
+    if (post.images && post.images.length > 0) {
+      const index = (post.imageIndex + 1) % post.images.length;
+      post.imageIndex = index;
+      setNewList2([...newList2]);
+    }
   }
   
-  function btnNext(images) {
-    const index = (imageIndex + 1) % images.length;
-    setImageIndex(index);
-  }
+  
 
   return (
     <div className='body'>
@@ -131,14 +148,15 @@ export default function InstagramComp() {
               <div className='imgBx'>
                 <img
                   className='event-slide-img'
-                  src={post.images[imageIndex]}
-                  alt={`Image ${imageIndex + 1}`}
+                  src={post.images[post.imageIndex]}
+                  alt={`Image ${post.imageIndex + 1}`}
                   style={{ width: '340px' }}
                 />
 
                 <div className='slide-btn'>
-                  <button className='prev-btn' onClick={() => btnPrev(post.images)}>{'<'}</button>
-                  <button className='next-btn' onClick={() => btnNext(post.images)}>{'>'}</button>
+                  {/* 아래 버튼에 onClick시 post를 인자로 전달하여 각버튼이 독립적인 post 객체를 받게끔 설정 */}
+                  <button className='prev-btn' onClick={() => btnPrev(post)}>{'<'}</button>
+                  <button className='next-btn' onClick={() => btnNext(post)}>{'>'}</button>
                 </div>
 
               </div>

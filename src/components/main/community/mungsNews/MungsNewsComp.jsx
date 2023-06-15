@@ -1,5 +1,6 @@
 import React from 'react'
 import style from './mungsnewscomp.module.scss'
+import { Outlet } from 'react-router-dom'
 
 
 export const MungsNewsComp = () => {
@@ -8,9 +9,7 @@ export const MungsNewsComp = () => {
       <div className={style.mungsList_menu}>
         <h1>Mung's news</h1>
       </div>
-      <div className={style.mungsList_news}>
-        멍스 뉴스 나오는곳
-      </div>
+      <Outlet/>
     </div>
   )
 }
