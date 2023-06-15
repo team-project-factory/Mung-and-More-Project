@@ -37,7 +37,7 @@
 }
 
 .Text2 {
-  margin-top: 20px;
+  margin-top: 25px;
   font-size: 1.07rem;
   color: rgb(134, 134, 134);
   margin-bottom: 15px;
@@ -53,4 +53,91 @@
 .NameInput::placeholder {
   color: black;
   font-size: 1rem;
+}
+
+.PostCodeInput {
+  border: none;
+  border-radius: 7px;
+  background-color: #f9fafb;
+  height: 45px;
+  width: 300px;
+}
+
+.PostCodeInput::placeholder {
+  color: black;
+  font-size: 1rem;
+}
+
+.PostCode {
+  display: flex;
+  justify-content: center;
+  width: 400px;
+}
+
+.SearchBtn {
+  width: 100px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 7px;
+  background-color: #c2dcf4a9;
+}
+
+.SearchBtn:hover {
+  cursor: pointer;
+}
+
+.ADDInput {
+  margin-top: 12px;
+  border: none;
+  border-radius: 7px;
+  background-color: #f9fafb;
+  height: 45px;
+}
+
+.ADDInput::placeholder {
+  color: black;
+  font-size: 1rem;
+}
+
+.PNInput {
+  border: none;
+  border-radius: 7px;
+  background-color: #f9fafb;
+  height: 45px;
+}
+
+.PNInput::placeholder {
+  color: black;
+  font-size: 1rem;
+}
+
+.ItemPrice {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  margin-bottom: 15px;
+}
+
+.ShipPrice {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.TotalPrice {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.BuyBtn {
+  border: none;
+  border-radius: 7px;
+  background-color: #c2dcf4a9;
+  height: 50px;
+  font-size: 1rem;
+}
+
+.BuyBtn:hover {
+  cursor: pointer;
 }
