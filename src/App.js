@@ -18,6 +18,7 @@ import { Notice } from "./pages/Main/Notice";
 import { Mungstagram } from "./pages/Main/Mungstagram";
 import { MungsNews } from "./pages/Main/MungsNews";
 import CreatePost from "./pages/Main/CreatePost";
+import { MungsNewsContents } from "./components/main/community/mungsNews/MungsNewsContents";
 
 function App() {
   return (
@@ -43,7 +44,9 @@ function App() {
         <Route path="/community" element={<Community />} />
         <Route path="/notice" element={<Notice />} />
         <Route path="/mungstagram" element={<Mungstagram/>}/>
-        <Route path="/mungsnews" element={<MungsNews/>}/>
+        <Route path="/mungsnews" element={<MungsNews/>}>
+          <Route path="/mungsnews/:name" element={<MungsNewsContents/>} />
+        </Route>
         <Route path="/createpostcomp" element={<CreatePost/>}/>
 
         {/** 로그인 성공했을 때 */}
