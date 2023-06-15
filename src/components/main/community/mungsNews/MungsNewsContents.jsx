@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useOutletContext, useParams } from 'react-router-dom'
+import style from './mungsNewsContens.module.scss'
 
 
 

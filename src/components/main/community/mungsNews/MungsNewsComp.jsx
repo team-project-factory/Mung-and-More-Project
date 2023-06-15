@@ -40,7 +40,9 @@ export const MungsNewsComp = () => {
           <Link to={`/mungsnews/${n.id}`}><h1>{n.title}</h1></Link>
         ))}
       </div>
-      <Outlet context={news}/>
+      <div className={style.mungsList_news}>
+        <Outlet context={news}/>
+      </div>
     </div>
   )
 }
