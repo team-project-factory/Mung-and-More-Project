@@ -37,7 +37,7 @@
 }
 
 .Text2 {
-  margin-top: 20px;
+  margin-top: 25px;
   font-size: 1.07rem;
   color: rgb(134, 134, 134);
   margin-bottom: 15px;
@@ -60,7 +60,7 @@
   border-radius: 7px;
   background-color: #f9fafb;
   height: 45px;
-  width: 270px;
+  width: 300px;
 }
 
 .PostCodeInput::placeholder {
@@ -72,4 +72,41 @@
   display: flex;
   justify-content: center;
   width: 400px;
+}
+
+.SearchBtn {
+  width: 100px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 7px;
+  background-color: #c2dcf4a9;
+}
+
+.SearchBtn:hover {
+  cursor: pointer;
+}
+
+.ADDInput {
+  margin-top: 12px;
+  border: none;
+  border-radius: 7px;
+  background-color: #f9fafb;
+  height: 45px;
+}
+
+.ADDInput::placeholder {
+  color: black;
+  font-size: 1rem;
+}
+
+.PNInput {
+  border: none;
+  border-radius: 7px;
+  background-color: #f9fafb;
+  height: 45px;
+}
+
+.PNInput::placeholder {
+  color: black;
+  font-size: 1rem;
 }
