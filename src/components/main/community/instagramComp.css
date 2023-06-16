@@ -87,15 +87,15 @@
 .left .heart, .comment {
     margin-right:15px;
 }
-.likes {
+.date {
     margin-top: 10px;
-    margin-left: 15px;
+    margin-left: -70%;
 }
 
 .message {
     font-weight: 400;
     margin-top: 10px;
-    margin-left: 13px;
+    margin-left: -70%;
     line-height: 1.5em;
     color: #777;
 }
