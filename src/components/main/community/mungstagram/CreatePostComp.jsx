@@ -14,12 +14,32 @@ export default function CreatePostComp() {
   const [inputLocation, setInputLocation] = useState('');
   const [uid,setUid] = useState('');
   const [file,setFile] = useState([]);
-  
+
   // 게시글 작성 날짜 사용 변수
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth() + 1; // getMonth()는 0부터 시작하므로 1을 더함
   const day = currentDate.getDate();
+
+
+  // 프로필 이미지 불러오는 객체
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 추가: 로그인 상태
+  const [photo, setPhoto] = useState('');
+  useEffect(() => {
+    // 추가: 로그인 상태 변경 감지g
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+        setPhoto(user.photoURL || '');
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+  }, []);
+
+  
+  
+  
   
   // 로그인 한 ID의 UID값 가져오기
   useEffect(()=>{
@@ -109,7 +129,8 @@ export default function CreatePostComp() {
           des : inputDes,
           location : inputLocation,
           date: `${year}-${month}-${day}`,
-          images : imagesUrls
+          images : imagesUrls,
+          photo : photo // 프로필 이미지 담기
         })
       });
       // addPost 실행하면 게시글작성 페이지에서 원래 페이지로 돌아가게끔 (비동기 안에서 처리)

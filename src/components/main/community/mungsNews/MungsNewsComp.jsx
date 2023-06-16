@@ -36,9 +36,13 @@ export const MungsNewsComp = () => {
   return (
     <div className={style.mungsList}>
       <div className={style.mungsList_menu}>
-        {news && news.map((n)=>(
-          <Link to={`/mungsnews/${n.id}`}><h1>{n.title}</h1></Link>
-        ))}
+        <ul>
+          {news && news.map((n)=>(
+            <li>
+              <Link to={`/mungsnews/${n.id}`}><h1>{n.title}</h1></Link>
+            </li>
+          ))}
+        </ul>
       </div>
       <div className={style.mungsList_news}>
         <Outlet context={news}/>
