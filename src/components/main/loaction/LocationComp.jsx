@@ -91,7 +91,7 @@ export const LocationComp = () => {
     new window.kakao.maps.LatLng(35.0480138, 128.9668879),
     new window.kakao.maps.LatLng(35.0989232, 129.0286563),
     new window.kakao.maps.LatLng(35.153639, 129.065654),
-    new window.kakao.maps.LatLng(35.09934, 129.0317647),
+    new window.kakao.maps.LatLng(35.1369538,129.1004688),
     new window.kakao.maps.LatLng(35.1547761, 129.1201317),
     new window.kakao.maps.LatLng(35.1766136, 129.1264725),
     new window.kakao.maps.LatLng(35.1796538, 129.1986063),
@@ -100,7 +100,7 @@ export const LocationComp = () => {
     new window.kakao.maps.LatLng(35.1193245, 129.1157462),
   ];
 
-  const markerImageSrc = 'https://ifh.cc/g/aD6NXr.png';
+  const markerImageSrc = 'https://ifh.cc/g/94KNAO.png';
   const [pathMarkers] = useState([]); // 산책로 마커 객체를 가지고 있을 배열
   const [hospitalMarkers] = useState([]); // 동물병원 마커 객체를 가지고 있을 배열
   const [cafeMarkers] = useState([]); // 애견카페 마커 객체를 가지고 있을 배열
@@ -127,8 +127,9 @@ export const LocationComp = () => {
 
   // 산책로 마커를 생성
   function createPathMarkers() {
+    console.log("마커생성")
     for (let i = 0; i < pathPositions.length; i++) {
-      const imageSize = new window.kakao.maps.Size(22, 26);
+      const imageSize = new window.kakao.maps.Size(30,32);
       const imageOptions = {
         spriteOrigin: new window.kakao.maps.Point(10, 0),
         spriteSize: new window.kakao.maps.Size(36, 98)
@@ -139,6 +140,7 @@ export const LocationComp = () => {
       // 아래 내용은 마커에 클릭 이벤트를 추가하여 인덱스값을 할당하는 내용
       kakao.maps.event.addListener(marker, 'click', function(){
         setIndex(i)
+        console.log(i)
       });
       pathMarkers.push(marker);
     }
@@ -152,7 +154,7 @@ export const LocationComp = () => {
 
   function createHospitalMarkers() {
     for (let i = 0; i < hospitalPositions.length; i++) {
-      const imageSize = new window.kakao.maps.Size(22, 26);
+      const imageSize = new window.kakao.maps.Size(30, 32);
       const imageOptions = {
         spriteOrigin: new window.kakao.maps.Point(10, 36),
         spriteSize: new window.kakao.maps.Size(36, 98)
@@ -176,7 +178,7 @@ export const LocationComp = () => {
 
   function createCafeMarkers() {
     for (let i = 0; i < cafePositions.length; i++) {
-      const imageSize = new window.kakao.maps.Size(22, 26);
+      const imageSize = new window.kakao.maps.Size(30, 32);
       const imageOptions = {
         spriteOrigin: new window.kakao.maps.Point(10, 72),
         spriteSize: new window.kakao.maps.Size(36, 98)
@@ -251,13 +253,15 @@ export const LocationComp = () => {
           애견카페
         </button>
       </div>
-      <div style={{margin : '10%',marginLeft:'-10%', overflow:"scroll", height:'400px', width:'400px'}}>
+      <div style={{margin : '10%',marginLeft:'-10%',
+      height:'400px', width:'400px', marginBottom:'10%'}}>
       {/* 아래 내용은 중첩 삼항 연산자를 사용하여 작성
       path와 index값을 둘다 충족해야 클릭한 해당 항목(div)만 출력 
-      path는 있지만 index 값이 0이거나 false일 떄는 전체 내용(ul)을 출력,*/}
-      {type === 'path' && (index ? (
+      path는 있지만 index 값이 문자열이 아닌 나머지일 때 (숫자) 전체 내용(ul)을 출력,*/}
+      {type === 'path' && (index !== "" ? (
       <div> 
         <h3>{pathes[index].name}</h3>
+        <br />
         <p>{pathes[index].content}</p>
         <a href={pathes[index].url} target='blank'>{pathes[index].place}</a>
       </div>) : (
@@ -265,6 +269,7 @@ export const LocationComp = () => {
         {pathes && pathes.map((path,index) => (
           <li key={index}>
             <h3>{path.name}</h3>
+            <br />
             <p>{path.content}</p>
             <a href={path.url}target='blank'>{path.place}</a>
           </li>
@@ -273,9 +278,10 @@ export const LocationComp = () => {
       )}
 
       
-      {type === 'hospital' && (index ? (
+      {type === 'hospital' && (index !== "" ? (
         <div>
           <h3>{hospitals[index].name}</h3>
+          <br />
           <p>{hospitals[index].content}</p>
           <a href={hospitals[index].url} target='blank'>{hospitals[index].place}</a>
         </div>
@@ -284,6 +290,7 @@ export const LocationComp = () => {
         {hospitals && hospitals.map((hospital,index) => (
           <li key={index}>
             <h3>{hospital.name}</h3>
+            <br />
             <p>{hospital.content}</p>
             <a href={hospital.url}target='blank'>{hospital.place}</a>
           </li>
@@ -292,9 +299,10 @@ export const LocationComp = () => {
       )}
 
 
-      {type === 'cafe' && (index ? (
+      {type === 'cafe' && (index !== "" ? (
         <div>
           <h3>{cafes[index].name}</h3>
+          <br />
           <p>{cafes[index].content}</p>
           <a href={cafes[index].url} target='blank'>{cafes[index].place}</a>
         </div>
@@ -303,6 +311,7 @@ export const LocationComp = () => {
         {cafes && cafes.map((cafe,index) => (
           <li key={index}>
             <h3>{cafe.name}</h3>
+            <br />
             <p>{cafe.content}</p>
             <a href={cafe.url}target='blank'>{cafe.place}</a>
           </li>
