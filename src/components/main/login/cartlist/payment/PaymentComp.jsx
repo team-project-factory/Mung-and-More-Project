@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux'
 export const PaymentComp = () => {
   
   return (
-    <div>PaymentComp</div>
+    <div>
+      PaymentComp
+    </div>
   )
 }
