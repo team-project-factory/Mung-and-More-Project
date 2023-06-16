@@ -150,9 +150,9 @@ export default function InstagramComp() {
             <div className='card'>
               <div className='top'>
                 <div className='userDetails'>
-                  <div className='profile_img'>
-                    <img src="./img/logo.png" className='logo' />
-                  </div>
+                  <ProfileImg>
+                      <img src={selectedImage ? URL.createObjectURL(selectedImage) : photo} alt="Selected" style={{width:"100%", height:"100%"}}/>
+                  </ProfileImg>
                   <h3> {post.title} <br /><span> {post.location} </span></h3>
                 </div>
                 <div
@@ -209,7 +209,5 @@ export default function InstagramComp() {
             <Link to={"/createpostcomp"}>게시글 작성</Link>
           }
         </div>
-      </div>
-    </div>
   )
 }
