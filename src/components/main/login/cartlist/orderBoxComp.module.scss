@@ -14,7 +14,7 @@
 .OrderBox {
   padding: 50px;
   width: 400px;
-  min-height: 630px;
+  height: 866px;
   border-radius: 15px;
   background-color: white;
   display: flex;
@@ -26,7 +26,6 @@
   margin-top: 25px;
   font-size: 1.18rem;
   color: rgb(134, 134, 134);
-  margin-bottom: 15px;
   padding-bottom: 15px;
   border-bottom: 0.3px solid rgba(199, 199, 199, 0.493);
 }
@@ -34,6 +33,23 @@
 .ListSet {
   padding-bottom: 15px;
   border-bottom: 0.3px solid rgba(199, 199, 199, 0.493);
+  max-height: 89px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+// CartBox ScrollBar 전체
+.ListSet::-webkit-scrollbar {
+  background-color: white;
+  border-radius: 15px;
+}
+
+// CartBox ScrollBar 막대 부분
+.ListSet::-webkit-scrollbar-thumb {
+  background-color: #e1e5e9;
+  border-radius: 15px;
+  background-clip: padding-box;
+  border: 3px solid transparent;
 }
 
 .Text2 {
@@ -140,4 +156,29 @@
 
 .BuyBtn:hover {
   cursor: pointer;
+}
+
+.CheckedItem {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  margin: auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+}
+
+.ListSet .CheckedItem:first-child {
+  margin-top: 20px;
+}
+
+.ListSet .CheckedItem:last-child {
+  margin-bottom: 10px;
+}
+
+.Text3 {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 25px;
+  font-size: 1.2rem;
 }

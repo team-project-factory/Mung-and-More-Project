@@ -75,12 +75,16 @@ export const OrderBoxComp = () => {
           {/* 상품 정보 */}
           <p className={style.Text1}>상품 정보</p>
           <div className={style.ListSet}>
-            {checkedList &&
-              checkedList.map((item) => (
-                <div className={style.EachList}>
+            {checkedList && checkedList.length > 0 ? (
+              checkedList.map((item, index) => (
+                <div className={style.CheckedItem} key={index}>
                   <div>{item.name}</div>
+                  <div>{item.price}₩</div>
                 </div>
-              ))}
+              ))
+            ) : (
+              <p className={style.Text3}>선택된 상품이 없습니다!</p>
+            )}
           </div>
 
           {/* 수령인: 로그인 정보의 이름과 연결 */}
