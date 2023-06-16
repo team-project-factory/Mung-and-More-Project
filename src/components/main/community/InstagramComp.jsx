@@ -6,9 +6,10 @@ import { faHeart, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 import { faComment, faPaperPlane, faBookmark } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { doc, updateDoc, arrayRemove, collection, getDocs } from 'firebase/firestore';
-import { auth, db,storage } from '../../../data/firebase';
-import { onAuthStateChanged } from 'firebase/auth'
+import {auth, db,storage } from '../../../data/firebase';
+import { onAuthStateChanged,getAuth } from 'firebase/auth'
 import { ref,deleteObject} from 'firebase/storage'
+import { ProfileImg } from '../../../layout/styles/NavStylecomp'
 
 export default function InstagramComp() {
   const userInfor = JSON.parse(sessionStorage.getItem("user"));
@@ -16,6 +17,28 @@ export default function InstagramComp() {
   // 게시물 마다 독립적으로 관리하기 위해 객체 형태로 변경
   const [newList2, setNewList2] = useState([]);
   const [deleteId, setDeleteId] = useState('');
+
+  // 프로필 이미지 불러오는 객체
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 추가: 로그인 상태
+  const [photo, setPhoto] = useState('');
+  const [selectedImage, setSelectedImage] = useState(null);
+  useEffect(() => {
+    // 추가: 로그인 상태 변경 감지g
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+        setPhoto(user.photoURL || '');
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+  }, []);
+
+
+
+
+
 
   // 아래 getData에서 UID 값이 있을 때 실행하도록 하기 위해 작성
   useEffect(() => {
@@ -83,7 +106,7 @@ export default function InstagramComp() {
     }
   }
   else {
-    alert("작성자만 삭제 할 수 있습니다.")
+    alert("작성자만 삭제할 수 있습니다.")
   }
 }
 
@@ -132,9 +155,9 @@ export default function InstagramComp() {
                 <div className='card'>
                   <div className='top'>
                     <div className='userDetails'>
-                      <div className='profile_img'>
-                        <img src="./img/logo.png" className='logo' />
-                      </div>
+                        <ProfileImg>
+                          <img src={selectedImage ? URL.createObjectURL(selectedImage) : photo} alt="Selected" style={{width:"100%", height:"100%"}}/>
+                        </ProfileImg>
                       <h3> {post.title} <br /><span> {post.location} </span></h3>
                     </div>
                     <div

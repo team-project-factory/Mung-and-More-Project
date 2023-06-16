@@ -1,5 +1,6 @@
 import React from 'react'
 import { PaymentComp } from '../../../../components/main/login/cartlist/payment/PaymentComp'
+import { Nav } from 'react-bootstrap'
 
 export const Payment = () => {
   return (
