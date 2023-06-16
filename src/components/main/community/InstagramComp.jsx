@@ -18,22 +18,7 @@ export default function InstagramComp() {
   const [newList2, setNewList2] = useState([]);
   const [deleteId, setDeleteId] = useState('');
 
-  // 프로필 이미지 불러오는 객체
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // 추가: 로그인 상태
-  const [photo, setPhoto] = useState('');
-  const [selectedImage, setSelectedImage] = useState(null);
-  useEffect(() => {
-    // 추가: 로그인 상태 변경 감지g
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setIsLoggedIn(true);
-        setPhoto(user.photoURL || '');
-      } else {
-        setIsLoggedIn(false);
-      }
-    });
-  }, []);
+  
 
 
 
@@ -156,7 +141,7 @@ export default function InstagramComp() {
                   <div className='top'>
                     <div className='userDetails'>
                         <ProfileImg>
-                          <img src={selectedImage ? URL.createObjectURL(selectedImage) : photo} alt="Selected" style={{width:"100%", height:"100%"}}/>
+                          <img src={post.photo} alt="Selected" style={{width:"100%", height:"100%"}}/>
                         </ProfileImg>
                       <h3> {post.title} <br /><span> {post.location} </span></h3>
                     </div>
@@ -204,7 +189,7 @@ export default function InstagramComp() {
                       <FontAwesomeIcon icon={faBookmark} size="2xl" />
                     </div>
                   </div>
-                  <h4 className='likes'>{post.date}</h4>
+                  <h4 className='date'>{post.date}</h4>
                   <h4 className='message'><b>{post.sub}</b> {post.des} <span>{post.hash}</span></h4>
                 </div>
               </div>
