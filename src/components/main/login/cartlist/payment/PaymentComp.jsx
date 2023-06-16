@@ -13,16 +13,11 @@ import { json, useNavigate } from "react-router-dom";
 import style from "./paymentComp.module.scss";
 
 export const PaymentComp = () => {
-  const navigater = useNavigate();
-  const dispatch = useDispatch();
+  // cart에 담은 상품 中 check한 상품 리스트
+  const checkedList = useSelector((state) => state.cartList);
 
   // user UID 담을 state
   const [userUID, setUserUID] = useState("");
-
-  // cartList 담을 state
-  const [cartList, setCartList] = useState("");
-
-  const [checkList, setCheckList] = useState("");
 
   //유저 데이터 들고오기
   const getUserData = () => {
@@ -45,33 +40,14 @@ export const PaymentComp = () => {
     getUserData();
   }, []);
 
-  // 유저가 가지고 있는 데이터 들고오기
-  const getData = async () => {
-    const docRef = doc(db, "users", userUID);
-    const docSnap = await getDoc(docRef);
-    const cart = docSnap.data().cartList;
-
-    if (docSnap.exists()) {
-      console.log("Document data:", cart);
-      setCartList(cart);
-    } else {
-      // docSnap.data() will be undefined in this case
-      console.log("No such document!");
-    }
-  };
-
-  useEffect(() => {
-    if (userUID) {
-      getData();
-    }
-  }, [userUID]);
-
   return (
     <div className={style.PaymentComp}>
       <div className={style.Layout}>
         <div className={style.PaymentBox}>
           <h1>Thanks for your order!</h1>
           <p className={style.Text1}>주문 완료</p>
+
+          {/* 주문 상품 정보: Cart에서 체크한 뒤 주문 결정한 상품만 표시 */}
         </div>
       </div>
     </div>

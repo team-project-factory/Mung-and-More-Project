@@ -14,14 +14,10 @@ import style from "./orderBoxComp.module.scss";
 
 export const OrderBoxComp = () => {
   const navigater = useNavigate();
-  const dispatch = useDispatch();
+  const checkedList = useSelector((state) => state.cartList);
 
   //user UID 담을 state
   const [userUID, setUserUID] = useState("");
-  //cartList 담을 state
-  const [cartList, setCartList] = useState("");
-
-  const [checkList, setCheckList] = useState("");
 
   //유저 데이터 들고오기
   const getUserData = () => {
@@ -51,7 +47,7 @@ export const OrderBoxComp = () => {
 
     if (docSnap.exists()) {
       console.log("Document data:", cart);
-      setCartList(cart);
+      // setCartList(cart);
     } else {
       // docSnap.data() will be undefined in this case
       console.log("No such document!");
@@ -64,24 +60,10 @@ export const OrderBoxComp = () => {
     }
   }, [userUID]);
 
-  // 체크된 item들 checkList에 넣기
-  const onCheck = (check, item) => {
-    if (check) {
-      setCheckList([...checkList, item]);
-    } else {
-      setCheckList(checkList.filter((c) => c !== item));
-    }
-  };
-
-  if (checkList) {
-    console.log(checkList);
-  }
+  console.log(checkedList);
 
   const goPayment = () => {
-    if (cartList) {
-      dispatch(getCartData(checkList));
-      navigater("/payment");
-    }
+    navigater("/payment");
   };
 
   return (
@@ -93,8 +75,12 @@ export const OrderBoxComp = () => {
           {/* 상품 정보 */}
           <p className={style.Text1}>상품 정보</p>
           <div className={style.ListSet}>
-            <div>좌측에서 체크한 상품 이름</div>
-            <div>좌측에서 체크한 상품 가격 / 수량</div>
+            {checkedList &&
+              checkedList.map((item) => (
+                <div className={style.EachList}>
+                  <div>{item.name}</div>
+                </div>
+              ))}
           </div>
 
           {/* 수령인: 로그인 정보의 이름과 연결 */}
