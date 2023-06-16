@@ -23,7 +23,7 @@ export default function InstagramComp() {
   const [photo, setPhoto] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
   useEffect(() => {
-    // 추가: 로그인 상태 변경 감지
+    // 추가: 로그인 상태 변경 감지g
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -143,43 +143,48 @@ export default function InstagramComp() {
   
 
   return (
-    <div className='body'>
-      <div>
-        {newList2 && newList2.map((post, index) => (
-          <div key={index}>
-            <div className='card'>
-              <div className='top'>
-                <div className='userDetails'>
-                  <ProfileImg>
-                      <img src={selectedImage ? URL.createObjectURL(selectedImage) : photo} alt="Selected" style={{width:"100%", height:"100%"}}/>
-                  </ProfileImg>
-                  <h3> {post.title} <br /><span> {post.location} </span></h3>
-                </div>
-                <div
-                  style={{width:'50px', height:'50px', zIndex:'10'}}
-                  onMouseEnter={()=>setDeleteId(post.id)}
-                  onMouseLeave={()=>setDeleteId("")}>
-                  <FontAwesomeIcon 
-                    icon={faEllipsisVertical} size='2xl' className='dot'
-                  />
-                  {deleteId === post.id && (
-                    <button
-                      style={{padding:'10px'}}
-                      className='delete-btn'
-                      onClick={()=>handleDeletePost(post.id)}
-                    >
-                      삭 제
-                    </button>
-                  )}
-                </div>
-              </div>
-              <div className='imgBx'>
-                <img
-                  className='event-slide-img'
-                  src={post.images[post.imageIndex]}
-                  alt={`Image ${post.imageIndex + 1}`}
-                  style={{ width: '340px' }}
-                />
+    <div className={style.mungsList}>
+      <div className={style.mungsList_menu}>
+        메뉴출력될곳
+      </div>
+      <div className={style.mungsList_news}>
+        <div className='body'>
+          <div>
+            {newList2 && newList2.map((post, index) => (
+              <div key={index}>
+                <div className='card'>
+                  <div className='top'>
+                    <div className='userDetails'>
+                        <ProfileImg>
+                          <img src={selectedImage ? URL.createObjectURL(selectedImage) : photo} alt="Selected" style={{width:"100%", height:"100%"}}/>
+                        </ProfileImg>
+                      <h3> {post.title} <br /><span> {post.location} </span></h3>
+                    </div>
+                    <div
+                      style={{width:'50px', height:'50px', zIndex:'10'}}
+                      onMouseEnter={()=>setDeleteId(post.id)}
+                      onMouseLeave={()=>setDeleteId("")}>
+                      <FontAwesomeIcon 
+                        icon={faEllipsisVertical} size='2xl' className='dot'
+                      />
+                      {deleteId === post.id && (
+                        <button
+                          style={{padding:'10px'}}
+                          className='delete-btn'
+                          onClick={()=>handleDeletePost(post.id)}
+                        >
+                          삭 제
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <div className='imgBx'>
+                    <img
+                      className='event-slide-img'
+                      src={post.images[post.imageIndex]}
+                      alt={`Image ${post.imageIndex + 1}`}
+                      style={{ width: '340px' }}
+                    />
 
                     <div className='slide-btn'>
                       {/* 아래 버튼에 onClick시 post를 인자로 전달하여 각버튼이 독립적인 post 객체를 받게끔 설정 */}
@@ -209,5 +214,7 @@ export default function InstagramComp() {
             <Link to={"/createpostcomp"}>게시글 작성</Link>
           }
         </div>
+      </div>
+    </div>
   )
 }
