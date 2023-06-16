@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import './instagramComp.css'
 import style from './instagramComp.module.scss'
 import { faHeart, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
@@ -9,7 +8,6 @@ import { doc, updateDoc, arrayRemove, collection, getDocs } from 'firebase/fires
 import {auth, db,storage } from '../../../data/firebase';
 import { onAuthStateChanged,getAuth } from 'firebase/auth'
 import { ref,deleteObject} from 'firebase/storage'
-import { ProfileImg } from '../../../layout/styles/NavStylecomp'
 
 export default function InstagramComp() {
   const userInfor = JSON.parse(sessionStorage.getItem("user"));
@@ -140,13 +138,15 @@ export default function InstagramComp() {
                 <div className='card'>
                   <div className='top'>
                     <div className='userDetails'>
-                        <ProfileImg>
+                        
+                        <div className='logo'>
                           <img src={post.photo} alt="Selected" style={{width:"100%", height:"100%"}}/>
-                        </ProfileImg>
-                      <h3> {post.title} <br /><span> {post.location} </span></h3>
+                        </div>
+                        
+                      <h2 className='insta-title'> {post.title} <br /><span className='insta-sub'> {post.location} </span></h2>
                     </div>
                     <div
-                      style={{width:'50px', height:'50px', zIndex:'10'}}
+                      style={{width:'80px', height:'60px', zIndex:'10'}}
                       onMouseEnter={()=>setDeleteId(post.id)}
                       onMouseLeave={()=>setDeleteId("")}>
                       <FontAwesomeIcon 
@@ -168,7 +168,6 @@ export default function InstagramComp() {
                       className='event-slide-img'
                       src={post.images[post.imageIndex]}
                       alt={`Image ${post.imageIndex + 1}`}
-                      style={{ width: '340px' }}
                     />
 
                     <div className='slide-btn'>
@@ -190,14 +189,16 @@ export default function InstagramComp() {
                     </div>
                   </div>
                   <h4 className='date'>{post.date}</h4>
-                  <h4 className='message'><b>{post.sub}</b> {post.des} <span>{post.hash}</span></h4>
+                  <div className='message'>
+                    <p>{post.sub}</p> 
+                    <div>{post.des}</div>
+                    <span>{post.hash}</span>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-          {userInfor &&
-            <Link to={"/createpostcomp"}>게시글 작성</Link>
-          }
+          
         </div>
       </div>
     </div>
