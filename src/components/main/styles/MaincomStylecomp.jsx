@@ -50,3 +50,6 @@ export const ImageWrap = styled.div`
     margin: 0 auto;
     border-radius: 500px;
 `
+export const Image = styled.div`
+    width: 400px;
+`
