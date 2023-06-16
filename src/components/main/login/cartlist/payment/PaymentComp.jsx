@@ -5,5 +5,5 @@ import { useSelector } from "react-redux";
 import style from "./paymentComp.module.scss";
 
 export const PaymentComp = () => {
-  return <div>PaymentComp</div>;
+  return <div className={style.Layout}>PaymentComp</div>;
 };
