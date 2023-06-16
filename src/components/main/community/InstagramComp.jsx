@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './instagramComp.css'
+import style from './instagramComp.module.scss'
 import { faHeart, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 import { faComment, faPaperPlane, faBookmark } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -150,9 +151,7 @@ export default function InstagramComp() {
               <div className='top'>
                 <div className='userDetails'>
                   <div className='profile_img'>
-                    <ProfileImg>
-                      <img src={selectedImage ? URL.createObjectURL(selectedImage) : photo} alt="Selected" style={{width:"100%", height:"100%"}}/>
-                    </ProfileImg>
+                    <img src="./img/logo.png" className='logo' />
                   </div>
                   <h3> {post.title} <br /><span> {post.location} </span></h3>
                 </div>
@@ -182,33 +181,35 @@ export default function InstagramComp() {
                   style={{ width: '340px' }}
                 />
 
-                <div className='slide-btn'>
-                  {/* 아래 버튼에 onClick시 post를 인자로 전달하여 각버튼이 독립적인 post 객체를 받게끔 설정 */}
-                  <button className='prev-btn' onClick={() => btnPrev(post)}>{'<'}</button>
-                  <button className='next-btn' onClick={() => btnNext(post)}>{'>'}</button>
-                </div>
+                    <div className='slide-btn'>
+                      {/* 아래 버튼에 onClick시 post를 인자로 전달하여 각버튼이 독립적인 post 객체를 받게끔 설정 */}
+                      <button className='prev-btn' onClick={() => btnPrev(post)}>{'<'}</button>
+                      <button className='next-btn' onClick={() => btnNext(post)}>{'>'}</button>
+                    </div>
 
-              </div>
-              <div className='actionBtns'>
-                <div className='left'>
-                  <FontAwesomeIcon icon={faHeart} size="2xl" color='red' className='heart' />
-                  <FontAwesomeIcon icon={faComment} size="2xl" flip='horizontal' className='comment' />
-                  <FontAwesomeIcon icon={faPaperPlane} size="2xl" className='share' />
+                  </div>
+                  <div className='actionBtns'>
+                    <div className='left'>
+                      <FontAwesomeIcon icon={faHeart} size="2xl" color='red' className='heart' />
+                      <FontAwesomeIcon icon={faComment} size="2xl" flip='horizontal' className='comment' />
+                      <FontAwesomeIcon icon={faPaperPlane} size="2xl" className='share' />
 
-                </div>
-                <div className='right'>
-                  <FontAwesomeIcon icon={faBookmark} size="2xl" />
+                    </div>
+                    <div className='right'>
+                      <FontAwesomeIcon icon={faBookmark} size="2xl" />
+                    </div>
+                  </div>
+                  <h4 className='likes'>{post.date}</h4>
+                  <h4 className='message'><b>{post.sub}</b> {post.des} <span>{post.hash}</span></h4>
                 </div>
               </div>
-              <h4 className='likes'>{post.date}</h4>
-              <h4 className='message'><b>{post.sub}</b> {post.des} <span>{post.hash}</span></h4>
-            </div>
+            ))}
           </div>
-        ))}
+          {userInfor &&
+            <Link to={"/createpostcomp"}>게시글 작성</Link>
+          }
+        </div>
       </div>
-      {userInfor &&
-        <Link to={"/createpostcomp"}>게시글 작성</Link>
-      }
     </div>
   )
 }
