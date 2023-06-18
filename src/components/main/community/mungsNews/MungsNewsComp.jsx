@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
 
 
 //css
@@ -19,14 +19,13 @@ export const MungsNewsComp = () => {
       const querySnapshot = await getDocs(collection(db, "News"));
       const newsList = [];
       querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data().news}`);
         const data =doc.data().news;
         newsList.push({
           id : doc.id,
           ...data
         });
       });
-      setNews(newsList);     
+      setNews(newsList.reverse());     
     }
     getData();
   },[]);
@@ -35,18 +34,18 @@ export const MungsNewsComp = () => {
 
   return (
     <div className={style.mungsList}>
-      <div className={style.mungsList_menu}>
-        <ul>
-          {news && news.map((n)=>(
-            <li>
-              <Link to={`/mungsnews/${n.id}`}><h1>{n.title}</h1></Link>
+      <ul className={style.mungsList_menu}>
+          {news && news.map((n,i)=>(
+            <li key={i}>
+              <NavLink to={`/mungsnews/${n.id}`}
+              className={({ isActive })=>(isActive ? style.active : '' )}
+              >
+                {n.title}
+              </NavLink>
             </li>
           ))}
-        </ul>
-      </div>
-      <div className={style.mungsList_news}>
-        <Outlet context={news}/>
-      </div>
+      </ul>
+      <Outlet context={news}/>
     </div>
   )
 }

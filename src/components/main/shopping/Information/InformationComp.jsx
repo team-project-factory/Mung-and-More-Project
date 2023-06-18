@@ -70,7 +70,7 @@ export default function InformationComp() {
   
   //버튼 누를시 장바구니 추가
   const buyBtn = () =>{
-    itemInfo.num = itemNum;
+    itemInfo.num = Number(itemNum);
     if(user){
       const setCartList = async() =>{
           const washingtonRef = doc(db, "users", userUID);
