@@ -14,7 +14,7 @@
 .PaymentBox {
   padding: 50px;
   width: 650px;
-  height: 832px;
+
   border-radius: 15px;
   background-color: white;
   display: flex;
@@ -90,4 +90,52 @@
 .ListSet {
   display: flex;
   flex-direction: column;
+}
+
+.Price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 585px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-bottom: 30px;
+  font-size: 1.2rem;
+  color: rgba(0, 0, 0, 0.637);
+  border-bottom: 0.3px solid rgba(199, 199, 199, 0.493);
+}
+
+.Shipping {
+  display: flex;
+  flex-direction: column;
+}
+
+.Element {
+  width: 500px;
+  display: flex;
+  margin-left: 50px;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  margin: auto;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  color: rgb(134, 134, 134);
+}
+
+.BuyBtn {
+  margin: auto;
+  margin-top: 20px;
+  border: none;
+  border-radius: 7px;
+  background-color: #c2dcf4a9;
+  height: 50px;
+  width: 530px;
+  font-size: 1rem;
+}
+
+.BuyBtn:hover {
+  cursor: pointer;
 }
