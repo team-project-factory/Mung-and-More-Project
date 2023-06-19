@@ -1,18 +1,31 @@
-
-import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 //css
-import style from './mungsNewsContens.module.scss'
+import style from "./mungsNewsContens.module.scss";
 
 //파이어베이스
-import { db,auth } from '../../../../data/firebase';
-import {  
-  doc, updateDoc, arrayUnion, arrayRemove,collection, getDocs , getDocFromCache 
+import { db, auth } from "../../../../data/firebase";
+import {
+  doc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+  collection,
+  getDocs,
+  getDocFromCache,
 } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 
 export const MungsNewsContents = () => {
+  const navigater = useNavigate();
+  const Id = useParams();
+
+  const [newsList, setNewsList] = useState("");
+
+  const [commentList, setCommentList] = useState([]);
+  //로그인여부
+  const userInfor = JSON.parse(sessionStorage.getItem("user"));
   //유저이름
   const [userName, setUserName] = useState("");
   //uid
@@ -25,7 +38,6 @@ export const MungsNewsContents = () => {
   //로그인했을때 로그인유저 정보들고오기
   useEffect(() => {
     if (userInfor) {
-
       onAuthStateChanged(auth, (user) => {
         if (user) {
           // User is signed in, see docs for a list of available properties
@@ -36,7 +48,6 @@ export const MungsNewsContents = () => {
           setUserUid(uid);
           setUserPhoto(photo);
           setUserName(displayName);
-
           // ...
         } else {
           // User is signed out
@@ -182,4 +193,3 @@ export const MungsNewsContents = () => {
     </div>
   );
 };
-
