@@ -145,14 +145,16 @@ export const MungsNewsContents = () => {
       ))}
           <ul className={style.commentBox}>
             {
-              commentList && commentList.map((c)=>(
-                <li>
+              commentList && commentList.map((c,i)=>(
+                <li key={i}>
                   <div className={style.imgBox}
                   style={{backgroundImage:`url(${c.photo})`}}
                   ></div>
                   <p className={style.userBox}>{c.name}</p>
                   <p className={style.userComment}>{c.comment}</p>
-                  <span onClick={()=>{deleteBtn(c)}}>삭제</span>
+                  <span onClick={()=>{deleteBtn(c)}}
+                  style={c.uid === userUid ? {visibility:''} : {visibility:'hidden'}}
+                  >삭제</span>
                 </li>
               ))
             }
