@@ -20,6 +20,8 @@ export const MungsNewsContents = () => {
   const [commentList, setCommentList] = useState([]);
   //로그인여부
   const userInfor = JSON.parse(sessionStorage.getItem("user"));
+  //유저이름
+  const [userName, setUserName] = useState('');
   //uid
   const [userUid,setUserUid] = useState('');
   //photo
@@ -36,8 +38,10 @@ export const MungsNewsContents = () => {
           // https://firebase.google.com/docs/reference/js/auth.user
           const uid = user.uid;
           const photo = user.photoURL
+          const displayName = user.displayName
           setUserUid(uid);
           setUserPhoto(photo);
+          setUserName(displayName);
           // ...
         } else {
           // User is signed out
@@ -46,7 +50,7 @@ export const MungsNewsContents = () => {
       });
     }
   },[])
-  //뉴스 데이터 들고오기
+  //뉴스 데이터, 댓글 들고오기
   const getData = async() =>{
     const querySnapshot = await getDocs(collection(db, "News"));
     const commentList2 = [];
@@ -57,6 +61,7 @@ export const MungsNewsContents = () => {
         id : doc.id,
         ...news
       });
+      //댓글
       const comment = doc.data().comment
       if(comment){
         commentList2.push(...comment);
@@ -85,7 +90,9 @@ export const MungsNewsContents = () => {
         comment: arrayUnion({
           id: id,
           uid : userUid,
-          comment : input
+          comment : input,
+          photo : userPhoto,
+          name : userName
         })
     });
     }
@@ -100,11 +107,30 @@ export const MungsNewsContents = () => {
     }
   }
 
+  const deleteBtn = (comment) =>{
+    const washingtonRef = doc(db, "News", Id.name);
+    const deleteComment = async() =>{
+      await updateDoc(washingtonRef, {
+        comment: arrayRemove(comment)
+    });
+    }
+    if(comment.uid === userUid){
+      alert('삭제!')
+      deleteComment();
+      getData();
+    }
+    else{
+      alert('아이디 다르다!')
+    }
+  }
+
   return (
     <div className={style.mungsList_news}>
       {newsList && newsList.map((n)=>(
         <div key={n.id}>
-          <h2 className={style.title}>{n.title}</h2>
+          <div className={style.title}>
+            <h2>{n.title}</h2>
+          </div>
 
           <div className={style.contentBox}>
             {n.contents && n.contents.map((c,i)=>(
@@ -117,13 +143,20 @@ export const MungsNewsContents = () => {
           </div>
         </div>
       ))}
-          <div className={style.commentBox}>
+          <ul className={style.commentBox}>
             {
               commentList && commentList.map((c)=>(
-                <li>{c.comment}</li>
+                <li>
+                  <div className={style.imgBox}
+                  style={{backgroundImage:`url(${c.photo})`}}
+                  ></div>
+                  <p className={style.userBox}>{c.name}</p>
+                  <p className={style.userComment}>{c.comment}</p>
+                  <span onClick={()=>{deleteBtn(c)}}>삭제</span>
+                </li>
               ))
             }
-          </div>
+          </ul>
           <ul className={style.commentInput}>
             <div
             style={userPhoto ? {backgroundImage:`url(${userPhoto})`} : {backgroundImage: ''}}
@@ -132,8 +165,11 @@ export const MungsNewsContents = () => {
               <input type='text' placeholder={`'이름'으로 댓글달기...`}
               value={input}
               onChange={(e)=>{setinput(e.target.value)}}
+              required
               />
-              <button onClick={()=>{setData(Id.name)}}>게시</button>
+              <button onClick={()=>{setData(Id.name)}}
+              style={{cursor:'pointer'}}
+              >게시</button>
             </li>
           </ul>
     </div>
