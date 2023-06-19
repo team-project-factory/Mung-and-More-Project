@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MainTitle, Image } from './styles/MaincomStylecomp';
+import { MainTitle, Image, SwiperBtn, ImageImg, GoBtn } from './styles/MaincomStylecomp';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import 'swiper/css';
@@ -33,8 +33,8 @@ export const MainComp3 = () => {
     },[]);
 
   return (
-    <div style={{ backgroundColor: '#CBECB5', height: '100vh', padding: '70px' }}>
-      <MainTitle>Let’s go shopping together!</MainTitle>
+    <div style={{ backgroundColor: '#CBECB5', height: '100vh', padding: '70px', textAlign: 'center' }}>
+      <MainTitle style={{marginBottom:'40px'}}>Let’s go shopping together!</MainTitle>
       <Swiper
         spaceBetween={10}
         slidesPerView={3}
@@ -44,20 +44,23 @@ export const MainComp3 = () => {
         {product && product.map((item) => (
           <SwiperSlide key={item.id}>
             <Image>
-              <img src={item.url} alt={item.name} />
-              <p>{item.name}</p>
-            </Image>
+              <img src={item.url} alt={item.name} width={"100%"}/>
+              
+            </Image><p>{item.name}</p>
           </SwiperSlide>
         ))}
-        <div className="allswiperbutton">
+        <SwiperBtn>
           <div className="swiper-prev">
-            <img src={'/img/prevbtn.png'} alt="" />
+            <img src={'/img/prevbtn.png'} width={"90px"} />
           </div>
           <div className="swiper-next">
-            <img src={'/img/nextbtn.png'} alt="" />
+            <img src={'/img/nextbtn.png'} width={"90px"} />
           </div>
-        </div>
+        </SwiperBtn>
       </Swiper>
+      <GoBtn>
+        Go Shopping
+      </GoBtn>
     </div>
   );
 };
