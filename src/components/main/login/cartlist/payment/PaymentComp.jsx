@@ -48,6 +48,27 @@ export const PaymentComp = () => {
           <p className={style.Text1}>주문 완료</p>
 
           {/* 주문 상품 정보: Cart에서 체크한 뒤 주문 결정한 상품만 표시 */}
+          <p className={style.Text2}>주문 상품 정보</p>
+          <div className={style.ListSet}>
+            {checkedList &&
+              checkedList.map((item, index) => (
+                <div className={style.CheckedList} key={index}>
+                  <img src={item.url} className={style.ItemImg} />
+                  <div className={style.Align1}>
+                    <div className={style.ItemName}>{item.name}</div>
+                    <div className={style.Align2}>
+                      <div>주문 수량: X개</div>
+                      <div>TOTAL PRICE: {item.price}₩</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </div>
+
+          {/* 상품 금액 계산창 */}
+          <div>
+            <div>총 상품 금액</div>
+          </div>
         </div>
       </div>
     </div>

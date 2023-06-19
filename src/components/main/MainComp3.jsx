@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { MainTitle, Image, SwiperBtn, ImageImg, GoBtn } from './styles/MaincomStylecomp';
 import { Swiper, SwiperSlide } from 'swiper/react';
