@@ -14,7 +14,6 @@
 .PaymentBox {
   padding: 50px;
   width: 650px;
-  height: 832px;
   border-radius: 15px;
   background-color: white;
   display: flex;
@@ -32,4 +31,110 @@
   border-bottom: 0.3px solid rgba(199, 199, 199, 0.493);
   width: 90%;
   text-align: center;
+}
+
+.Text2 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 50px;
+  font-size: 1.1rem;
+  color: rgb(134, 134, 134);
+}
+
+.CheckedList {
+  display: flex;
+
+  width: 87%;
+  margin: auto;
+}
+
+.ItemImg {
+  margin-top: 10px;
+  margin-left: 5px;
+  width: 100px;
+  height: 100px;
+  border: solid 0.3px rgba(199, 199, 199, 0.493);
+  border-radius: 15px;
+  padding: 3px;
+  margin-bottom: 20px;
+}
+
+.Align1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.Align2 {
+  margin-top: 15px;
+  margin-right: 7px;
+  margin-left: 25px;
+  margin-bottom: 20px;
+
+  padding-bottom: 10px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.ItemName {
+  margin-left: 25px;
+  margin-top: 15px;
+  padding-top: 3px;
+  font-size: 1.15rem;
+}
+
+.ListSet {
+  display: flex;
+  flex-direction: column;
+}
+
+.Price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 585px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-bottom: 30px;
+  font-size: 1.2rem;
+  color: rgba(0, 0, 0, 0.637);
+  border-bottom: 0.3px solid rgba(199, 199, 199, 0.493);
+}
+
+.Shipping {
+  display: flex;
+  flex-direction: column;
+}
+
+.Element {
+  width: 500px;
+  display: flex;
+  margin-left: 50px;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  margin: auto;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  color: rgb(134, 134, 134);
+}
+
+.BuyBtn {
+  margin: auto;
+  margin-top: 20px;
+  border: none;
+  border-radius: 7px;
+  background-color: #c2dcf4a9;
+  height: 50px;
+  width: 530px;
+  font-size: 1rem;
+}
+
+.BuyBtn:hover {
+  cursor: pointer;
 }

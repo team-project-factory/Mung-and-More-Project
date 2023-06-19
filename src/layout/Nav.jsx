@@ -92,7 +92,7 @@ export const Nav = () => {
                   <ArrowDropDownIcon />
                 )}
                 <SubItems>
-                  <Link to={'/mungstagram'}>
+                  <Link to={'/community'}>
                     <SubLink>Mungstagram</SubLink>
                   </Link>
                   <Link to={'/mungsnews'}>
