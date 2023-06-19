@@ -16,11 +16,6 @@ export default function InstagramComp() {
   const [newList2, setNewList2] = useState([]);
   const [deleteId, setDeleteId] = useState('');
 
-  
-
-
-
-
 
 
   // 아래 getData에서 UID 값이 있을 때 실행하도록 하기 위해 작성
@@ -165,6 +160,7 @@ export default function InstagramComp() {
                   </div>
                   <div className='imgBx'>
                     <img
+
                       className='event-slide-img'
                       src={post.images[post.imageIndex]}
                       alt={`Image ${post.imageIndex + 1}`}
@@ -194,11 +190,12 @@ export default function InstagramComp() {
                     <div>{post.des}</div>
                     <span>{post.hash}</span>
                   </div>
+
+                  {/* 작성란 */}
                 </div>
               </div>
             ))}
           </div>
-          
         </div>
       </div>
     </div>
