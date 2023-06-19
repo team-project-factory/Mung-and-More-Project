@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import './instagramComp.css'
+import style from './instagramComp.module.scss'
 import { faHeart, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 import { faComment, faPaperPlane, faBookmark } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { doc, updateDoc, arrayRemove, collection, getDocs } from 'firebase/firestore';
-import { auth, db,storage } from '../../../data/firebase';
-import { onAuthStateChanged } from 'firebase/auth'
+import {auth, db,storage } from '../../../data/firebase';
+import { onAuthStateChanged,getAuth } from 'firebase/auth'
 import { ref,deleteObject} from 'firebase/storage'
 
 export default function InstagramComp() {
@@ -15,6 +15,13 @@ export default function InstagramComp() {
   // 게시물 마다 독립적으로 관리하기 위해 객체 형태로 변경
   const [newList2, setNewList2] = useState([]);
   const [deleteId, setDeleteId] = useState('');
+
+  
+
+
+
+
+
 
   // 아래 getData에서 UID 값이 있을 때 실행하도록 하기 위해 작성
   useEffect(() => {
@@ -51,8 +58,9 @@ export default function InstagramComp() {
 
   // 게시글 삭제 함수
   const deletePost = async (postId) => {
-    const post = newList2.find((post) => post === postId);
+    const post = newList2.find((post) => post.id === postId);
     // 파일 삭제 함수 정의
+    if(uid===postId) {
     const deleteFiles = async () => {
       // 각 파일에 대해 삭제 작업 수행
       const deletePromises = post.images.map((imageUrl) => {
@@ -62,9 +70,9 @@ export default function InstagramComp() {
   
       try {
         await Promise.all(deletePromises);
-        console.log("파일 삭제 완료");
+        alert("게시글 삭제 완료");
       } catch (error) {
-        console.error("파일 삭제 중 오류가 발생했습니다:", error);
+        alert("직접 작성한 글만 삭제 할 수 있습니다.", error);
       }
     };
       // DB 삭제 작업 수행
@@ -75,17 +83,20 @@ export default function InstagramComp() {
         postList: arrayRemove(post)
       });
       await deleteFiles(); // 파일 삭제 함수 호출
-      alert("게시물이 삭제되었습니다.");
+      console.log("사진 파일이 삭제되었습니다.");
     } catch (error) {
-      console.error("게시물 삭제 중 오류가 발생했습니다:", error);
+      console.error("사진 파일 삭제 오류가 발생했습니다:", error);
     }
-  };
-  
+  }
+  else {
+    alert("작성자만 삭제할 수 있습니다.")
+  }
+}
 
-  // 게시글 삭제 실행 함수
+  // 게시글 삭제 실행 함수.
   const handleDeletePost = (postId) => {
+    getData()
     deletePost(postId);
-    getData();
   }
 
   
@@ -115,71 +126,81 @@ export default function InstagramComp() {
   
 
   return (
-    <div className='body'>
-      <div>
-        {newList2 && newList2.map((post, index) => (
-          <div key={index}>
-            <div className='card'>
-              <div className='top'>
-                <div className='userDetails'>
-                  <div className='profile_img'>
-                    <img src="./img/logo.png" className='logo' />
-                  </div>
-                  <h3> {post.title} <br /><span> {post.location} </span></h3>
-                </div>
-                <div
-                  style={{width:'50px', height:'50px', zIndex:'10'}}
-                  onMouseEnter={()=>setDeleteId(post.id)}
-                  onMouseLeave={()=>setDeleteId("")}>
-                  <FontAwesomeIcon 
-                    icon={faEllipsisVertical} size='2xl' className='dot'
-                  />
-                  {deleteId === post.id && (
-                    <button
-                      style={{padding:'10px'}}
-                      className='delete-btn'
-                      onClick={()=>handleDeletePost(post)}
-                    >
-                      삭제
-                    </button>
-                  )}
-                </div>
-              </div>
-              <div className='imgBx'>
-                <img
-                  className='event-slide-img'
-                  src={post.images[post.imageIndex]}
-                  alt={`Image ${post.imageIndex + 1}`}
-                  style={{ width: '340px' }}
-                />
-
-                <div className='slide-btn'>
-                  {/* 아래 버튼에 onClick시 post를 인자로 전달하여 각버튼이 독립적인 post 객체를 받게끔 설정 */}
-                  <button className='prev-btn' onClick={() => btnPrev(post)}>{'<'}</button>
-                  <button className='next-btn' onClick={() => btnNext(post)}>{'>'}</button>
-                </div>
-
-              </div>
-              <div className='actionBtns'>
-                <div className='left'>
-                  <FontAwesomeIcon icon={faHeart} size="2xl" color='red' className='heart' />
-                  <FontAwesomeIcon icon={faComment} size="2xl" flip='horizontal' className='comment' />
-                  <FontAwesomeIcon icon={faPaperPlane} size="2xl" className='share' />
-
-                </div>
-                <div className='right'>
-                  <FontAwesomeIcon icon={faBookmark} size="2xl" />
-                </div>
-              </div>
-              <h4 className='likes'>{post.date}</h4>
-              <h4 className='message'><b>{post.sub}</b> {post.des} <span>{post.hash}</span></h4>
-            </div>
-          </div>
-        ))}
+    <div className={style.mungsList}>
+      <div className={style.mungsList_menu}>
+        메뉴출력될곳
       </div>
-      {userInfor &&
-        <Link to={"/createpostcomp"}>게시글 작성</Link>
-      }
+      <div className={style.mungsList_news}>
+        <div className='body'>
+          <div>
+            {newList2 && newList2.map((post, index) => (
+              <div key={index}>
+                <div className='card'>
+                  <div className='top'>
+                    <div className='userDetails'>
+                        
+                        <div className='logo'>
+                          <img src={post.photo} alt="Selected" style={{width:"100%", height:"100%"}}/>
+                        </div>
+                        
+                      <h2 className='insta-title'> {post.title} <br /><span className='insta-sub'> {post.location} </span></h2>
+                    </div>
+                    <div
+                      style={{width:'80px', height:'60px', zIndex:'10'}}
+                      onMouseEnter={()=>setDeleteId(post.id)}
+                      onMouseLeave={()=>setDeleteId("")}>
+                      <FontAwesomeIcon 
+                        icon={faEllipsisVertical} size='2xl' className='dot'
+                      />
+                      {deleteId === post.id && (
+                        <button
+                          style={{padding:'10px'}}
+                          className='delete-btn'
+                          onClick={()=>handleDeletePost(post.id)}
+                        >
+                          삭 제
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <div className='imgBx'>
+                    <img
+                      className='event-slide-img'
+                      src={post.images[post.imageIndex]}
+                      alt={`Image ${post.imageIndex + 1}`}
+                    />
+
+                    <div className='slide-btn'>
+                      {/* 아래 버튼에 onClick시 post를 인자로 전달하여 각버튼이 독립적인 post 객체를 받게끔 설정 */}
+                      <button className='prev-btn' onClick={() => btnPrev(post)}>{'<'}</button>
+                      <button className='next-btn' onClick={() => btnNext(post)}>{'>'}</button>
+                    </div>
+
+                  </div>
+                  <div className='actionBtns'>
+                    <div className='left'>
+                      <FontAwesomeIcon icon={faHeart} size="2xl" color='red' className='heart' />
+                      <FontAwesomeIcon icon={faComment} size="2xl" flip='horizontal' className='comment' />
+                      <FontAwesomeIcon icon={faPaperPlane} size="2xl" className='share' />
+
+                    </div>
+                    <div className='right'>
+                      <FontAwesomeIcon icon={faBookmark} size="2xl" />
+                    </div>
+                  </div>
+                  <h4 className='date'>{post.date}</h4>
+                  <div className='message'>
+                    <p>{post.sub}</p> 
+                    <div>{post.des}</div>
+                    <span>{post.hash}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+        </div>
+      </div>
     </div>
   )
 }

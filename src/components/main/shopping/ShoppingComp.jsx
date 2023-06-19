@@ -236,26 +236,27 @@ export const ShoppingComp = () => {
           onClick={active4}
           >장난감</li>
         </ul>
-        <div style={{maxWidth:"1337px", margin:"0 auto"}}>
+        <div>
           <Outlet context = {items && items}/>
           <ul className={style.shoppingBox_itemList}>
             {printItems && printItems.map((item)=>(
               <li key={item.name}>
                 <div className={style.card}>
-                  <div className={style.imgBox}
-                  style={{backgroundImage:`url(${item.url})`}}
-                  >
-                    <div
-                    className={style.likeBtn}
-                    onClick={()=>likeBtn(item)}
-                    >
-                      {item.like ? `하트`:`빈하트`}
+                  <div className={style.imgBox}>
+                      <div
+                      className={style.likeBtn}
+                      onClick={()=>likeBtn(item)}
+                      >
+                        {item.like ? `하트`:`빈하트`}
+                      </div>
+                    <div style={{backgroundImage:`url(${item.url})`
+                    ,width:'200px',height:'150px', backgroundSize: '200px 150px', margin:'auto'}}>
                     </div>
                   </div>
                   <ul className={style.textBox}>
                     <li>
-                      <p>{item.name}</p>
-                      <p>{item.price}</p>
+                      <p>{item.name}</p><br/>
+                      <p>{item.price}&#8361;</p>
                     </li>
                     <li>
                     {

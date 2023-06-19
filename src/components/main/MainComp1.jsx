@@ -6,13 +6,13 @@ import { TitleCircle, DogCircle
 
 export const MainComp1 = () => {
   return (
-    <div style={{minWidth : '1920px',height : `100vh`}} >
+    <div style={{minWidth : '1920px',height : `100vh`, overflow : "hidden"}} >
       <TitleCircle>
       <img src="/img/circle.png" alt=""  style={{width:"730px"}}/>
       </TitleCircle>
       
       <DogCircle>
-        <img src="/img/maindog2.png" alt=""  style={{width:"550px"}}/>
+        <img src="/img/maindog2.png" style={{width:"550px"}}/>
       </DogCircle>
     </div>
   )

@@ -71,22 +71,21 @@ export const CartBoxComp = () => {
   // 체크된 item들 checkList에 넣기
   const onCheck = (check, item) => {
     if (check) {
-      setCheckList([...checkList, item]);
+      // redux에 check된 item 추가
+      dispatch(getCartData([...checkList, JSON.parse(item)]));
+      setCheckList([...checkList, JSON.parse(item)]);
     } else {
-      setCheckList(checkList.filter((c) => c !== item));
+      // redux에 check 해제된 item 삭제
+      dispatch(
+        getCartData(checkList.filter((c) => c.name !== JSON.parse(item).name))
+      );
+      setCheckList(checkList.filter((c) => c.name !== JSON.parse(item).name));
     }
   };
 
   if (checkList) {
     console.log(checkList);
   }
-
-  const goPayment = () => {
-    if (cartList) {
-      dispatch(getCartData(checkList));
-      navigater("/payment");
-    }
-  };
 
   return (
     <div className={style.CartComp}>
@@ -121,7 +120,6 @@ export const CartBoxComp = () => {
                 </div>
               ))}
           </div>
-          <button onClick={goPayment}>구매하기</button>
         </div>
       </div>
     </div>

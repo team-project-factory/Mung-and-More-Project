@@ -14,14 +14,10 @@ import style from "./orderBoxComp.module.scss";
 
 export const OrderBoxComp = () => {
   const navigater = useNavigate();
-  const dispatch = useDispatch();
+  const checkedList = useSelector((state) => state.cartList);
 
   //user UID 담을 state
   const [userUID, setUserUID] = useState("");
-  //cartList 담을 state
-  const [cartList, setCartList] = useState("");
-
-  const [checkList, setCheckList] = useState("");
 
   //유저 데이터 들고오기
   const getUserData = () => {
@@ -51,7 +47,7 @@ export const OrderBoxComp = () => {
 
     if (docSnap.exists()) {
       console.log("Document data:", cart);
-      setCartList(cart);
+      // setCartList(cart);
     } else {
       // docSnap.data() will be undefined in this case
       console.log("No such document!");
@@ -64,24 +60,10 @@ export const OrderBoxComp = () => {
     }
   }, [userUID]);
 
-  // 체크된 item들 checkList에 넣기
-  const onCheck = (check, item) => {
-    if (check) {
-      setCheckList([...checkList, item]);
-    } else {
-      setCheckList(checkList.filter((c) => c !== item));
-    }
-  };
-
-  if (checkList) {
-    console.log(checkList);
-  }
+  console.log(checkedList);
 
   const goPayment = () => {
-    if (cartList) {
-      dispatch(getCartData(checkList));
-      navigater("/payment");
-    }
+    navigater("/payment");
   };
 
   return (
@@ -89,17 +71,81 @@ export const OrderBoxComp = () => {
       <div className={style.Layout}>
         <div className={style.OrderBox}>
           <h1>Order</h1>
+
+          {/* 상품 정보 */}
           <p className={style.Text1}>상품 정보</p>
           <div className={style.ListSet}>
-            <div>좌측에서 체크한 상품 이름</div>
-            <div>좌측에서 체크한 상품 가격 / 수량</div>
+            {checkedList && checkedList.length > 0 ? (
+              checkedList.map((item, index) => (
+                <div className={style.CheckedItem} key={index}>
+                  <div>{item.name}</div>
+                  <div>{item.price}₩</div>
+                </div>
+              ))
+            ) : (
+              <p className={style.Text3}>선택된 상품이 없습니다!</p>
+            )}
           </div>
+
+          {/* 수령인: 로그인 정보의 이름과 연결 */}
           <p className={style.Text2}>수령인</p>
           <input
             type="text"
-            placeholder="   이름"
+            placeholder="    이름"
             className={style.NameInput}
           />
+
+          {/* 배송지: 로그인 정보의 배송지와 연결 */}
+          <p className={style.Text2}>배송지</p>
+          <div className={style.PostCode}>
+            <input
+              type="text"
+              placeholder="    우편번호"
+              className={style.PostCodeInput}
+            />
+            <button className={style.SearchBtn}>SEARCH</button>
+          </div>
+          <input
+            type="text"
+            placeholder="    상세주소"
+            className={style.ADDInput}
+          />
+          <input
+            type="text"
+            placeholder="    배송 요청사항"
+            className={style.ADDInput}
+          />
+
+          {/* 연락처: 로그인 정보의 연락처와 연결 */}
+          <p className={style.Text2}>연락처</p>
+          <input
+            type="text"
+            placeholder="    '-' 기호를 제외한 숫자만 입력해 주세요"
+            className={style.PNInput}
+          />
+
+          {/* 총 상품금액: 선택한 상품 금액 합계 표시 */}
+          <div className={style.ItemPrice}>
+            <p>총 상품금액</p>
+            <p>000₩</p>
+          </div>
+
+          {/* 배송비 */}
+          <div className={style.ShipPrice}>
+            <p>배송비</p>
+            <p>000₩</p>
+          </div>
+
+          {/* 총 결제금액 */}
+          <div className={style.TotalPrice}>
+            <p>총 결제금액</p>
+            <p>000₩</p>
+          </div>
+
+          {/* 구매 버튼 */}
+          <button onClick={goPayment} className={style.BuyBtn}>
+            Buy Now!
+          </button>
         </div>
       </div>
     </div>

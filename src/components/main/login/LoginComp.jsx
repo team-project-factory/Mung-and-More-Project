@@ -45,7 +45,6 @@ export const LoginComp = () => {
     //로그인 성공시
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
     //로그인 정보 가져오기
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -68,7 +67,7 @@ export const LoginComp = () => {
           // ...
         }
     });
-    navigater('/');
+    navigater(-1);
   })
     .catch((error) => {
         setFail(false)
