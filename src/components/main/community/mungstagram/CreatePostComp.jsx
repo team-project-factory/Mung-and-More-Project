@@ -4,6 +4,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 import { ref,uploadBytes,getDownloadURL } from "firebase/storage";
+import '../instagramComp.css'
 
 export default function CreatePostComp() {
   const navigator = useNavigate();
@@ -144,32 +145,43 @@ export default function CreatePostComp() {
 
   return (
     <div>
-      title : 
-      <input 
-      style={{padding:"20px", marginTop:"50px"}}
-      type="text" value={inputTitle} onChange={handleTitleChange} />
-      sub title : 
-      <input 
-      style={{padding:"20px", marginTop:"50px"}}
-      type="text" value={inputSub} onChange={handleSubChange} />
-      location : 
-      <input 
-      style={{padding:"20px", marginTop:"50px"}}
-      type="text" value={inputLocation} onChange={handleLocationChange} />
-      hash tag : 
-      <input 
-      style={{padding:"20px", marginTop:"50px"}}
-      type="text" value={inputHash} onChange={handleHashChange} />
-      des : 
-      <input 
-      style={{padding:"20px", marginTop:"50px"}}
-      type="text" value={inputDes} onChange={handleDesChange} />
-      images : 
-      <input 
-      style={{padding:"20px", marginTop:"50px"}}
-      type="file" multiple={true} onChange={handleFile} />
+      <div className='create-container'>
+      <h2>New Post</h2>
+      <span>Title  </span>
+      <input
+      className='title-1'
+      placeholder='50자 이내로 입력'
+      type="text" value={inputTitle} onChange={handleTitleChange} /> <br />
 
-      <button onClick={addPost}>작성 완료</button>
+      <span>Sub Title  </span>
+      <input 
+      className='sub-title-1'
+      placeholder='50자 이내로 입력'
+      type="text" value={inputSub} onChange={handleSubChange} /> <br />
+
+      <span>Location  </span>
+      <input className='location-1'
+      placeholder='ex) 부산 / 서면 / 멍앤모어'
+      type="text" value={inputLocation} onChange={handleLocationChange} /> <br />
+
+      <span>Hashtag  </span>
+      <input 
+      placeholder='ex) #Mung #and #More'
+      className='hash-tag-1'
+      type="text" value={inputHash} onChange={handleHashChange} /> <br />
+
+      <span>Description  </span>
+      <textarea 
+      className='des-1'
+      type="text" value={inputDes} onChange={handleDesChange} /> <br />
+
+      <span>Pictures  </span>
+      <input 
+      className='img-1'
+      type="file" multiple={true} onChange={handleFile} /> <br />
+
+      </div>
+      <button className='complete-btn' onClick={addPost}>작성 완료</button>
     </div>
   );
 }
