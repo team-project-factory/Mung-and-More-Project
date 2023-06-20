@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination } from 'swiper';
+import 'swiper/css';
 
 export const TitleCircle = styled.div`
     position: relative;
