@@ -66,6 +66,15 @@ export const OrderBoxComp = () => {
     navigater("/payment");
   };
 
+  // 금액의 합 계산 함수
+  function calculateTotalPrice(checkedList) {
+    let totalPrice = 0;
+    checkedList.forEach((item) => {
+      totalPrice += item.price;
+    });
+    return totalPrice;
+  }
+
   return (
     <div className={style.OrderComp}>
       <div className={style.Layout}>
@@ -127,19 +136,24 @@ export const OrderBoxComp = () => {
           {/* 총 상품금액: 선택한 상품 금액 합계 표시 */}
           <div className={style.ItemPrice}>
             <p>총 상품금액</p>
-            <p>000₩</p>
+            <p>{calculateTotalPrice(checkedList)}₩</p>
           </div>
 
           {/* 배송비 */}
           <div className={style.ShipPrice}>
             <p>배송비</p>
-            <p>000₩</p>
+            <p>{calculateTotalPrice(checkedList) >= 50000 ? "0₩" : "2500₩"}</p>
           </div>
 
           {/* 총 결제금액 */}
           <div className={style.TotalPrice}>
             <p>총 결제금액</p>
-            <p>000₩</p>
+            <p>
+              {calculateTotalPrice(checkedList) >= 50000
+                ? calculateTotalPrice(checkedList)
+                : calculateTotalPrice(checkedList) + 2500}
+              ₩
+            </p>
           </div>
 
           {/* 구매 버튼 */}
