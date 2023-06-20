@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import 'swiper/css';
+import { keyframes } from 'styled-components';
+
 
 export const TitleCircle = styled.div`
     position: relative;
@@ -32,6 +34,131 @@ export const DogCircle = styled.div`
     right: 0;
     bottom: 20px;
 `
+export const WordContainer = styled.div`
+    perspective: 1000px;
+    font-weight: 800;
+    /* font-size: 500px; */
+    color: #fff;
+`;
+
+export const balance = keyframes`
+    0%, 100% {
+    transform: rotate(0deg);
+}
+
+    30%, 60% {
+    transform: rotate(-45deg);
+}
+`;
+
+export const shrinkjump = keyframes`
+    10%, 35% {
+		transform: scale(2, .2) translate(0, 0);
+	}
+	
+	45%, 50% {
+		transform: scale(1) translate(0, -150px);
+	}
+	
+	80% {
+		transform: scale(1) translate(0, 0);
+	}
+`;
+export const falling = keyframes`
+    12% {
+		transform: rotateX(240deg);
+	}
+	
+	24% {
+		transform: rotateX(150deg);
+	}
+	
+	36% {
+		transform: rotateX(200deg);
+	}
+	
+	48% {
+		transform: rotateX(175deg);
+	}
+	
+	60%, 85% {
+		transform: rotateX(180deg);
+	}
+	
+	100% {
+		transform: rotateX(0deg);
+	}
+`;
+export const rotate = keyframes`
+    20%, 80% {
+		transform: rotateY(180deg);
+	}
+	
+	100% {
+		transform: rotateY(360deg);
+	}
+`;
+export const toplong = keyframes`
+    10%, 40% {
+		transform: translateY(-48vh) scaleY(1);
+	}
+	
+	90% {
+		transform: translateY(-48vh) scaleY(4);
+	}
+`;
+
+export const WordSpan = styled.span`
+    cursor: pointer;
+    display: inline-block;
+    font-size: 260px;
+    user-select: none;
+    line-height: 1;
+
+    &.active:nth-child(1) {
+    animation: ${balance} 1.5s ease-out;
+    transform-origin: bottom left;
+    }
+    &.active:nth-child(2) {
+    animation: ${shrinkjump} 1s ease-in-out;
+	transform-origin: bottom center;
+    }
+    &.active:nth-child(3) {
+    animation: ${falling} 2s ease-out;
+	transform-origin: bottom center;
+    }
+    &.active:nth-child(4) {
+    animation: ${rotate} 1s ease-out;
+    }
+    &.active:nth-child(5) {
+        animation: ${toplong} 1.5s linear;
+    }
+    &.active:nth-child(6) {
+    animation: ${balance} 1.5s ease-out;
+    transform-origin: bottom left;
+    }
+    &.active:nth-child(7) {
+    animation: ${shrinkjump} 1.5s ease-out;
+    transform-origin: bottom left;
+    }
+    &.active:nth-child(8) {
+    animation: ${falling} 1.5s ease-out;
+    transform-origin: bottom left;
+    }
+    &.active:nth-child(9) {
+    animation: ${rotate} 1.5s ease-out;
+    transform-origin: bottom left;
+    }
+
+
+`;
+
+const FixedHeading = styled.h3`
+    position: fixed;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+`;
 export const MainTitle = styled.h2`
     padding: 50px 0;
     text-align: center;
@@ -53,12 +180,17 @@ export const ImageWrap = styled.div`
 export const Image = styled.div`
     width: 100%;
 `
+export const ProductName = styled.p`
+    font-size: 22px;
+    text-align: left;
+    padding: 20px 10px;
+`
 export const SwiperBtn = styled.div`
     display: flex;
-    max-width: 240px;
+    max-width: 220px;
     margin: 0 auto;
     gap: 60px;
-    margin-top: 50px;
+    margin-top: 30px;
 `
 export const GoBtn = styled.button`
     margin-top: 80px;
@@ -79,7 +211,7 @@ export const WalkWrap = styled.div`
     gap: 130px;
     justify-content: center;
     padding: 70px 0;
-` 
+`
 export const TextInfo = styled.div`
     display: block;
 `

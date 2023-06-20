@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MainTitle, Image, SwiperBtn, ImageImg, GoBtn,
-  ProductSlide} from './styles/MaincomStylecomp';
+  ProductSlide, ProductName} from './styles/MaincomStylecomp';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import 'swiper/css';
@@ -36,32 +36,32 @@ export const MainComp3 = () => {
 
   return (
     <div style={{ backgroundColor: '#CBECB5', height: '100vh', padding: '70px', textAlign: 'center' }}>
-      <MainTitle style={{marginBottom:'40px'}}>Let’s go shopping together!</MainTitle>
+      <MainTitle style={{marginBottom:'20px'}}>Let’s go shopping together!</MainTitle>
       <Swiper
         spaceBetween={20}
-        slidesPerView={3}
+        slidesPerView={4}
         loop={true}
         navigation={{ prevEl: '.swiper-prev', nextEl: '.swiper-next' }}
       >
         {product &&
         product.map((item) => (
           <SwiperSlide key={item.id} style={{ display: 'block', backgroundColor: 'transparent' }}>
-            <div style={{ width: '100%',height: '300px', backgroundColor: '#fff', borderRadius: '20px' }}>
+            <div style={{ width: '100%',height: '440px', backgroundColor: '#fff', borderRadius: '20px' }}>
               <img src={item.url} alt={item.name} style={{ maxWidth:'30%',height: 'auto' }} />
             </div>
-            <p>{item.name}</p>
+            <ProductName>{item.name}</ProductName>
           </SwiperSlide>
         ))}
         <SwiperBtn>
           <div className="swiper-prev">
-            <img src={'/img/prevbtn.png'} width={"90px"} style={{opacity:'90%'}} />
+            <img src={'/img/prevbtn.png'} width={"80px"} style={{opacity:'90%'}} />
           </div>
           <div className="swiper-next">
-            <img src={'/img/nextbtn.png'} width={"90px"} style={{opacity:'90%'}}/>
+            <img src={'/img/nextbtn.png'} width={"80px"} style={{opacity:'90%'}}/>
           </div>
         </SwiperBtn>
       </Swiper>
-      <GoBtn>
+      <GoBtn style={{marginTop:'90px'}}>
         Go Shopping
       </GoBtn>
     </div>
