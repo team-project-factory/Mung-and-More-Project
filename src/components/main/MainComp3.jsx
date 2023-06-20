@@ -11,6 +11,7 @@ import 'swiper/css/pagination';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, updateDoc, arrayUnion, arrayRemove, getDocs, collection, getDoc  } from "firebase/firestore";
 import { db, auth } from '../../data/firebase';
+import { Margin } from '@mui/icons-material';
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -42,11 +43,12 @@ export const MainComp3 = () => {
         loop={true}
         navigation={{ prevEl: '.swiper-prev', nextEl: '.swiper-next' }}
       >
-        {product && product.map((item) => (
-          <SwiperSlide key={item.id} style={{display:'block', backgroundColor: 'transparent'}}>
-            <Image style={{width:'100%', backgroundColor: '#fff', borderRadius: '20px'}}>
-              <img src={item.url} alt={item.name} style={{width:'100%'}}/>
-            </Image>
+        {product &&
+        product.map((item) => (
+          <SwiperSlide key={item.id} style={{ display: 'block', backgroundColor: 'transparent' }}>
+            <div style={{ width: '100%',height: '300px', backgroundColor: '#fff', borderRadius: '20px' }}>
+              <img src={item.url} alt={item.name} style={{ maxWidth:'30%',height: 'auto' }} />
+            </div>
             <p>{item.name}</p>
           </SwiperSlide>
         ))}
