@@ -20,12 +20,31 @@ export const CartBoxComp = () => {
   const navigater = useNavigate();
   const dispatch = useDispatch();
 
-  //user UID 담을 state
+  // user UID 담을 state
   const [userUID, setUserUID] = useState("");
-  //cartList 담을 state
+
+  // cartList 담을 state
   const [cartList, setCartList] = useState("");
 
   const [checkList, setCheckList] = useState("");
+
+  // 상품 수량 담을 state
+  const [itemAmount, setItemAmount] = useState({});
+
+  // 상품 수량 변경
+  const changeItemAmount = (item, amount) => {
+    const newAmount = item.num + amount;
+
+    // 최소값을 1로 설정
+    const finalAmount = newAmount > 1 ? newAmount : 1;
+
+    const newCart = cartList.map((cart) =>
+      cart.name === item.name ? { ...cart, num: finalAmount } : cart
+    );
+
+    dispatch(getCartData(newCart));
+    setCartList(newCart);
+  };
 
   //유저 데이터 들고오기
   const getUserData = () => {
@@ -69,23 +88,21 @@ export const CartBoxComp = () => {
   }, [userUID]);
 
   // 체크된 item들 checkList에 넣기
-  const onCheck = (check, item) => {
-    if (check) {
-      // redux에 check된 item 추가
-      dispatch(getCartData([...checkList, JSON.parse(item)]));
-      setCheckList([...checkList, JSON.parse(item)]);
-    } else {
-      // redux에 check 해제된 item 삭제
-      dispatch(
-        getCartData(checkList.filter((c) => c.name !== JSON.parse(item).name))
-      );
-      setCheckList(checkList.filter((c) => c.name !== JSON.parse(item).name));
-    }
+  const onCheck = (item) => {
+    // redux에 check된 item 추가
+    const newCart = cartList.map((cart) =>
+      cart.name === item.name ? { ...cart, check: !cart.check } : cart
+    );
+    dispatch(getCartData(newCart));
+    setCartList(newCart);
   };
 
-  if (checkList) {
-    console.log(checkList);
-  }
+  // 수량 변경시 금액 계산
+  const calculatePrice = (item) => {
+    console.log(itemAmount);
+    const amount = itemAmount[item.name] || item.num;
+    return item.price * amount;
+  };
 
   return (
     <div className={style.CartComp}>
@@ -97,24 +114,52 @@ export const CartBoxComp = () => {
               cartList.map((item) => (
                 <div className={style.EachList}>
                   <div className={style.Btns}>
+                    {/* 체크박스 */}
                     <input
                       type="checkbox"
-                      value={JSON.stringify(item)}
-                      onChange={(e) => {
-                        onCheck(e.target.checked, e.target.value);
+                      onChange={() => {
+                        onCheck(item);
                       }}
                       className={style.CheckBtn}
                     />
+
+                    {/* 삭제 버튼 (클릭했을 때 아이템 삭제되는 부분 추가) */}
                     <button className={style.DeleteBtn}>
                       <FontAwesomeIcon icon={faXmark} />
                     </button>
                   </div>
+
+                  {/* 상품 정보 표시 */}
                   <div className={style.CartList}>
                     <img src={item.url} className={style.itemImg} />
                     <div className={style.ItemName}>{item.name}</div>
                     <div className={style.Align}>
-                      <div>수량 버튼 공간</div>
-                      <div>PRICE: {item.price}₩</div>
+                      <div className={style.Amount}>
+                        {/* 수량 조절 버튼 */}
+                        <div className={style.AmountBtn}>
+                          {/* 마이너스 버튼 */}
+                          <button
+                            className={style.PMBtn}
+                            onClick={() => changeItemAmount(item, -1)}
+                          >
+                            -
+                          </button>
+
+                          {/* 수량 표시 */}
+                          <div className={style.AmountNum}>
+                            {itemAmount[item.name] || item.num}
+                          </div>
+
+                          {/* 플러스 버튼 */}
+                          <button
+                            className={style.PMBtn}
+                            onClick={() => changeItemAmount(item, 1)}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                      <div>PRICE: {calculatePrice(item)}₩</div>
                     </div>
                   </div>
                 </div>
