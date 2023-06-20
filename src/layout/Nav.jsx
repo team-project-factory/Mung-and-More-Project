@@ -70,7 +70,7 @@ export const Nav = () => {
         <InnerStyle>
           {/** 로고 */}
           <Link to={"/"}>
-            <LogoImage src={process.env.PUBLIC_URL + "./img/logo.svg"} />
+            <LogoImage src={process.env.PUBLIC_URL + "/img/logo.svg"} />
           </Link>
           {/** 메뉴 */}
           <MenuStyle>
