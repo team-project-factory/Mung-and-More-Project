@@ -1,6 +1,12 @@
 // 파이어베이스
 import { auth, db } from "../../../../data/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+} from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // 리액트
@@ -104,6 +110,19 @@ export const CartBoxComp = () => {
     return item.price * amount;
   };
 
+  const deleteBtn = (item) => {
+    const washingtonRef = doc(db, "users", userUID);
+    if (userUID) {
+      const deleteItem = async () => {
+        await updateDoc(washingtonRef, {
+          cartList: arrayRemove(item),
+        });
+      };
+      deleteItem();
+      getData();
+    }
+  };
+
   return (
     <div className={style.CartComp}>
       <div className={style.Layout}>
@@ -122,9 +141,13 @@ export const CartBoxComp = () => {
                       }}
                       className={style.CheckBtn}
                     />
-
                     {/* 삭제 버튼 (클릭했을 때 아이템 삭제되는 부분 추가) */}
-                    <button className={style.DeleteBtn}>
+                    <button
+                      className={style.DeleteBtn}
+                      onClick={() => {
+                        deleteBtn(item);
+                      }}
+                    >
                       <FontAwesomeIcon icon={faXmark} />
                     </button>
                   </div>

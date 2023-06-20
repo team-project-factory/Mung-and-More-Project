@@ -119,12 +119,19 @@ export const EditComp = () => {
               aria-describedby="modal-modal-description"
             >
               <ModalInfo>
-                <p>dididi</p>
+                {/* 우편번호 검색 결과를 모달 내부에 표시 */}
+                {isOpenPost && (
+                  <DaumPostCode
+                    style={PostCodeStyle}
+                    onComplete={onCompletePost}
+                  />
+                )}
               </ModalInfo>
             </ModalStyle>
           </AddWrap>
           <div ref={ref}></div>
         </StyledFieldset>
+        <div ref={ref}></div>
         {/* 상세주소 1 */}
         <StyledFieldset>
           <StyledLabel>상세주소</StyledLabel>
@@ -145,7 +152,6 @@ export const EditComp = () => {
               />
             </StyledWrapper>
           </AddWrap>
-          <div ref={ref}></div>
         </StyledFieldset>
         
         <div style={{textAlign:"right"}}>

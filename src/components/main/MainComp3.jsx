@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { MainTitle, Image, SwiperBtn, ImageImg, GoBtn } from './styles/MaincomStylecomp';
+import { MainTitle, Image, SwiperBtn, ImageImg, GoBtn,
+  ProductSlide} from './styles/MaincomStylecomp';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import 'swiper/css';
@@ -10,6 +11,7 @@ import 'swiper/css/pagination';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, updateDoc, arrayUnion, arrayRemove, getDocs, collection, getDoc  } from "firebase/firestore";
 import { db, auth } from '../../data/firebase';
+import { Margin } from '@mui/icons-material';
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -36,25 +38,26 @@ export const MainComp3 = () => {
     <div style={{ backgroundColor: '#CBECB5', height: '100vh', padding: '70px', textAlign: 'center' }}>
       <MainTitle style={{marginBottom:'40px'}}>Let’s go shopping together!</MainTitle>
       <Swiper
-        spaceBetween={10}
+        spaceBetween={20}
         slidesPerView={3}
         loop={true}
         navigation={{ prevEl: '.swiper-prev', nextEl: '.swiper-next' }}
       >
-        {product && product.map((item) => (
-          <SwiperSlide key={item.id}>
-            <Image>
-              <img src={item.url} alt={item.name} width={"100%"}/>
-              
-            </Image><p>{item.name}</p>
+        {product &&
+        product.map((item) => (
+          <SwiperSlide key={item.id} style={{ display: 'block', backgroundColor: 'transparent' }}>
+            <div style={{ width: '100%',height: '300px', backgroundColor: '#fff', borderRadius: '20px' }}>
+              <img src={item.url} alt={item.name} style={{ maxWidth:'30%',height: 'auto' }} />
+            </div>
+            <p>{item.name}</p>
           </SwiperSlide>
         ))}
         <SwiperBtn>
           <div className="swiper-prev">
-            <img src={'/img/prevbtn.png'} width={"90px"} />
+            <img src={'/img/prevbtn.png'} width={"90px"} style={{opacity:'90%'}} />
           </div>
           <div className="swiper-next">
-            <img src={'/img/nextbtn.png'} width={"90px"} />
+            <img src={'/img/nextbtn.png'} width={"90px"} style={{opacity:'90%'}}/>
           </div>
         </SwiperBtn>
       </Swiper>

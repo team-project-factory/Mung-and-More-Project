@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { db,auth,storage } from '../../../../data/firebase';
+import { db, auth,storage } from '../../../../data/firebase';
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc, arrayUnion, collection, addDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 import { ref,uploadBytes,getDownloadURL } from "firebase/storage";
 import '../instagramComp.css'
@@ -102,19 +102,34 @@ export default function CreatePostComp() {
 
   // firebase에 input에 작성한 내용 배열로 등록하기
   function addPost(){
-    const docRef = doc(db, "Post", uid);
-    
+    //const docRef = doc(db, "Post", uid);
     const setData = async() =>{
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-      } else {
-      await setDoc(doc(db, "Post", uid), {
-          postList : []
-          });
-      }
+      const imagesUrls = await uploadFiles();
+      const docRef = await addDoc(collection(db, "post"), {
+        post:{
+          uid : uid, // 게시물 ID 추가
+          title : inputTitle,
+          sub : inputSub,
+          hash : inputHash,
+          des : inputDes,
+          location : inputLocation,
+          date: `${year}-${month}-${day}`,
+          images : imagesUrls,
+          photo : photo // 프로필 이미지 담기
+        },
+      });
+      console.log("Document written with ID: ", docRef.id);
     }
-    
-    // firebase 등록 양식 설정
+    setData();
+    navigator("/community");
+    /*const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+    } else {
+    await setDoc(doc(db, "Post", uid), {
+        postList : []
+        });
+    }*/
+    /*// firebase 등록 양식 설정
     const upadteDoc = async() =>{
       
       // 이미지 파일 업로드
@@ -135,10 +150,7 @@ export default function CreatePostComp() {
         })
       });
       // addPost 실행하면 게시글작성 페이지에서 원래 페이지로 돌아가게끔 (비동기 안에서 처리)
-      navigator("/community");
-  }
-  setData();
-  upadteDoc();
+  }*/
 }
 
   

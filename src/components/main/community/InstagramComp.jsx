@@ -4,10 +4,11 @@ import style from './instagramComp.module.scss'
 import { faHeart, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 import { faComment, faPaperPlane, faBookmark } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { doc, updateDoc, arrayRemove, collection, getDocs } from 'firebase/firestore';
+import { doc, updateDoc, arrayRemove, collection, getDocs, deleteDoc } from 'firebase/firestore';
 import {auth, db,storage } from '../../../data/firebase';
 import { onAuthStateChanged,getAuth } from 'firebase/auth'
 import { ref,deleteObject} from 'firebase/storage'
+
 
 export default function InstagramComp() {
   const userInfor = JSON.parse(sessionStorage.getItem("user"));
@@ -15,7 +16,7 @@ export default function InstagramComp() {
   // 게시물 마다 독립적으로 관리하기 위해 객체 형태로 변경
   const [newList2, setNewList2] = useState([]);
   const [deleteId, setDeleteId] = useState('');
-
+  console.log(newList2);
 
 
   // 아래 getData에서 UID 값이 있을 때 실행하도록 하기 위해 작성
@@ -32,18 +33,18 @@ export default function InstagramComp() {
   // Post 컬렉션에서 문서이름을 UID로 해놓았기 때문에
   // "컬렉션이름",uid 형태로 집어넣어 사용
   const getData = async () => {
-    const querySnapshot = await getDocs(collection(db, "Post"));
+    const querySnapshot = await getDocs(collection(db, "post"));
     const newList = [];
     querySnapshot.forEach((doc) => {
-      const data = doc.data();
-      data.postList.forEach((post) => {
-        // getData 함수에서 게시물 데이터를 가져올 때 post 안에 imageIndex 상태 추가
-        post.imageIndex = 0; // 초기 슬라이드 인덱스 설정
-        newList.push(post);
+      const data = doc.data().post;
+      newList.push({
+        id : doc.id,
+        imageIndex : 0, 
+        ...data
       });
     });
     // newList2라는 상태 변수 사용 가능
-    setNewList2(newList)
+    setNewList2(newList);
   }
 
 
@@ -52,10 +53,13 @@ export default function InstagramComp() {
   }, [])
 
   // 게시글 삭제 함수
-  const deletePost = async (postId) => {
+  const deletePost = async (postUid,postId) => {
+    console.log(postUid);
+    console.log(postId);
     const post = newList2.find((post) => post.id === postId);
+    console.log(post);
     // 파일 삭제 함수 정의
-    if(uid===postId) {
+    if(uid===postUid) {
     const deleteFiles = async () => {
       // 각 파일에 대해 삭제 작업 수행
       const deletePromises = post.images.map((imageUrl) => {
@@ -74,9 +78,7 @@ export default function InstagramComp() {
     try {
       // firebase에 있는 모양을 유지하기 위해 이미지 옮기는데 사용한 imageIndex를 삭제
       delete post.imageIndex
-      await updateDoc(doc(db, "Post", uid), {
-        postList: arrayRemove(post)
-      });
+      await deleteDoc(doc(db, "post", postId));
       await deleteFiles(); // 파일 삭제 함수 호출
       console.log("사진 파일이 삭제되었습니다.");
     } catch (error) {
@@ -89,9 +91,9 @@ export default function InstagramComp() {
 }
 
   // 게시글 삭제 실행 함수.
-  const handleDeletePost = (postId) => {
+  const handleDeletePost = (postUid,postId) => {
     getData()
-    deletePost(postId);
+    deletePost(postUid,postId);
   }
 
   
@@ -121,13 +123,7 @@ export default function InstagramComp() {
   
 
   return (
-    <div className={style.mungsList}>
-      <div className={style.mungsList_menu}>
-        메뉴출력될곳
-      </div>
-      <div className={style.mungsList_news}>
-        <div className='body'>
-          <div>
+          <div className={style.mungsList_news}>
             {newList2 && newList2.map((post, index) => (
               <div key={index}>
                 <div className='card'>
@@ -147,11 +143,11 @@ export default function InstagramComp() {
                       <FontAwesomeIcon 
                         icon={faEllipsisVertical} size='2xl' className='dot'
                       />
-                      {deleteId === post.id && (
+                      {uid === post.uid && (
                         <button
                           style={{padding:'10px'}}
                           className='delete-btn'
-                          onClick={()=>handleDeletePost(post.id)}
+                          onClick={()=>handleDeletePost(post.uid, post.id)}
                         >
                           삭 제
                         </button>
@@ -189,6 +185,7 @@ export default function InstagramComp() {
                     <p>{post.sub}</p> 
                     <div>{post.des}</div>
                     <span>{post.hash}</span>
+                    {post.id}
                   </div>
 
                   {/* 작성란 */}
@@ -196,8 +193,5 @@ export default function InstagramComp() {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-    </div>
   )
 }
