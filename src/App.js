@@ -18,6 +18,7 @@ import { Notice } from "./pages/Main/Notice";
 import { MungsNews } from "./pages/Main/MungsNews";
 import CreatePost from "./pages/Main/CreatePost";
 import { MungsNewsContents } from "./components/main/community/mungsNews/MungsNewsContents";
+import InstagramComp from "./components/main/community/InstagramComp";
 
 function App() {
   return (
@@ -41,7 +42,9 @@ function App() {
         </Route>
         <Route path="/location" element={<Location />} />
         <Route path="/notice" element={<Notice />} />
-        <Route path="/community" element={<Community />}/>   
+        <Route path="/community" element={<Community />}>
+          <Route path="/community/:id" element={<InstagramComp/>}/>
+        </Route>
         <Route path="/mungsnews" element={<MungsNews/>}>
           <Route path="/mungsnews/:name" element={<MungsNewsContents/>} />
         </Route>

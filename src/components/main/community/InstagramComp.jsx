@@ -4,19 +4,29 @@ import style from './instagramComp.module.scss'
 import { faHeart, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 import { faComment, faPaperPlane, faBookmark } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { doc, updateDoc, arrayRemove, collection, getDocs, deleteDoc } from 'firebase/firestore';
+import { doc, updateDoc, arrayRemove, collection, getDocs, deleteDoc,arrayUnion } from 'firebase/firestore';
 import {auth, db,storage } from '../../../data/firebase';
 import { onAuthStateChanged,getAuth } from 'firebase/auth'
 import { ref,deleteObject} from 'firebase/storage'
+import { useNavigate, useParams } from 'react-router-dom'
 
 
 export default function InstagramComp() {
+  const navigater = useNavigate();
+  const param = useParams();
   const userInfor = JSON.parse(sessionStorage.getItem("user"));
   const [uid, setUid] = useState('');
   // 게시물 마다 독립적으로 관리하기 위해 객체 형태로 변경
   const [newList2, setNewList2] = useState([]);
   const [deleteId, setDeleteId] = useState('');
-  console.log(newList2);
+
+  //유저이름
+  const [userName, setUserName] = useState("");
+  //photo
+  const [userPhoto, setUserPhoto] = useState("");
+  //댓글작성
+  const [input, setinput] = useState("");
+
 
 
   // 아래 getData에서 UID 값이 있을 때 실행하도록 하기 위해 작성
@@ -24,7 +34,11 @@ export default function InstagramComp() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
+        const photo = user.photoURL;
+        const displayName = user.displayName;
         setUid(uid);
+        setUserPhoto(photo);
+        setUserName(displayName);
       } else {
       }
     });
@@ -44,13 +58,40 @@ export default function InstagramComp() {
       });
     });
     // newList2라는 상태 변수 사용 가능
-    setNewList2(newList);
+    const filter = newList.filter((n)=>(
+      n.id === param.id
+    ))
+    setNewList2(filter);
   }
 
 
   useEffect(() => {
     getData();
-  }, [])
+  }, [param]);
+
+  // 댓글 달기
+  const setData = (id) => {
+    const washingtonRef = doc(db, "post", id);
+    const setComment = async () => {
+      await updateDoc(washingtonRef, {
+        comment: arrayUnion({
+          id: id,
+          uid: uid,
+          comment: input,
+          photo: userPhoto,
+          name: userName,
+        }),
+      });
+    };
+    if (uid) {
+      setComment();
+      setinput("");
+      getData();
+    } else {
+      alert("로그인해주세요");
+      navigater("/login");
+    }
+  };
 
   // 게시글 삭제 함수
   const deletePost = async (postUid,postId) => {
@@ -131,7 +172,7 @@ export default function InstagramComp() {
                     <div className='userDetails'>
                         
                         <div className='logo'>
-                          <img src={post.photo} alt="Selected" style={{width:"100%", height:"100%"}}/>
+                          {post.photo ? <img src={post.photo} alt="Selected" style={{width:"100%", height:"100%"}}/>: ''}
                         </div>
                         
                       <h2 className='insta-title'> {post.title} <br /><span className='insta-sub'> {post.location} </span></h2>
@@ -192,6 +233,34 @@ export default function InstagramComp() {
                 </div>
               </div>
             ))}
+            <ul className={style.commentInput}>
+              <div
+                style={
+                  userPhoto
+                    ? { backgroundImage: `url(${userPhoto})` }
+                    : { backgroundImage: "" }
+                }
+              ></div>
+              <li>
+                <input
+                  type="text"
+                  placeholder={`'이름'으로 댓글달기...`}
+                  value={input}
+                  onChange={(e) => {
+                    setinput(e.target.value);
+                  }}
+                  required
+                />
+                <button
+                  onClick={() => {
+                    setData(param.id);
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
+                  게시
+                </button>
+              </li>
+            </ul>
           </div>
   )
 }
