@@ -14,7 +14,7 @@ import style from "./orderBoxComp.module.scss";
 
 export const OrderBoxComp = () => {
   const navigater = useNavigate();
-  const checkedList = useSelector((state) => state.cartList);
+  const cartList = useSelector((state) => state.cartList);
 
   //user UID 담을 state
   const [userUID, setUserUID] = useState("");
@@ -60,17 +60,25 @@ export const OrderBoxComp = () => {
     }
   }, [userUID]);
 
+  const checkedList = cartList.filter((cart) => cart.check);
+
   console.log(checkedList);
 
   const goPayment = () => {
     navigater("/payment");
   };
 
-  // 금액의 합 계산 함수
+  // 수량 변경시 금액 계산
+  const calculatePrice = (item) => {
+    const amount = checkedList[item.name] || item.num;
+    return item.price * amount;
+  };
+
+  // 총 상품금액 계산 함수
   function calculateTotalPrice(checkedList) {
     let totalPrice = 0;
     checkedList.forEach((item) => {
-      totalPrice += item.price;
+      totalPrice += calculatePrice(item);
     });
     return totalPrice;
   }
@@ -88,7 +96,7 @@ export const OrderBoxComp = () => {
               checkedList.map((item, index) => (
                 <div className={style.CheckedItem} key={index}>
                   <div>{item.name}</div>
-                  <div>{item.price}₩</div>
+                  <div>{calculatePrice(item)}₩</div>
                 </div>
               ))
             ) : (
