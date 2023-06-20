@@ -15,7 +15,6 @@ import { Information } from "./pages/Main/Shopping/Information";
 import { Location } from "./pages/Main/Location";
 import { Community } from "./pages/Main/Community";
 import { Notice } from "./pages/Main/Notice";
-import { Mungstagram } from "./pages/Main/Mungstagram";
 import { MungsNews } from "./pages/Main/MungsNews";
 import CreatePost from "./pages/Main/CreatePost";
 import { MungsNewsContents } from "./components/main/community/mungsNews/MungsNewsContents";
@@ -41,9 +40,8 @@ function App() {
           <Route path="/shopping/:name" element={<Information />} />
         </Route>
         <Route path="/location" element={<Location />} />
-        <Route path="/community" element={<Community />} />
         <Route path="/notice" element={<Notice />} />
-        <Route path="/mungstagram" element={<Mungstagram/>}/>
+        <Route path="/community" element={<Community />}/>   
         <Route path="/mungsnews" element={<MungsNews/>}>
           <Route path="/mungsnews/:name" element={<MungsNewsContents/>} />
         </Route>
