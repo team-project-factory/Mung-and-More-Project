@@ -4,6 +4,8 @@ import React, { useEffect,useState } from 'react'
 import {doc,getDoc} from 'firebase/firestore';
 import { db } from '../../../data/firebase';
 
+//css
+import style from './loactioncomp.module.scss'
 
 
 // script로 kakao map을 들고오면 window 전역 객체에 들어가기 떄문에
@@ -240,85 +242,87 @@ export const LocationComp = () => {
 
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'left' }}>
-      <div id="map" style={{ width: '500px', height: '400px' ,margin:'10%' }}></div>
-      <div style={{marginTop:'5%', marginLeft:'5%' }}>
-        <button id="pathMenu" onClick={() => changeMarker('path',map)}>
-          산책로
-        </button>
-        <button id="hospitalMenu" onClick={() => changeMarker('hospital',map)}>
-          동물병원
-        </button>
-        <button id="cafeMenu" onClick={() => changeMarker('cafe',map)}>
-          애견카페
-        </button>
-      </div>
-      <div style={{margin : '10%',marginLeft:'-10%',
-      height:'400px', width:'400px', marginBottom:'10%'}}>
-      {/* 아래 내용은 중첩 삼항 연산자를 사용하여 작성
-      path와 index값을 둘다 충족해야 클릭한 해당 항목(div)만 출력 
-      path는 있지만 index 값이 문자열이 아닌 나머지일 때 (숫자) 전체 내용(ul)을 출력,*/}
-      {type === 'path' && (index !== "" ? (
-      <div> 
-        <h3>{pathes[index].name}</h3>
-        <br />
-        <p>{pathes[index].content}</p>
-        <a href={pathes[index].url} target='blank'>{pathes[index].place}</a>
-      </div>) : (
-      <ul>
-        {pathes && pathes.map((path,index) => (
-          <li key={index}>
-            <h3>{path.name}</h3>
-            <br />
-            <p>{path.content}</p>
-            <a href={path.url}target='blank'>{path.place}</a>
-          </li>
-        ))}
-      </ul>)
-      )}
-
-      
-      {type === 'hospital' && (index !== "" ? (
-        <div>
-          <h3>{hospitals[index].name}</h3>
-          <br />
-          <p>{hospitals[index].content}</p>
-          <a href={hospitals[index].url} target='blank'>{hospitals[index].place}</a>
+    <div className={style.locationLayout}>
+        <div className={style.loaction_menu}>
+          <button id="pathMenu" onClick={() => changeMarker('path',map)}>
+            산책로
+          </button>
+          <button id="hospitalMenu" onClick={() => changeMarker('hospital',map)}>
+            동물병원
+          </button>
+          <button id="cafeMenu" onClick={() => changeMarker('cafe',map)}>
+            애견카페
+          </button>
         </div>
-      ) : (
-      <ul>
-        {hospitals && hospitals.map((hospital,index) => (
-          <li key={index}>
-            <h3>{hospital.name}</h3>
-            <br />
-            <p>{hospital.content}</p>
-            <a href={hospital.url}target='blank'>{hospital.place}</a>
-          </li>
-        ))}
-      </ul>)
-      )}
-
-
-      {type === 'cafe' && (index !== "" ? (
-        <div>
-          <h3>{cafes[index].name}</h3>
+      <div style={{ display: 'flex', justifyContent: 'left' }}>
+        <div id="map" style={{ width: '500px', height: '400px' ,margin:'10%' }}></div>
+        <div style={{margin : '10%',marginLeft:'-10%',
+        height:'400px', width:'400px', marginBottom:'10%'}}>
+        {/* 아래 내용은 중첩 삼항 연산자를 사용하여 작성
+        path와 index값을 둘다 충족해야 클릭한 해당 항목(div)만 출력 
+        path는 있지만 index 값이 문자열이 아닌 나머지일 때 (숫자) 전체 내용(ul)을 출력,*/}
+        {type === 'path' && (index !== "" ? (
+        <div> 
+          <h3>{pathes[index].name}</h3>
           <br />
-          <p>{cafes[index].content}</p>
-          <a href={cafes[index].url} target='blank'>{cafes[index].place}</a>
-        </div>
-      ) : (
-      <ul>
-        {cafes && cafes.map((cafe,index) => (
-          <li key={index}>
-            <h3>{cafe.name}</h3>
-            <br />
-            <p>{cafe.content}</p>
-            <a href={cafe.url}target='blank'>{cafe.place}</a>
-          </li>
-        ))}
-      </ul>)
-      )}
+          <p>{pathes[index].content}</p>
+          <a href={pathes[index].url} target='blank'>{pathes[index].place}</a>
+        </div>) : (
+        <ul>
+          {pathes && pathes.map((path,index) => (
+            <li key={index}>
+              <h3>{path.name}</h3>
+              <br />
+              <p>{path.content}</p>
+              <a href={path.url}target='blank'>{path.place}</a>
+            </li>
+          ))}
+        </ul>)
+        )}
 
+        
+        {type === 'hospital' && (index !== "" ? (
+          <div>
+            <h3>{hospitals[index].name}</h3>
+            <br />
+            <p>{hospitals[index].content}</p>
+            <a href={hospitals[index].url} target='blank'>{hospitals[index].place}</a>
+          </div>
+        ) : (
+        <ul>
+          {hospitals && hospitals.map((hospital,index) => (
+            <li key={index}>
+              <h3>{hospital.name}</h3>
+              <br />
+              <p>{hospital.content}</p>
+              <a href={hospital.url}target='blank'>{hospital.place}</a>
+            </li>
+          ))}
+        </ul>)
+        )}
+
+
+        {type === 'cafe' && (index !== "" ? (
+          <div>
+            <h3>{cafes[index].name}</h3>
+            <br />
+            <p>{cafes[index].content}</p>
+            <a href={cafes[index].url} target='blank'>{cafes[index].place}</a>
+          </div>
+        ) : (
+        <ul>
+          {cafes && cafes.map((cafe,index) => (
+            <li key={index}>
+              <h3>{cafe.name}</h3>
+              <br />
+              <p>{cafe.content}</p>
+              <a href={cafe.url}target='blank'>{cafe.place}</a>
+            </li>
+          ))}
+        </ul>)
+        )}
+
+        </div>
       </div>
     </div>
   );

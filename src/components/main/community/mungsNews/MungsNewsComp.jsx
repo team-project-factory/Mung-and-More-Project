@@ -45,7 +45,7 @@ export const MungsNewsComp = () => {
             </li>
           ))}
       </ul>
-      <Outlet context={news}/>
+      <Outlet/>
     </div>
   )
 }
