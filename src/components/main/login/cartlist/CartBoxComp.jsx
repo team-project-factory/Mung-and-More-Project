@@ -21,6 +21,7 @@ import style from "./cartBoxComp.module.scss";
 // font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faPaw } from "@fortawesome/free-solid-svg-icons";
 
 export const CartBoxComp = () => {
   const navigater = useNavigate();
@@ -129,7 +130,12 @@ export const CartBoxComp = () => {
         <div className={style.CartBox}>
           <h1>Cart</h1>
           <div className={style.ListSet}>
-            {cartList &&
+            {cartList.length === 0 ? (
+              <div className={style.EmptyCart}>
+                장바구니에 담긴 물건이 없다멍 <FontAwesomeIcon icon={faPaw} />
+              </div>
+            ) : (
+              cartList &&
               cartList.map((item) => (
                 <div className={style.EachList}>
                   <div className={style.Btns}>
@@ -186,7 +192,8 @@ export const CartBoxComp = () => {
                     </div>
                   </div>
                 </div>
-              ))}
+              ))
+            )}
           </div>
         </div>
       </div>

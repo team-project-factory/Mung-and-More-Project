@@ -105,8 +105,7 @@ export const PaymentComp = () => {
             <div className={style.Element}>
               배송지{" "}
               <div style={{ color: "black" }}>
-                {postcode}
-                {address}
+                {postcode} {address}
               </div>
             </div>
             <div className={style.Element}>
