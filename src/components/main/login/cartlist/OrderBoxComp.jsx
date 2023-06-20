@@ -4,7 +4,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // React
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartData } from "./CartListSlice";
 import { json, useNavigate } from "react-router-dom";
@@ -12,9 +12,23 @@ import { json, useNavigate } from "react-router-dom";
 // scss
 import style from "./orderBoxComp.module.scss";
 
+// 우편번호 검색
+import DaumPostCode from "react-daum-postcode";
+import ReactDaumPost from "react-daumpost-hook";
+
 export const OrderBoxComp = () => {
   const navigater = useNavigate();
+
+  const [inputName, setInputName] = useState("");
+  const [inputPhoneNumber, setInputPhoneNumber] = useState("");
+  const [inputAddress, setInputAddress] = useState("");
+  const [inputDeliveryRequest, setInputDeliveryRequest] = useState("");
+
   const cartList = useSelector((state) => state.cartList);
+
+  const [addressDetail, setAddressDetail] = useState("");
+  const [isOpenPost, setIsOpenPost] = useState(false);
+  const ref = useRef(null);
 
   //user UID 담을 state
   const [userUID, setUserUID] = useState("");
@@ -65,7 +79,15 @@ export const OrderBoxComp = () => {
   console.log(checkedList);
 
   const goPayment = () => {
-    navigater("/payment");
+    navigater("/payment", {
+      state: {
+        name: inputName,
+        phoneNumber: inputPhoneNumber,
+        postcode: addressDetail,
+        address: inputAddress,
+        deliveryRequest: inputDeliveryRequest,
+      },
+    });
   };
 
   // 수량 변경시 금액 계산
@@ -82,6 +104,40 @@ export const OrderBoxComp = () => {
     });
     return totalPrice;
   }
+
+  // 우편번호 검색
+  const onChangeOpenPost = () => {
+    setIsOpenPost((prevIsOpenPost) => !prevIsOpenPost);
+  };
+
+  const onCompletePost = (data) => {
+    let fullAddr = data.address;
+    let extraAddr = "";
+
+    if (data.addressType === "R") {
+      if (data.bname !== "") {
+        extraAddr += data.bname;
+      }
+      if (data.buildingName !== "") {
+        extraAddr +=
+          extraAddr !== "" ? `, ${data.buildingName}` : data.buildingName;
+      }
+      fullAddr += extraAddr !== "" ? ` (${extraAddr})` : "";
+    }
+
+    setAddressDetail(fullAddr);
+    setIsOpenPost(false);
+
+    if (ref.current) {
+      ref.current.style.display = "none";
+    }
+  };
+
+  const postConfig = {
+    ref: ref,
+    onComplete: onCompletePost,
+  };
+  const postCode = ReactDaumPost(postConfig);
 
   return (
     <div className={style.OrderComp}>
@@ -108,37 +164,53 @@ export const OrderBoxComp = () => {
           <p className={style.Text2}>수령인</p>
           <input
             type="text"
-            placeholder="    이름"
+            placeholder="이름"
             className={style.NameInput}
+            value={inputName}
+            onChange={(e) => setInputName(e.target.value)}
           />
 
           {/* 배송지: 로그인 정보의 배송지와 연결 */}
           <p className={style.Text2}>배송지</p>
           <div className={style.PostCode}>
-            <input
-              type="text"
-              placeholder="    우편번호"
-              className={style.PostCodeInput}
-            />
-            <button className={style.SearchBtn}>SEARCH</button>
+            <div className={style.PostCodeElement}>
+              <input
+                type="text"
+                placeholder="우편번호"
+                className={style.PostCodeInput}
+                value={addressDetail}
+                onChange={(e) => setAddressDetail(e.target.value)}
+              />
+              <button className={style.SearchBtn} onClick={postCode}>
+                SEARCH
+              </button>
+            </div>
+            {/* 우편번호 검색 박스가 나올 공간 */}
+            <div ref={ref}></div>
           </div>
           <input
             type="text"
-            placeholder="    상세주소"
+            placeholder="상세주소"
             className={style.ADDInput}
+            value={inputAddress}
+            onChange={(e) => setInputAddress(e.target.value)}
           />
           <input
             type="text"
-            placeholder="    배송 요청사항"
+            placeholder="배송 요청사항"
             className={style.ADDInput}
+            value={inputDeliveryRequest}
+            onChange={(e) => setInputDeliveryRequest(e.target.value)}
           />
 
           {/* 연락처: 로그인 정보의 연락처와 연결 */}
           <p className={style.Text2}>연락처</p>
           <input
             type="text"
-            placeholder="    '-' 기호를 제외한 숫자만 입력해 주세요"
+            placeholder="'-' 기호를 제외한 숫자만 입력해 주세요"
             className={style.PNInput}
+            value={inputPhoneNumber}
+            onChange={(e) => setInputPhoneNumber(e.target.value)}
           />
 
           {/* 총 상품금액: 선택한 상품 금액 합계 표시 */}

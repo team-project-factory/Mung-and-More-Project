@@ -14,7 +14,7 @@
 .OrderBox {
   padding: 50px;
   width: 400px;
-  height: 866px;
+  min-height: 866px;
   border-radius: 15px;
   background-color: white;
   display: flex;
@@ -64,10 +64,12 @@
   border-radius: 7px;
   background-color: #f9fafb;
   height: 45px;
+  font-size: 1rem;
+  padding-left: 16px;
 }
 
 .NameInput::placeholder {
-  color: black;
+  color: rgba(0, 0, 0, 0.486);
   font-size: 1rem;
 }
 
@@ -77,17 +79,24 @@
   background-color: #f9fafb;
   height: 45px;
   width: 300px;
+  font-size: 1rem;
+  padding-left: 16px;
 }
 
 .PostCodeInput::placeholder {
-  color: black;
+  color: rgba(0, 0, 0, 0.486);
   font-size: 1rem;
 }
 
 .PostCode {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 400px;
+}
+
+.PostCodeElement {
+  display: flex;
 }
 
 .SearchBtn {
@@ -108,10 +117,12 @@
   border-radius: 7px;
   background-color: #f9fafb;
   height: 45px;
+  font-size: 1rem;
+  padding-left: 16px;
 }
 
 .ADDInput::placeholder {
-  color: black;
+  color: rgba(0, 0, 0, 0.486);
   font-size: 1rem;
 }
 
@@ -120,10 +131,12 @@
   border-radius: 7px;
   background-color: #f9fafb;
   height: 45px;
+  font-size: 1rem;
+  padding-left: 16px;
 }
 
 .PNInput::placeholder {
-  color: black;
+  color: rgba(0, 0, 0, 0.486);
   font-size: 1rem;
 }
 
