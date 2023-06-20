@@ -79,6 +79,26 @@ export const OrderBoxComp = () => {
   console.log(checkedList);
 
   const goPayment = () => {
+    if (checkedList.length === 0) {
+      alert("상품을 선택해 주세요!");
+      return;
+    }
+
+    if (inputName.trim() === "") {
+      alert("수령하실 분의 성함을 입력해 주세요!");
+      return;
+    }
+
+    if (addressDetail.trim() === "") {
+      alert("배송지 정보를 입력해 주세요!");
+      return;
+    }
+
+    if (inputPhoneNumber.trim() === "") {
+      alert("연락처를 입력해 주세요!");
+      return;
+    }
+
     navigater("/payment", {
       state: {
         name: inputName,
@@ -197,7 +217,7 @@ export const OrderBoxComp = () => {
           />
           <input
             type="text"
-            placeholder="배송 요청사항"
+            placeholder="배송 요청사항 (선택)"
             className={style.ADDInput}
             value={inputDeliveryRequest}
             onChange={(e) => setInputDeliveryRequest(e.target.value)}
