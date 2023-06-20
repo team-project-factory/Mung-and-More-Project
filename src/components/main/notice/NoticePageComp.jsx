@@ -23,13 +23,13 @@ export const NoticePageComp = () => {
   // Notice page Navbar 전체를 감싸는 div
   const NoticeNav = styled.div`
     font-family: "Montserrat", sans-serif;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 1.4rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 80px;
-    background-color: #ebebeb;
+    height: 86px;
+    background-color: #F4F4F4;
     border-radius: 80px;
     width: 880px;
     margin: auto;
@@ -51,7 +51,7 @@ export const NoticePageComp = () => {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 0 110px;
+    padding: 0 112px;
     margin: auto;
     width: 65px;
 
@@ -64,7 +64,7 @@ export const NoticePageComp = () => {
   const ActiveCategory = styled(Category)`
     margin: auto;
     background-color: white;
-    height: 65px;
+    height: 78px;
     border-radius: 85px;
     width: 65px;
     text-align: center;

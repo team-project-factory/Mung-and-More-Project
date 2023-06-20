@@ -12,7 +12,7 @@ export default function FAQListComp() {
     justify-content: space-between;
     margin: auto;
     font-family: "Montserrat", "SUITE-Regular";
-    margin-top: 50px;
+    margin-top: 80px;
     font-size: 1.25rem;
   `;
 

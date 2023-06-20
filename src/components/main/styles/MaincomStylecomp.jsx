@@ -46,7 +46,7 @@ export const Main2Subtitld = styled.p`
 export const ImageWrap = styled.div`
     max-width: 1500px;
     position: relative;
-    top: 12%;
+    top: 8%;
     margin: 0 auto;
     border-radius: 500px;
 `

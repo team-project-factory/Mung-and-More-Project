@@ -12,8 +12,8 @@ export const MainComp4 = () => {
         <TextInfo>
           <MainInfoTitle>Do you want <br></br> to go for a walk?</MainInfoTitle>
           <Main2Subtitld style={{textAlign:'left'}}>
-            산책로, 동물병원, 애견동반 카페까지 <br></br> 
-            한번에 찾는게 가능한 페이지임을 강조하는 문구
+            산책로, 동물병원, 애견동반 카페까지! <br></br> 
+            모든것을 멍앤뭉에서 찾아보세요.
           </Main2Subtitld>
           <GoBtn>
             Find a place

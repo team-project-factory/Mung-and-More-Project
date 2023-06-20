@@ -8,8 +8,8 @@ export const MainComp5 = () => {
         <TextInfo>
         <MainInfoTitle>Everything<br></br>about dogs!</MainInfoTitle>
           <Main2Subtitld style={{textAlign:'left'}}>
-          멍앤몰 사이트에서만 가능한  내 강아지 자랑하기,<br></br>
-          강아지에 관한 몰랐던 사실들을 확인 가능하다는 문구
+          멍앤몰에서만 가능한 특별한 경험을 만나보세요!<br></br>
+          자랑스러운 강아지를 공유하고, 강아지에 관한 놀라운 <br></br>사실들을 확인할 수 있습니다. 
           </Main2Subtitld>
           <GoBtn>
             Going to share
