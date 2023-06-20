@@ -20,6 +20,9 @@ export default function InstagramComp() {
   const [newList2, setNewList2] = useState([]);
   const [deleteId, setDeleteId] = useState('');
 
+  //댓글 리스트
+  const [commentList, setCommentList] = useState([]);
+
   //유저이름
   const [userName, setUserName] = useState("");
   //photo
@@ -48,6 +51,7 @@ export default function InstagramComp() {
   // "컬렉션이름",uid 형태로 집어넣어 사용
   const getData = async () => {
     const querySnapshot = await getDocs(collection(db, "post"));
+    const commentList2 = [];
     const newList = [];
     querySnapshot.forEach((doc) => {
       const data = doc.data().post;
@@ -56,12 +60,17 @@ export default function InstagramComp() {
         imageIndex : 0, 
         ...data
       });
+      //댓글
+      const comment = doc.data().comment;
+      if (comment) {
+        commentList2.push(...comment);
+      }
     });
     // newList2라는 상태 변수 사용 가능
-    const filter = newList.filter((n)=>(
-      n.id === param.id
-    ))
+    const filter = newList.filter((n)=>(n.id === param.id))
     setNewList2(filter);
+    const newCommentList = commentList2.filter((c) => (c.id === param.id));
+    setCommentList(newCommentList);
   }
 
 
@@ -84,12 +93,30 @@ export default function InstagramComp() {
       });
     };
     if (uid) {
+      alert('댓글 작성 완료!');
       setComment();
       setinput("");
       getData();
     } else {
       alert("로그인해주세요");
       navigater("/login");
+    }
+  };
+
+  //댓글 삭제버튼
+  const deleteBtn = (comment) => {
+    const washingtonRef = doc(db, "post", param.id);
+    const deleteComment = async () => {
+      await updateDoc(washingtonRef, {
+        comment: arrayRemove(comment),
+      });
+    };
+    if (comment.uid === uid) {
+      alert("삭제!");
+      deleteComment();
+      getData();
+    } else {
+      alert("아이디 다르다!");
     }
   };
 
@@ -160,7 +187,7 @@ export default function InstagramComp() {
       setNewList2([...newList2]);
     }
   }
-  
+
   
 
   return (
@@ -233,6 +260,26 @@ export default function InstagramComp() {
                 </div>
               </div>
             ))}
+            <ul className={style.commentBox}>
+              {commentList &&
+                commentList.map((c) => (
+                  <li>
+                    <div
+                      className={style.imgBox}
+                      style={{ backgroundImage: `url(${c.photo})` }}
+                    ></div>
+                    <p className={style.userBox}>{c.name}</p>
+                    <p className={style.userComment}>{c.comment}</p>
+                    <span
+                      onClick={() => {
+                        deleteBtn(c);
+                      }}
+                    >
+                      삭제
+                    </span>
+                  </li>
+                ))}
+            </ul>
             <ul className={style.commentInput}>
               <div
                 style={
