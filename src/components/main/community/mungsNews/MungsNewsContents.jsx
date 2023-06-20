@@ -83,7 +83,7 @@ export const MungsNewsContents = () => {
   useEffect(() => {
     getData();
   }, [Id]);
-
+  // 댓글 달기
   const setData = (id) => {
     const washingtonRef = doc(db, "News", id);
     const setComment = async () => {

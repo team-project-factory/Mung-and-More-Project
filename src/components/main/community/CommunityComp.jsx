@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import InstagramComp from './InstagramComp'
-import { Link } from 'react-router-dom'
+import { Link, NavLink, Outlet } from 'react-router-dom'
 import './instagramComp.css'
 
 
@@ -31,7 +31,10 @@ export const CommunityComp = () => {
     const newList = [];
     querySnapshot.forEach((doc) => {
       const data = doc.data().post;
-      newList.push(data);
+      newList.push({
+        id : doc.id,
+        ...data
+      });
     });
     // newList2라는 상태 변수 사용 가능
     setNewList2(newList);
@@ -65,21 +68,26 @@ export const CommunityComp = () => {
       <div className={style.mungsList}>
         <ul className={style.mungsList_menu}>
           {newList2 && newList2.map((l)=>(
-            <li>{l.title}</li>
+            <li>
+              <NavLink to={`/community/${l.id}`}
+              className={({ isActive })=>(isActive ? style.active : '' )}
+              >{l.title}</NavLink>
+              </li>
           ))}
         </ul>
-        <InstagramComp/>
-      </div>
+        <Outlet/>
+        <div style={{position:'relative',minHeight: '700px',}}>
           {userInfor &&
-                <Link 
-                to={"/createpostcomp"} 
-                className='create-post'
-                >
                   <div className='write-box'>
-                  <img className='write' src="./img/pen.png" />
+                    <Link 
+                      to={"/createpostcomp"} 
+                        className='create-post'>
+                    <img className='write' src={process.env.PUBLIC_URL + "/img/pen.png"} />
+                    </Link>
                   </div>
-                </Link>
-              }
+                }
+        </div>
+      </div>
     </div>
   )
 }
