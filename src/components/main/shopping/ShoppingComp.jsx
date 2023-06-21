@@ -41,8 +41,7 @@ export const ShoppingComp = () => {
   //아이템 배열
   const itemList = [];
 
-
-  useEffect(()=>{
+  const handleNewItemList = () =>{
     if(items && likeList){
       const newList2 =[];
       items.forEach((i)=>{
@@ -55,8 +54,11 @@ export const ShoppingComp = () => {
         }
       })
       setNewItemList(newList2);
-      console.log(newList2);
     }
+  }
+
+  useEffect(()=>{
+    handleNewItemList();
   },[likeList]);
 
   useEffect(()=>{
@@ -117,7 +119,6 @@ export const ShoppingComp = () => {
 
   useEffect(()=>{
     if(userUID){
-      console.log(userUID);
       getUserData();
     }
   },[userUID]);
@@ -130,7 +131,6 @@ export const ShoppingComp = () => {
     setBtnBool4(false);
     if(newItemList){
       setPrintItems(newItemList);
-      console.log(newItemList);
     }
     else{
       setPrintItems(items);
@@ -150,7 +150,6 @@ export const ShoppingComp = () => {
       ));
       newList.push(...clothList);
       setPrintItems(newList);
-      console.log(newList);
     }
     else{
       const clothList = items.filter((c)=>(
@@ -207,7 +206,6 @@ export const ShoppingComp = () => {
 
   //좋아요 버튼
   const likeBtn = (item) =>{
-    console.log(item);
     if(userUID){
       if(!item.like){
         const setLikeList = async() =>{
@@ -219,16 +217,6 @@ export const ShoppingComp = () => {
         }
         setLikeList();
       }
-      else{
-        const deleteLikeList = async() =>{
-          const washingtonRef = doc(db, "users", userUID);
-          await updateDoc(washingtonRef, {
-            likeList: arrayRemove(item)
-          });
-        }
-        deleteLikeList();
-      }
-      getShoppingItems();
       getUserData();
     }
     else{
@@ -265,7 +253,7 @@ export const ShoppingComp = () => {
                       className={style.likeBtn}
                       onClick={()=>likeBtn(item)}
                       >
-                        {item.like ? <FontAwesomeIcon icon={redHeart} style={{fontSize:'1.5rem',color:'red'}}/>:<FontAwesomeIcon icon={faHeart} style={{fontSize:'1.5rem'}}/>}
+                        {item.like ? <FontAwesomeIcon icon={redHeart} style={{fontSize:'1.5rem',color:'#FFAE21'}}/>:<FontAwesomeIcon icon={faHeart} style={{fontSize:'1.5rem'}}/>}
                       </div>
                     <div style={{backgroundImage:`url(${item.url})`
                     ,width:'200px',height:'150px', backgroundSize: '200px 150px', margin:'auto'}}>
