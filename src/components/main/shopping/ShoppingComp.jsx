@@ -9,6 +9,11 @@ import style from './shoppingcomp.module.scss';
 import { Outlet, useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as redHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
+
+
 
 
 
@@ -202,15 +207,28 @@ export const ShoppingComp = () => {
 
   //좋아요 버튼
   const likeBtn = (item) =>{
+    console.log(item);
     if(userUID){
-      const setLikeList = async() =>{
-        const washingtonRef = doc(db, "users", userUID);
-        item.like = !item.like ;
-        await updateDoc(washingtonRef, {
-          likeList: arrayUnion(item)
-        });
+      if(!item.like){
+        const setLikeList = async() =>{
+          const washingtonRef = doc(db, "users", userUID);
+          item.like = !item.like ;
+          await updateDoc(washingtonRef, {
+            likeList: arrayUnion(item)
+          });
+        }
+        setLikeList();
       }
-      setLikeList();
+      else{
+        const deleteLikeList = async() =>{
+          const washingtonRef = doc(db, "users", userUID);
+          await updateDoc(washingtonRef, {
+            likeList: arrayRemove(item)
+          });
+        }
+        deleteLikeList();
+      }
+      getShoppingItems();
       getUserData();
     }
     else{
@@ -247,7 +265,7 @@ export const ShoppingComp = () => {
                       className={style.likeBtn}
                       onClick={()=>likeBtn(item)}
                       >
-                        {item.like ? `하트`:`빈하트`}
+                        {item.like ? <FontAwesomeIcon icon={redHeart} style={{fontSize:'1.5rem',color:'red'}}/>:<FontAwesomeIcon icon={faHeart} style={{fontSize:'1.5rem'}}/>}
                       </div>
                     <div style={{backgroundImage:`url(${item.url})`
                     ,width:'200px',height:'150px', backgroundSize: '200px 150px', margin:'auto'}}>
