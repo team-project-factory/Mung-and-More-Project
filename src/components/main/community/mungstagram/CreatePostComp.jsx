@@ -109,7 +109,7 @@ export default function CreatePostComp() {
           uid : uid, // 게시물 ID 추가
           title : inputTitle,
           sub : inputSub,
-          hash : inputHash,
+          hash :inputHash,
           des : inputDes,
           location : inputLocation,
           date: `${year}-${month}-${day}`,

@@ -142,6 +142,7 @@ export const MungsNewsContents = () => {
             </div>
           </div>
         ))}
+        <h3 style={{textAlign : 'left', margin : '6px 0 0 20px'}}>댓글</h3>
       <ul className={style.commentBox}>
         {commentList &&
           commentList.map((c) => (

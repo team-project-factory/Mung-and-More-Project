@@ -222,24 +222,26 @@ export default function InstagramComp() {
                           className='delete-btn'
                           onClick={()=>handleDeletePost(post.uid, post.id)}
                         >
-                          삭 제
+                          X
                         </button>
                       )}
                     </div>
                   </div>
                   <div className='imgBx'>
+                    { post.images.length ? 
                     <img
-
                       className='event-slide-img'
                       src={post.images[post.imageIndex]}
                       alt={`Image ${post.imageIndex + 1}`}
-                    />
-
+                    /> : <div></div>
+                    
+                  }
+                    { post.images.length > 1 ? 
                     <div className='slide-btn'>
                       {/* 아래 버튼에 onClick시 post를 인자로 전달하여 각버튼이 독립적인 post 객체를 받게끔 설정 */}
                       <button className='prev-btn' onClick={() => btnPrev(post)}>{'<'}</button>
                       <button className='next-btn' onClick={() => btnNext(post)}>{'>'}</button>
-                    </div>
+                    </div> : <div></div>}
 
                   </div>
                   <div className='actionBtns'>
@@ -264,6 +266,7 @@ export default function InstagramComp() {
                 </div>
               </div>
             ))}
+            <h3 style={{textAlign : 'left', margin : '6px 0 0 15px'}}>댓글</h3>
             <ul className={style.commentBox}>
               {commentList &&
                 commentList.map((c) => (
