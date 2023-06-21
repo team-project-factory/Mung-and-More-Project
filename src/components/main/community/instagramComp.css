@@ -51,11 +51,11 @@
     align-items: center;
 }
 
-.card .top .userDetails {
+.card .title .userDetails {
     display: flex;
     align-items: center;
 }
-.card .top .userDetails .profile img {
+.card .title .userDetails .profile img {
     position: relative;
     width: 36px;
     height: 36px;
@@ -63,13 +63,13 @@
     overflow: hidden;
     margin-right: 8px;
 }
-.card .top .userDetails h3 {
+.card .title .userDetails h3 {
     font-size: 16px;
     color: #4d4d4f;
     font-weight: 500;
     line-height: 1em;
 }
-.card .top .userDetails h3 span{
+.card .title .userDetails h3 span{
     font-size: 0.75em;
 }
 .dot {
