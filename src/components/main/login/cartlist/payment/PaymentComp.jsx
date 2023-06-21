@@ -15,7 +15,8 @@ import style from "./paymentComp.module.scss";
 
 export const PaymentComp = () => {
   // cart에 담은 상품 中 check한 상품 리스트
-  const checkedList = useSelector((state) => state.cartList);
+  const cartList = useSelector((state) => state.cartList);
+  const checkedList = cartList.filter((cart) => cart.check);
 
   const location = useLocation();
   const { name, phoneNumber, postcode, address, deliveryRequest } =

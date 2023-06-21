@@ -31,16 +31,18 @@ export const CartBoxComp = () => {
   const [userUID, setUserUID] = useState("");
 
   // cartList 담을 state
-  const [cartList, setCartList] = useState("");
+  const [cartList, setCartList] = useState([]);
 
-  const [checkList, setCheckList] = useState("");
+  const [checkList, setCheckList] = useState([]);
 
   // 상품 수량 담을 state
   const [itemAmount, setItemAmount] = useState({});
 
   // 상품 수량 변경
   const changeItemAmount = (item, amount) => {
-    const newAmount = item.num + amount;
+    const currentAmount =
+      itemAmount[item.name] !== undefined ? itemAmount[item.name] : item.num;
+    const newAmount = currentAmount + amount;
 
     // 최소값을 1로 설정
     const finalAmount = newAmount > 1 ? newAmount : 1;
@@ -48,6 +50,11 @@ export const CartBoxComp = () => {
     const newCart = cartList.map((cart) =>
       cart.name === item.name ? { ...cart, num: finalAmount } : cart
     );
+
+    setItemAmount((prevState) => ({
+      ...prevState,
+      [item.name]: finalAmount,
+    }));
 
     dispatch(getCartData(newCart));
     setCartList(newCart);
@@ -72,6 +79,7 @@ export const CartBoxComp = () => {
   //화면 출력하자마자 유저데이터 들고오기
   useEffect(() => {
     getUserData();
+    dispatch(getCartData([]));
   }, []);
   //유저가지고 있는 데이터 들고오기
   const getData = async () => {
@@ -102,6 +110,9 @@ export const CartBoxComp = () => {
     );
     dispatch(getCartData(newCart));
     setCartList(newCart);
+
+    const newCheckList = newCart.filter((cart) => cart.check);
+    setCheckList(newCheckList);
   };
 
   // 수량 변경시 금액 계산
@@ -182,7 +193,7 @@ export const CartBoxComp = () => {
                           {/* 플러스 버튼 */}
                           <button
                             className={style.PMBtn}
-                            onClick={() => changeItemAmount(item, 1)}
+                            onClick={() => changeItemAmount(item, +1)}
                           >
                             +
                           </button>
