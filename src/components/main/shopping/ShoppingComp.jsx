@@ -40,34 +40,8 @@ export const ShoppingComp = () => {
 
   //아이템 배열
   const itemList = [];
-
-  const handleNewItemList = () =>{
-    if(items && likeList){
-      const newList2 =[];
-      items.forEach((i)=>{
-        const newList = likeList.find((like)=>(i.name === like.name));
-        if(newList){
-          newList2.push(newList);
-        }
-        else{
-          newList2.push(i);
-        }
-      })
-      setNewItemList(newList2);
-    }
-  }
-
-  useEffect(()=>{
-    handleNewItemList();
-  },[likeList]);
-
-  useEffect(()=>{
-    if(userUID && newItemList){
-      setPrintItems(newItemList)
-    }
-  },[newItemList])
-
-
+  
+  
   //데이터 들고오기
   const getShoppingItems = async() =>{
     const querySnapshot = await getDocs(collection(db, "shopping_item"));
@@ -103,7 +77,7 @@ export const ShoppingComp = () => {
     getShoppingItems();
     getUser();
   },[]);
-
+  
   //likelist 문서들고오기
   const getUserData = async() =>{
     const docRef = doc(db, "users", userUID); 
@@ -122,6 +96,32 @@ export const ShoppingComp = () => {
       getUserData();
     }
   },[userUID]);
+
+
+  const handleNewItemList = () =>{
+    if(items && likeList){
+      const newList2 =[];
+      items.forEach((i)=>{
+        const newList = likeList.find((like)=>(i.name === like.name));
+        if(newList){
+          newList2.push(newList);
+        }
+        else{
+          newList2.push(i);
+        }
+      })
+      setNewItemList(newList2);
+    }
+  }
+
+  useEffect(()=>{
+    if(userUID && newItemList){
+      setPrintItems(newItemList)
+    }
+  },[newItemList])
+
+
+
 
   //전체 버튼
   const active1 = () =>{
@@ -216,8 +216,8 @@ export const ShoppingComp = () => {
           });
         }
         setLikeList();
+        alert('좋아요!');
       }
-      getUserData();
     }
     else{
       alert('로그인해주세요!');
@@ -253,7 +253,7 @@ export const ShoppingComp = () => {
                       className={style.likeBtn}
                       onClick={()=>likeBtn(item)}
                       >
-                        {item.like ? <FontAwesomeIcon icon={redHeart} style={{fontSize:'1.5rem',color:'#FFAE21'}}/>:<FontAwesomeIcon icon={faHeart} style={{fontSize:'1.5rem'}}/>}
+                        {item.like ? <FontAwesomeIcon icon={redHeart} style={{fontSize:'1.5rem',color:'#FFAE21',cursor:'pointer'}}/>:<FontAwesomeIcon icon={faHeart} style={{fontSize:'1.5rem',cursor:'pointer'}}/>}
                       </div>
                     <div style={{backgroundImage:`url(${item.url})`
                     ,width:'200px',height:'150px', backgroundSize: '200px 150px', margin:'auto'}}>
