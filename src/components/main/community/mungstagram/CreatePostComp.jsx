@@ -37,8 +37,6 @@ export default function CreatePostComp() {
       }
     });
   }, []);
-
-  
   
   
   
@@ -91,6 +89,7 @@ export default function CreatePostComp() {
       try {
         const downloadURLs = await Promise.all(uploadPromises);
         alert('게시글 작성 완료');
+        navigator("/community", {replace:true, state:{ok : true}});
         return downloadURLs;
       } catch (error) {
         alert('업로드 실패', error);
@@ -121,7 +120,6 @@ export default function CreatePostComp() {
       console.log("Document written with ID: ", docRef.id);
     }
     setData();
-    navigator("/community");
     /*const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
     } else {
