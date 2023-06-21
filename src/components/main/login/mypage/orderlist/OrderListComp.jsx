@@ -80,7 +80,7 @@ export const OrderListComp = () => {
                   order.checkedList.map((item) => (
                     <OderInfo>
                       <ProductImg>
-                        <img src={item.url} alt={item.name} style={{ width: '50%', margin: '0 auto' }} />
+                        <img src={item.url} alt={item.name} style={{ width: '50%', lineHeight: '120px' }} />
                       </ProductImg>
                       <ProductInfoAll>
                         <ProductInfo>

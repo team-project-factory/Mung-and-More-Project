@@ -175,6 +175,8 @@ export const OrderBoxComp = () => {
   };
   const postCode = ReactDaumPost(postConfig);
 
+  console.log("체크된 상품 목록", checkedList);
+
   return (
     <div className={style.OrderComp}>
       <div className={style.Layout}>
