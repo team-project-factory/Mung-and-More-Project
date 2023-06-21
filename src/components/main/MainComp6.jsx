@@ -8,9 +8,11 @@ export const MainComp6 = () => {
       <Main2Subtitld>
         FAQ, 공지사항 및 이벤트를 한 곳에서 확인해보세요!
       </Main2Subtitld>
+      <a href="./notice">
       <GoBtn style={{marginTop:'110px'}}>
         Go to information
       </GoBtn>
+      </a>
     </div>
   )
 }
