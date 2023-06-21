@@ -17,15 +17,18 @@ import { json, useNavigate, useLocation } from "react-router-dom";
 export const OrderListComp = () => {
 
   // cart에 담은 상품 中 check한 상품 리스트
-  const checkedList = useSelector((state) => state.cartList);
+  //const orderlist = useSelector((state) => state.orderlist.orderlist);
 
+  // 주문서 하나확인
+  const orderlist = useSelector((state) => state.orderlist.orderlist);
+  console.log(orderlist)
   const location = useLocation();
   // const {  } =
   //   location.state;
 
   const TotalPrice = () => {
     let sum = 0;
-    for (let checkedItem of checkedList) {
+    for (let checkedItem of orderlist) {
       sum = sum + checkedItem.price * checkedItem.num;
     }
     return sum;
@@ -69,32 +72,38 @@ export const OrderListComp = () => {
       <Title>주문내역</Title>
       <ContentWrap>
         <OrderWrap>
-        {checkedList &&
-              checkedList.map((item, index) => (
-                <div key={index}>
-                  <OderNum>주문번호:  ORD20230429-7085698</OderNum>
-                <OderInfo>
-                  <ProductImg>
-                    <img src={item.url} alt={item.name} style={{ width: '70%', margin: '0 auto' }} />
-                  </ProductImg>
-                  <ProductInfoAll>
-                    <ProductInfo>
-                      <Brand>브랜드</Brand>
-                      <Name>{item.name}</Name>
-                      <NumWrap>
-                        <Num>{item.price * item.num}₩ / </Num>
-                        <Num>{item.num}개</Num>
-                      </NumWrap>
-                    </ProductInfo>
-                    
-                    <ProductState>
-                      <Date>주문일자</Date>
-                      <Delev>상품준비</Delev>
-                    </ProductState>
-                  </ProductInfoAll>
-                </OderInfo>
-                </div>
-              ))}    
+          {orderlist &&
+            orderlist.map((order, index) => (
+              <div key={index}>
+                <OderNum>주문번호:  ORD20230429-7085698</OderNum>
+                {
+                  order.checkedList.map((item) => (
+                    <OderInfo>
+                      <ProductImg>
+                        <img src={item.url} alt={item.name} style={{ width: '50%', lineHeight: '120px' }} />
+                      </ProductImg>
+                      <ProductInfoAll>
+                        <ProductInfo>
+                          <Brand>브랜드</Brand>
+                          <Name>{item.name}</Name>
+                          <NumWrap>
+                            <Num>{item.price * item.num}₩ / </Num>
+                            <Num>{item.num}개</Num>
+                          </NumWrap>
+                        </ProductInfo>
+
+                        <ProductState>
+                          <Date>주문일자:{order.date.getMonth()}</Date>
+                          <Delev>상품준비</Delev>
+                        </ProductState>
+                      </ProductInfoAll>
+                    </OderInfo>
+                  ))
+                }
+
+
+              </div>
+            ))}
         </OrderWrap>
       </ContentWrap>
     </Wrap>
