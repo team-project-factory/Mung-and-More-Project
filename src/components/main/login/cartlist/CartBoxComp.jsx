@@ -45,7 +45,7 @@ export const CartBoxComp = () => {
     const newAmount = currentAmount + amount;
 
     // 최소값을 1로 설정
-    const finalAmount = newAmount > 1 ? newAmount : 1;
+    const finalAmount = Math.max(Math.min(newAmount, 30), 1);
 
     const newCart = cartList.map((cart) =>
       cart.name === item.name ? { ...cart, num: finalAmount } : cart
