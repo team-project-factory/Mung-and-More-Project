@@ -1,15 +1,42 @@
-import React,{ useEffect, useRef } from 'react'
-
-import { TitleCircle, DogCircle, WordContainer, WordSpan
-  
-} from './styles/MaincomStylecomp'
+import React, { useEffect, useRef } from 'react';
+import {
+  TitleCircle,
+  DogCircle,
+  WordContainer,
+  WordSpan, Container, Cursor, TitleHover
+} from './styles/MaincomStylecomp';
 
 export const MainComp1 = () => {
-  const wordRrf = useRef()
   
   useEffect(() => {
-    console.log(wordRrf.current.childNodes)
-    const spans = wordRrf.current.childNodes;
+    const cursor = document.querySelector('.cursor');
+    const title = document.querySelector('.title h1');
+  
+    const handleMouseOverTitle = () => {
+      cursor.classList.add('cursor--hover');
+    };
+  
+    const handleMouseOutTitle = () => {
+      cursor.classList.remove('cursor--hover');
+    };
+  
+    if (title) {
+      title.addEventListener('mouseover', handleMouseOverTitle);
+      title.addEventListener('mouseout', handleMouseOutTitle);
+    }
+  
+    return () => {
+      if (title) {
+        title.removeEventListener('mouseover', handleMouseOverTitle);
+        title.removeEventListener('mouseout', handleMouseOutTitle);
+      }
+    };
+  }, []);
+  const wordRef = useRef();
+
+  useEffect(() => {
+    console.log(wordRef.current.childNodes);
+    const spans = wordRef.current.childNodes;
 
     spans.forEach((span, idx) => {
       span.addEventListener('click', (e) => {
@@ -26,17 +53,21 @@ export const MainComp1 = () => {
     });
   }, []);
 
-  return (
-    <div style={{minWidth : '1920px',height : `100vh`, overflow : "hidden", textAlign: 'center'}} >
+  
+  
 
+  return (
+    <div style={{ minWidth: '1920px', height: '100vh', overflow: 'hidden', textAlign: 'center' }}>
       {/* <TitleCircle>
-      <img src="/img/circle.png" alt=""  style={{width:"730px"}}/>
+        <img src="/img/circle.png" alt="" style={{ width: '730px' }} />
       </TitleCircle> */}
-      
       <DogCircle>
-        <img src="/img/maindog2.png" style={{width:"550px"}}/>
+        <img src="/img/maindog2.png" style={{ width: '550px' }} />
       </DogCircle>
-      <WordContainer ref={wordRrf}>
+      <div class="cursor">
+  <div class="cursor__inner"></div>
+</div>
+      <WordContainer ref={wordRef}>
         <WordSpan>M</WordSpan>
         <WordSpan>U</WordSpan>
         <WordSpan>N</WordSpan>
@@ -49,5 +80,5 @@ export const MainComp1 = () => {
         <WordSpan>E</WordSpan>
       </WordContainer>
     </div>
-  )
-}
+  );
+};

@@ -24,7 +24,6 @@ export const OrderWrap = styled.div`
     padding: 25px 0px;
     text-align: initial;
     margin-bottom: 17px;
-
 `
 export const OderNum = styled.p`
     font-size: 20px;
@@ -39,6 +38,7 @@ export const OderInfo = styled.div`
     display: flex;
     gap: 25px;
     align-items: center;
+    margin-bottom: 20px;
 `
 export const ProductImg = styled.div`
     width: 120px;
@@ -46,6 +46,12 @@ export const ProductImg = styled.div`
     border-radius: 10px;
     background-color: #F2F2F2;
     flex-grow: 0;
+    text-align: center;
+`
+export const ProductInfoAll = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 455px;
 `
 export const ProductInfo = styled.div`
     flex-grow: 2;

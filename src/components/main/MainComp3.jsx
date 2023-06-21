@@ -39,14 +39,14 @@ export const MainComp3 = () => {
       <MainTitle style={{marginBottom:'20px'}}>Let’s go shopping together!</MainTitle>
       <Swiper
         spaceBetween={20}
-        slidesPerView={4}
+        slidesPerView={3}
         loop={true}
         navigation={{ prevEl: '.swiper-prev', nextEl: '.swiper-next' }}
       >
         {product &&
         product.map((item) => (
-          <SwiperSlide key={item.id} style={{ display: 'block', backgroundColor: 'transparent' }}>
-            <div style={{ width: '100%',height: '440px', backgroundColor: '#fff', borderRadius: '20px' }}>
+          <SwiperSlide key={item.id} style={{ display: 'block', backgroundColor: 'transparent'}}>
+            <div style={{ width: '100%',height: '350px', backgroundColor: '#fff', borderRadius: '30px', padding: '50px 0' }}>
               <img src={item.url} alt={item.name} style={{ maxWidth:'30%',height: 'auto' }} />
             </div>
             <ProductName>{item.name}</ProductName>

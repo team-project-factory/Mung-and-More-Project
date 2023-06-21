@@ -1,7 +1,8 @@
 // firebase
 import { auth, db } from "../../../../../data/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc ,serverTimestamp} from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 
 // react
 import React, { useEffect, useState } from "react";
@@ -56,6 +57,9 @@ export const PaymentComp = () => {
 
   const goShoppingBack = () => {
     navigater("/shopping");
+    const orderData = {
+      orderTime : serverTimestamp()
+    }
   };
 
   return (

@@ -116,7 +116,7 @@ export const WordSpan = styled.span`
     line-height: 1;
 
     &.active:nth-child(1) {
-    animation: ${balance} 1.5s ease-out;
+    animation: ${balance} 1.3s ease-out;
     transform-origin: bottom left;
     }
     &.active:nth-child(2) {
@@ -124,40 +124,75 @@ export const WordSpan = styled.span`
 	transform-origin: bottom center;
     }
     &.active:nth-child(3) {
-    animation: ${falling} 2s ease-out;
+    animation: ${falling} 1.8s ease-out;
 	transform-origin: bottom center;
     }
     &.active:nth-child(4) {
     animation: ${rotate} 1s ease-out;
     }
     &.active:nth-child(5) {
-        animation: ${toplong} 1.5s linear;
+        animation: ${toplong} 1.3s linear;
     }
     &.active:nth-child(6) {
-    animation: ${balance} 1.5s ease-out;
+    animation: ${balance} 1.3s ease-out;
     transform-origin: bottom left;
     }
     &.active:nth-child(7) {
-    animation: ${shrinkjump} 1.5s ease-out;
-    transform-origin: bottom left;
+    animation: ${shrinkjump} 1.3s ease-in-out;
+    transform-origin: bottom center;
     }
     &.active:nth-child(8) {
-    animation: ${falling} 1.5s ease-out;
-    transform-origin: bottom left;
+    animation: ${falling} 1.2s ease-out;
+    transform-origin: bottom center;
     }
     &.active:nth-child(9) {
-    animation: ${rotate} 1.5s ease-out;
+    animation: ${rotate} 1.3s ease-out;
     transform-origin: bottom left;
     }
-
-
+`;
+export const Container = styled.div`
+    min-width: 1920px;
+    height: 100vh;
+    overflow: hidden;
+    text-align: center;
 `;
 
-const FixedHeading = styled.h3`
-    position: fixed;
-    top: 40px;
-    left: 50%;
-    transform: translateX(-50%);
+export const Cursor = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    mix-blend-mode: difference;
+
+    &__inner {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: transform 0.5s ease-in-out;
+}
+
+    &--hover {
+    .cursor__inner {
+    transform: scale(3);
+    }
+}
+`;
+export const TitleHover = styled.div`
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: none;
+    background-color: #263035;
+`;
+
+export const TitleHoverText = styled.h1`
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-size: 150px;
+    font-weight: 700;
+    color: #d9e8ef;
 `;
 export const MainTitle = styled.h2`
     padding: 50px 0;
