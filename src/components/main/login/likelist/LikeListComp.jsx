@@ -1,6 +1,14 @@
 // firebase
 import { auth, db } from "../../../../data/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+  getDocs,
+  collection,
+} from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // react
@@ -8,6 +16,11 @@ import React, { useEffect, useState } from "react";
 
 // scss
 import style from "./likeListComp.module.scss";
+
+// font Awesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as redHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
 
 export const LikeListComp = () => {
   // user UID 담을 state
@@ -62,12 +75,77 @@ export const LikeListComp = () => {
     console.log(likeList);
   }
 
+  // 좋아요 버튼
+  const likeBtn = (item) => {
+    console.log(item);
+    if (userUID) {
+      if (!item.like) {
+        const setLikeList = async () => {
+          const washingtonRef = doc(db, "users", userUID);
+          item.like = !item.like;
+          await updateDoc(washingtonRef, {
+            likeList: arrayUnion(item),
+          });
+        };
+        setLikeList();
+      } else {
+        const deleteLikeList = async () => {
+          const washingtonRef = doc(db, "users", userUID);
+          await updateDoc(washingtonRef, {
+            likeList: arrayRemove(item),
+          });
+        };
+        deleteLikeList();
+      }
+      getUserData();
+    }
+  };
+
   return (
     <div className={style.LikeListComp}>
       <div className={style.Layout}>
         <div className={style.LikeListBox}>
-          <h1>My Like List</h1>
-          <ul>{likeList && likeList.map((item) => <li>{item.name}</li>)}</ul>
+          <h1>My Like</h1>
+
+          {/* 찜한 상품 정보 카드 형태로 표시 */}
+          <div className={style.CardListSet}>
+            {likeList &&
+              likeList.map((item) => (
+                <div className={style.CardList}>
+                  <div className={style.ImgBox}>
+                    <div
+                      className={style.LikeBtn}
+                      onClick={() => likeBtn(item)}
+                    >
+                      {item.like ? (
+                        <FontAwesomeIcon
+                          icon={redHeart}
+                          style={{ fontSize: "1.5rem", color: "red" }}
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                          icon={faHeart}
+                          style={{ fontSize: "1.5rem" }}
+                        />
+                      )}
+                    </div>
+                    <div
+                      style={{
+                        backgroundImage: `url(${item.url})`,
+                        width: "200px",
+                        height: "150px",
+                        backgroundSize: "200px 150px",
+                        margin: "auto",
+                      }}
+                    ></div>
+                  </div>
+                  <div className={style.TextBox}>
+                    {item.name}
+                    {item.price}
+                  </div>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </div>
