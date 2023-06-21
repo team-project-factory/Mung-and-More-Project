@@ -4,7 +4,7 @@ import { Nav } from "../../../../layout/Nav";
 
 export const CartList = () => {
   return (
-    <div style={{ backgroundColor: `rgb(243, 245, 246)` }}>
+    <div style={{ backgroundColor: `rgb(243, 245, 246)`, minHeight: "100vh" }}>
       <div
         style={{
           width: `100%`,

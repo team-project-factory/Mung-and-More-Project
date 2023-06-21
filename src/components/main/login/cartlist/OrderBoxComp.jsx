@@ -12,6 +12,10 @@ import { json, useNavigate } from "react-router-dom";
 // scss
 import style from "./orderBoxComp.module.scss";
 
+// font Awesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaw } from "@fortawesome/free-solid-svg-icons";
+
 // 우편번호 검색
 import DaumPostCode from "react-daum-postcode";
 import ReactDaumPost from "react-daumpost-hook";
@@ -76,8 +80,6 @@ export const OrderBoxComp = () => {
 
   const checkedList = cartList.filter((cart) => cart.check);
 
-  console.log(checkedList);
-
   const goPayment = () => {
     if (checkedList.length === 0) {
       alert("상품을 선택해 주세요!");
@@ -114,6 +116,12 @@ export const OrderBoxComp = () => {
   const calculatePrice = (item) => {
     const amount = checkedList[item.name] || item.num;
     return item.price * amount;
+  };
+
+  // 변경된 수량
+  const itemAmount = (item) => {
+    const amount = checkedList[item.name] || item.num;
+    return amount;
   };
 
   // 총 상품금액 계산 함수
@@ -172,7 +180,11 @@ export const OrderBoxComp = () => {
               checkedList.map((item, index) => (
                 <div className={style.CheckedItem} key={index}>
                   <div>{item.name}</div>
-                  <div>{calculatePrice(item)}₩</div>
+                  <div className={style.ItemInfo}>
+                    <div style={{ color: "#72b6f7" }}>{itemAmount(item)}개</div>
+                    <FontAwesomeIcon icon={faPaw} />
+                    <div>{calculatePrice(item)}₩</div>
+                  </div>
                 </div>
               ))
             ) : (
