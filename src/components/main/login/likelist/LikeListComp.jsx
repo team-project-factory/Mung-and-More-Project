@@ -140,8 +140,8 @@ export const LikeListComp = () => {
                     ></div>
                   </div>
                   <div className={style.TextBox}>
-                    {item.name}
-                    {item.price}
+                    <div style={{ fontSize: "1.2rem" }}>{item.name}</div>
+                    <div style={{ fontSize: "1.1rem" }}>{item.price}₩</div>
                   </div>
                 </div>
               ))}

@@ -33,11 +33,11 @@
 }
 
 .CardList {
-  border: 1px solid blue; // 레이아웃 확인용
   width: 260px;
   height: 340px;
   border-radius: 20px;
   border: 1px solid #eeeeee;
+  margin-bottom: 50px;
 }
 
 .ImgBox {
@@ -45,6 +45,8 @@
   width: 220px;
   height: 200px;
   padding: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eeeeee;
 }
 
 .LikeBtn {
@@ -52,10 +54,14 @@
 }
 
 .TextBox {
+  justify-content: space-around;
   text-align: center;
+  align-items: flex-start;
   width: 230px;
-  height: 50px;
+  height: 80px;
   display: flex;
-  margin: auto;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-left: 15px;
   padding: 10px;
 }
