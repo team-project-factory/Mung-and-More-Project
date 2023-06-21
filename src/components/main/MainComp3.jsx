@@ -12,6 +12,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, updateDoc, arrayUnion, arrayRemove, getDocs, collection, getDoc  } from "firebase/firestore";
 import { db, auth } from '../../data/firebase';
 import { Margin } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -61,9 +62,13 @@ export const MainComp3 = () => {
           </div>
         </SwiperBtn>
       </Swiper>
-      <GoBtn style={{marginTop:'90px'}}>
-        Go Shopping
-      </GoBtn>
+
+        <a href = './shopping'>
+        <GoBtn 
+          style={{marginTop:'90px'}}>
+          Go shopping
+        </GoBtn>
+        </a>
     </div>
   );
 };
