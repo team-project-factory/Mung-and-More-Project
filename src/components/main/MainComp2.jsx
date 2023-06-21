@@ -45,6 +45,12 @@ export const MainComp2 = () => {
           </div>
         </div>
       </MainTitle>
+      <div className='cursor-box'>
+        <img 
+        className='cursor'
+        src="./img/cursor.png" 
+        />
+      </div>
       
             
         
