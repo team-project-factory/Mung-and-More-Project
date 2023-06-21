@@ -200,7 +200,7 @@ export default function InstagramComp() {
             {newList2 && newList2.map((post, index) => (
               <div key={index}>
                 <div className='card'>
-                  <div className='top'>
+                  <div className='title'>
                     <div className='userDetails'>
                         
                         <div className='logo'>

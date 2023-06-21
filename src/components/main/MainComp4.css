@@ -10,7 +10,6 @@
 *::before {
   margin: 0;
   padding: 0;
-
   user-select: none;
 }
 
@@ -21,7 +20,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fdfbfd;
+  background-color: white;
 }
 
 .main {
