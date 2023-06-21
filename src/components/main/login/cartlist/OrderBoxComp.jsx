@@ -19,6 +19,7 @@ import { faPaw } from "@fortawesome/free-solid-svg-icons";
 // 우편번호 검색
 import DaumPostCode from "react-daum-postcode";
 import ReactDaumPost from "react-daumpost-hook";
+import { getOrderData } from "./OrderListSlice";
 
 export const OrderBoxComp = () => {
   const navigater = useNavigate();
@@ -33,6 +34,8 @@ export const OrderBoxComp = () => {
   const [addressDetail, setAddressDetail] = useState("");
   const [isOpenPost, setIsOpenPost] = useState(false);
   const ref = useRef(null);
+
+  const dispatch = useDispatch();
 
   //user UID 담을 state
   const [userUID, setUserUID] = useState("");
@@ -108,8 +111,13 @@ export const OrderBoxComp = () => {
         postcode: addressDetail,
         address: inputAddress,
         deliveryRequest: inputDeliveryRequest,
+        date : new Date()
       },
     });
+
+    //오더리스트의 배열의 객체{ 장바구니 목록(배열), 주문날짜(date) }
+    dispatch(getOrderData({checkedList, date: new Date()}))
+    
   };
 
   // 수량 변경시 금액 계산
