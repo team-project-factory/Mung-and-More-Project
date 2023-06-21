@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import InstagramComp from './InstagramComp'
-import { Link, NavLink, Outlet } from 'react-router-dom'
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import './instagramComp.css'
 
 
@@ -21,8 +21,8 @@ export const CommunityComp = () => {
   // 게시물 마다 독립적으로 관리하기 위해 객체 형태로 변경
   const [newList2, setNewList2] = useState('');
   const [deleteId, setDeleteId] = useState('');
+  const stateOk = useLocation();
 
-  
   
   // Post 컬렉션에서 문서이름을 UID로 해놓았기 때문에
   // "컬렉션이름",uid 형태로 집어넣어 사용
@@ -44,21 +44,18 @@ export const CommunityComp = () => {
   // 아래 getData에서 UID 값이 있을 때 실행하도록 하기 위해 작성
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) {
+      if (userInfor) {
         const uid = user.uid;
         setUid(uid);
       } else {
       }
     });
     getData();
-  }, [])
-  
-  
-  
-  if(newList2){
-    console.log(newList2);
-  }
-  
+  }, []);
+
+  useEffect(()=>{
+    getData();
+  },[stateOk])
   
 
 

@@ -8,10 +8,12 @@ import { doc, updateDoc, arrayRemove, collection, getDocs, deleteDoc,arrayUnion 
 import {auth, db,storage } from '../../../data/firebase';
 import { onAuthStateChanged,getAuth } from 'firebase/auth'
 import { ref,deleteObject} from 'firebase/storage'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 
 export default function InstagramComp() {
+  const stateOk = useLocation();
+  console.log(stateOk);
   const navigater = useNavigate();
   const param = useParams();
   const userInfor = JSON.parse(sessionStorage.getItem("user"));
@@ -35,7 +37,7 @@ export default function InstagramComp() {
   // 아래 getData에서 UID 값이 있을 때 실행하도록 하기 위해 작성
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) {
+      if (userInfor) {
         const uid = user.uid;
         const photo = user.photoURL;
         const displayName = user.displayName;
@@ -45,7 +47,12 @@ export default function InstagramComp() {
       } else {
       }
     });
+    getData();
   }, [])
+
+  useEffect(()=>{
+    getData();
+  },[stateOk])
 
   // Post 컬렉션에서 문서이름을 UID로 해놓았기 때문에
   // "컬렉션이름",uid 형태로 집어넣어 사용
@@ -149,19 +156,17 @@ export default function InstagramComp() {
       await deleteDoc(doc(db, "post", postId));
       await deleteFiles(); // 파일 삭제 함수 호출
       console.log("사진 파일이 삭제되었습니다.");
+      navigater('/community',{replace:true, state: param});
     } catch (error) {
       console.error("사진 파일 삭제 오류가 발생했습니다:", error);
     }
-  }
-  else {
-    alert("작성자만 삭제할 수 있습니다.")
   }
 }
 
   // 게시글 삭제 실행 함수.
   const handleDeletePost = (postUid,postId) => {
-    getData()
     deletePost(postUid,postId);
+    navigater('/community',{replace:true, state: param});
   }
 
   
@@ -253,7 +258,6 @@ export default function InstagramComp() {
                     <p>{post.sub}</p> 
                     <div>{post.des}</div>
                     <span>{post.hash}</span>
-                    {post.id}
                   </div>
 
                   {/* 작성란 */}
@@ -280,34 +284,34 @@ export default function InstagramComp() {
                   </li>
                 ))}
             </ul>
-            <ul className={style.commentInput}>
-              <div
-                style={
-                  userPhoto
-                    ? { backgroundImage: `url(${userPhoto})` }
-                    : { backgroundImage: "" }
-                }
-              ></div>
-              <li>
-                <input
-                  type="text"
-                  placeholder={`'이름'으로 댓글달기...`}
-                  value={input}
-                  onChange={(e) => {
-                    setinput(e.target.value);
-                  }}
-                  required
-                />
-                <button
-                  onClick={() => {
-                    setData(param.id);
-                  }}
-                  style={{ cursor: "pointer" }}
-                >
-                  게시
-                </button>
-              </li>
-            </ul>
+              <ul className={style.commentInput}>
+                <div
+                  style={
+                    userPhoto
+                      ? { backgroundImage: `url(${userPhoto})` }
+                      : { backgroundImage: "" }
+                  }
+                ></div>
+                <li>
+                  <input
+                    type="text"
+                    placeholder={`'이름'으로 댓글달기...`}
+                    value={input}
+                    onChange={(e) => {
+                      setinput(e.target.value);
+                    }}
+                    required
+                  />
+                  <button
+                    onClick={() => {
+                      setData(param.id);
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    게시
+                  </button>
+                </li>
+              </ul>
           </div>
   )
 }

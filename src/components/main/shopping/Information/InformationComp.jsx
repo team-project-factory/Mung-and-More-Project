@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import style from './informationcomp.module.scss'
 import { useNavigate, useOutletContext, useParams } from 'react-router'
 
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { doc, updateDoc, arrayUnion, arrayRemove, getDocs, collection, getDoc  } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db, auth } from '../../../../data/firebase';
 
 
@@ -97,7 +97,7 @@ export default function InformationComp() {
           <p>{itemName}</p>
           <p>{itemInfo.price}</p>
           <p>
-            <span>수량</span><input type="number" value={itemNum} min={0} onChange={(e)=>{setItemNum(e.target.value)}} />
+            <span>수량</span><input type="number" value={itemNum} min={1} onChange={(e)=>{setItemNum(e.target.value)}} />
           </p>
           <button onClick={()=>{navigater(-1)}}>취소</button>
           <button onClick={buyBtn}>구매하기</button>
