@@ -1,6 +1,6 @@
 // firebase
 import { auth, db } from "../../../../../data/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, serverTimestamp } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // react
@@ -14,10 +14,11 @@ import style from "./paymentComp.module.scss";
 
 export const PaymentComp = () => {
   // cart에 담은 상품 中 check한 상품 리스트
-  const checkedList = useSelector((state) => state.cartList);
+  const cartList = useSelector((state) => state.cartList);
+  const checkedList = cartList.filter((cart) => cart.check);
 
   const location = useLocation();
-  const { name, phoneNumber, postcode, address, deliveryRequest, date} =
+  const { name, phoneNumber, postcode, address, deliveryRequest } =
     location.state;
 
   const TotalPrice = () => {
@@ -42,18 +43,12 @@ export const PaymentComp = () => {
         const uid = user.uid;
         setUserUID(uid);
         // ...
-        // const dates = querySnapshot.docs.map((doc) => doc.data().orderDate);
       } else {
         // User is signed out
         // ...
       }
     });
   };
-
-  // 날짜 데이터 가져오기
-  useEffect(() => {
-    getUserData();
-  }, []);
 
   // 화면 출력하자마자 유저 데이터 들고오기
   useEffect(() => {
@@ -62,6 +57,9 @@ export const PaymentComp = () => {
 
   const goShoppingBack = () => {
     navigater("/shopping");
+    const orderData = {
+      orderTime: serverTimestamp(),
+    };
   };
 
   return (
