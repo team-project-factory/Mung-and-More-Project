@@ -20,7 +20,7 @@ export default function InformationComp() {
   // props로 들고온 아이템 배열 들고오기
   const [itemList,setItemList] = useState(''); 
   // 구매수량
-  const [itemNum, setItemNum]= useState(0);
+  const [itemNum, setItemNum]= useState(1);
 
   //장바구니 추가 모달 상태
   const [successBtn, setSuccessBtn] = useState(false);
@@ -70,16 +70,19 @@ export default function InformationComp() {
   
   //버튼 누를시 장바구니 추가
   const buyBtn = () =>{
-    itemInfo.num = Number(itemNum);
-    if(user){
-      const setCartList = async() =>{
-          const washingtonRef = doc(db, "users", userUID);
-          await updateDoc(washingtonRef, {
-            cartList: arrayUnion(itemInfo)
-          });
-        }
-        setCartList();
-        setSuccessBtn(true);
+    if(itemNum>0){
+      itemInfo.num = Number(itemNum);
+        const setCartList = async() =>{
+            const washingtonRef = doc(db, "users", userUID);
+            await updateDoc(washingtonRef, {
+              cartList: arrayUnion(itemInfo)
+            });
+          }
+          setCartList();
+          setSuccessBtn(true);
+    }
+    else{
+      alert('수량을 1개이상으로 해주세요!');
     }
   }
 
@@ -97,7 +100,7 @@ export default function InformationComp() {
           <p>{itemName}</p>
           <p>{itemInfo.price}</p>
           <p>
-            <span>수량</span><input type="number" value={itemNum} min={1} onChange={(e)=>{setItemNum(e.target.value)}} />
+            <span>수량</span><input type="number" value={itemNum} min="1" onChange={(e)=>{setItemNum(e.target.value)}} />
           </p>
           <button onClick={()=>{navigater(-1)}}>취소</button>
           <button onClick={buyBtn}>구매하기</button>
