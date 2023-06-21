@@ -1,5 +1,5 @@
 .swiper-container {
-  padding-top: 80px;
+  padding-top: 70px;
   height: 70%;
   width: 49%;
   margin: auto;
@@ -22,7 +22,7 @@
 }
 
 .swiper-pagination {
-  margin-bottom: 170px;
+  margin-bottom: 145px;
   position: absolute;
   bottom: 10px;
   left: 50%;

@@ -1,56 +1,77 @@
-.locationLayout{
+.locationLayout {
   width: 1630px;
   min-height: 100vh;
   margin: auto;
-  .loaction_menu{
-    font-family: "Montserrat",sans-serif;
-    font-weight: bold;
+  .loaction_menu {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
     font-size: 1.4rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 80px;
-    background-color: #ebebeb;
+    height: 86px;
+    background-color: #f4f4f4;
     border-radius: 80px;
     width: 880px;
     margin: auto;
     margin-top: 150px;
     margin-bottom: 10px;
-    button{
+    button {
       font-size: 1.4rem;
+      align-items: center;
       border: none;
-      padding: 20px 90px;
+      // padding: 20px 90px;
+      padding: 10px 103px;
       background-color: transparent;
       cursor: pointer;
+      &:first-child {
+        padding-left: 110px;
+      }
       &.clicked {
-        border-radius: 80px;
-        background-color: #fff;
+        align-items: center;
+        width: 284px;
+        height: 78px;
+        border-radius: 85px;
+        padding: 10px 103px;
+        background-color: white;
+        &:first-child {
+          padding-left: 100px;
+        }
       }
     }
-
-    
   }
-  .location_container{
+  .location_container {
     width: 600px;
-    height: 680px;
+    height: 600px;
     overflow-y: scroll;
-    margin-top: 10%;
+    margin-top: 81.484px;
     margin-left: -7%;
     display: flex;
     justify-content: center;
-    .location_content{
+    &::-webkit-scrollbar {
+      background-color: white;
+      border-radius: 15px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #e1e5e9;
+      border-radius: 15px;
+      background-clip: padding-box;
+      border: 3px solid transparent;
+    }
+    .location_content {
+      margin-top: -2%;
       padding: 3%;
       width: 500px;
-      background-color: #F5F5F5;
+      background-color: #f5f5f5;
     }
-    .location_content_point{
+    .location_content_point {
       margin-top: 4%;
       padding: 3%;
       width: 470px;
       height: 85px;
-      background-color: #F5F5F5;
-      }
-    h3{
+      background-color: #f5f5f5;
+    }
+    h3 {
       margin-top: 5px;
     }
     p {
