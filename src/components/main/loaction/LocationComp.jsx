@@ -294,6 +294,10 @@ export const LocationComp = () => {
         ></div>
 
         <div>
+          <div style={{marginBottom:"-72px",marginTop:"50px"}}>
+          <img src="./img/pointDog.png" style={{width:"20px", marginRight:"5px", marginBottom:"-3.5px"}} />
+          <span>를 클릭해서 위치를 확인해보세요!</span>
+          </div>
           {/* 아래 내용은 중첩 삼항 연산자를 사용하여 작성
         path와 index값을 둘다 충족해야 클릭한 해당 항목(div)만 출력 
         path는 있지만 index 값이 문자열이 아닌 나머지일 때 (숫자) 전체 내용(ul)을 출력,*/}
