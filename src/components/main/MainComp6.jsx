@@ -14,7 +14,7 @@ export const MainComp6 = () => {
       </GoBtn>
       </a>
       <div style={{marginLeft:"30%"}}>
-        <img src="/img/mainDog6.gif" style={{width:'300px'}} />
+        <img src="/img/mainDog8.gif" style={{width:'800px', marginLeft:"545px",marginTop:"-180px"}} />
       </div>
     </div>
   )
