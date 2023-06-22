@@ -39,6 +39,7 @@ export const MainComp3 = () => {
     <div style={{ backgroundColor: '#CBECB5', height: '100vh', padding: '70px', textAlign: 'center' }}>
       <MainTitle style={{marginBottom:'20px'}}>Let’s go shopping together!</MainTitle>
       <Swiper
+        style={{cursor:"pointer"}}
         spaceBetween={20}
         slidesPerView={3}
         loop={true}
@@ -48,7 +49,7 @@ export const MainComp3 = () => {
         product.map((item) => (
           <SwiperSlide key={item.id} style={{ display: 'block', backgroundColor: 'transparent'}}>
             <div style={{ width: '100%',height: '350px', backgroundColor: '#fff', borderRadius: '30px', padding: '50px 0' }}>
-              <img src={item.url} alt={item.name} style={{ maxWidth:'30%',height: 'auto' }} />
+              <img src={item.url} alt={item.name} style={{ Width:'150px',height: '330px',objectFit:"contain" }} />
             </div>
             <ProductName>{item.name}</ProductName>
           </SwiperSlide>

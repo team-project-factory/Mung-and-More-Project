@@ -114,6 +114,7 @@ export const WordSpan = styled.span`
     font-size: 260px;
     user-select: none;
     line-height: 1;
+    text-shadow : 1.5px 1.5px 1.5px gray;
 
     &.active:nth-child(1) {
     animation: ${balance} 1.3s ease-out;

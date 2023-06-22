@@ -87,7 +87,7 @@
   height: 1.5vmax;
   background-color: rgba(28, 49, 48, 0.1);
   border-radius: 50%;
-  z-index: 2;
+  z-index: 0;
   animation: shadow 10s cubic-bezier(0.3, 0.41, 0.18, 1.01) infinite;
 }
 
