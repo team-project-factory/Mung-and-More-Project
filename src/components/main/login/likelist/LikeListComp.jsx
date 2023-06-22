@@ -21,6 +21,7 @@ import style from "./likeListComp.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as redHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 
 export const LikeListComp = () => {
   // user UID 담을 state
@@ -105,7 +106,7 @@ export const LikeListComp = () => {
     <div className={style.LikeListComp}>
       <div className={style.Layout}>
         <div className={style.LikeListBox}>
-          <h1>My Like</h1>
+          <h1 style={{ marginLeft: "45px", marginBottom: "20px" }}>My Like</h1>
 
           {/* 찜한 상품 정보 카드 형태로 표시 */}
           <div className={style.CardListSet}>
@@ -134,14 +135,29 @@ export const LikeListComp = () => {
                         backgroundImage: `url(${item.url})`,
                         width: "200px",
                         height: "150px",
-                        backgroundSize: "200px 150px",
+                        backgroundSize: "contain",
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
                         margin: "auto",
                       }}
                     ></div>
                   </div>
-                  <div className={style.TextBox}>
-                    <div style={{ fontSize: "1.2rem" }}>{item.name}</div>
-                    <div style={{ fontSize: "1.1rem" }}>{item.price}₩</div>
+                  <div className={style.InfoBox}>
+                    <div className={style.TextBox}>
+                      <div style={{ fontSize: "1.2rem" }}>{item.name}</div>
+                      <div style={{ fontSize: "1.1rem" }}>{item.price}₩</div>
+                    </div>
+                    <div className={style.CartBtn}>
+                      <FontAwesomeIcon
+                        icon={faCartPlus}
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          color: "#bbbbbb",
+                          paddingLeft: "10.5px",
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               ))}
