@@ -1,18 +1,18 @@
-.shopping_backgrd{
+.shopping_backgrd {
   min-height: 70vh;
   padding-top: 110px;
-  .shoppingBox{
+  .shoppingBox {
     width: 1640px;
     margin: auto;
-    .shoppingBox_menu{
+    .shoppingBox_menu {
       display: flex;
       padding: 2%;
       padding-left: 13%;
       padding-bottom: 3%;
-      li{
+      li {
         text-align: center;
         font-size: 1.2rem;
-        background-color: #F3F3F3;
+        background-color: #f3f3f3;
         padding: 1.2%;
         margin: 0.5%;
         min-width: 90px;
@@ -20,47 +20,89 @@
         border-radius: 50px;
         cursor: pointer;
       }
-      .active{
-        background-color: #C2DCF4;
-      }
-    }
-    .shoppingBox_itemList{
-      width: 1200px;
-      margin: auto;
-      display: flex;
-      flex-wrap: wrap;
-      li{
-        width: 320px;
-        padding: 35px;
-        .card{
-          width: 350px;
-          height: 440px;
-          border-radius: 20px;
-          border: 1px solid #EEEEEE;
-          .imgBox{
-            border-radius: 20px 20px 0 0;
-            width: 310px;
-            height: 280px;
-            padding: 0 20px 0 20px;
-            border-bottom: 1px solid #EEEEEE;
-            padding-top: 20px;
-            .likeBtn{
-              text-align: right;
-            }
-          }
-          .textBox{
-            font-size: 1.5rem;
-            text-align: center;
-            width: 200px;
-            height: 120px;
-            display: flex;
-            padding-left: 20px;
-            li{
-              padding: 25px 50px 0 10px;
-            }
-          }
-        }
+      .active {
+        background-color: #c2dcf4;
       }
     }
   }
+}
+
+// 아이템 표시 css
+.shoppingBox_itemList {
+  width: 1000px;
+  display: flex;
+  justify-content: flex-start;
+  align-content: space-around;
+  margin: auto;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 260px;
+  height: 340px;
+  border-radius: 20px;
+  border: 1px solid #eeeeee;
+  margin: 30px;
+  margin-top: 0;
+}
+
+.imgBox {
+  border-radius: 20px 20px 0 0;
+  width: 220px;
+  height: 200px;
+  padding: 20px;
+  padding-top: 15px;
+  padding-bottom: 23px;
+  border-bottom: 1px solid #eeeeee;
+  position: relative;
+  top: -20px;
+}
+
+.likeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: right;
+  border: 1px solid #dfdfdf;
+  border-radius: 50%;
+  z-index: 100;
+  width: 42px;
+  height: 42px;
+  margin-left: 180px;
+  position: relative;
+  top: 20px;
+}
+
+.infoBox {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: -16.5px;
+}
+
+.textBox {
+  justify-content: space-around;
+  text-align: center;
+  align-items: flex-start;
+  width: 100px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-left: 15px;
+  padding: 10px;
+}
+
+.cartBtn {
+  margin: 35px;
+  margin-right: 23px;
+  margin-top: 30px;
+  width: 53px;
+  height: 53px;
+  border: 1px solid #dfdfdf;
+  border-radius: 50%;
+  display: flex;
+  // align-items: center;
+  // justify-content: center;
 }
