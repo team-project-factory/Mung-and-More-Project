@@ -46,8 +46,10 @@
   height: 200px;
   padding: 20px;
   padding-top: 15px;
-  padding-bottom: 10px;
+  padding-bottom: 23px;
   border-bottom: 1px solid #eeeeee;
+  position: relative;
+  top: -20px;
 }
 
 .LikeBtn {
@@ -61,6 +63,8 @@
   width: 42px;
   height: 42px;
   margin-left: 180px;
+  position: relative;
+  top: 20px;
 }
 
 .LikeBtn:hover {
@@ -83,6 +87,8 @@
 .InfoBox {
   display: flex;
   justify-content: space-between;
+  position: relative;
+  top: -16.5px;
 }
 
 .CartBtn {
@@ -94,6 +100,6 @@
   border: 1px solid #dfdfdf;
   border-radius: 50%;
   display: flex;
-  align-items: center;
+  // align-items: center;
   // justify-content: center;
 }
