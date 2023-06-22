@@ -37,6 +37,7 @@ export default function FAQListComp() {
           투명하되 있으랴? 내려온 우리의 살 들어 가치를 실로 그들은 이상은
           인간은 뿐이다.
         </ListComp>
+        <hr style={{border: '0.7px solid #f5f5f5', margin: '5px 0'}}/>
         <ListComp content="FAQ 게시판의 두 번째 내용입니다.">
           이상이 든 만물은 생생하며, 것이다. 하는 가지에 청춘은 인간은 방지하는
           무엇을 그들의 뭇 있는 것이다. 이상의 방지하는 보는 그들은 듣는다.
@@ -52,6 +53,7 @@ export default function FAQListComp() {
           일월과 예수는 봄바람이다. 갑 바이며, 열락의 위하여서. 청춘 뛰노는
           열락의 있을 아니다.
         </ListComp>
+        <hr style={{border: '0.7px solid #f5f5f5', margin: '5px 0'}}/>
         <ListComp content="FAQ 게시판의 세 번째 내용입니다.">
           위하여서, 눈에 인생에 긴지라 그들의 미인을 사람은 위하여서. 인간의
           얼마나 크고 피고 것이다. 방지하는 곳으로 가슴에 힘차게 갑 위하여서.
@@ -65,6 +67,7 @@ export default function FAQListComp() {
           아니다. 끝에 착목한는 가치를 사는가 끝까지 하였으며, 꾸며 사라지지
           뿐이다. 돋고, 위하여 온갖 인간에 불어 아니더면, 것이다.
         </ListComp>
+        <hr style={{border: '0.7px solid #f5f5f5', margin: '5px 0'}}/>
         <ListComp content="FAQ 게시판의 네 번째 내용입니다.">
           피고, 얼음이 같은 봄바람이다. 청춘에서만 기관과 그들은 이 천지는
           공자는 심장의 사는가 교향악이다. 못할 대한 용기가 보라. 위하여서 생의
@@ -78,6 +81,7 @@ export default function FAQListComp() {
           하는 위하여 설레는 간에 사막이다. 그것을 얼마나 그러므로 그들은 자신과
           관현악이며, 웅대한 풍부하게 사막이다.
         </ListComp>
+        <hr style={{border: '0.7px solid #f5f5f5', margin: '5px 0'}}/>
         <ListComp content="FAQ 게시판의 다섯 번째 내용입니다.">
           않는 곳이 트고, 이상은 듣는다. 피가 보는 오아이스도 그들의 위하여서.
           생명을 꽃 되는 전인 미묘한 있는 그들의 것이다. 산야에 피에 공자는

@@ -43,6 +43,7 @@ export const MainComp3 = () => {
         spaceBetween={20}
         slidesPerView={3}
         loop={true}
+        // autoplay={{ delay: 3000 }}
         navigation={{ prevEl: '.swiper-prev', nextEl: '.swiper-next' }}
       >
         {product &&
