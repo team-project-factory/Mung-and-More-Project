@@ -38,8 +38,10 @@ export const MainComp2 = () => {
               </div>
             <Main2Subtitld>
               <div className='main-des'>
-                <p>Mung&More는 강아지를 위한 종합 정보 플랫폼으로, </p>
-                <p>산책로부터 강아지 상품까지 모두 제공합니다!</p>
+                <p>Mung & More는 강아지를 위한 종합 웹 사이트로,</p>
+                <p>강아지 용품부터 함께 할 수 있는 공간 정보,</p>
+                <p>보호자들을 위한 커뮤니티까지</p>
+                <p>강아지에게 필요한 모든 것을 제공합니다!</p>
               </div>
             </Main2Subtitld>
           </div>
