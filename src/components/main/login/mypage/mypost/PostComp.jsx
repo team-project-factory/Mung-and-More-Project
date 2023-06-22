@@ -40,7 +40,7 @@ export default function PostComp() {
         const newList = [];
         querySnapshot.forEach((doc) => {
             const data = doc.data().post;
-            if (data.uid == uid) {
+            if (data!= undefined && data.uid == uid) {
                 // 이미지 참조 생성
                 const imageRef = ref(storage, data.imagePath);
                 // 이미지 다운로드 URL
@@ -68,9 +68,11 @@ export default function PostComp() {
                     {postList.map((post) => (
                         <Post key={post.id}>
                             <PostInner>
-                                <img src={post.images&&post.images[0]} alt="" />
+                                <div style={{textAlign:'center'}}>
+                                <img src={post.images&&post.images[0]} style={{width:'367px', height:'192px',objectFit:'contain'}} />
+                                </div>
                                 <PostInfo>
-                                    <Date>00.00.23</Date>
+                                    <Date>{post.date}</Date>
                                     <PostTitle>{post.title}</PostTitle>
                                     <p>{email}</p>
                                     <Goto>Go To</Goto>
