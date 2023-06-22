@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 //firebase
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { doc, updateDoc, arrayUnion, arrayRemove, getDocs, collection, getDoc  } from "firebase/firestore";
 import { db, auth } from '../../../data/firebase';
 
@@ -83,8 +83,8 @@ export const ShoppingComp = () => {
     const docRef = doc(db, "users", userUID); 
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      const likeList = docSnap.data().likeList
-      setLikeList(likeList);
+      const likeList2 = docSnap.data().likeList
+      setLikeList(likeList2);
     } 
     else {
       // docSnap.data() will be undefined in this case
@@ -98,30 +98,20 @@ export const ShoppingComp = () => {
   },[userUID]);
 
 
-  const handleNewItemList = () =>{
-    if(items && likeList){
-      const newList2 =[];
-      items.forEach((i)=>{
-        const newList = likeList.find((like)=>(i.name === like.name));
-        if(newList){
-          newList2.push(newList);
-        }
-        else{
-          newList2.push(i);
-        }
-      })
-      setNewItemList(newList2);
-    }
-  }
-
   useEffect(()=>{
-    if(userUID && newItemList){
-      setPrintItems(newItemList)
+    if(likeList){
+      const newMap = likeList.filter((i)=>(
+        items.find((l)=>(
+          i.name === l.name
+        ))
+      ))
+      setNewItemList(newMap);
     }
-  },[newItemList])
-
-
-
+  },[likeList]);
+  if(newItemList){
+    console.log(newItemList);
+  }
+  
 
   //전체 버튼
   const active1 = () =>{
@@ -129,12 +119,7 @@ export const ShoppingComp = () => {
     setBtnBool2(false);
     setBtnBool3(false);
     setBtnBool4(false);
-    if(newItemList){
-      setPrintItems(newItemList);
-    }
-    else{
-      setPrintItems(items);
-    }
+    setPrintItems(items);
   }
   //의류 버튼
   const active2 = () =>{
@@ -143,21 +128,11 @@ export const ShoppingComp = () => {
     setBtnBool3(false);
     setBtnBool4(false);
     const newList = []
-
-    if(newItemList){
-      const clothList = newItemList.filter((c)=>(
-        c.category === 'clothes'
-      ));
-      newList.push(...clothList);
-      setPrintItems(newList);
-    }
-    else{
       const clothList = items.filter((c)=>(
         c.category === 'clothes'
       ));
       newList.push(...clothList);
       setPrintItems(newList);
-    }
   }
   //식품 버튼
   const active3 = () =>{
@@ -166,20 +141,11 @@ export const ShoppingComp = () => {
     setBtnBool3(true);
     setBtnBool4(false);
     const newList = []
-    if(newItemList){
-      const clothList = newItemList.filter((c)=>(
-        c.category === 'foods'
-      ));
-      newList.push(...clothList);
-      setPrintItems(newList);
-    }
-    else{
       const clothList = items.filter((c)=>(
         c.category === 'foods'
       ));
       newList.push(...clothList);
       setPrintItems(newList);
-    }
   }
   //장난감 버튼
   const active4 = () =>{
@@ -188,20 +154,12 @@ export const ShoppingComp = () => {
     setBtnBool3(false);
     setBtnBool4(true);
     const newList = []
-    if(newItemList){
-      const clothList = newItemList.filter((c)=>(
-        c.category === 'toys'
-      ));
-      newList.push(...clothList);
-      setPrintItems(newList);
-    }
-    else{
+    
       const clothList = items.filter((c)=>(
         c.category === 'toys'
       ));
       newList.push(...clothList);
       setPrintItems(newList);
-    }
   }
 
   //좋아요 버튼
@@ -209,14 +167,31 @@ export const ShoppingComp = () => {
     if(userUID){
       if(!item.like){
         const setLikeList = async() =>{
+          item.like = true;
           const washingtonRef = doc(db, "users", userUID);
-          item.like = !item.like ;
           await updateDoc(washingtonRef, {
-            likeList: arrayUnion(item)
+            likeList: arrayUnion({
+              ...item,
+              like : true
+            })
           });
         }
         setLikeList();
         alert('좋아요!');
+      }
+      else{
+        const setLikeList = async() =>{
+          const washingtonRef = doc(db, "users", userUID);
+          item.like = false;
+          await updateDoc(washingtonRef, {
+            likeList: arrayRemove({
+              ...item,
+              like : true,
+            })
+          });
+        }
+        setLikeList();
+        alert('해제!')
       }
     }
     else{
