@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as redHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -23,19 +24,22 @@ export const ShoppingComp = () => {
   //유저 uid 생성
   const [userUID, setUserUID] = useState('');
   //버튼 배경색 변경
-  const [btnBool1, setBtnBool1] = useState(true);
-  const [btnBool2, setBtnBool2] = useState(false);
-  const [btnBool3, setBtnBool3] = useState(false);
-  const [btnBool4, setBtnBool4] = useState(false);
+  const [btn, setBtn] = useState('');
+
   // 아이템 state
   const [items, setitems] = useState('');
-  //아이템 출력할 state
-  const [printItems, setPrintItems] = useState('');
+  // 유저 아이템
+  const [items2, setitems2] = useState('');
   
-  //좋아요 배열
+  //유저 좋아요 배열
   const [likeList, setLikeList] = useState('');
   const [newItemList, setNewItemList] = useState();
 
+  const printArray = userInfor ? items2 : items ;
+  const printArray2 = btn ? printArray.filter((p)=>(p.category === btn)) : printArray ;
+
+
+  console.log(printArray2);
 
 
   //아이템 배열
@@ -48,9 +52,8 @@ export const ShoppingComp = () => {
     querySnapshot.forEach((doc) => {
       itemList.push(...doc.data().itemlist);
     });
-    const newItemList = itemList.sort((a,b)=> (a.name - b.name));
-    setitems(newItemList);
-    setPrintItems(newItemList);
+    const newItemList2 = itemList.sort((a,b)=> (a.category - b.category));
+    setitems(newItemList2);
   }
   
   //유저 기본 들고오기
@@ -72,11 +75,6 @@ export const ShoppingComp = () => {
     });
   
   }
-  //시작하자마자 shoppingItem, userUID 들고오기
-  useEffect(()=>{
-    getShoppingItems();
-    getUser();
-  },[]);
   
   //likelist 문서들고오기
   const getUserData = async() =>{
@@ -90,84 +88,67 @@ export const ShoppingComp = () => {
       // docSnap.data() will be undefined in this case
     }
   }
+  //user Item
+  const setNewUserItem = () =>{
+    if(userUID && items && likeList){
+      const newUseritem =[].sort((a,b)=> (a.name > b.name))
+      newUseritem.push(...likeList);
+      const falseItem = items.filter((item)=>(
+        !likeList.some(like => like.name === item.name)
+      ))
+      newUseritem.push(...falseItem);
+      setitems2(newUseritem);
+    }
+  }
 
+  //시작하자마자 shoppingItem, userUID 들고오기
+  useEffect(()=>{
+    getShoppingItems();
+    getUser();
+  },[]);
+  
+  
+  //유저 아이디 바뀔때 마다 유저 likelist 불러오기
   useEffect(()=>{
     if(userUID){
       getUserData();
+      setNewUserItem();
     }
   },[userUID]);
 
-
-  useEffect(()=>{
-    if(likeList){
-      const newMap = likeList.filter((i)=>(
-        items.find((l)=>(
-          i.name === l.name
-        ))
-      ))
-      setNewItemList(newMap);
-    }
-  },[likeList]);
-  if(newItemList){
-    console.log(newItemList);
-  }
   
+  //likeList가 있으면 newItemList에 넣기
+  useEffect(()=>{
+    setNewUserItem();
+  },[likeList]);
+
+  if(items2){
+    console.log(items2);
+  }
 
   //전체 버튼
   const active1 = () =>{
-    setBtnBool1(true);
-    setBtnBool2(false);
-    setBtnBool3(false);
-    setBtnBool4(false);
-    setPrintItems(items);
+    setBtn('');
   }
   //의류 버튼
   const active2 = () =>{
-    setBtnBool1(false);
-    setBtnBool2(true);
-    setBtnBool3(false);
-    setBtnBool4(false);
-    const newList = []
-      const clothList = items.filter((c)=>(
-        c.category === 'clothes'
-      ));
-      newList.push(...clothList);
-      setPrintItems(newList);
+    setBtn('clothes');
   }
   //식품 버튼
   const active3 = () =>{
-    setBtnBool1(false);
-    setBtnBool2(false);
-    setBtnBool3(true);
-    setBtnBool4(false);
-    const newList = []
-      const clothList = items.filter((c)=>(
-        c.category === 'foods'
-      ));
-      newList.push(...clothList);
-      setPrintItems(newList);
+    setBtn('foods');
   }
   //장난감 버튼
   const active4 = () =>{
-    setBtnBool1(false);
-    setBtnBool2(false);
-    setBtnBool3(false);
-    setBtnBool4(true);
-    const newList = []
-    
-      const clothList = items.filter((c)=>(
-        c.category === 'toys'
-      ));
-      newList.push(...clothList);
-      setPrintItems(newList);
+    setBtn('toys');
   }
 
   //좋아요 버튼
   const likeBtn = (item) =>{
     if(userUID){
       if(!item.like){
+        item.like = true;
         const setLikeList = async() =>{
-          item.like = true;
           const washingtonRef = doc(db, "users", userUID);
           await updateDoc(washingtonRef, {
             likeList: arrayUnion({
@@ -177,12 +158,11 @@ export const ShoppingComp = () => {
           });
         }
         setLikeList();
-        alert('좋아요!');
       }
       else{
+        item.like = false;
         const setLikeList = async() =>{
           const washingtonRef = doc(db, "users", userUID);
-          item.like = false;
           await updateDoc(washingtonRef, {
             likeList: arrayRemove({
               ...item,
@@ -191,66 +171,105 @@ export const ShoppingComp = () => {
           });
         }
         setLikeList();
-        alert('해제!')
       }
     }
     else{
       alert('로그인해주세요!');
       navigater('/login');
     }
+    setNewUserItem();
   }
 
   return (
     <div className={style.shopping_backgrd}>
       <div className={style.shoppingBox}>
         <ul className={style.shoppingBox_menu}>
-          <li className={btnBool1 ? style.active : ''}
+          <li
+          className={btn ? "" : style.active} 
           onClick={active1}
           >전체</li>
-          <li className={btnBool2 ? style.active : ''}
+          <li 
+          className={btn === 'clothes' ? style.active: ''}
           onClick={active2}
           >의류</li>
-          <li className={btnBool3 ? style.active : ''}
+          <li 
+          className={btn === 'foods' ? style.active: ''}
           onClick={active3}
           >식품</li>
-          <li className={btnBool4 ? style.active : ''}
+          <li
+          className={btn === 'toys' ? style.active: ''}
           onClick={active4}
           >장난감</li>
         </ul>
         <div>
           <Outlet context = {items && items}/>
           <ul className={style.shoppingBox_itemList}>
-            {printItems && printItems.map((item)=>(
+            {printArray2 && printArray2.map((item)=>(
               <li key={item.name}>
                 <div className={style.card}>
                   <div className={style.imgBox}>
                       <div
                       className={style.likeBtn}
-                      onClick={()=>likeBtn(item)}
+                      onClick={()=>{
+                        if(userInfor){
+                          likeBtn(item)
+                        }
+                        else{
+                          alert('로그인!')
+                        }
+                        }}
                       >
-                        {item.like ? <FontAwesomeIcon icon={redHeart} style={{fontSize:'1.5rem',color:'#FFAE21',cursor:'pointer'}}/>:<FontAwesomeIcon icon={faHeart} style={{fontSize:'1.5rem',cursor:'pointer'}}/>}
+                        {item.like ? <FontAwesomeIcon icon={redHeart} style={{fontSize:'2rem',color:'#FFAE21',cursor:'pointer'}}/>:<FontAwesomeIcon icon={faHeart} style={{fontSize:'2rem',cursor:'pointer'}}/>}
                       </div>
                     <div style={{backgroundImage:`url(${item.url})`
-                    ,width:'200px',height:'150px', backgroundSize: '200px 150px', margin:'auto'}}>
+                    ,width:'200px',height:'200px', backgroundSize: "contain",backgroundRepeat: "no-repeat",backgroundPosition: "center", margin:'auto'}}>
                     </div>
                   </div>
                   <ul className={style.textBox}>
                     <li>
-                      <p>{item.name}</p><br/>
+                      <p style={{minWidth:'150px'}}>{item.name}</p><br/>
                       <p>{item.price}&#8361;</p>
                     </li>
                     <li>
                     {
                       userInfor ? <Link to={`/shopping/${item.name}`}>
-                        <span
-                        style={{cursor:'pointer'}}
-                        >장바구니</span>
+                        <div
+                        style={{
+                          marginTop:'-10px',
+                          width:'70px',
+                          height:'70px',
+                          borderRadius:'50%',
+                          border:'1px solid #EEEEEE',
+                          cursor:'pointer',
+                          marginTop : '10px'
+                        }}
+                        >
+                          <FontAwesomeIcon
+                        icon={faCartPlus}
+                        style={{
+                          width: "45px",
+                          height: "45px",
+                          color: "#bbbbbb",
+                          padding: '16px 5px 0 0'
+                        }}
+                      />
+                        </div>
                       </Link>
                       :
-                      <span
+                      <div
                         onClick={()=>{alert('로그인 해주세요!'); navigater('/login')}}
                         style={{cursor:'pointer'}}
-                        >장바구니</span>
+                        >
+                          <FontAwesomeIcon
+                        icon={faCartPlus}
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          color: "#bbbbbb",
+                          paddingLeft: "10.5px",
+                        }}
+                      />
+                        </div>
                     }
                     </li>
                   </ul>
