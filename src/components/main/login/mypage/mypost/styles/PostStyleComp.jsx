@@ -26,11 +26,12 @@ export const PostWrap = styled.div`
     margin-bottom: 17px;
     border-radius: 10px;
     display: flex;
-    gap: 20px;
+    gap: 15px;
+    flex-wrap: wrap; 
 `
 export const Post = styled.div`
     background-color: #fff;
-    width: 365px;
+    width: 49%;
     height: 377px;
     border-radius: 15px;
     overflow: hidden;

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrap = styled.div`
     background-color: #F3F5F6;
-    /* height: 115vh; */
+    height: 115vh;
 `
 export const Title = styled.h2`
     max-width: 600px;

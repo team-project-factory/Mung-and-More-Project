@@ -1,9 +1,12 @@
-import React,{ useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Nav } from '../../../../../layout/Nav';
 
 //파이어베이스
-import { db } from '../../../../../data/firebase';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { db, storage } from '../../../../../data/firebase';
+import { getAuth, signOut, onAuthStateChanged, updateProfile, updatePassword, deleteUser } from "firebase/auth";
+import { doc, deleteDoc, collection, getDocs } from "firebase/firestore";
+import { useDispatch } from 'react-redux';
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 
 import {
     Wrap, Title, ContentWrap, PostWrap, Post, PostInner, PostInfo, Goto, Date, PostTitle
@@ -13,6 +16,8 @@ export default function PostComp() {
 
     const [email, setEmail] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false); // 추가: 로그인 상태
+    // 게시물 리스트 상태 추가
+    const [postList, setPostList] = useState([]);
 
     useEffect(() => {
         // 추가: 로그인 상태 변경 감지
@@ -21,11 +26,36 @@ export default function PostComp() {
             if (user) {
                 setIsLoggedIn(true);
                 setEmail(user.email || '');
+                // 데이터 가져오기 함수 호출
+                getData(user.uid);
             } else {
                 setIsLoggedIn(false);
             }
         });
+        
     }, []);
+
+    const getData = async (uid) => {
+        const querySnapshot = await getDocs(collection(db, 'post'));
+        const newList = [];
+        querySnapshot.forEach((doc) => {
+            const data = doc.data().post;
+            if (data!= undefined && data.uid == uid) {
+                // 이미지 참조 생성
+                const imageRef = ref(storage, data.imagePath);
+                // 이미지 다운로드 URL
+
+                newList.push({
+                    id: doc.id,
+                    imageIndex: 0,
+                    ...data
+                });
+            }
+
+        });
+        // 게시물 리스트 상태 업데이트
+        setPostList(newList);
+    }
 
     return (
         <Wrap>
@@ -35,28 +65,21 @@ export default function PostComp() {
             <Title>작성한 게시물</Title>
             <ContentWrap>
                 <PostWrap>
-                    <Post>
-                        <PostInner>
-                            <img src="./img/board1.png" alt="" />
-                            <PostInfo>
-                                <Date>00.00.23</Date>
-                                <PostTitle>Post Title</PostTitle>
-                                <p>{email}</p>
-                                <Goto>Go To</Goto>
-                            </PostInfo>
-                        </PostInner>
-                    </Post>
-                    <Post>
-                        <PostInner>
-                            <img src="./img/board1.png" alt="" />
-                            <PostInfo>
-                                <Date>00.00.23</Date>
-                                <PostTitle>Post Title</PostTitle>
-                                <p>{email}</p>
-                                <Goto>Go To</Goto>
-                            </PostInfo>
-                        </PostInner>
-                    </Post>
+                    {postList.map((post) => (
+                        <Post key={post.id}>
+                            <PostInner>
+                                <div style={{textAlign:'center'}}>
+                                <img src={post.images&&post.images[0]} style={{width:'367px', height:'192px',objectFit:'contain'}} />
+                                </div>
+                                <PostInfo>
+                                    <Date>{post.date}</Date>
+                                    <PostTitle>{post.title}</PostTitle>
+                                    <p>{email}</p>
+                                    <Goto>Go To</Goto>
+                                </PostInfo>
+                            </PostInner>
+                        </Post>
+                    ))}
                 </PostWrap>
             </ContentWrap>
         </Wrap>
