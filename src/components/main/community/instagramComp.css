@@ -17,11 +17,13 @@
 .insta-title {
     margin: 0 10px;
     text-align: left;
+    font-weight: 500;
 }
 .insta-sub {
-    font-size: 0.8rem;
+    font-size: 1.1rem;
     text-align: left;
     margin-left: 1.5%;
+    font-weight: 500;
 }
 
 .logo {
@@ -29,7 +31,7 @@
     height: 60px;
     margin: 20px;
     margin-left: 25px;
-    border: 2px solid black;
+    /* border: 2px solid #b6b6b6; */
     border-radius: 50%;
 }
 .logo img {
@@ -110,6 +112,7 @@
     margin-top: 10px;
     font-size: 1.2rem;
     margin-left: 2.6%;
+    font-weight: 500;
 }
 
 .message {
@@ -248,7 +251,7 @@
     margin-bottom: 20px;
     margin-left: 75%;
     border: 2px solid rgb(211, 204, 204);
-    box-shadow: #cacaca 1px 1px 1px 1px;
+    box-shadow: 0px 0px rgba(0, 0, 13, 0.05);
     border-radius: 50%;
     width: 70px;
     height: 70px;
