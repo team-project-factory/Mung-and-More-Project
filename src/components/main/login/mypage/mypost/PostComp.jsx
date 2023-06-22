@@ -68,9 +68,7 @@ export default function PostComp() {
                     {postList.map((post) => (
                         <Post key={post.id}>
                             <PostInner>
-                                <div style={{textAlign:'center'}}>
-                                <img src={post.images&&post.images[0]} style={{width:'367px', height:'192px',objectFit:'contain'}} />
-                                </div>
+                                <img src={post.images&&post.images[0]} style={{width:'100%', height:'192px',padding: '15px 0',objectFit:'contain'}} />
                                 <PostInfo>
                                     <Date>{post.date}</Date>
                                     <PostTitle>{post.title}</PostTitle>

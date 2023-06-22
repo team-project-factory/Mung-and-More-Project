@@ -32,7 +32,7 @@ export const PostWrap = styled.div`
 export const Post = styled.div`
     background-color: #fff;
     width: 49%;
-    height: 377px;
+    height: 100%;
     border-radius: 15px;
     overflow: hidden;
 `

@@ -31,8 +31,8 @@ export default function ListComp({ children, content, bgColor, ...rest }) {
     justify-content: space-between;
     width: 815px;
     padding: 20px;
-    border-top: ${(props) =>
-      removeBorderTop ? "none" : "0.7px solid #c9c9c9"};
+    /* border-top: ${(props) =>
+      removeBorderTop ? "none" : "0.7px solid #c9c9c9"}; */
     margin-bottom: 5px;
     padding-top: 25px;
 
@@ -77,13 +77,16 @@ export default function ListComp({ children, content, bgColor, ...rest }) {
   // List의 active, deactive 상태에 따라 적용될 스타일
   const ActiveList = styled(List)`
     font-family: "SUITE-Bold";
-    font-weight: bold;
+    /* font-weight: bold; */
+    background-color: #f5f5f5;
+      border-radius: 12px;
   `;
 
   const DeactiveList = styled(List)`
     &:hover {
       font-family: "SUITE-Bold";
-      font-weight: bold;
+      background-color: #f5f5f5;
+      border-radius: 12px;
     }
   `;
 
