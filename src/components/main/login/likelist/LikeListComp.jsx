@@ -14,6 +14,8 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 // react
 import React, { useEffect, useState } from "react";
 
+// component
+
 // scss
 import style from "./likeListComp.module.scss";
 
@@ -155,7 +157,10 @@ export const LikeListComp = () => {
                           height: "30px",
                           color: "#bbbbbb",
                           paddingLeft: "10.5px",
+                          paddingTop: "13.5px",
                         }}
+                        // 모달 표시 이벤트
+                        // onClick={openModal}
                       />
                     </div>
                   </div>
@@ -164,6 +169,8 @@ export const LikeListComp = () => {
           </div>
         </div>
       </div>
+      {/* 모달 컴포넌트 표시 */}
+      {/* showModal && <CartModalComp closeModal={closeModal} />*/}
     </div>
   );
 };
