@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as redHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -209,7 +210,14 @@ export const ShoppingComp = () => {
                   <div className={style.imgBox}>
                       <div
                       className={style.likeBtn}
-                      onClick={()=>likeBtn(item)}
+                      onClick={()=>{
+                        if(userInfor){
+                          likeBtn(item)
+                        }
+                        else{
+                          alert('로그인!')
+                        }
+                        }}
                       >
                         {item.like ? <FontAwesomeIcon icon={redHeart} style={{fontSize:'2rem',color:'#FFAE21',cursor:'pointer'}}/>:<FontAwesomeIcon icon={faHeart} style={{fontSize:'2rem',cursor:'pointer'}}/>}
                       </div>
@@ -219,21 +227,49 @@ export const ShoppingComp = () => {
                   </div>
                   <ul className={style.textBox}>
                     <li>
-                      <p>{item.name}</p><br/>
+                      <p style={{minWidth:'150px'}}>{item.name}</p><br/>
                       <p>{item.price}&#8361;</p>
                     </li>
                     <li>
                     {
                       userInfor ? <Link to={`/shopping/${item.name}`}>
-                        <span
-                        style={{cursor:'pointer'}}
-                        >장바구니</span>
+                        <div
+                        style={{
+                          marginTop:'-10px',
+                          width:'70px',
+                          height:'70px',
+                          borderRadius:'50%',
+                          border:'1px solid #EEEEEE',
+                          cursor:'pointer',
+                          marginTop : '10px'
+                        }}
+                        >
+                          <FontAwesomeIcon
+                        icon={faCartPlus}
+                        style={{
+                          width: "45px",
+                          height: "45px",
+                          color: "#bbbbbb",
+                          padding: '16px 5px 0 0'
+                        }}
+                      />
+                        </div>
                       </Link>
                       :
-                      <span
+                      <div
                         onClick={()=>{alert('로그인 해주세요!'); navigater('/login')}}
                         style={{cursor:'pointer'}}
-                        >장바구니</span>
+                        >
+                          <FontAwesomeIcon
+                        icon={faCartPlus}
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          color: "#bbbbbb",
+                          paddingLeft: "10.5px",
+                        }}
+                      />
+                        </div>
                     }
                     </li>
                   </ul>

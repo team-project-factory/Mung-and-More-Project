@@ -46,7 +46,7 @@ function App() {
           <Route path="/community/:id" element={<InstagramComp/>}/>
         </Route>
         <Route path="/mungsnews" element={<MungsNews/>}>
-          <Route path="/mungsnews/:name" element={<MungsNewsContents/>} />
+          <Route path="/mungsnews/:id" element={<MungsNewsContents/>} />
         </Route>
         <Route path="/createpostcomp" element={<CreatePost/>}/>
 
