@@ -13,6 +13,9 @@ export const MainComp6 = () => {
         Go to information
       </GoBtn>
       </a>
+      <div style={{marginLeft:"30%"}}>
+        <img src="/img/mainDog6.gif" style={{width:'300px'}} />
+      </div>
     </div>
   )
 }

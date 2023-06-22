@@ -57,12 +57,18 @@ export const MainComp1 = () => {
   
 
   return (
-    <div style={{ minWidth: '1920px', height: '100vh', overflow: 'hidden', textAlign: 'center' }}>
+    <div style={{ minWidth: '1920px', height: '100vh', overflow: 'hidden', textAlign: 'center'}}>
+      
       {/* <TitleCircle>
         <img src="/img/circle.png" alt="" style={{ width: '730px' }} />
       </TitleCircle> */}
       <DogCircle>
-        <img src="/img/maindog2.png" style={{ width: '550px' }} />
+        <div style={{position:"absolute", right:"300px", bottom:"275px"}}>
+          <img src="/img/maindog7.gif" style={{ width: '250px'}} />
+        </div>
+        <div style={{position:"absolute", right:"1150px", bottom:"10px"}}>
+          <img src="/img/mainDog55.gif" style={{width:'800px'}} />
+        </div>
       </DogCircle>
       <div class="cursor">
   <div class="cursor__inner"></div>
