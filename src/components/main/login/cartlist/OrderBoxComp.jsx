@@ -81,7 +81,7 @@ export const OrderBoxComp = () => {
     }
   }, [userUID]);
 
-  const checkedList = cartList.filter((cart) => cart.check);
+  const checkedList = cartList ? cartList.filter((cart) => cart.check): '';
 
   const goPayment = () => {
     if (checkedList.length === 0) {
@@ -134,11 +134,13 @@ export const OrderBoxComp = () => {
 
   // 총 상품금액 계산 함수
   function calculateTotalPrice(checkedList) {
-    let totalPrice = 0;
-    checkedList.forEach((item) => {
-      totalPrice += calculatePrice(item);
-    });
-    return totalPrice;
+    if(checkedList){
+      let totalPrice = 0;
+      checkedList.forEach((item) => {
+        totalPrice += calculatePrice(item);
+      });
+      return totalPrice;
+    }
   }
 
   // 우편번호 검색

@@ -1,24 +1,32 @@
-
-
-.infor_modal{
-  text-align: center;
+.infor_back{
+  top: 0;
+  z-index: 100;
   position: fixed;
-  width: 800px;
-  height: 500px;
-  border: 3px solid black ;
-  left: 50%;
-  transform: translate(-50%, 0);
-  display: flex;
-  background-color: white;
-  padding: 20px;
-  .infor_modal_cart{
-    width: 600px;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba($color: #000000, $alpha: 0.3);
+  .infor_modal{
+    position: relative;
+    text-align: center;
+    width: 1000px;
+    height: 600px;
+    border: 3px solid black ;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
-  }
-  li{
-    width: 50%;
-  }
-  .infro_modal_setCart{
-
+    background-color: white;
+    padding: 20px;
+    .infor_modal_cart{
+      width: 600px;
+      display: flex;
+    }
+    li{
+      border: 2px solid black ;
+      width: 50%;
+    }
+    .infro_modal_setCart{
+  
+    }
   }
 }

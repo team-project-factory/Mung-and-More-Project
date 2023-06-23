@@ -177,6 +177,7 @@ export const ShoppingComp = () => {
 
   return (
     <div className={style.shopping_backgrd}>
+      <Outlet context={items && items} />
       <div className={style.shoppingBox}>
         <ul className={style.shoppingBox_menu}>
           <li className={btn ? "" : style.active} onClick={active1}>
@@ -195,9 +196,6 @@ export const ShoppingComp = () => {
             장난감
           </li>
         </ul>
-        <div>
-          <Outlet context={items && items} />
-
           {/* 상품 정보 카드 형태로 표시 */}
           <div className={style.shoppingBox_itemList}>
             {printArray2 &&
@@ -239,6 +237,7 @@ export const ShoppingComp = () => {
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "center",
                         margin: "auto",
+                        marginTop:'-20px'
                       }}
                     ></div>
                   </div>
@@ -288,7 +287,6 @@ export const ShoppingComp = () => {
                 </div>
               ))}
           </div>
-        </div>
       </div>
     </div>
   );

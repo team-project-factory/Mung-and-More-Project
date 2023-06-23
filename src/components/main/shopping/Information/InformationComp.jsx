@@ -88,7 +88,7 @@ export default function InformationComp() {
   };
 
   return (
-    <div>
+    <div className={style.infor_back}>
       <div className={style.infor_modal}>
         <ul className={style.infor_modal_cart}>
           <li>img</li>

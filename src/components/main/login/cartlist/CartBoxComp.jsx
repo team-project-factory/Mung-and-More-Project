@@ -132,6 +132,7 @@ export const CartBoxComp = () => {
       };
       deleteItem();
       getData();
+      dispatch(getCartData(''));
     }
   };
 
