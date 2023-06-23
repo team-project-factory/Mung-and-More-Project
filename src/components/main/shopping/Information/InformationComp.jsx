@@ -1,10 +1,15 @@
+// react
 import React, { useEffect, useRef, useState } from "react";
 import style from "./informationcomp.module.scss";
 import { useNavigate, useOutletContext, useParams } from "react-router";
 
+// firebase
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db, auth } from "../../../../data/firebase";
+
+// image slider
+import ImgSliderComp from "./ImgSliderComp";
 
 export default function InformationComp() {
   const user = JSON.parse(sessionStorage.getItem("user"));
@@ -79,13 +84,19 @@ export default function InformationComp() {
       setCartList();
       setSuccessBtn(true);
     } else {
-      alert("수량을 1개이상으로 해주세요!");
+      alert("1개부터 구매 가능하다멍 🐶");
     }
   };
 
   const cartBtn = () => {
     if (user) {
       navigater("/cartlist");
+    }
+  };
+
+  const keepShoppingBtn = () => {
+    if (user) {
+      navigater("/shopping");
     }
   };
 
@@ -101,8 +112,10 @@ export default function InformationComp() {
     >
       <div className={style.infor_modal}>
         <ul className={style.infor_modal_cart}>
-          <li>img</li>
-          <li>
+          <li className={style.ImgSlider}>
+            <ImgSliderComp />
+          </li>
+          <li className={style.ItemBuyBox}>
             <p>{itemName}</p>
             <p>{itemInfo.price}</p>
             <p>
@@ -131,7 +144,8 @@ export default function InformationComp() {
           style={successBtn ? { display: "" } : { display: "none" }}
         >
           <h3>장바구니에 담았습니다!</h3>
-          <button onClick={cartBtn}>확인</button>
+          <button onClick={cartBtn}>장바구니로 이동</button>
+          <button onClick={keepShoppingBtn}>쇼핑 계속하기</button>
         </div>
       </div>
     </div>
