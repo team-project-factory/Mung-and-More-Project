@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import style from "./informationcomp.module.scss";
 import { useNavigate, useOutletContext, useParams } from "react-router";
 
@@ -10,6 +10,8 @@ export default function InformationComp() {
   const user = JSON.parse(sessionStorage.getItem("user"));
   const navigater = useNavigate();
   const param = useParams().name;
+  const outside = useRef();
+
   //유저 아이디
   const [userUID, setUserUID] = useState("");
   //파람값
@@ -88,7 +90,15 @@ export default function InformationComp() {
   };
 
   return (
-    <div className={style.infor_back}>
+    <div
+      ref={outside}
+      className={style.infor_back}
+      onClick={(e) => {
+        if (e.target == outside.current) {
+          navigater(-1);
+        }
+      }}
+    >
       <div className={style.infor_modal}>
         <ul className={style.infor_modal_cart}>
           <li>img</li>

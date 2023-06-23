@@ -123,12 +123,12 @@ export const LikeListComp = () => {
                       {item.like ? (
                         <FontAwesomeIcon
                           icon={redHeart}
-                          style={{ fontSize: "1.5rem", color: "red" }}
+                          style={{ fontSize: "1.5rem", color: "#FFAE21" }}
                         />
                       ) : (
                         <FontAwesomeIcon
                           icon={faHeart}
-                          style={{ fontSize: "1.5rem" }}
+                          style={{ fontSize: "1.5rem", color: "#FFAE21" }}
                         />
                       )}
                     </div>
