@@ -185,9 +185,12 @@ export default function CreatePostComp() {
       type="text" value={inputDes} onChange={handleDesChange} /> <br />
 
       <span>Pictures  </span>
+      <div className='pictures-wrap'>
       <input 
       className='img-1'
+      style={{height:'24px', borderColor:'transparent', padding:'0'}}
       type="file" multiple={true} onChange={handleFile} /> <br />
+      </div>
 
       </div>
       <button className='complete-btn' onClick={addPost}>작성 완료</button>
