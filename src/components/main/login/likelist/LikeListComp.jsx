@@ -100,7 +100,7 @@ export const LikeListComp = () => {
         };
         deleteLikeList();
       }
-      getUserData();
+      getData();
     }
   };
 
