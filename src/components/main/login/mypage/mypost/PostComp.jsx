@@ -11,8 +11,10 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import {
     Wrap, Title, ContentWrap, PostWrap, Post, PostInner, PostInfo, Goto, Date, PostTitle
 } from './styles/PostStyleComp'
+import { useNavigate } from 'react-router-dom';
 
 export default function PostComp() {
+    const navigater = useNavigate()    
 
     const [email, setEmail] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false); // 추가: 로그인 상태
@@ -56,7 +58,7 @@ export default function PostComp() {
         // 게시물 리스트 상태 업데이트
         setPostList(newList);
     }
-
+    console.log(postList);
     return (
         <Wrap>
             <div style={{ position: "relative", top: "50px" }}>
@@ -73,7 +75,7 @@ export default function PostComp() {
                                     <Date>{post.date}</Date>
                                     <PostTitle>{post.title}</PostTitle>
                                     <p>{email}</p>
-                                    <Goto>Go To</Goto>
+                                    <Goto onClick={()=>{navigater(`/community/${post.id}`)}}>Go To</Goto>
                                 </PostInfo>
                             </PostInner>
                         </Post>
