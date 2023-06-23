@@ -189,80 +189,64 @@ export const ShoppingComp = () => {
             장난감
           </li>
         </ul>
-          {/* 상품 정보 카드 형태로 표시 */}
-          <div className={style.shoppingBox_itemList}>
-            {printArray2 &&
-              printArray2.map((item) => (
-                <div className={style.card}>
-                  <div className={style.imgBox}>
-                    <div
-                      className={style.likeBtn}
-                      onClick={() => {
-                        if (userInfor) {
-                          likeBtn(item);
-                        } else {
-                          alert("로그인!");
-                        }
-                      }}
-                    >
-                      {item.like ? (
-                        <FontAwesomeIcon
-                          icon={redHeart}
-                          style={{
-                            fontSize: "1.5rem",
-                            color: "#FFAE21",
-                            cursor: "pointer",
-                          }}
-                        />
-                      ) : (
-                        <FontAwesomeIcon
-                          icon={faHeart}
-                          style={{ fontSize: "1.5rem", cursor: "pointer" }}
-                        />
-                      )}
-                    </div>
-                    <div
-                      style={{
-                        backgroundImage: `url(${item.url})`,
-                        width: "200px",
-                        height: "150px",
-                        backgroundSize: "contain",
-                        backgroundRepeat: "no-repeat",
-                        backgroundPosition: "center",
-                        margin: "auto",
-                        marginTop:'-20px'
-                      }}
-                    ></div>
+        {/* 상품 정보 카드 형태로 표시 */}
+        <div className={style.shoppingBox_itemList}>
+          {printArray2 &&
+            printArray2.map((item) => (
+              <div className={style.card}>
+                <div className={style.imgBox}>
+                  <div
+                    className={style.likeBtn}
+                    onClick={() => {
+                      if (userInfor) {
+                        likeBtn(item);
+                      } else {
+                        alert("로그인!");
+                      }
+                    }}
+                  >
+                    {item.like ? (
+                      <FontAwesomeIcon
+                        icon={redHeart}
+                        style={{
+                          fontSize: "1.5rem",
+                          color: "#FFAE21",
+                          cursor: "pointer",
+                        }}
+                      />
+                    ) : (
+                      <FontAwesomeIcon
+                        icon={faHeart}
+                        style={{
+                          fontSize: "1.5rem",
+                          cursor: "pointer",
+                          color: "#FFAE21",
+                        }}
+                      />
+                    )}
                   </div>
-                  <div className={style.infoBox}>
-                    <div className={style.textBox}>
-                      <div style={{ fontSize: "1.2rem" }}>{item.name}</div>
-                      <div style={{ fontSize: "1.1rem" }}>{item.price}₩</div>
-                    </div>
-                    <div className={style.cartBtn}>
-                      {userInfor ? (
-                        <Link to={`/shopping/${item.name}`}>
-                          <div>
-                            <FontAwesomeIcon
-                              icon={faCartPlus}
-                              style={{
-                                width: "30px",
-                                height: "30px",
-                                color: "#bbbbbb",
-                                paddingLeft: "10.5px",
-                                paddingTop: "13.5px",
-                              }}
-                            />
-                          </div>
-                        </Link>
-                      ) : (
-                        <div
-                          onClick={() => {
-                            alert("로그인 해 주세요!");
-                            navigater("/login");
-                          }}
-                          style={{ cursor: "pointer" }}
-                        >
+                  <div
+                    style={{
+                      backgroundImage: `url(${item.url})`,
+                      width: "200px",
+                      height: "150px",
+                      backgroundSize: "contain",
+                      backgroundRepeat: "no-repeat",
+                      backgroundPosition: "center",
+                      margin: "auto",
+                      marginTop: "-20px",
+                    }}
+                  ></div>
+                </div>
+                <div className={style.infoBox}>
+                  <div className={style.textBox}>
+                    <div style={{ fontSize: "1.2rem" }}>{item.name}</div>
+                    <div style={{ fontSize: "1.1rem" }}>{item.price}₩</div>
+                  </div>
+                  <div className={style.cartBtn}>
+                    {userInfor ? (
+                      <Link to={`/shopping/${item.name}`}>
+                        <div>
                           <FontAwesomeIcon
                             icon={faCartPlus}
                             style={{
@@ -274,12 +258,32 @@ export const ShoppingComp = () => {
                             }}
                           />
                         </div>
-                      )}
-                    </div>
+                      </Link>
+                    ) : (
+                      <div
+                        onClick={() => {
+                          alert("로그인 해 주세요!");
+                          navigater("/login");
+                        }}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <FontAwesomeIcon
+                          icon={faCartPlus}
+                          style={{
+                            width: "30px",
+                            height: "30px",
+                            color: "#bbbbbb",
+                            paddingLeft: "10.5px",
+                            paddingTop: "13.5px",
+                          }}
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
-              ))}
-          </div>
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );
