@@ -160,7 +160,7 @@ export default function CreatePostComp() {
       <span>Title  </span>
       <input
       className='title-1'
-      placeholder='50자 이내로 입력'
+      placeholder='20자 이내로 입력'
       type="text" value={inputTitle} onChange={handleTitleChange} /> <br />
 
       <span>Sub Title  </span>
