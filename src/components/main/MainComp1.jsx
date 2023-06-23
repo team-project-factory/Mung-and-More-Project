@@ -57,7 +57,7 @@ export const MainComp1 = () => {
   
 
   return (
-    <div style={{ minWidth: '1920px', height: '100vh', overflow: 'hidden', textAlign: 'center'}}>
+    <div style={{minHeight: '100vh', overflow: 'hidden', textAlign: 'center'}}>
       
       {/* <TitleCircle>
         <img src="/img/circle.png" alt="" style={{ width: '730px' }} />

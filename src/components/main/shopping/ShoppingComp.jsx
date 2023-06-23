@@ -43,9 +43,6 @@ export const ShoppingComp = () => {
   const printArray2 = btn
     ? printArray.filter((p) => p.category === btn)
     : printArray;
-
-  console.log(printArray2);
-
   //아이템 배열
   const itemList = [];
 
@@ -55,7 +52,7 @@ export const ShoppingComp = () => {
     querySnapshot.forEach((doc) => {
       itemList.push(...doc.data().itemlist);
     });
-    const newItemList2 = itemList.sort((a, b) => a.category - b.category);
+    const newItemList2 = itemList.sort((a,b)=>a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
     setitems(newItemList2);
   };
 
@@ -90,13 +87,13 @@ export const ShoppingComp = () => {
   //user Item
   const setNewUserItem = () => {
     if (userUID && items && likeList) {
-      const newUseritem = [].sort((a, b) => a.name > b.name);
+      const newUseritem = [];
       newUseritem.push(...likeList);
       const falseItem = items.filter(
         (item) => !likeList.some((like) => like.name === item.name)
       );
       newUseritem.push(...falseItem);
-      setitems2(newUseritem);
+      setitems2(newUseritem.sort((a,b)=>a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
     }
   };
 
@@ -118,10 +115,6 @@ export const ShoppingComp = () => {
   useEffect(() => {
     setNewUserItem();
   }, [likeList]);
-
-  if (items2) {
-    console.log(items2);
-  }
 
   //전체 버튼
   const active1 = () => {
