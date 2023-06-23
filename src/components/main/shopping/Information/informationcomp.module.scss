@@ -5,11 +5,13 @@
   width: 100%;
   height: 100vh;
   background-color: rgba($color: #000000, $alpha: 0.3);
+
+  // 모달 전체
   .infor_modal {
     z-index: 60;
     position: relative;
     text-align: center;
-    width: 1000px;
+    width: 900px;
     height: 600px;
     border: 3px solid black;
     top: 50%;
@@ -18,15 +20,25 @@
     display: flex;
     background-color: white;
     padding: 20px;
+
+    // 모달 내부 내용 영역 전체
     .infor_modal_cart {
-      width: 600px;
+      width: 900px;
       display: flex;
     }
-    li {
-      border: 2px solid black;
-      width: 50%;
-    }
-    .infro_modal_setCart {
+
+    // 구매하기 버튼 누를 시 나오는 div -> 장바구니에 담았습니다! 알림창
+    .infor_modal_setCart {
     }
   }
+}
+
+.ImgSlider {
+  width: 500px;
+  border: 1px solid blue;
+}
+
+.ItemBuyBox {
+  width: 500px;
+  border: 1px solid blue;
 }
