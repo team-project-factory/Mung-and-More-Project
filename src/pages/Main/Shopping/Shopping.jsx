@@ -5,7 +5,7 @@ import { Nav } from '../../../layout/Nav'
 
 export const Shopping = () => {
   return (
-    <div style={{overflowX:'hidden'}}>
+    <div>
       <div style={{width : `100%`, position :`relative`, top:'50px'}}>
         <Nav/>
       </div>
