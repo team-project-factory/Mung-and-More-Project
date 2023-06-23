@@ -123,12 +123,12 @@ export const LikeListComp = () => {
                       {item.like ? (
                         <FontAwesomeIcon
                           icon={redHeart}
-                          style={{ fontSize: "1.5rem", color: "#FFAE21" }}
+                          style={{ fontSize: "1.4rem", color: "#FFAE21" }}
                         />
                       ) : (
                         <FontAwesomeIcon
                           icon={faHeart}
-                          style={{ fontSize: "1.5rem", color: "#FFAE21" }}
+                          style={{ fontSize: "1.4rem", color: "#FFAE21" }}
                         />
                       )}
                     </div>
@@ -153,11 +153,11 @@ export const LikeListComp = () => {
                       <FontAwesomeIcon
                         icon={faCartPlus}
                         style={{
-                          width: "30px",
-                          height: "30px",
-                          color: "#bbbbbb",
-                          paddingLeft: "10.5px",
-                          paddingTop: "13.5px",
+                          width: "21px",
+                          height: "21px",
+                          color: "#c2c2c2",
+                          paddingLeft: "11.5px",
+                          paddingTop: "12.5px",
                         }}
                       />
                     </div>
