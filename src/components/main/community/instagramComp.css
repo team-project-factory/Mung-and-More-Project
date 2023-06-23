@@ -193,6 +193,7 @@
     text-align: center;
     width: 600px;
     height: 800px;
+    padding: 30px 0 20px;
 }
 
 .create-container h2 {
@@ -206,7 +207,7 @@
 
 .create-container input {
     width: 600px;
-    margin-top: 5px;
+    margin-top: 10px;
     border: 1px solid #dbdbdb;
     border-radius: 5px;
     height: 38px;
@@ -231,7 +232,7 @@
     resize: none;
     border: 1px solid #dbdbdb;
     border-radius: 5px;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 .img-1{
     padding: 10px 0;
@@ -247,6 +248,7 @@
     border: none;
     border-radius: 20px;
     background-color: #C2DCF4;
+    cursor: pointer;
 }
 
 .create-post {
@@ -268,4 +270,11 @@
     padding: 15px;
     width: 40px;
     height: 40px;
+}
+.pictures-wrap{
+    margin-top: 10px;
+    /* background-color: aliceblue; */
+    padding: 13px 20px 28px;
+    border: 1px dashed #dbdbdb;
+    border-radius: 5px;
 }
