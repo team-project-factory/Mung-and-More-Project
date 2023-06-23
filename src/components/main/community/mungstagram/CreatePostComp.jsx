@@ -106,7 +106,6 @@ export default function CreatePostComp() {
       const imagesUrls = await uploadFiles();
       const docRef = await addDoc(collection(db, "post"), {
         post:{
-          uid : uid, // 게시물 ID 추가
           title : inputTitle,
           sub : inputSub,
           hash :inputHash,
