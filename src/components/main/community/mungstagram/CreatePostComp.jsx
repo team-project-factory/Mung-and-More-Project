@@ -187,6 +187,7 @@ export default function CreatePostComp() {
       <span>Pictures  </span>
       <input 
       className='img-1'
+      style={{height:'24px', borderColor:'transparent', padding:'0'}}
       type="file" multiple={true} onChange={handleFile} /> <br />
 
       </div>
