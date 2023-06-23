@@ -114,6 +114,7 @@ export default function InformationComp() {
       <div className={style.infor_modal}>
         <ul className={style.infor_modal_cart}>
           <li className={style.ImgSlider}>
+            {/* 상품 상세 사진 슬라이더 */}
             <ImgSliderComp />
           </li>
           <li className={style.ItemBuyBox}>
