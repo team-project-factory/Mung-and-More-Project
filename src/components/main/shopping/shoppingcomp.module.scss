@@ -1,13 +1,15 @@
 .shopping_backgrd {
+  width: 1800px;
   min-height: 70vh;
   padding-top: 110px;
+  width: 100%;
   .shoppingBox {
-    width: 1640px;
+    width: 1500px;
     margin: auto;
     .shoppingBox_menu {
       display: flex;
       padding: 2%;
-      padding-left: 13%;
+      padding-left: 18%;
       padding-bottom: 3%;
       li {
         text-align: center;
@@ -50,13 +52,13 @@
 .imgBox {
   border-radius: 20px 20px 0 0;
   width: 220px;
-  height: 200px;
+  height: 180px;
   padding: 20px;
   padding-top: 15px;
+  padding-left: 25px;
   padding-bottom: 23px;
   border-bottom: 1px solid #eeeeee;
-  position: relative;
-  top: -20px;
+
 }
 
 .likeBtn {
@@ -70,15 +72,13 @@
   width: 42px;
   height: 42px;
   margin-left: 180px;
-  position: relative;
-  top: 20px;
 }
 
 .infoBox {
   display: flex;
-  justify-content: space-between;
-  position: relative;
-  top: -16.5px;
+  margin: -16.5px;
+  margin-left: 25px;
+  padding-top: 10px;
 }
 
 .textBox {
@@ -89,15 +89,13 @@
   height: 80px;
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
-  margin-left: 15px;
-  padding: 10px;
+  margin-top: 15px;
+  padding: 15px;
 }
 
 .cartBtn {
   margin: 35px;
-  margin-right: 23px;
-  margin-top: 30px;
+  margin-top: 38px;
   width: 53px;
   height: 53px;
   border: 1px solid #dfdfdf;

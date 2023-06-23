@@ -15,6 +15,7 @@
 }
 
 .insta-title {
+    min-width: 20%;
     margin: 0 10px;
     text-align: left;
     font-weight: 500;
