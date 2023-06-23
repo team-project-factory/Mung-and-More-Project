@@ -79,7 +79,7 @@ export default function InstagramComp() {
     const newCommentList = commentList2.filter((c) => (c.id === param.id));
     setCommentList(newCommentList);
   }
-
+ 
 
   useEffect(() => {
     getData();
