@@ -23,7 +23,6 @@ export default function InformationComp() {
   const [itemName, setItemName] = useState("");
   //아이템 정보들
   const [itemInfo, setItemInfo] = useState("");
-  console.log(itemInfo);
   // props로 들고온 아이템 배열 들고오기
   const [itemList, setItemList] = useState("");
   // 구매수량
@@ -64,13 +63,12 @@ export default function InformationComp() {
     setItemName(param);
     setItemList(outletProps);
     getUser();
+    findItem();
   }, []);
 
   useEffect(() => {
     findItem();
   }, [itemList]);
-  console.log(itemName);
-  console.log(itemList);
 
   //버튼 누를시 장바구니 추가
   const buyBtn = () => {
@@ -115,7 +113,7 @@ export default function InformationComp() {
         <ul className={style.infor_modal_cart}>
           <li className={style.ImgSlider}>
             {/* 상품 상세 사진 슬라이더 */}
-            <ImgSliderComp />
+            <ImgSliderComp item={itemInfo}/>
           </li>
           <li className={style.ItemBuyBox}>
             <p>{itemName}</p>
