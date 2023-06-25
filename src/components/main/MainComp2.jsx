@@ -25,7 +25,7 @@ export const MainComp2 = () => {
 },[])
 
   return (
-    <div style={{backgroundColor : 'white', height : `108vh`, padding: '30px 0'}}>
+    <div style={{backgroundColor : 'white', minHeight : `108vh`, padding: '30px 0', position:'relative'}}>
       <MainTitle>
         <div className='main-wrap'>
           <div className='main-scroll' id='intro'>

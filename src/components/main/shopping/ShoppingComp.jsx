@@ -270,11 +270,11 @@ export const ShoppingComp = () => {
                         <FontAwesomeIcon
                           icon={faCartPlus}
                           style={{
-                            width: "30px",
-                            height: "30px",
-                            color: "#bbbbbb",
-                            paddingLeft: "10.5px",
-                            paddingTop: "13.5px",
+                            width: "21px",
+                            height: "21px",
+                            color: "#c2c2c2",
+                            paddingLeft: "11.5px",
+                            paddingTop: "12.5px",
                           }}
                         />
                       </div>

@@ -13,24 +13,38 @@ export default function ImgSliderComp(props) {
     slidesToScroll: 1,
   };
 
+  const item = props.item.info;
+
   return (
     <div>
-      <Slider {...settings}>
-        <div>
-          <img src={require("./InfoImg/001.png")} className="Img" />
-        </div>
-        <div>
-          <img src={require("./InfoImg/002.png")} className="Img" />
-        </div>
-        <div>
-          <img src={require("./InfoImg/003.png")} className="Img" />
-        </div>
-        <div>
-          <img src={require("./InfoImg/004.png")} className="Img" />
-        </div>
-        <div>
-          <img src={require("./InfoImg/006.png")} className="Img" />
-        </div>
+      <Slider {...settings}> 
+        {
+          item && item.map((i)=>(
+            <div>
+              <img src={i} className="Img" />
+            </div>
+          ))
+        }
+
+        { /**
+          <div>
+            <img src={require("./InfoImg/001.png")} className="Img" />
+          </div>
+          <div>
+            <img src={require("./InfoImg/002.png")} className="Img" />
+          </div>
+          <div>
+            <img src={require("./InfoImg/003.png")} className="Img" />
+          </div>
+          <div>
+            <img src={require("./InfoImg/004.png")} className="Img" />
+          </div>
+          <div>
+            <img src={require("./InfoImg/006.png")} className="Img" />
+          </div>
+         * 
+         */
+        }
       </Slider>
     </div>
   );

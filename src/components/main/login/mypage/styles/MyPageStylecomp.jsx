@@ -5,7 +5,7 @@ import { TextField, FilledInput, IconButton } from '@mui/material';
 
 export const Wrap = styled.div`
     background-color: #F3F5F6;
-    height: 115vh;
+    min-height: 130vh;
 `
 export const ContentWrap = styled.div`
     max-width: 1000px;
