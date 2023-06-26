@@ -106,6 +106,7 @@ export default function CreatePostComp() {
       const imagesUrls = await uploadFiles();
       const docRef = await addDoc(collection(db, "post"), {
         post:{
+          uid : uid,
           title : inputTitle,
           sub : inputSub,
           hash :inputHash,
