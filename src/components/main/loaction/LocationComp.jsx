@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-
 // 파이어스토어 데이터 읽기
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../data/firebase";
 
 //css
 import style from "./loactioncomp.module.scss";
+import { faHandPointDown } from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // script로 kakao map을 들고오면 window 전역 객체에 들어가기 떄문에
 // 함수형 컴포넌트에서 인식하지 못함
@@ -288,6 +289,12 @@ export const LocationComp = () => {
       </div>
 
       <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{position:"relative"}}>
+          <span style={{position:"absolute", left:"90px", top:"50px", width:"250px", fontSize:"17px", fontFamily:"SUITE-Medium"}}>
+          👇
+            지도 위 아이콘을 클릭해보세요!
+            </span>
+        </div>
         <div
           id="map"
           style={{ width: "650px", height: "587px", margin: "5%" }}
