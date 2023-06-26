@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './instagramComp.css'
 import style from './instagramComp.module.scss'
 import { faHeart, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
-import { faComment, faPaperPlane, faBookmark } from '@fortawesome/free-regular-svg-icons'
+import { faComment, faPaperPlane, faBookmark,faTrashCan } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { doc, updateDoc, arrayRemove, collection, getDocs, deleteDoc,arrayUnion } from 'firebase/firestore';
 import {auth, db,storage } from '../../../data/firebase';
@@ -190,9 +190,10 @@ export default function InstagramComp() {
       post.imageIndex = index;
       setNewList2([...newList2]);
     }
+    
   }
 
-  
+  console.log(uid)
 
   return (
           <div className={style.mungsList_news}>
@@ -212,16 +213,20 @@ export default function InstagramComp() {
                       style={{width:'80px', height:'60px', zIndex:'10'}}
                       onMouseEnter={()=>setDeleteId(post.id)}
                       onMouseLeave={()=>setDeleteId("")}>
-                      <FontAwesomeIcon 
-                        icon={faEllipsisVertical} size='2xl' className='dot'
-                      />
+                      <div className='dot-box'>
+                        <div className='dot'>
+                          <FontAwesomeIcon 
+                            icon={faEllipsisVertical} size='2xl' 
+                          />
+                        </div>
+                      </div>
                       {uid === post.uid && (
                         <button
-                          style={{padding:'10px'}}
+                          style={{padding:'5px'}}
                           className='delete-btn'
                           onClick={()=>handleDeletePost(post.uid, post.id)}
                         >
-                          X
+                          <FontAwesomeIcon icon={faTrashCan} size='2xl'/>
                         </button>
                       )}
                     </div>
