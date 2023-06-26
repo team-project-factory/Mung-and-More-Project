@@ -6,6 +6,9 @@ font-family: 'Montserrat', "SUITE-Regular";
 
 font-weight로 조절
 */
+html {
+  scroll-behavior: smooth;
+}
 
 * {
   margin: 0;
@@ -23,9 +26,7 @@ a {
   /* font-weight: 600; */
   /* font-size: 1.1rem; */
 }
-a:hover {
-  /* color: red; */
-}
+
 
 @font-face {
   font-family: "SUITE-Regular";

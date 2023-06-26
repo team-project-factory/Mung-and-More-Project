@@ -1,0 +1,28 @@
+.page-top {
+    width: 60px;
+    height: 60px;
+    position:fixed;
+    bottom: 40px;
+    right: 40px;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    text-align: center;
+    line-height: 60px;
+    font-family: normal 16px "Noto Sans KR";
+    z-index: 999;
+}
+
+.page-top:hover {
+    animation: btn-top 3s infinite;
+    color: black;
+    background-color: rgb(231, 230, 230);
+}
+
+@keyframes btn-top {
+    0% {transform: scale(1);}
+    25% {transform: scale(0.8);}
+    50% {transform: scale(1.1);}
+    75% {transform: scale(0.8);}
+    100% {transform: scale(1);}
+}
