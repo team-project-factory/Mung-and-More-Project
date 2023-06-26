@@ -205,6 +205,7 @@ export const Main2Subtitld = styled.p`
     font-size: 23px;
     text-align: center;
     line-height: 32px;
+    margin-bottom: 50px;
 `
 export const ImageWrap = styled.div`
     max-width: 1500px;
