@@ -1,7 +1,11 @@
+.videoBox {
+  position: relative;
+}
+
 .wrapper {
-  position: absolute;
+  position: relative;
+  top:120px;
   left: 25%;
-  top: 5300px;
   transform: translate(-50%, -50%);
   width: 235px;
   height: 70px;

@@ -6,17 +6,18 @@ export const MainComp5 = () => {
   
   return (
     <div style={{backgroundColor : '#FFCB72', height : `100vh`, paddingTop: '230px'}}>
-        <div className="wrapper">
-          <div className="focus">
-            Everything
-          </div>
-          <div className="mask">
-            <div className="text">Everything</div>
-          </div>
-        </div>
+        
       <CommuWrap>
         <TextInfo>
-        <MainInfoTitle>
+        <MainInfoTitle> 
+          <div className="wrapper">
+            <div className="focus">
+              Everything
+            </div>
+            <div className="mask">
+              <div className="text">Everything</div>
+            </div>
+          </div>
           <br></br>about dogs!
           </MainInfoTitle>
           <Main2Subtitld style={{textAlign:'left'}}>
@@ -29,10 +30,10 @@ export const MainComp5 = () => {
           </GoBtn>
           </a>
         </TextInfo>
-        <div>
+        <div className='videoBox'>
           <img src="/img/mainDogPost.png" width={'580px'} />
           <video src='./dogVideo.mp4' id="main-slide-video" autoPlay muted loop width="510px"
-          style={{position:"absolute", left:"995px", top:"5180px", height:"490px"}}>
+          style={{position:"absolute",  height:"490px", left:"34px"}}>
         </video>
         </div>
       </CommuWrap>
