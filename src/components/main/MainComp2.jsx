@@ -57,7 +57,7 @@ export const MainComp2 = () => {
             
         
       <ImageWrap>
-        <img src="/img/main2dog.png" alt="" style={{width:"1500px"}}/>
+        <img src="/img/main2dog.png" alt="" style={{width:"1500px", marginTop:"30px"}}/>
       </ImageWrap>
     </div>
   )
