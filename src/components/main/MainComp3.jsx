@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MainTitle, Image, SwiperBtn, ImageImg, GoBtn,
   ProductSlide, ProductName} from './styles/MaincomStylecomp';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination } from 'swiper';
+import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -42,9 +42,17 @@ export const MainComp3 = () => {
         style={{cursor:"pointer"}}
         spaceBetween={20}
         slidesPerView={3}
-        loop={true}
-        // autoplay={{ delay: 3000 }}
-        navigation={{ prevEl: '.swiper-prev', nextEl: '.swiper-next' }}
+        // loop={true}
+        centeredSlides={true}
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: false,
+        }}
+        // pagination={{
+        //   clickable: true,
+        // }}
+        // navigation={true}
+        modules={[Autoplay]}
       >
         {product &&
         product.map((item) => (
@@ -56,12 +64,12 @@ export const MainComp3 = () => {
           </SwiperSlide>
         ))}
         <SwiperBtn>
-          <div className="swiper-prev">
+          {/* <div className="swiper-prev">
             <img src={'/img/prevbtn.png'} width={"80px"} style={{opacity:'90%'}} />
           </div>
           <div className="swiper-next">
             <img src={'/img/nextbtn.png'} width={"80px"} style={{opacity:'90%'}}/>
-          </div>
+          </div> */}
         </SwiperBtn>
       </Swiper>
 
