@@ -23,6 +23,7 @@ export const CommunityComp = () => {
   const [deleteId, setDeleteId] = useState('');
 
   const [btn, setBtn] = useState(true);
+  console.log(btn);
   const stateOk = useLocation();
 
   
@@ -43,7 +44,6 @@ export const CommunityComp = () => {
     setNewList2(newList);
   }
   
-  
   // 아래 getData에서 UID 값이 있을 때 실행하도록 하기 위해 작성
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -54,12 +54,12 @@ export const CommunityComp = () => {
       }
     });
     getData();
+    setBtn(true);
   }, []);
 
   useEffect(()=>{
     getData();
   },[stateOk])
-  
 
   function btnPrev(post) {
     if (post.images && post.images.length > 0) {
@@ -80,8 +80,6 @@ export const CommunityComp = () => {
     }
   }
 
-
-
   return (
     <div style={{width : '100%'}}>
       <div className={style.mungsList}>
@@ -95,67 +93,8 @@ export const CommunityComp = () => {
               </li>
           ))}
         </ul>
-        {
-        btn && newList2? 
-        <div className={style.mungsList_news}>
-          <div className='card'>
-                  <div className='title'>
-                    <div className='userDetails'> 
-                        <div className='logo'>
-                          {newList2[0].photo ? <img src={newList2[0].photo} alt="Selected" style={{width:"100%", height:"100%"}}/>: ''}
-                        </div>
-                        
-                      <h2 className='insta-title'> {newList2[0].title} <br /><span className='insta-sub'> {newList2[0].location} </span></h2>
-                    </div>
-                    <div
-                      style={{width:'80px', height:'60px', zIndex:'10'}}
-                      onMouseEnter={()=>setDeleteId(newList2[0].id)}
-                      onMouseLeave={()=>setDeleteId("")}>
-                      <FontAwesomeIcon 
-                        icon={faEllipsisVertical} size='2xl' className='dot'
-                      />
-                    </div>
-                  </div>
-                  <div className='imgBx'>
-                    { newList2[0].images.length ? 
-                    <img
-                      className='event-slide-img'
-                      src={newList2[0].images[newList2[0].imageIndex]}
-                      alt={`Image ${newList2[0].imageIndex + 1}`}
-                    /> : <div></div>
-                    
-                  }
-                    { newList2[0].images.length > 1 ? 
-                    <div className='slide-btn'>
-                      {/* 아래 버튼에 onClick시 post를 인자로 전달하여 각버튼이 독립적인 post 객체를 받게끔 설정 */}
-                      <button className='prev-btn' onClick={() => btnPrev(newList2[0])}>{'<'}</button>
-                      <button className='next-btn' onClick={() => btnNext(newList2[0])}>{'>'}</button>
-                    </div> : <div></div>}
-
-                  </div>
-                  <div className='actionBtns'>
-                    <div className='left'>
-                      <FontAwesomeIcon icon={faHeart} size="2xl" color='red' className='heart' />
-                      <FontAwesomeIcon icon={faComment} size="2xl" flip='horizontal' className='comment' />
-                      <FontAwesomeIcon icon={faPaperPlane} size="2xl" className='share' />
-
-                    </div>
-                    <div className='right'>
-                      <FontAwesomeIcon icon={faBookmark} size="2xl" />
-                    </div>
-                  </div>
-                  <h4 className='date'>{newList2[0].date}</h4>
-                  <div className='message'>
-                    <p>{newList2[0].sub}</p> 
-                    <div>{newList2[0].des}</div>
-                    <span>{newList2[0].hash}</span>
-                  </div>
-
-                  {/* 작성란 */}
-                </div>
-        </div>:
-        <Outlet/>
-      }
+          <div>gd</div>
+          <Outlet/>
         <div style={{position:'relative',minHeight: '700px',}}>
           {userInfor &&
                   <div className='write-box'>

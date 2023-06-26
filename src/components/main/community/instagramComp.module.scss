@@ -1,5 +1,6 @@
 .mungsList {
-  width: 1100px;
+    position: relative;
+    width: 1100px;
     margin: auto;
     margin-top: 80px;
     min-height: 700px;
@@ -31,7 +32,10 @@
     display: none;
 }
   .mungsList_news {
+    position: absolute;
+    left: 37%;
     width: 55%;
+    height: 860px;
     box-shadow: 0px 2px 9px 4px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
 
@@ -79,7 +83,6 @@
 
 
     .commentInput {
-      margin-top: 10px;
       min-height: 60px;
       border: 20px;
       display: flex;

@@ -75,67 +75,7 @@ export const MungsNewsComp = () => {
             </li>
           ))}
       </ul>
-      {
-        btn && news ? 
-        <div className={style2.mungsList_news}>
-          <div className='card'>
-                  <div className='title'>
-                    <div className='userDetails'> 
-                        <div className='logo'>
-                          {news[0].photo ? <img src={news[0].photo} alt="Selected" style={{width:"100%", height:"100%"}}/>: ''}
-                        </div>
-                        
-                      <h2 className='insta-title'> {news[0].title} <br /><span className='insta-sub'> {news[0].location} </span></h2>
-                    </div>
-                    <div
-                      style={{width:'80px', height:'60px', zIndex:'10'}}
-                      onMouseEnter={()=>setDeleteId(news[0].id)}
-                      onMouseLeave={()=>setDeleteId("")}>
-                      <FontAwesomeIcon 
-                        icon={faEllipsisVertical} size='2xl' className='dot'
-                      />
-                    </div>
-                  </div>
-                  <div className='imgBx'>
-                    { news[0].images.length ? 
-                    <img
-                      className='event-slide-img'
-                      src={news[0].images[news[0].imageIndex]}
-                      alt={`Image ${news[0].imageIndex + 1}`}
-                    /> : <div></div>
-                    
-                  }
-                    { news[0].images.length > 1 ? 
-                    <div className='slide-btn'>
-                      {/* 아래 버튼에 onClick시 post를 인자로 전달하여 각버튼이 독립적인 post 객체를 받게끔 설정 */}
-                      <button className='prev-btn' onClick={() => btnPrev(news[0])}>{'<'}</button>
-                      <button className='next-btn' onClick={() => btnNext(news[0])}>{'>'}</button>
-                    </div> : <div></div>}
-
-                  </div>
-                  <div className='actionBtns'>
-                    <div className='left'>
-                      <FontAwesomeIcon icon={faHeart} size="2xl" color='red' className='heart' />
-                      <FontAwesomeIcon icon={faComment} size="2xl" flip='horizontal' className='comment' />
-                      <FontAwesomeIcon icon={faPaperPlane} size="2xl" className='share' />
-
-                    </div>
-                    <div className='right'>
-                      <FontAwesomeIcon icon={faBookmark} size="2xl" />
-                    </div>
-                  </div>
-                  <h4 className='date'>{news[0].date}</h4>
-                  <div className='message'>
-                    <p>{news[0].sub}</p> 
-                    <div>{news[0].des}</div>
-                    <span>{news[0].hash}</span>
-                  </div>
-
-                  {/* 작성란 */}
-                </div>
-        </div>:
         <Outlet/>
-      }
     </div>
   )
 }
