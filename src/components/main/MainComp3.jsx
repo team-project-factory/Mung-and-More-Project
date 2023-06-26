@@ -53,6 +53,7 @@ export const MainComp3 = () => {
         // }}
         // navigation={true}
         modules={[Autoplay]}
+        observer = {true}
       >
         {product &&
         product.map((item) => (

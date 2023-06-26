@@ -1,7 +1,11 @@
+.videoBox {
+  position: relative;
+}
+
 .wrapper {
-  position: absolute;
-  left: 25%;
-  top: 5300px;
+  position: relative;
+  top:120px;
+  left: 26%;
   transform: translate(-50%, -50%);
   width: 235px;
   height: 70px;
@@ -10,6 +14,7 @@
 
 .focus {
   position: absolute;
+  left: -7px;
   top: 20px;
   transform: translateY(-50%);
   text-transform: uppercase;
@@ -18,7 +23,6 @@
   font-size: 65px;
   opacity: 0.6;
   color: black;
-  z-index: 1;
 }
 
 .mask {
