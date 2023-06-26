@@ -198,7 +198,7 @@ export default function InstagramComp() {
   return (
           <div className={style.mungsList_news}>
             {newList2 && newList2.map((post, index) => (
-              <div key={index}>
+              <div key={index} style={{overflow:'hidden'}}>
                 <div className='card'>
                   <div className='title'>
                     <div className='userDetails'>
@@ -267,9 +267,6 @@ export default function InstagramComp() {
                   </div>
 
                   {/* 작성란 */}
-                </div>
-              </div>
-            ))}
             <h3 style={{textAlign : 'left', margin : '6px 0 0 15px'}}>댓글</h3>
             <ul className={style.commentBox}>
               {commentList &&
@@ -291,6 +288,7 @@ export default function InstagramComp() {
                   </li>
                 ))}
             </ul>
+                </div>
               <ul className={style.commentInput}>
                 <div
                   style={
@@ -319,6 +317,8 @@ export default function InstagramComp() {
                   </button>
                 </li>
               </ul>
+              </div>
+            ))}
           </div>
   )
 }

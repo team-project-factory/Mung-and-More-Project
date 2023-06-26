@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
 
 
 //css
@@ -16,6 +16,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 export const MungsNewsComp = () => {
+  const navigate = useNavigate();
   const [news, setNews] = useState('');
   console.log(news);
   const [btn, setBtn] = useState(true);
@@ -75,6 +76,9 @@ export const MungsNewsComp = () => {
             </li>
           ))}
       </ul>
+      <Link to={'/mungsnews/FpS0NoePozU2YMFyoU1d'}>
+        <div className={style2.mungsList_news} style={{backgroundImage:`url('${process.env.PUBLIC_URL + "/img/뉴스.png"}')`, backgroundSize:'620px 860px'}}/>
+      </Link>
         <Outlet/>
     </div>
   )

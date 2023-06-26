@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { doc, updateDoc, arrayRemove, collection, getDocs } from 'firebase/firestore';
 import {auth, db,storage } from '../../../data/firebase';
 import { onAuthStateChanged,getAuth } from 'firebase/auth'
-import { ref,deleteObject} from 'firebase/storage'
+
 
 
 export const CommunityComp = () => {
@@ -25,7 +25,6 @@ export const CommunityComp = () => {
   const [btn, setBtn] = useState(true);
   console.log(btn);
   const stateOk = useLocation();
-
   
   // Post 컬렉션에서 문서이름을 UID로 해놓았기 때문에
   // "컬렉션이름",uid 형태로 집어넣어 사용
@@ -93,8 +92,9 @@ export const CommunityComp = () => {
               </li>
           ))}
         </ul>
-          <div>gd</div>
-          <Outlet/>
+        <div className={style.mungsList_news} style={{backgroundImage:`url('${process.env.PUBLIC_URL + "/img/멍스타 가이드라인.png"}')`, backgroundSize:'620px 860px'}}>
+        </div>
+        <Outlet/>
         <div style={{position:'relative',minHeight: '700px',}}>
           {userInfor &&
                   <div className='write-box'>
