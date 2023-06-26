@@ -209,8 +209,6 @@ export const MungsNewsContents = () => {
 
                   {/* 작성란 */}
                 </div>
-              </div>
-            ))}
             <h3 style={{textAlign : 'left', margin : '6px 0 0 15px'}}>댓글</h3>
             <ul className={style.commentBox}>
               {commentList &&
@@ -260,6 +258,8 @@ export const MungsNewsContents = () => {
                   </button>
                 </li>
               </ul>
+              </div>
+            ))}
           </div>
   )
 }

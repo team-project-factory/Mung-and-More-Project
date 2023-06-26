@@ -1,5 +1,6 @@
 .mungsList {
-  width: 1100px;
+    position: relative;
+    width: 1100px;
     margin: auto;
     margin-top: 80px;
     min-height: 700px;
@@ -8,6 +9,7 @@
     padding: 20px;
 
   .mungsList_menu {
+    overflow: hidden;
     margin-right: 20px;
     width: 35%;
     box-shadow: 0px 2px 9px 4px rgba(0, 0, 0, 0.05);
@@ -31,7 +33,10 @@
     display: none;
 }
   .mungsList_news {
+    position: absolute;
+    left: 37%;
     width: 55%;
+    height: 860px;
     box-shadow: 0px 2px 9px 4px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
 
@@ -40,6 +45,7 @@
       width: 100%;
       height: 90px;
       overflow-y: scroll;
+      border-radius: 5px;
       li {
         width: 93%;
         margin: auto;
@@ -79,13 +85,13 @@
 
 
     .commentInput {
-      margin-top: 10px;
-      min-height: 60px;
-      border: 20px;
+      background-color: white;
+      min-height: 68px;
       display: flex;
-      padding: 10px;
+      padding: 5px;
       padding-left: 15px;
       align-items: center;
+      border-radius: 0 0 5px 5px;
   
   
       div {
