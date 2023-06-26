@@ -178,6 +178,8 @@ export const MungsNewsContents = () => {
                       className='event-slide-img'
                       src={post.images[post.imageIndex]}
                       alt={`Image ${post.imageIndex + 1}`}
+                      width={550}
+                      height={400}
                     /> : <div></div>
                     
                   }

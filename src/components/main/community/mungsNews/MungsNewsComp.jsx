@@ -77,7 +77,7 @@ export const MungsNewsComp = () => {
           ))}
       </ul>
       <Link to={'/mungsnews/FpS0NoePozU2YMFyoU1d'}>
-        <div className={style2.mungsList_news} style={{backgroundImage:`url('${process.env.PUBLIC_URL + "/img/뉴스.png"}')`, backgroundSize:'620px 860px'}}/>
+        <div className={style2.mungsList_news} style={{backgroundImage:`url('${process.env.PUBLIC_URL + "/img/뉴스.jpg"}')`, backgroundSize:'620px 860px'}}/>
       </Link>
         <Outlet/>
     </div>
