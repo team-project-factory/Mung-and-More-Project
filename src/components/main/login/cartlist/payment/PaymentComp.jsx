@@ -1,6 +1,6 @@
 // firebase
 import { auth, db } from "../../../../../data/firebase";
-import { doc, getDoc, serverTimestamp } from "firebase/firestore";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // react
@@ -55,7 +55,24 @@ export const PaymentComp = () => {
     getUserData();
   }, []);
 
+  // Done 버튼 클릭 함수
   const goShoppingBack = () => {
+    const uncheckedList = cartList
+      ? cartList.filter((cart) => !cart.check)
+      : "";
+
+    const setNewCart = async () => {
+      await setDoc(
+        doc(db, "users", userUID),
+        {
+          cartList: uncheckedList,
+        },
+        { merge: true }
+      );
+    };
+
+    setNewCart();
+
     navigater("/shopping");
     const orderData = {
       orderTime: serverTimestamp(),

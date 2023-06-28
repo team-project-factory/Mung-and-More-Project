@@ -81,7 +81,7 @@ export const OrderBoxComp = () => {
     }
   }, [userUID]);
 
-  const checkedList = cartList ? cartList.filter((cart) => cart.check): '';
+  const checkedList = cartList ? cartList.filter((cart) => cart.check) : "";
 
   const goPayment = () => {
     if (checkedList.length === 0) {
@@ -111,13 +111,12 @@ export const OrderBoxComp = () => {
         postcode: addressDetail,
         address: inputAddress,
         deliveryRequest: inputDeliveryRequest,
-        date : new Date()
+        date: new Date(),
       },
     });
 
     //오더리스트의 배열의 객체{ 장바구니 목록(배열), 주문날짜(date) }
-    dispatch(getOrderData({checkedList, date: new Date()}))
-    
+    dispatch(getOrderData({ checkedList, date: new Date() }));
   };
 
   // 수량 변경시 금액 계산
@@ -134,7 +133,7 @@ export const OrderBoxComp = () => {
 
   // 총 상품금액 계산 함수
   function calculateTotalPrice(checkedList) {
-    if(checkedList){
+    if (checkedList) {
       let totalPrice = 0;
       checkedList.forEach((item) => {
         totalPrice += calculatePrice(item);
