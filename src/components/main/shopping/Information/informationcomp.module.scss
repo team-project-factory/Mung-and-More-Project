@@ -10,10 +10,11 @@
   .infor_modal {
     z-index: 60;
     position: relative;
-    text-align: center;
+    // text-align: center;
     width: 1000px;
     height: 650px;
-    border: 3px solid black;
+    border: 1px solid black;
+    border-radius: 10px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -31,16 +32,149 @@
 
     // 구매하기 버튼 누를 시 나오는 div -> 장바구니에 담았습니다! 알림창
   }
-  .infro_modal_setCart {
-  }
 }
 
 .ImgSlider {
   width: 500px;
-  border: 1px solid blue;
 }
 
 .ItemBuyBox {
   width: 500px;
-  border: 1px solid blue;
+}
+
+.BoxContents {
+  margin-right: 50px;
+  margin-left: 50px;
+}
+
+.ProductModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 350px;
+  height: 300px;
+}
+
+.Buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 350px;
+}
+
+.CancelBtn {
+  width: 160px;
+  height: 40px;
+  border-radius: 15px;
+  border: none;
+  font-size: 1rem;
+  color: gray;
+}
+
+.CancelBtn:hover {
+  cursor: pointer;
+}
+
+.BuyBtn {
+  width: 160px;
+  height: 40px;
+  border-radius: 15px;
+  border: none;
+  font-size: 1rem;
+  background-color: #c2dcf4ea;
+}
+
+.BuyBtn:hover {
+  cursor: pointer;
+}
+
+.AmountInput {
+  width: 45px;
+  height: 20px;
+  border: 0.5px solid black;
+  border-radius: 15px;
+  padding-left: 10px;
+  margin-left: 20px;
+  font-size: 1.1rem;
+}
+
+.PutCartModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 320px;
+  height: 200px;
+  margin: auto;
+  margin-top: 25px;
+  padding: 10px;
+  padding-bottom: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.233);
+  border-radius: 15px;
+}
+
+.CartBtn {
+  width: 130px;
+  height: 40px;
+  border-radius: 15px;
+  border: none;
+  font-size: 1rem;
+}
+
+.CartBtn:hover {
+  cursor: pointer;
+}
+
+.KeepBtn {
+  width: 130px;
+  height: 40px;
+  border-radius: 15px;
+  border: none;
+  font-size: 1rem;
+  background-color: #6d6d6dea;
+  color: white;
+}
+
+.KeepBtn:hover {
+  cursor: pointer;
+}
+
+.Buttons2 {
+  display: flex;
+  justify-content: space-around;
+  width: 300px;
+  margin: auto;
+  margin-bottom: 5px;
+  margin-top: 0;
+}
+
+.StartImg {
+  display: flex;
+  justify-content: space-between;
+  width: 320px;
+  height: 200px;
+  margin: auto;
+  margin-top: 25px;
+  padding: 10px;
+  padding-bottom: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.233);
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.233);
+}
+
+.ImgBox {
+  width: 190px;
+  height: 200px;
+  background-image: url(../../../../../public/img/cart_dog.gif);
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-top: 15px;
+}
+
+.Text {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  width: 180px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: white;
 }

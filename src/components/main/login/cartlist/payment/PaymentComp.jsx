@@ -118,20 +118,20 @@ export const PaymentComp = () => {
           <p className={style.Text2}>배송 정보</p>
           <div className={style.Shipping}>
             <div className={style.Element}>
-              수령인 <div style={{ color: "black" }}>{name}</div>
+              수령인 <div className={style.Element_Text}>{name}</div>
             </div>
             <div className={style.Element}>
-              연락처 <div style={{ color: "black" }}>{phoneNumber}</div>
+              연락처 <div className={style.Element_Text}>{phoneNumber}</div>
             </div>
             <div className={style.Element}>
               배송지{" "}
-              <div style={{ color: "black" }}>
+              <div className={style.Element_Text}>
                 {postcode} {address}
               </div>
             </div>
             <div className={style.Element}>
-              배송 요청사항{" "}
-              <div style={{ color: "black" }}>{deliveryRequest}</div>
+              요청사항{" "}
+              <div className={style.Element_Text}>{deliveryRequest}</div>
             </div>
 
             {/* 확인 버튼 */}

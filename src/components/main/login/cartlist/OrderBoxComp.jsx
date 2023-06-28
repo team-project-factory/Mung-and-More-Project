@@ -240,7 +240,7 @@ export const OrderBoxComp = () => {
           />
           <input
             type="text"
-            placeholder="배송 요청사항 (선택)"
+            placeholder="요청사항 (선택)"
             className={style.ADDInput}
             value={inputDeliveryRequest}
             onChange={(e) => setInputDeliveryRequest(e.target.value)}
