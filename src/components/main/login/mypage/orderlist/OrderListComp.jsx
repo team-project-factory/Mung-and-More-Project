@@ -63,6 +63,19 @@ export const OrderListComp = () => {
   const goShoppingBack = () => {
     navigater("/shopping");
   };
+  
+  // 주문날짜
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}.${month}.${day}`;
+  };
+
+  const generateRandomNumber = () => {
+    const randomNumber = Math.floor(Math.random() * 10000000); // 0부터 999999 사이의 랜덤한 숫자 생성
+    return String(randomNumber).padStart(7, '0'); // 6자리 숫자로 변환
+  };
 
   return (
     <Wrap>
@@ -75,12 +88,12 @@ export const OrderListComp = () => {
           {orderlist &&
             orderlist.map((order, index) => (
               <div key={index}>
-                <OderNum>주문번호:  ORD20230429-7085698</OderNum>
+                <OderNum>주문번호:  ORD11285698-{generateRandomNumber()}</OderNum>
                 {
                   order.checkedList.map((item) => (
                     <OderInfo>
                       <ProductImg>
-                        <img src={item.url} alt={item.name} style={{ width: '50%', lineHeight: '120px' }} />
+                        <img src={item.url} alt={item.name} style={{ width: '100%', lineHeight: '120px' }} />
                       </ProductImg>
                       <ProductInfoAll>
                         <ProductInfo>
@@ -93,7 +106,7 @@ export const OrderListComp = () => {
                         </ProductInfo>
 
                         <ProductState>
-                          <Date>주문일자:{order.date.getMonth()}</Date>
+                          <Date>주문일자: {formatDate(order.date)}</Date>
                           <Delev>상품준비</Delev>
                         </ProductState>
                       </ProductInfoAll>
