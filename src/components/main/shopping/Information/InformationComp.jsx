@@ -70,7 +70,6 @@ export default function InformationComp() {
     setUserCartList(docSnap.data().cartList);
   }
 
-  console.log(userCartList);
   useEffect(() => {
     setItemName(param);
     setItemList(outletProps);
@@ -91,7 +90,7 @@ export default function InformationComp() {
   //버튼 누를시 장바구니 추가
   const buyBtn = () => {
     if (itemNum > 0) {
-      const filter = userCartList.filter((item)=>(item.name === param));
+      const filter = userCartList.find((item)=>(item.name === param));
       if(!filter){
         itemInfo.num = Number(itemNum);
         const setCartList = async () => {
@@ -109,6 +108,7 @@ export default function InformationComp() {
     } else {
       alert("1개부터 구매 가능하다멍 🐶");
     }
+    getUserData();
   };
 
   const cartBtn = () => {
