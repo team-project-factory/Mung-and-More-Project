@@ -36,7 +36,7 @@ export const Main = () => {
         </div>
         <MainComp1/>
       </div>
-      <MainComp2/>
+      <MainComp2/> 
       <MainComp3/>
       <MainComp4/>
       <MainComp5/>
