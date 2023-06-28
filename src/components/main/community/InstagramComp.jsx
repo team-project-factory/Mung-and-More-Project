@@ -13,6 +13,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 export default function InstagramComp() {
   const stateOk = useLocation();
+  console.log(stateOk);
   const navigater = useNavigate();
   const param = useParams();
   const userInfor = JSON.parse(sessionStorage.getItem("user"));
@@ -288,7 +289,6 @@ export default function InstagramComp() {
                   </li>
                 ))}
             </ul>
-                </div>
               <ul className={style.commentInput}>
                 <div
                   style={
@@ -317,6 +317,7 @@ export default function InstagramComp() {
                   </button>
                 </li>
               </ul>
+                </div>
               </div>
             ))}
           </div>

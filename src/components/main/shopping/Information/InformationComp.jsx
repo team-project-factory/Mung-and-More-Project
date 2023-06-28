@@ -25,6 +25,7 @@ export default function InformationComp() {
   const [itemInfo, setItemInfo] = useState("");
   // props로 들고온 아이템 배열 들고오기
   const [itemList, setItemList] = useState("");
+  console.log(itemList);
   // 구매수량
   const [itemNum, setItemNum] = useState(1);
 
