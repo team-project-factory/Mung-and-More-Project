@@ -11,8 +11,8 @@
     z-index: 60;
     position: relative;
     text-align: center;
-    width: 900px;
-    height: 600px;
+    width: 1000px;
+    height: 650px;
     border: 3px solid black;
     top: 50%;
     left: 50%;
@@ -20,16 +20,18 @@
     display: flex;
     background-color: white;
     padding: 20px;
+    flex-wrap: wrap;
 
     // 모달 내부 내용 영역 전체
     .infor_modal_cart {
+      margin: auto;
       width: 900px;
       display: flex;
     }
 
     // 구매하기 버튼 누를 시 나오는 div -> 장바구니에 담았습니다! 알림창
-    .infor_modal_setCart {
-    }
+  }
+  .infro_modal_setCart {
   }
 }
 

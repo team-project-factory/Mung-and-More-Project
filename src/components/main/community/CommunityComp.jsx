@@ -23,7 +23,6 @@ export const CommunityComp = () => {
   const [deleteId, setDeleteId] = useState('');
 
   const [btn, setBtn] = useState(true);
-  console.log(btn);
   const stateOk = useLocation();
   
   // Post 컬렉션에서 문서이름을 UID로 해놓았기 때문에

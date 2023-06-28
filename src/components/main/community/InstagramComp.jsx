@@ -128,10 +128,7 @@ export default function InstagramComp() {
 
   // 게시글 삭제 함수
   const deletePost = async (postUid,postId) => {
-    console.log(postUid);
-    console.log(postId);
     const post = newList2.find((post) => post.id === postId);
-    console.log(post);
     // 파일 삭제 함수 정의
     if(uid===postUid) {
     const deleteFiles = async () => {
@@ -193,7 +190,6 @@ export default function InstagramComp() {
     
   }
 
-  console.log(uid)
 
   return (
           <div className={style.mungsList_news}>
@@ -288,7 +284,6 @@ export default function InstagramComp() {
                   </li>
                 ))}
             </ul>
-                </div>
               <ul className={style.commentInput}>
                 <div
                   style={
@@ -317,6 +312,7 @@ export default function InstagramComp() {
                   </button>
                 </li>
               </ul>
+                </div>
               </div>
             ))}
           </div>

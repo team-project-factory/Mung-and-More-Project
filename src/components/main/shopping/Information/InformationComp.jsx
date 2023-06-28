@@ -25,6 +25,7 @@ export default function InformationComp() {
   const [itemInfo, setItemInfo] = useState("");
   // props로 들고온 아이템 배열 들고오기
   const [itemList, setItemList] = useState("");
+  
   // 구매수량
   const [itemNum, setItemNum] = useState(1);
 
@@ -137,16 +138,16 @@ export default function InformationComp() {
               취소
             </button>
             <button onClick={buyBtn}>구매하기</button>
+              <div
+                  className={style.infro_modal_setCart}
+                  style={successBtn ? { display: "" } : { display: "none" }}
+                >
+                  <h3>장바구니에 담았습니다!</h3>
+                  <button onClick={cartBtn}>장바구니로 이동</button>
+                  <button onClick={keepShoppingBtn}>쇼핑 계속하기</button>
+              </div>
           </li>
         </ul>
-        <div
-          className={style.infro_modal_setCart}
-          style={successBtn ? { display: "" } : { display: "none" }}
-        >
-          <h3>장바구니에 담았습니다!</h3>
-          <button onClick={cartBtn}>장바구니로 이동</button>
-          <button onClick={keepShoppingBtn}>쇼핑 계속하기</button>
-        </div>
       </div>
     </div>
   );
