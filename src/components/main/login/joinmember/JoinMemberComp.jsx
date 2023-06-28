@@ -6,6 +6,8 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, up
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from '../../../../data/firebase';
 
+import basicProfile from '../../../../img/basicprofile.png'
+
 import {
     Wrap, JoinWrap, Jointext, LogoImage, TextWrap, StyledText, Aglog, Text, TextSpan, StyleForm
     , StyledInput, StyledFieldset, StyledLabel, StyledWrapper, StyledIconButton, StyledInputPw, PwButton,
@@ -147,7 +149,8 @@ export default function JoinMemberComp() {
                 
                 //회원가입 성공시 displayName에 이름 넣기
                 updateProfile(auth.currentUser, {
-                    displayName: name
+                    displayName: name,
+                    photoURL : basicProfile
                 }).then(() => {
                     // Profile updated!
                     // ...
