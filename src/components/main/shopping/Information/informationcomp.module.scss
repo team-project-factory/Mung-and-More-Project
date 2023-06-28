@@ -10,7 +10,7 @@
   .infor_modal {
     z-index: 60;
     position: relative;
-    text-align: center;
+    // text-align: center;
     width: 1000px;
     height: 650px;
     border: 3px solid black;
@@ -31,8 +31,6 @@
 
     // 구매하기 버튼 누를 시 나오는 div -> 장바구니에 담았습니다! 알림창
   }
-  .infro_modal_setCart {
-  }
 }
 
 .ImgSlider {
@@ -43,4 +41,48 @@
 .ItemBuyBox {
   width: 500px;
   border: 1px solid blue;
+}
+
+.BoxContents {
+  margin-right: 50px;
+  margin-left: 50px;
+}
+
+.ProductModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 350px;
+  height: 300px;
+}
+
+.Buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 350px;
+}
+
+.CancelBtn {
+  width: 160px;
+  height: 30px;
+}
+
+.BuyBtn {
+  width: 160px;
+}
+
+.AmountInput {
+  width: 45px;
+  height: 20px;
+  border: 0.5px solid black;
+  border-radius: 15px;
+  padding-left: 10px;
+  margin-left: 20px;
+  font-size: 1.1rem;
+}
+
+.PutCartModal {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
 }

@@ -25,7 +25,7 @@ export default function InformationComp() {
   const [itemInfo, setItemInfo] = useState("");
   // props로 들고온 아이템 배열 들고오기
   const [itemList, setItemList] = useState("");
-  
+
   // 구매수량
   const [itemNum, setItemNum] = useState(1);
 
@@ -114,38 +114,66 @@ export default function InformationComp() {
         <ul className={style.infor_modal_cart}>
           <li className={style.ImgSlider}>
             {/* 상품 상세 사진 슬라이더 */}
-            <ImgSliderComp item={itemInfo}/>
+            <ImgSliderComp item={itemInfo} />
           </li>
           <li className={style.ItemBuyBox}>
-            <p>{itemName}</p>
-            <p>{itemInfo.price}</p>
-            <p>
-              <span>수량</span>
-              <input
-                type="number"
-                value={itemNum}
-                min="1"
-                onChange={(e) => {
-                  setItemNum(e.target.value);
-                }}
-              />
-            </p>
-            <button
-              onClick={() => {
-                navigater(-1);
-              }}
-            >
-              취소
-            </button>
-            <button onClick={buyBtn}>구매하기</button>
-              <div
-                  className={style.infro_modal_setCart}
-                  style={successBtn ? { display: "" } : { display: "none" }}
-                >
-                  <h3>장바구니에 담았습니다!</h3>
-                  <button onClick={cartBtn}>장바구니로 이동</button>
-                  <button onClick={keepShoppingBtn}>쇼핑 계속하기</button>
+            <div className={style.BoxContents}>
+              <div className={style.ProductModal}>
+                {/* 상품 이름 */}
+                <h2 style={{ fontSize: "1.8rem", marginTop: "35px" }}>
+                  {itemName}
+                </h2>
+
+                {/* 상품 가격 */}
+                <p style={{ fontWeight: "bold", fontSize: "1.3rem" }}>
+                  {itemInfo.price}₩
+                </p>
+
+                {/* 상품 상세설명 */}
+                <p style={{ fontSize: "1.1rem" }}>
+                  무더운 여름 시즌! <br /> 강아지들에게 꼭 필요한 기능성 의류
+                </p>
+
+                {/* 상품 수량 */}
+                <p>
+                  <span style={{ fontSize: "1.1rem" }}>수량 </span>
+                  <input
+                    type="number"
+                    value={itemNum}
+                    min="1"
+                    onChange={(e) => {
+                      setItemNum(e.target.value);
+                    }}
+                    className={style.AmountInput}
+                  />
+                </p>
+
+                {/* 취소, 구매 버튼 */}
+                <div className={style.Buttons}>
+                  <button
+                    onClick={() => {
+                      navigater(-1);
+                    }}
+                    className={style.CancelBtn}
+                  >
+                    취소
+                  </button>
+                  <button onClick={buyBtn} className={style.BuyBtn}>
+                    구매하기
+                  </button>
+                </div>
               </div>
+
+              {/* 구매 버튼 눌렀을 때 뜨는 장바구니 모달 */}
+              <div
+                className={style.PutCartModal}
+                style={successBtn ? { display: "" } : { display: "none" }}
+              >
+                <h3>장바구니에 담았습니다!</h3>
+                <button onClick={cartBtn}>장바구니로 이동</button>
+                <button onClick={keepShoppingBtn}>쇼핑 계속하기</button>
+              </div>
+            </div>
           </li>
         </ul>
       </div>

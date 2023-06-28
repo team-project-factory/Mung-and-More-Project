@@ -28,7 +28,7 @@ export const NoticePageComp = () => {
     justify-content: space-around;
     align-items: center;
     height: 86px;
-    background-color: #F4F4F4;
+    background-color: #f4f4f4;
     border-radius: 80px;
     width: 880px;
     margin: auto;
