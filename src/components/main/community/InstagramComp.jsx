@@ -13,7 +13,6 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 export default function InstagramComp() {
   const stateOk = useLocation();
-  console.log(stateOk);
   const navigater = useNavigate();
   const param = useParams();
   const userInfor = JSON.parse(sessionStorage.getItem("user"));
