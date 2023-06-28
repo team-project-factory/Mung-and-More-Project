@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrap = styled.div`
     background-color: #F3F5F6;
-    height: 115vh;
+    padding-bottom: 20%;
 `
 export const Title = styled.h2`
     max-width: 600px;
@@ -48,6 +48,7 @@ export const ProductImg = styled.div`
     background-color: #F2F2F2;
     flex-grow: 0;
     text-align: center;
+    overflow: hidden;
 `
 export const ProductInfoAll = styled.div`
     display: flex;
