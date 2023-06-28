@@ -5,7 +5,14 @@ import { useNavigate, useOutletContext, useParams } from "react-router";
 
 // firebase
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 import { db, auth } from "../../../../data/firebase";
 
 // image slider
@@ -19,12 +26,13 @@ export default function InformationComp() {
 
   //유저 아이디
   const [userUID, setUserUID] = useState("");
+  const [userCartList, setUserCartList] = useState();
   //파람값
   const [itemName, setItemName] = useState("");
-  //아이템 정보들
-  const [itemInfo, setItemInfo] = useState("");
   // props로 들고온 아이템 배열 들고오기
   const [itemList, setItemList] = useState("");
+  //아이템 정보들
+  const [itemInfo, setItemInfo] = useState("");
 
   // 구매수량
   const [itemNum, setItemNum] = useState(1);
@@ -60,6 +68,12 @@ export default function InformationComp() {
     });
   };
 
+  const getUserData = async () => {
+    const docRef = doc(db, "users", userUID);
+    const docSnap = await getDoc(docRef);
+    setUserCartList(docSnap.data().cartList);
+  };
+
   useEffect(() => {
     setItemName(param);
     setItemList(outletProps);
@@ -68,24 +82,36 @@ export default function InformationComp() {
   }, []);
 
   useEffect(() => {
+    if (userUID) {
+      getUserData();
+    }
+  }, [userUID]);
+
+  useEffect(() => {
     findItem();
   }, [itemList]);
 
   //버튼 누를시 장바구니 추가
   const buyBtn = () => {
     if (itemNum > 0) {
-      itemInfo.num = Number(itemNum);
-      const setCartList = async () => {
-        const washingtonRef = doc(db, "users", userUID);
-        await updateDoc(washingtonRef, {
-          cartList: arrayUnion(itemInfo),
-        });
-      };
-      setCartList();
-      setSuccessBtn(true);
+      const filter = userCartList.find((item) => item.name === param);
+      if (!filter) {
+        itemInfo.num = Number(itemNum);
+        const setCartList = async () => {
+          const washingtonRef = doc(db, "users", userUID);
+          await updateDoc(washingtonRef, {
+            cartList: arrayUnion(itemInfo),
+          });
+        };
+        setCartList();
+        setSuccessBtn(true);
+      } else {
+        alert("장바구니에 담겨있습니다!");
+      }
     } else {
       alert("1개부터 구매 가능하다멍 🐶");
     }
+    getUserData();
   };
 
   const cartBtn = () => {
@@ -131,7 +157,8 @@ export default function InformationComp() {
 
                 {/* 상품 상세설명 */}
                 <p style={{ fontSize: "1.1rem" }}>
-                  무더운 여름 시즌! <br /> 강아지들에게 꼭 필요한 기능성 의류
+                  우리 강아지들에게 필요한 제품을 <br /> 합리적인 가격에
+                  제공하고 있습니다!
                 </p>
 
                 {/* 상품 수량 */}
@@ -165,14 +192,31 @@ export default function InformationComp() {
               </div>
 
               {/* 구매 버튼 눌렀을 때 뜨는 장바구니 모달 */}
-              <div
-                className={style.PutCartModal}
-                style={successBtn ? { display: "" } : { display: "none" }}
-              >
-                <h3>장바구니에 담았습니다!</h3>
-                <button onClick={cartBtn}>장바구니로 이동</button>
-                <button onClick={keepShoppingBtn}>쇼핑 계속하기</button>
-              </div>
+              {successBtn ? (
+                <div
+                  className={style.PutCartModal}
+                  // style={successBtn ? { display: "" } : { display: "none" }}
+                >
+                  <h3 style={{ margin: "auto" }}>
+                    장바구니에 상품을 담았습니다!
+                  </h3>
+                  <div className={style.Buttons2}>
+                    <button onClick={cartBtn} className={style.CartBtn}>
+                      장바구니로 이동
+                    </button>
+                    <button onClick={keepShoppingBtn} className={style.KeepBtn}>
+                      쇼핑 계속하기
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className={style.StartImg}>
+                  <div className={style.Text}>
+                    Mung & More <br /> for our dog!
+                  </div>
+                  <div className={style.ImgBox}></div>
+                </div>
+              )}
             </div>
           </li>
         </ul>

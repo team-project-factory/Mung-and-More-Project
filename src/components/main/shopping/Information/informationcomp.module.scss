@@ -13,7 +13,8 @@
     // text-align: center;
     width: 1000px;
     height: 650px;
-    border: 3px solid black;
+    border: 1px solid black;
+    border-radius: 10px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -35,12 +36,10 @@
 
 .ImgSlider {
   width: 500px;
-  border: 1px solid blue;
 }
 
 .ItemBuyBox {
   width: 500px;
-  border: 1px solid blue;
 }
 
 .BoxContents {
@@ -64,11 +63,28 @@
 
 .CancelBtn {
   width: 160px;
-  height: 30px;
+  height: 40px;
+  border-radius: 15px;
+  border: none;
+  font-size: 1rem;
+  color: gray;
+}
+
+.CancelBtn:hover {
+  cursor: pointer;
 }
 
 .BuyBtn {
   width: 160px;
+  height: 40px;
+  border-radius: 15px;
+  border: none;
+  font-size: 1rem;
+  background-color: #c2dcf4ea;
+}
+
+.BuyBtn:hover {
+  cursor: pointer;
 }
 
 .AmountInput {
@@ -84,5 +100,81 @@
 .PutCartModal {
   display: flex;
   flex-direction: column;
-  width: 350px;
+  justify-content: space-around;
+  width: 320px;
+  height: 200px;
+  margin: auto;
+  margin-top: 25px;
+  padding: 10px;
+  padding-bottom: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.233);
+  border-radius: 15px;
+}
+
+.CartBtn {
+  width: 130px;
+  height: 40px;
+  border-radius: 15px;
+  border: none;
+  font-size: 1rem;
+}
+
+.CartBtn:hover {
+  cursor: pointer;
+}
+
+.KeepBtn {
+  width: 130px;
+  height: 40px;
+  border-radius: 15px;
+  border: none;
+  font-size: 1rem;
+  background-color: #6d6d6dea;
+  color: white;
+}
+
+.KeepBtn:hover {
+  cursor: pointer;
+}
+
+.Buttons2 {
+  display: flex;
+  justify-content: space-around;
+  width: 300px;
+  margin: auto;
+  margin-bottom: 5px;
+  margin-top: 0;
+}
+
+.StartImg {
+  display: flex;
+  justify-content: space-between;
+  width: 320px;
+  height: 200px;
+  margin: auto;
+  margin-top: 25px;
+  padding: 10px;
+  padding-bottom: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.233);
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.233);
+}
+
+.ImgBox {
+  width: 190px;
+  height: 200px;
+  background-image: url(../../../../../public/img/cart_dog.gif);
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-top: 15px;
+}
+
+.Text {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  width: 180px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: white;
 }
