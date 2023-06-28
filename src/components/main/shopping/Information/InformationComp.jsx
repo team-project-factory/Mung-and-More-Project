@@ -5,9 +5,15 @@ import { useNavigate, useOutletContext, useParams } from "react-router";
 
 // firebase
 import { onAuthStateChanged } from "firebase/auth";
-import { doc,getDoc, updateDoc, arrayUnion, collection, getDocs  } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 import { db, auth } from "../../../../data/firebase";
-
 
 // image slider
 import ImgSliderComp from "./ImgSliderComp";
@@ -27,7 +33,7 @@ export default function InformationComp() {
   const [itemList, setItemList] = useState("");
   //아이템 정보들
   const [itemInfo, setItemInfo] = useState("");
-  
+
   // 구매수량
   const [itemNum, setItemNum] = useState(1);
 
@@ -60,15 +66,13 @@ export default function InformationComp() {
         // ...
       }
     });
-    
   };
 
-
-  const getUserData = async() =>{
+  const getUserData = async () => {
     const docRef = doc(db, "users", userUID);
     const docSnap = await getDoc(docRef);
     setUserCartList(docSnap.data().cartList);
-  }
+  };
 
   useEffect(() => {
     setItemName(param);
@@ -77,11 +81,11 @@ export default function InformationComp() {
     findItem();
   }, []);
 
-  useEffect(()=>{
-    if(userUID){
+  useEffect(() => {
+    if (userUID) {
       getUserData();
     }
-  },[userUID])
+  }, [userUID]);
 
   useEffect(() => {
     findItem();
@@ -90,8 +94,8 @@ export default function InformationComp() {
   //버튼 누를시 장바구니 추가
   const buyBtn = () => {
     if (itemNum > 0) {
-      const filter = userCartList.find((item)=>(item.name === param));
-      if(!filter){
+      const filter = userCartList.find((item) => item.name === param);
+      if (!filter) {
         itemInfo.num = Number(itemNum);
         const setCartList = async () => {
           const washingtonRef = doc(db, "users", userUID);
@@ -101,9 +105,8 @@ export default function InformationComp() {
         };
         setCartList();
         setSuccessBtn(true);
-      }
-      else{
-        alert('장바구니에 담겨있습니다!');
+      } else {
+        alert("장바구니에 담겨있습니다!");
       }
     } else {
       alert("1개부터 구매 가능하다멍 🐶");
@@ -137,38 +140,84 @@ export default function InformationComp() {
         <ul className={style.infor_modal_cart}>
           <li className={style.ImgSlider}>
             {/* 상품 상세 사진 슬라이더 */}
-            <ImgSliderComp item={itemInfo}/>
+            <ImgSliderComp item={itemInfo} />
           </li>
           <li className={style.ItemBuyBox}>
-            <p>{itemName}</p>
-            <p>{itemInfo.price}</p>
-            <p>
-              <span>수량</span>
-              <input
-                type="number"
-                value={itemNum}
-                min="1"
-                onChange={(e) => {
-                  setItemNum(e.target.value);
-                }}
-              />
-            </p>
-            <button
-              onClick={() => {
-                navigater(-1);
-              }}
-            >
-              취소
-            </button>
-            <button onClick={buyBtn}>구매하기</button>
-              <div
-                  className={style.infro_modal_setCart}
-                  style={successBtn ? { display: "" } : { display: "none" }}
-                >
-                  <h3>장바구니에 담았습니다!</h3>
-                  <button onClick={cartBtn}>장바구니로 이동</button>
-                  <button onClick={keepShoppingBtn}>쇼핑 계속하기</button>
+            <div className={style.BoxContents}>
+              <div className={style.ProductModal}>
+                {/* 상품 이름 */}
+                <h2 style={{ fontSize: "1.8rem", marginTop: "35px" }}>
+                  {itemName}
+                </h2>
+
+                {/* 상품 가격 */}
+                <p style={{ fontWeight: "bold", fontSize: "1.3rem" }}>
+                  {itemInfo.price}₩
+                </p>
+
+                {/* 상품 상세설명 */}
+                <p style={{ fontSize: "1.1rem" }}>
+                  우리 강아지들에게 필요한 제품을 <br /> 합리적인 가격에
+                  제공하고 있습니다!
+                </p>
+
+                {/* 상품 수량 */}
+                <p>
+                  <span style={{ fontSize: "1.1rem" }}>수량 </span>
+                  <input
+                    type="number"
+                    value={itemNum}
+                    min="1"
+                    onChange={(e) => {
+                      setItemNum(e.target.value);
+                    }}
+                    className={style.AmountInput}
+                  />
+                </p>
+
+                {/* 취소, 구매 버튼 */}
+                <div className={style.Buttons}>
+                  <button
+                    onClick={() => {
+                      navigater(-1);
+                    }}
+                    className={style.CancelBtn}
+                  >
+                    취소
+                  </button>
+                  <button onClick={buyBtn} className={style.BuyBtn}>
+                    구매하기
+                  </button>
+                </div>
               </div>
+
+              {/* 구매 버튼 눌렀을 때 뜨는 장바구니 모달 */}
+              {successBtn ? (
+                <div
+                  className={style.PutCartModal}
+                  // style={successBtn ? { display: "" } : { display: "none" }}
+                >
+                  <h3 style={{ margin: "auto" }}>
+                    장바구니에 상품을 담았습니다!
+                  </h3>
+                  <div className={style.Buttons2}>
+                    <button onClick={cartBtn} className={style.CartBtn}>
+                      장바구니로 이동
+                    </button>
+                    <button onClick={keepShoppingBtn} className={style.KeepBtn}>
+                      쇼핑 계속하기
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className={style.StartImg}>
+                  <div className={style.Text}>
+                    Mung & More <br /> for our dog!
+                  </div>
+                  <div className={style.ImgBox}></div>
+                </div>
+              )}
+            </div>
           </li>
         </ul>
       </div>
