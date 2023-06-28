@@ -5,8 +5,9 @@ import { useNavigate, useOutletContext, useParams } from "react-router";
 
 // firebase
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { doc,getDoc, updateDoc, arrayUnion, collection, getDocs  } from "firebase/firestore";
 import { db, auth } from "../../../../data/firebase";
+
 
 // image slider
 import ImgSliderComp from "./ImgSliderComp";
@@ -19,12 +20,13 @@ export default function InformationComp() {
 
   //유저 아이디
   const [userUID, setUserUID] = useState("");
+  const [userCartList, setUserCartList] = useState();
   //파람값
   const [itemName, setItemName] = useState("");
-  //아이템 정보들
-  const [itemInfo, setItemInfo] = useState("");
   // props로 들고온 아이템 배열 들고오기
   const [itemList, setItemList] = useState("");
+  //아이템 정보들
+  const [itemInfo, setItemInfo] = useState("");
   
   // 구매수량
   const [itemNum, setItemNum] = useState(1);
@@ -58,14 +60,29 @@ export default function InformationComp() {
         // ...
       }
     });
+    
   };
 
+
+  const getUserData = async() =>{
+    const docRef = doc(db, "users", userUID);
+    const docSnap = await getDoc(docRef);
+    setUserCartList(docSnap.data().cartList);
+  }
+
+  console.log(userCartList);
   useEffect(() => {
     setItemName(param);
     setItemList(outletProps);
     getUser();
     findItem();
   }, []);
+
+  useEffect(()=>{
+    if(userUID){
+      getUserData();
+    }
+  },[userUID])
 
   useEffect(() => {
     findItem();
@@ -74,15 +91,21 @@ export default function InformationComp() {
   //버튼 누를시 장바구니 추가
   const buyBtn = () => {
     if (itemNum > 0) {
-      itemInfo.num = Number(itemNum);
-      const setCartList = async () => {
-        const washingtonRef = doc(db, "users", userUID);
-        await updateDoc(washingtonRef, {
-          cartList: arrayUnion(itemInfo),
-        });
-      };
-      setCartList();
-      setSuccessBtn(true);
+      const filter = userCartList.filter((item)=>(item.name === param));
+      if(!filter){
+        itemInfo.num = Number(itemNum);
+        const setCartList = async () => {
+          const washingtonRef = doc(db, "users", userUID);
+          await updateDoc(washingtonRef, {
+            cartList: arrayUnion(itemInfo),
+          });
+        };
+        setCartList();
+        setSuccessBtn(true);
+      }
+      else{
+        alert('장바구니에 담겨있습니다!');
+      }
     } else {
       alert("1개부터 구매 가능하다멍 🐶");
     }
