@@ -172,10 +172,13 @@ export const MungsNewsContents = () => {
                       />
                     </div>
                   </div>
-                  <div className='imgBx'>
+                  <div className='imgBx'
+                  style={{height:'400px'}}
+                  >
                     { post.images.length ? 
                     <img
                       className='event-slide-img'
+                      style={{height:'400px'}}
                       src={post.images[post.imageIndex]}
                       alt={`Image ${post.imageIndex + 1}`}
                       width={550}
@@ -203,7 +206,9 @@ export const MungsNewsContents = () => {
                     </div>
                   </div>
                   <h4 className='date'>{post.date}</h4>
-                  <div className='message'>
+                  <div className='message'
+                  style={{minHeight:'0px'}}
+                  >
                     <p>{post.sub}</p> 
                     <div>{post.des}</div>
                     <span>{post.hash}</span>
