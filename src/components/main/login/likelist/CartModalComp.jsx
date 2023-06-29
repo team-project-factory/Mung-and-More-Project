@@ -1,13 +1,11 @@
-
 import "magnific-popup/dist/magnific-popup.css";
 import "./cartModalComp.css";
 // react
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router";
 
-
 //css
-import style from './cartModalComp.module.scss'
+import style from "./cartModalComp.module.scss";
 
 // firebase
 import { onAuthStateChanged } from "firebase/auth";
@@ -24,7 +22,6 @@ import { db, auth } from "../../../../data/firebase";
 import ImgSliderComp2 from "./ImgSliderComp2";
 
 const CartModalComp = () => {
-  
   const user = JSON.parse(sessionStorage.getItem("user"));
   const navigater = useNavigate();
   const param = useParams().name;
@@ -129,7 +126,7 @@ const CartModalComp = () => {
 
   const keepShoppingBtn = () => {
     if (user) {
-      navigater("/shopping");
+      navigater("/mylike");
     }
   };
 
