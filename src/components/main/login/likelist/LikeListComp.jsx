@@ -24,6 +24,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as redHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import { Link, Outlet} from "react-router-dom";
 
 export const LikeListComp = () => {
   // user UID 담을 state
@@ -106,6 +107,7 @@ export const LikeListComp = () => {
 
   return (
     <div className={style.LikeListComp}>
+      <Outlet context={likeList && likeList}/>
       <div className={style.Layout}>
         <div className={style.LikeListBox}>
           <h1 style={{ marginLeft: "45px", marginBottom: "20px" }}>My Like</h1>
@@ -149,18 +151,20 @@ export const LikeListComp = () => {
                       <div style={{ fontSize: "1.2rem" }}>{item.name}</div>
                       <div style={{ fontSize: "1.1rem" }}>{item.price}₩</div>
                     </div>
-                    <div className={style.CartBtn}>
-                      <FontAwesomeIcon
-                        icon={faCartPlus}
-                        style={{
-                          width: "21px",
-                          height: "21px",
-                          color: "#c2c2c2",
-                          paddingLeft: "11.5px",
-                          paddingTop: "12.5px",
-                        }}
-                      />
-                    </div>
+                    <Link to={`/mylike/${item.name}`}>
+                      <div className={style.CartBtn}>
+                        <FontAwesomeIcon
+                          icon={faCartPlus}
+                          style={{
+                            width: "21px",
+                            height: "21px",
+                            color: "#c2c2c2",
+                            paddingLeft: "11.5px",
+                            paddingTop: "12.5px",
+                          }}
+                        />
+                        </div>
+                    </Link>
                   </div>
                 </div>
               ))}
