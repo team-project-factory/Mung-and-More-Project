@@ -201,7 +201,8 @@ export const ShoppingComp = () => {
                       if (userInfor) {
                         likeBtn(item);
                       } else {
-                        alert("로그인!");
+                        alert("로그인해주세요!");
+                        navigater("/login");
                       }
                     }}
                   >
