@@ -91,7 +91,7 @@ export const CommunityComp = () => {
               </li>
           ))}
         </ul>
-        <div className={style.mungsList_news} style={{backgroundImage:`url('${process.env.PUBLIC_URL + "/img/멍스타 가이드라인.png"}')`, backgroundSize:'620px 860px'}}>
+        <div className={style.mungsList_news} style={{backgroundImage:`url('${process.env.PUBLIC_URL + "/img/멍스타 가이드라인.png"}')`, backgroundSize:'620px 830px'}}>
         </div>
         <Outlet/>
         <div style={{position:'relative',minHeight: '700px',}}>
