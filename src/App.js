@@ -19,6 +19,7 @@ import { MungsNews } from "./pages/Main/MungsNews";
 import CreatePost from "./pages/Main/CreatePost";
 import { MungsNewsContents } from "./components/main/community/mungsNews/MungsNewsContents";
 import InstagramComp from "./components/main/community/InstagramComp";
+import CartModalComp from "./components/main/login/likelist/CartModalComp";
 
 function App() {
   return (
@@ -51,8 +52,10 @@ function App() {
         <Route path="/createpostcomp" element={<CreatePost/>}/>
 
         {/** 로그인 성공했을 때 */}
-        <Route path="/mylike" element={<LikeList />} />
-        <Route path="/cart" element={<CartList />} />
+        <Route path="/mylike" element={<LikeList />}>
+          <Route path="/mylike/:name" element={<CartModalComp/>}/>
+        </Route>
+        <Route path="/cart" element={<CartList />}/>
       </Routes>
     </div>
   );
