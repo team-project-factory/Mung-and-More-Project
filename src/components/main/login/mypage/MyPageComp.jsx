@@ -150,7 +150,8 @@ export default function MyPageComp() {
     navigater('/');
   }
 
-  const handleSave = () => {
+  const handleSave = (e) => {
+    e.preventDefault();
     const auth = getAuth();
     const user = auth.currentUser;
 
@@ -177,6 +178,7 @@ export default function MyPageComp() {
             setPassword(''); // 비밀번호 필드 초기화
             setNewPassword(''); // 새 비밀번호 필드 초기화
             setConfirmPassword(''); // 비밀번호 확인 필드 초기화
+            console.log(isLoggedIn);
           })
           .catch((error) => {
             // 비밀번호 업데이트 실패

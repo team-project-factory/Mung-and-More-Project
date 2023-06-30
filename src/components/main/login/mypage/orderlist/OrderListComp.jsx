@@ -72,9 +72,10 @@ export const OrderListComp = () => {
     return `${year}.${month}.${day}`;
   };
 
+  // 주문번호
   const generateRandomNumber = () => {
     const randomNumber = Math.floor(Math.random() * 10000000); // 0부터 999999 사이의 랜덤한 숫자 생성
-    return String(randomNumber).padStart(7, '0'); // 6자리 숫자로 변환
+    return String(randomNumber).padStart(7, '0'); // 7자리 숫자로 변환
   };
 
   return (
