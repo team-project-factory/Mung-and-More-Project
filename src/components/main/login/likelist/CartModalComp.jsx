@@ -1,5 +1,3 @@
-import "magnific-popup/dist/magnific-popup.css";
-import "./cartModalComp.css";
 // react
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router";

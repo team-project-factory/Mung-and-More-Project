@@ -2,8 +2,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import "./cartModalComp.css";
-
 export default function ImgSliderComp2(props) {
   const settings = {
     dots: true,
@@ -17,16 +15,15 @@ export default function ImgSliderComp2(props) {
 
   return (
     <div>
-      <Slider {...settings}> 
-        {
-          item && item.map((i)=>(
+      <Slider {...settings}>
+        {item &&
+          item.map((i) => (
             <div>
               <img src={i} className="Img" />
             </div>
-          ))
-        }
+          ))}
 
-        { /**
+        {/**
           <div>
             <img src={require("./InfoImg/001.png")} className="Img" />
           </div>
@@ -43,8 +40,7 @@ export default function ImgSliderComp2(props) {
             <img src={require("./InfoImg/006.png")} className="Img" />
           </div>
          * 
-         */
-        }
+         */}
       </Slider>
     </div>
   );
