@@ -94,7 +94,11 @@ export const OrderListComp = () => {
                   order.checkedList.map((item) => (
                     <OderInfo>
                       <ProductImg>
-                        <img src={item.url} alt={item.name} style={{ width: '100%', lineHeight: '120px' }} />
+                        <img src={item.url} alt={item.name} 
+                        style={{ width: '100%', lineHeight: '120px', 
+                                marginTop:item.url === "https://firebasestorage.googleapis.com/v0/b/mungmore-80ab2.appspot.com/o/shoppingItem_images%2F%EC%9B%B0%EB%B9%99%EC%82%AC%EB%A3%8C_%EC%8D%B8%EB%84%A4%EC%9D%BC2-removebg-preview.png?alt=media&token=1e4e9c5b-f3f1-48b3-8310-a5e73be570a6" ? "2px" : "-15px",
+                                // 위에 웰빙사료만 사진 크기 조절하려고 삼항연산자 걸어 별도 관리
+                                }} />
                       </ProductImg>
                       <ProductInfoAll>
                         <ProductInfo>

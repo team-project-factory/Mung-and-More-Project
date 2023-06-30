@@ -24,6 +24,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as redHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import { Link, Outlet } from "react-router-dom";
 
 export const LikeListComp = () => {
   // user UID 담을 state
@@ -106,6 +107,7 @@ export const LikeListComp = () => {
 
   return (
     <div className={style.LikeListComp}>
+      <Outlet context={likeList && likeList} />
       <div className={style.Layout}>
         <div className={style.LikeListBox}>
           <h1 style={{ marginLeft: "45px", marginBottom: "20px" }}>My Like</h1>
@@ -135,12 +137,19 @@ export const LikeListComp = () => {
                     <div
                       style={{
                         backgroundImage: `url(${item.url})`,
-                        width: "200px",
-                        height: "150px",
+                        width: "220px",
+                        height: "210px",
+                        // 아래 이미지 웰빙사료만 사이즈가 칸에 조절하기 위해 삼항연산자 걸어서 별도 관리
+                        height:
+                          item.url ===
+                          "https://firebasestorage.googleapis.com/v0/b/mungmore-80ab2.appspot.com/o/shoppingItem_images%2F%EC%9B%B0%EB%B9%99%EC%82%AC%EB%A3%8C_%EC%8D%B8%EB%84%A4%EC%9D%BC2-removebg-preview.png?alt=media&token=1e4e9c5b-f3f1-48b3-8310-a5e73be570a6"
+                            ? "185px"
+                            : "210px",
                         backgroundSize: "contain",
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "center",
-                        margin: "auto",
+                        margin: "0 -10px",
+                        marginTop: "-42px",
                       }}
                     ></div>
                   </div>
@@ -149,18 +158,20 @@ export const LikeListComp = () => {
                       <div style={{ fontSize: "1.2rem" }}>{item.name}</div>
                       <div style={{ fontSize: "1.1rem" }}>{item.price}₩</div>
                     </div>
-                    <div className={style.CartBtn}>
-                      <FontAwesomeIcon
-                        icon={faCartPlus}
-                        style={{
-                          width: "21px",
-                          height: "21px",
-                          color: "#c2c2c2",
-                          paddingLeft: "11.5px",
-                          paddingTop: "12.5px",
-                        }}
-                      />
-                    </div>
+                    <Link to={`/mylike/${item.name}`}>
+                      <div className={style.CartBtn}>
+                        <FontAwesomeIcon
+                          icon={faCartPlus}
+                          style={{
+                            width: "21px",
+                            height: "21px",
+                            color: "#c2c2c2",
+                            paddingLeft: "11.5px",
+                            paddingTop: "12.5px",
+                          }}
+                        />
+                      </div>
+                    </Link>
                   </div>
                 </div>
               ))}
