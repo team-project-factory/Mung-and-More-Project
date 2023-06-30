@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../data/firebase";
 
-//css
-import style from "./loactioncomp.module.scss";
 import { faHandPointDown } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//css
+import style from "./loactioncomp.module.scss";
 
 // script로 kakao map을 들고오면 window 전역 객체에 들어가기 떄문에
 // 함수형 컴포넌트에서 인식하지 못함
