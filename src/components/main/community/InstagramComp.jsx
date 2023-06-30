@@ -114,12 +114,12 @@ export default function InstagramComp() {
         alert("댓글 작성이 완료되었다멍!");
         setComment();
         setinput("");
-        getData();
       }
     } else {
       alert("로그인이 필요하다멍!");
       navigater("/login");
     }
+    getData();
   };
 
   //댓글 삭제버튼
