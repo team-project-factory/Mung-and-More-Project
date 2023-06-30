@@ -78,7 +78,7 @@ export default function InstagramComp() {
     const newCommentList = commentList2.filter((c) => (c.id === param.id));
     setCommentList(newCommentList);
   }
- 
+
 
   useEffect(() => {
     getData();
@@ -106,12 +106,12 @@ export default function InstagramComp() {
         alert('댓글 작성 완료!');
       setComment();
       setinput("");
-      getData();
-      }
-    } else {
-      alert("로그인해주세요");
-      navigater("/login");
     }
+  } else {
+    alert("로그인해주세요");
+    navigater("/login");
+  }
+  getData();
   };
 
   //댓글 삭제버튼
