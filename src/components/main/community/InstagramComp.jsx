@@ -125,10 +125,10 @@ export default function InstagramComp() {
     if (comment.uid === uid) {
       alert("삭제!");
       deleteComment();
-      getData();
     } else {
       alert("아이디 다르다!");
     }
+    getData();
   };
 
   // 게시글 삭제 함수
