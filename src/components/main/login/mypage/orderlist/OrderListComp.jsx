@@ -102,7 +102,7 @@ export const OrderListComp = () => {
                       </ProductImg>
                       <ProductInfoAll>
                         <ProductInfo>
-                          <Brand>브랜드</Brand>
+                          <Brand>{item.category}</Brand>
                           <Name>{item.name}</Name>
                           <NumWrap>
                             <Num>{item.price * item.num}₩ / </Num>
