@@ -99,10 +99,15 @@ export default function InstagramComp() {
       });
     };
     if (uid) {
-      alert('댓글 작성 완료!');
+      if(!input){
+        alert('글자를 적어주세요');
+      }
+      else{
+        alert('댓글 작성 완료!');
       setComment();
       setinput("");
       getData();
+      }
     } else {
       alert("로그인해주세요");
       navigater("/login");
@@ -300,7 +305,6 @@ export default function InstagramComp() {
                     onChange={(e) => {
                       setinput(e.target.value);
                     }}
-                    required
                   />
                   <button
                     onClick={() => {
