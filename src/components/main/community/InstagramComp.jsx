@@ -1,25 +1,37 @@
-import React, { useEffect, useState } from 'react'
-import './instagramComp.css'
-import style from './instagramComp.module.scss'
-import { faHeart, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
-import { faComment, faPaperPlane, faBookmark,faTrashCan } from '@fortawesome/free-regular-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { doc, updateDoc, arrayRemove, collection, getDocs, deleteDoc,arrayUnion } from 'firebase/firestore';
-import {auth, db,storage } from '../../../data/firebase';
-import { onAuthStateChanged,getAuth } from 'firebase/auth'
-import { ref,deleteObject} from 'firebase/storage'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
-
+import React, { useEffect, useState } from "react";
+import "./instagramComp.css";
+import style from "./instagramComp.module.scss";
+import { faHeart, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import {
+  faComment,
+  faPaperPlane,
+  faBookmark,
+  faTrashCan,
+} from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  doc,
+  updateDoc,
+  arrayRemove,
+  collection,
+  getDocs,
+  deleteDoc,
+  arrayUnion,
+} from "firebase/firestore";
+import { auth, db, storage } from "../../../data/firebase";
+import { onAuthStateChanged, getAuth } from "firebase/auth";
+import { ref, deleteObject } from "firebase/storage";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export default function InstagramComp() {
   const stateOk = useLocation();
   const navigater = useNavigate();
   const param = useParams();
   const userInfor = JSON.parse(sessionStorage.getItem("user"));
-  const [uid, setUid] = useState('');
+  const [uid, setUid] = useState("");
   // 게시물 마다 독립적으로 관리하기 위해 객체 형태로 변경
   const [newList2, setNewList2] = useState([]);
-  const [deleteId, setDeleteId] = useState('');
+  const [deleteId, setDeleteId] = useState("");
 
   //댓글 리스트
   const [commentList, setCommentList] = useState([]);
@@ -30,8 +42,6 @@ export default function InstagramComp() {
   const [userPhoto, setUserPhoto] = useState("");
   //댓글작성
   const [input, setinput] = useState("");
-
-
 
   // 아래 getData에서 UID 값이 있을 때 실행하도록 하기 위해 작성
   useEffect(() => {
@@ -47,11 +57,11 @@ export default function InstagramComp() {
       }
     });
     getData();
-  }, [])
+  }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     getData();
-  },[stateOk])
+  }, [stateOk]);
 
   // Post 컬렉션에서 문서이름을 UID로 해놓았기 때문에
   // "컬렉션이름",uid 형태로 집어넣어 사용
@@ -62,9 +72,9 @@ export default function InstagramComp() {
     querySnapshot.forEach((doc) => {
       const data = doc.data().post;
       newList.push({
-        id : doc.id,
-        imageIndex : 0, 
-        ...data
+        id: doc.id,
+        imageIndex: 0,
+        ...data,
       });
       //댓글
       const comment = doc.data().comment;
@@ -73,12 +83,11 @@ export default function InstagramComp() {
       }
     });
     // newList2라는 상태 변수 사용 가능
-    const filter = newList.filter((n)=>(n.id === param.id))
+    const filter = newList.filter((n) => n.id === param.id);
     setNewList2(filter);
-    const newCommentList = commentList2.filter((c) => (c.id === param.id));
+    const newCommentList = commentList2.filter((c) => c.id === param.id);
     setCommentList(newCommentList);
-  }
-
+  };
 
   useEffect(() => {
     getData();
@@ -99,19 +108,18 @@ export default function InstagramComp() {
       });
     };
     if (uid) {
-      if(!input){
-        alert('글자를 적어주세요');
+      if (!input) {
+        alert("내용을 입력해 달라멍!");
+      } else {
+        alert("댓글 작성이 완료되었다멍!");
+        setComment();
+        setinput("");
       }
-      else{
-        alert('댓글 작성 완료!');
-      setComment();
-      setinput("");
+    } else {
+      alert("로그인이 필요하다멍!");
+      navigater("/login");
     }
-  } else {
-    alert("로그인해주세요");
-    navigater("/login");
-  }
-  getData();
+    getData();
   };
 
   //댓글 삭제버튼
@@ -123,55 +131,52 @@ export default function InstagramComp() {
       });
     };
     if (comment.uid === uid) {
-      alert("삭제!");
+      alert("댓글 삭제가 완료되었다멍!");
       deleteComment();
     } else {
-      alert("아이디 다르다!");
+      alert("본인의 댓글만 삭제할 수 있다멍!");
     }
     getData();
   };
 
   // 게시글 삭제 함수
-  const deletePost = async (postUid,postId) => {
+  const deletePost = async (postUid, postId) => {
     const post = newList2.find((post) => post.id === postId);
     // 파일 삭제 함수 정의
-    if(uid===postUid) {
-    const deleteFiles = async () => {
-      // 각 파일에 대해 삭제 작업 수행
-      const deletePromises = post.images.map((imageUrl) => {
-        const fileRef = ref(storage, imageUrl);
-        return deleteObject(fileRef);
-      });
-  
-      try {
-        await Promise.all(deletePromises);
-        alert("게시글 삭제 완료");
-      } catch (error) {
-        alert("직접 작성한 글만 삭제 할 수 있습니다.", error);
-      }
-    };
+    if (uid === postUid) {
+      const deleteFiles = async () => {
+        // 각 파일에 대해 삭제 작업 수행
+        const deletePromises = post.images.map((imageUrl) => {
+          const fileRef = ref(storage, imageUrl);
+          return deleteObject(fileRef);
+        });
+
+        try {
+          await Promise.all(deletePromises);
+          alert("게시글 삭제가 완료되었다멍!");
+        } catch (error) {
+          alert("본인의 게시글만 삭제할 수 있다멍!", error);
+        }
+      };
       // DB 삭제 작업 수행
-    try {
-      // firebase에 있는 모양을 유지하기 위해 이미지 옮기는데 사용한 imageIndex를 삭제
-      delete post.imageIndex
-      await deleteDoc(doc(db, "post", postId));
-      await deleteFiles(); // 파일 삭제 함수 호출
-      console.log("사진 파일이 삭제되었습니다.");
-      navigater('/community',{replace:true, state: param});
-    } catch (error) {
-      console.error("사진 파일 삭제 오류가 발생했습니다:", error);
+      try {
+        // firebase에 있는 모양을 유지하기 위해 이미지 옮기는데 사용한 imageIndex를 삭제
+        delete post.imageIndex;
+        await deleteDoc(doc(db, "post", postId));
+        await deleteFiles(); // 파일 삭제 함수 호출
+        console.log("사진 파일이 삭제되었습니다.");
+        navigater("/community", { replace: true, state: param });
+      } catch (error) {
+        console.error("사진 파일 삭제 오류가 발생했습니다:", error);
+      }
     }
-  }
-}
+  };
 
   // 게시글 삭제 실행 함수.
-  const handleDeletePost = (postUid,postId) => {
-    deletePost(postUid,postId);
-    navigater('/community',{replace:true, state: param});
-  }
-
-  
-
+  const handleDeletePost = (postUid, postId) => {
+    deletePost(postUid, postId);
+    navigater("/community", { replace: true, state: param });
+  };
 
   // 아래는 슬라이드에 이전, 다음 버튼 함수
   // 게시물 객체인 post를 인자로 받아 해당 게시물의 슬라이드 index를 변경하고 변경된 리스트를 상태로 업데이트
@@ -179,7 +184,8 @@ export default function InstagramComp() {
     if (post.images && post.images.length > 0) {
       // (현재 슬라이드 인덱스) -1 + (게시물의 이미지 배열의 길이) % (게시물의 이미지 배열의 길이로 나눈 나머지 값)
       // % 하는 이유 : 계산된 인덱스가 음수인 경우 배열의 마지막 인덱스로 순환하도록 하기 위함.
-      const index = (post.imageIndex - 1 + post.images.length) % post.images.length;
+      const index =
+        (post.imageIndex - 1 + post.images.length) % post.images.length;
       post.imageIndex = index;
       // 전체 게시물 리스트(newList2)를 새 배열로 복사하여 등록한 게시물 객체를 포함하도록 설정
       setNewList2([...newList2]);
@@ -192,103 +198,134 @@ export default function InstagramComp() {
       post.imageIndex = index;
       setNewList2([...newList2]);
     }
-    
   }
 
-
   return (
-          <div className={style.mungsList_news}>
-            {newList2 && newList2.map((post, index) => (
-              <div key={index} style={{overflow:'hidden'}}>
-                <div className='card'>
-                  <div className='title'>
-                    <div className='userDetails'>
-                        
-                        <div className='logo'>
-                          {post.photo ? <img src={post.photo} alt="Selected" style={{width:"100%", height:"100%"}}/>: ''}
-                        </div>
-                        
-                      <h2 className='insta-title'> {post.title} <br /><span className='insta-sub'> {post.location} </span></h2>
-                    </div>
-                    <div
-                      style={{width:'80px', height:'60px', zIndex:'10'}}
-                      onMouseEnter={()=>setDeleteId(post.id)}
-                      onMouseLeave={()=>setDeleteId("")}>
-                      <div className='dot-box'>
-                        <div className='dot'>
-                          <FontAwesomeIcon 
-                            icon={faEllipsisVertical} size='2xl' 
-                          />
-                        </div>
-                      </div>
-                      {uid === post.uid && (
-                        <button
-                          style={{padding:'5px'}}
-                          className='delete-btn'
-                          onClick={()=>handleDeletePost(post.uid, post.id)}
-                        >
-                          <FontAwesomeIcon icon={faTrashCan} size='2xl'/>
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <div className='imgBx'>
-                    { post.images.length ? 
-                    <img
-                      className='event-slide-img'
-                      src={post.images[post.imageIndex]}
-                      alt={`Image ${post.imageIndex + 1}`}
-                    /> : <div></div>
-                    
-                  }
-                    { post.images.length > 1 ? 
-                    <div className='slide-btn'>
-                      {/* 아래 버튼에 onClick시 post를 인자로 전달하여 각버튼이 독립적인 post 객체를 받게끔 설정 */}
-                      <button className='prev-btn' onClick={() => btnPrev(post)}>{'<'}</button>
-                      <button className='next-btn' onClick={() => btnNext(post)}>{'>'}</button>
-                    </div> : <div></div>}
-
-                  </div>
-                  <div className='actionBtns'>
-                    <div className='left'>
-                      <FontAwesomeIcon icon={faHeart} size="2xl" color='red' className='heart' />
-                      <FontAwesomeIcon icon={faComment} size="2xl" flip='horizontal' className='comment' />
-                      <FontAwesomeIcon icon={faPaperPlane} size="2xl" className='share' />
-
-                    </div>
-                    <div className='right'>
-                      <FontAwesomeIcon icon={faBookmark} size="2xl" />
-                    </div>
-                  </div>
-                  <h4 className='date'>{post.date}</h4>
-                  <div className='message'>
-                    <p>{post.sub}</p> 
-                    <div>{post.des}</div>
-                    <span>{post.hash}</span>
+    <div className={style.mungsList_news}>
+      {newList2 &&
+        newList2.map((post, index) => (
+          <div key={index} style={{ overflow: "hidden" }}>
+            <div className="card">
+              <div className="title">
+                <div className="userDetails">
+                  <div className="logo">
+                    {post.photo ? (
+                      <img
+                        src={post.photo}
+                        alt="Selected"
+                        style={{ width: "100%", height: "100%" }}
+                      />
+                    ) : (
+                      ""
+                    )}
                   </div>
 
-                  {/* 작성란 */}
-            <h3 style={{textAlign : 'left', margin : '6px 0 0 15px'}}>댓글</h3>
-            <ul className={style.commentBox}>
-              {commentList &&
-                commentList.map((c) => (
-                  <li>
-                    <div
-                      className={style.imgBox}
-                      style={{ backgroundImage: `url(${c.photo})` }}
-                    ></div>
-                    <p className={style.userBox}>{c.name}</p>
-                    <p className={style.userComment}>{c.comment}</p>
-                    <span
-                      onClick={() => {
-                        deleteBtn(c);
-                      }}
+                  <h2 className="insta-title">
+                    {" "}
+                    {post.title} <br />
+                    <span className="insta-sub"> {post.location} </span>
+                  </h2>
+                </div>
+                <div
+                  style={{ width: "80px", height: "60px", zIndex: "10" }}
+                  onMouseEnter={() => setDeleteId(post.id)}
+                  onMouseLeave={() => setDeleteId("")}
+                >
+                  <div className="dot-box">
+                    <div className="dot">
+                      <FontAwesomeIcon icon={faEllipsisVertical} size="2xl" />
+                    </div>
+                  </div>
+                  {uid === post.uid && (
+                    <button
+                      style={{ padding: "5px" }}
+                      className="delete-btn"
+                      onClick={() => handleDeletePost(post.uid, post.id)}
                     >
-                      삭제
-                    </span>
-                  </li>
-                ))}
-            </ul>
+                      <FontAwesomeIcon icon={faTrashCan} size="2xl" />
+                    </button>
+                  )}
+                </div>
+              </div>
+              <div className="imgBx">
+                {post.images.length ? (
+                  <img
+                    className="event-slide-img"
+                    src={post.images[post.imageIndex]}
+                    alt={`Image ${post.imageIndex + 1}`}
+                  />
+                ) : (
+                  <div></div>
+                )}
+                {post.images.length > 1 ? (
+                  <div className="slide-btn">
+                    {/* 아래 버튼에 onClick시 post를 인자로 전달하여 각버튼이 독립적인 post 객체를 받게끔 설정 */}
+                    <button className="prev-btn" onClick={() => btnPrev(post)}>
+                      {"<"}
+                    </button>
+                    <button className="next-btn" onClick={() => btnNext(post)}>
+                      {">"}
+                    </button>
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+              </div>
+              <div className="actionBtns">
+                <div className="left">
+                  <FontAwesomeIcon
+                    icon={faHeart}
+                    size="2xl"
+                    color="red"
+                    className="heart"
+                  />
+                  <FontAwesomeIcon
+                    icon={faComment}
+                    size="2xl"
+                    flip="horizontal"
+                    className="comment"
+                  />
+                  <FontAwesomeIcon
+                    icon={faPaperPlane}
+                    size="2xl"
+                    className="share"
+                  />
+                </div>
+                <div className="right">
+                  <FontAwesomeIcon icon={faBookmark} size="2xl" />
+                </div>
+              </div>
+              <h4 className="date">{post.date}</h4>
+              <div className="message">
+                <p>{post.sub}</p>
+                <div>{post.des}</div>
+                <span>{post.hash}</span>
+              </div>
+
+              {/* 작성란 */}
+              <h3 style={{ textAlign: "left", margin: "6px 0 0 15px" }}>
+                댓글
+              </h3>
+              <ul className={style.commentBox}>
+                {commentList &&
+                  commentList.map((c) => (
+                    <li>
+                      <div
+                        className={style.imgBox}
+                        style={{ backgroundImage: `url(${c.photo})` }}
+                      ></div>
+                      <p className={style.userBox}>{c.name}</p>
+                      <p className={style.userComment}>{c.comment}</p>
+                      <span
+                        onClick={() => {
+                          deleteBtn(c);
+                        }}
+                      >
+                        삭제
+                      </span>
+                    </li>
+                  ))}
+              </ul>
               <ul className={style.commentInput}>
                 <div
                   style={
@@ -316,9 +353,9 @@ export default function InstagramComp() {
                   </button>
                 </li>
               </ul>
-                </div>
-              </div>
-            ))}
+            </div>
           </div>
-  )
+        ))}
+    </div>
+  );
 }
