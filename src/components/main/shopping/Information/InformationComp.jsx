@@ -106,10 +106,10 @@ export default function InformationComp() {
         setCartList();
         setSuccessBtn(true);
       } else {
-        alert("장바구니에 담겨있습니다!");
+        alert("이미 장바구니에 담은 상품이다멍!");
       }
     } else {
-      alert("1개부터 구매 가능하다멍 🐶");
+      alert("1개부터 구매 가능하다멍!");
     }
     getUserData();
   };
