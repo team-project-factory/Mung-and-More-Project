@@ -127,7 +127,6 @@ export default function MyPageComp() {
     });
   },[])
 
-  console.log(userImfor);
   //회원탈퇴
   const handleDeleteUser = () =>{
     const auth = getAuth();
@@ -144,9 +143,9 @@ export default function MyPageComp() {
     const DeleteUserData = async() =>{
       await deleteDoc(doc(db, "users", userImfor));
     }
-    DeleteUserData();
     //세션정보 삭제
     sessionStorage.removeItem('user');
+    DeleteUserData();
     navigater('/');
   }
 
