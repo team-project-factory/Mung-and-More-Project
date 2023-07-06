@@ -22,7 +22,7 @@ export const MainComp6 = () => {
       </a>
       <div style={{ marginLeft: "30%" }}>
         <img
-          src="/img/mainDog8.gif"
+          src="./img/mainDog8.gif"
           style={{ width: "600px", marginLeft: "545px", marginTop: "-180px" }}
         />
       </div>

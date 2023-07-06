@@ -83,8 +83,9 @@ export const LoginComp = () => {
       <div className={style.loginList_LoginBox}>
         <div className={style.loginList_LoginBox_div}>
           <ul>
-            <Link to={`/`}><img src="/img/LOGO.svg" alt="" width={`35%`}/></Link>
-            <h2>한줄 소개가 들어갈 공간</h2>
+            <Link to={`/`}><img src="./img/logo.svg" alt="" width={`35%`}/></Link>
+            <h2>로그인 후 멍앤모어의</h2> 
+            <h2>모든 서비스를 즐기세요!</h2>
             <form onSubmit={login}>
               <li>
                 <input type="email" id="email" placeholder='이메일(example@email.com)' required 
