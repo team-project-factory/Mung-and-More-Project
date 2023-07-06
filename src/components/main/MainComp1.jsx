@@ -64,10 +64,10 @@ export const MainComp1 = () => {
       </TitleCircle> */}
       <DogCircle>
         <div style={{position:"absolute", right:"300px", bottom:"275px"}}>
-          <img src="./img/mainDog7.gif" style={{ width: '250px'}} />
+          <img src={process.env.PUBLIC_URL + "/img/mainDog7.gif"} style={{ width: '250px'}} />
         </div>
         <div style={{position:"absolute", right:"1150px", bottom:"10px"}}>
-          <img src="./img/mainDog55.gif" style={{width:'800px'}} />
+          <img src={process.env.PUBLIC_URL + "/img/mainDog55.gif"} style={{width:'800px'}} />
         </div>
       </DogCircle>
       <div class="cursor">

@@ -50,14 +50,15 @@ export const MainComp2 = () => {
       <div className='cursor-box'>
         <img 
         className='cursor'
-        src="./img/cursor.png" 
+        src={process.env.PUBLIC_URL + "/img/cursor.png"} 
         />
       </div>
       
             
         
       <ImageWrap>
-        <img src="./img/main2dog.png" alt="" style={{width:"1500px", marginTop:"30px"}}/>
+        <img src=
+        {process.env.PUBLIC_URL + "/img/main2dog.png"} alt="" style={{width:"1500px", marginTop:"30px"}}/>
       </ImageWrap>
     </div>
   )

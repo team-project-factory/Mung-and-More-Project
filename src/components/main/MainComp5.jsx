@@ -31,8 +31,8 @@ export const MainComp5 = () => {
           </a>
         </TextInfo>
         <div className='videoBox'>
-          <img src="./img/mainDogPost.png" width={'580px'} />
-          <video src='./dogVideo.mp4' id="main-slide-video" autoPlay muted loop width="510px"
+          <img src={process.env.PUBLIC_URL + "/img/mainDogPost.png"} width={'580px'} />
+          <video src={process.env.PUBLIC_URL + '/dogVideo.mp4'} id="main-slide-video" autoPlay muted loop width="510px"
           style={{position:"absolute",  height:"490px", left:"34px"}}>
         </video>
         </div>
