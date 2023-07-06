@@ -133,10 +133,10 @@ export default function InstagramComp() {
     if (comment.uid === uid) {
       alert("댓글 삭제가 완료되었다멍!");
       deleteComment();
-      getData();
     } else {
       alert("본인의 댓글만 삭제할 수 있다멍!");
     }
+    getData();
   };
 
   // 게시글 삭제 함수
