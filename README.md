@@ -1,7 +1,7 @@
 # 🐶Mung & More🐶
 ### 소개 
 반려견 관련 종합 정보를 한 곳에서 얻을 수 있는  웹 페이지
-### 팀 : Coding Factory
+# 팀 : Coding Factory
 ## 조원
 <p>고건: <a href="https://github.com/Ko-Keon">https://github.com/Ko-Keon</a></p> 
 <p>손예진: <a href="https://github.com/syzzny">https://github.com/syzzny</a></p>
