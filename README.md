@@ -34,7 +34,9 @@
   <img src="https://img.shields.io/badge/Sass-CC6699?style=flat&logo=Sass&logoColor=white"/>
   <img src="https://img.shields.io/badge/github-181717?style=flat&logo=github&logoColor=white"/>
 </p>
+
 <br>
+
 ## 프로젝트 시작하는 방법
 <pre><code> git clone https://github.com/team-project-factory/Mung-and-More-Project.git </code></pre>
 or 우측 상단 Add file로 다운로드
