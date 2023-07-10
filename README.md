@@ -6,11 +6,11 @@
 <p>손예진: <a href="https://github.com/syzzny">https://github.com/syzzny</a></p>
 <p>김두현: <a href="https://github.com/Kdddru">https://github.com/Kdddru</a></p>
 <p>성지연: <a href="https://github.com/slateblueness">https://github.com/slateblueness</a></p>
+<br>
 
-
-### 제작기간
+## 제작기간
 2023.06.01 ~ 2023.06.30
-
+<br>
 ## 링크 
 <div>
 <p>
@@ -21,7 +21,7 @@
 </a>
 </p>
 </div>
-
+<br>
 ## 🛠stack
 <p>
   <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/>
@@ -32,7 +32,7 @@
   <img src="https://img.shields.io/badge/Sass-CC6699?style=flat&logo=Sass&logoColor=white"/>
   <img src="https://img.shields.io/badge/github-181717?style=flat&logo=github&logoColor=white"/>
 </p>
-
+<br>
 ## 프로젝트 시작하는 방법
 <pre><code> git clone https://github.com/team-project-factory/Mung-and-More-Project.git </code></pre>
 or 우측 상단 Add file로 다운로드
