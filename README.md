@@ -30,3 +30,4 @@
 
 ## 프로젝트 시작하는 방법
 <pre><code> npm i --force </code></pre>
+<pre><code> npm i --force </code></pre>
