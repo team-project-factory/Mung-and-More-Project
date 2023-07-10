@@ -29,6 +29,4 @@
 </p>
 
 ## 프로젝트 시작하는 방법
-<code>
-  npm i --force
-</code>
+<code> npm i --force </code>
