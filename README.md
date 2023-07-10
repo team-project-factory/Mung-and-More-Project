@@ -1,8 +1,8 @@
 # 🐶Mung & More🐶
 
-### Team : Coding Factory
+## Team : Coding Factory
 
-### Link 
+## Link 
 <div>
 <p>page : <a href="https://team-project-factory.github.io/Mung-and-More-Project/">https://team-project-factory.github.io/Mung-and-More-Project/</a>
 </p>
