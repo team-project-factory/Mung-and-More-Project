@@ -1,12 +1,12 @@
 # 🐶Mung & More🐶
-### Team : Coding Factory
-### Introduce 
+### 팀 : Coding Factory
+### 소개 
 반려견 관련 종합 정보를 한 곳에서 얻을 수 있는  웹 페이지
 
 ### 제작기간
 2023.06.01 ~ 2023.06.30
 
-## Link 
+## 링크 
 <div>
 <p>
   page : <a href="https://team-project-factory.github.io/Mung-and-More-Project/">https://team-project-factory.github.io/Mung-    and-More-Project/</a>
