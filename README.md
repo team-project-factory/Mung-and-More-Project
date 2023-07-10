@@ -1,6 +1,6 @@
 # 🐶Mung & More🐶
-## team
-### Coding Factory
+
+## team : Coding Factory
 
 
 ### 🛠stack
