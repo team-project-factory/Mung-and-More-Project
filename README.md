@@ -29,5 +29,8 @@
 </p>
 
 ## 프로젝트 시작하는 방법
+<pre><code> git clone https://github.com/team-project-factory/Mung-and-More-Project.git </code></pre>
+or 우측 상단 Add file로 다운로드
 <pre><code> npm i --force </code></pre>
-<pre><code> npm i --force </code></pre>
+<pre><code> npm start </code></pre>
+
