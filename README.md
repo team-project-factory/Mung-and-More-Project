@@ -1,6 +1,8 @@
 # 🐶Mung & More🐶
-
-## Team : Coding Factory
+### Team : Coding Factory
+### Introduce 
+반려견 관련 종합 정보를 한 곳에서 얻기 힘든 구조여서 정보 수집에 어려움을 겪을 가능성이 높아 한 곳에서 정보를 얻을 수 있는  
+웹 페이지를 제작
 
 ## Link 
 <div>
@@ -11,11 +13,8 @@
 </a>
 </p>
 </div>
-<hr/>
 
-
-
-### 🛠stack
+## 🛠stack
 <p>
   <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/>
   <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=flat&logo=Javascript&logoColor=white"/>
