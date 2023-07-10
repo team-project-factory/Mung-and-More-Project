@@ -29,4 +29,4 @@
 </p>
 
 ## 프로젝트 시작하는 방법
-<code style : width:100%> npm i --force </code>
+<pre><code> npm i --force </code></pre>
