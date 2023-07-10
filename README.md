@@ -1,4 +1,7 @@
 # 🐶Mung & More🐶
+
+<img src="https://github.com/team-project-factory/Mung-and-More-Project/assets/125441996/ad49c5f5-81a4-4eab-9e4d-15713af2ae00">
+
 ### 소개 
 반려견 관련 종합 정보를 한 곳에서 얻을 수 있는  웹 페이지
 <h2>팀 : Coding Factory </h2>
