@@ -2,11 +2,11 @@
 ### 팀 : Coding Factory
 ## 조원
 <h4>팀장</h4>   
-고건 
+<p>고건: </p> 
 <h4>팀원</h4> 
-손예진:
-김두현: <a href="https://github.com/Kdddru>https://github.com/Kdddru</a>
-성지연
+<p>손예진</p>
+<p>김두현: <a href="https://github.com/Kdddru">https://github.com/Kdddru</a></p>
+<p>성지연: </p>
 ### 소개 
 반려견 관련 종합 정보를 한 곳에서 얻을 수 있는  웹 페이지
 
