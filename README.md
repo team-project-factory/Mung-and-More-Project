@@ -1,9 +1,11 @@
 # 🐶Mung & More🐶
 
-<img src="https://github.com/team-project-factory/Mung-and-More-Project/assets/125441996/e9e337be-c4d8-4a0b-bb73-5d3cd393a190">
 
 ### 소개 
 반려견 관련 종합 정보를 한 곳에서 얻을 수 있는  웹 페이지
+
+<img src="https://github.com/team-project-factory/Mung-and-More-Project/assets/125441996/e9e337be-c4d8-4a0b-bb73-5d3cd393a190">
+
 <h2>팀 : Coding Factory </h2>
 <p>고건: <a href="https://github.com/Ko-Keon">https://github.com/Ko-Keon</a></p> 
 <p>손예진: <a href="https://github.com/syzzny">https://github.com/syzzny</a></p>
