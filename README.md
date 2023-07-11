@@ -21,7 +21,7 @@
 ## 링크 
 <div>
 <p>
-  page : <a href="https://team-project-factory.github.io/Mung-and-More-Project/">https://team-project-factory.github.io/Mung-    and-More-Project/</a>
+  Page : <a href="https://team-project-factory.github.io/Mung-and-More-Project/">https://team-project-factory.github.io/Mung-    and-More-Project/</a>
 </p>
 <p>ppt : <a href= "https://www.canva.com/design/DAFjVxMqs3I/MGqVb5K4k7S8sezGfUuOQg/edit?utm_content=DAFjVxMqs3I&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">
   https://www.canva.com/design/DAFjVxMqs3I/MGqVb5K4k7S8sezGfUuOQg/edit?utm_content=DAFjVxMqs3I&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
