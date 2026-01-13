@@ -11,7 +11,6 @@ import { Link,useNavigate } from 'react-router-dom';
 import { db } from '../../../../data/firebase';
 import { getAuth, signOut, onAuthStateChanged, updateProfile, updatePassword, deleteUser } from "firebase/auth";
 import { doc, deleteDoc } from "firebase/firestore";
-import { useDispatch } from 'react-redux';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 
 
@@ -21,12 +20,10 @@ import {
   , LineStyle, Withdrawal, OutBtn, WithdrawalText, UlStyle, LiStyle, LogoutBtn, ContentWrap
 } from './styles/MyPageStylecomp'
 import { Nav } from '../../../../layout/Nav';
-import { loginUser } from '../LoginSlice';
 
 
 export default function MyPageComp() {
   const navigater = useNavigate();
-  const dispatch = useDispatch();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -37,7 +34,7 @@ export default function MyPageComp() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 추가: 로그인 상태
   const [photo, setPhoto] = useState('');
   //로그인 uid state
-  const [userImfor, setUserImfor] = useState('')
+  const [userImfor, setUserImfor] = useState('');
 
   useEffect(() => {
     // 추가: 로그인 상태 변경 감지
@@ -110,7 +107,7 @@ export default function MyPageComp() {
     });
   }
   
-  //회원탈퇴
+
   useEffect(()=>{
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
@@ -132,21 +129,26 @@ export default function MyPageComp() {
     const auth = getAuth();
     const user = auth.currentUser;
 
-    deleteUser(user).then(() => {
-      // User deleted.
-    }).catch((error) => {
-      // An error ocurred
-      // ...
-    });
+    console.log(user);
 
     //컬렉션 안의 유저 데이터 삭제
     const DeleteUserData = async() =>{
       await deleteDoc(doc(db, "users", userImfor));
     }
-    //세션정보 삭제
-    sessionStorage.removeItem('user');
+
+
+    deleteUser(user).then(() => {
+      // User deleted
+    }).catch((error) => {
+      // An error ocurred
+      // ...
+      console.log("회원 탈퇴 중 오류 발생:", error);
+    });
+    
     DeleteUserData();
+    sessionStorage.removeItem('user');
     navigater('/');
+
   }
 
   const handleSave = (e) => {
@@ -371,7 +373,7 @@ export default function MyPageComp() {
             <WithdrawalText>
               회원탈퇴 시 모든 데이터가 삭제됩니다.
             </WithdrawalText>
-            <OutBtn onClick={handleDeleteUser}>
+            <OutBtn type='button' onClick={handleDeleteUser}>
               회원탈퇴
             </OutBtn>
           </Withdrawal>

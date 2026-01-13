@@ -35,7 +35,6 @@ export const MainComp1 = () => {
   const wordRef = useRef();
 
   useEffect(() => {
-    console.log(wordRef.current.childNodes);
     const spans = wordRef.current.childNodes;
 
     spans.forEach((span, idx) => {
