@@ -1,12 +1,11 @@
 // Firebase
 import { auth, db } from "../../../../data/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 
 // React
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCartData } from "./CartListSlice";
 import { json, useNavigate } from "react-router-dom";
 
 // scss
@@ -17,7 +16,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
 
 // 우편번호 검색
-import DaumPostCode from "react-daum-postcode";
 import ReactDaumPost from "react-daumpost-hook";
 import { getOrderData } from "./OrderListSlice";
 

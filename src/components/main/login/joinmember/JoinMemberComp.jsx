@@ -233,7 +233,7 @@ export default function JoinMemberComp() {
     return (
         <ThemeProvider theme={theme}>
             <Wrap>
-                <JoinWrap src="../img/login.png" />
+                <JoinWrap src={process.env.PUBLIC_URL + "/img/logo.svg"} />
                 <Jointext>
                     <TextWrap>
                         <LogoImage src="../img/logo.svg" alt="" />

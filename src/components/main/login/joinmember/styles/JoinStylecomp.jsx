@@ -30,7 +30,7 @@ export const JoinWrap = styled.img`
     /* flex: 1.3 1 auto; */
     /* background-image: url('../assets/img/login.jpg');
     background-size: cover; */
-    height: 100%;
+    height: 5%;
 `
 export const Jointext = styled.div`
     flex: 1;
