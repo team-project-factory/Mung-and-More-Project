@@ -157,7 +157,7 @@ export default function MyPageComp() {
     const user = auth.currentUser;
 
     // 사용자 이름 업데이트
-    updateProfile(user, {
+    name && updateProfile(user, {
       displayName: name,
     })
       .then(() => {
@@ -273,6 +273,9 @@ export default function MyPageComp() {
                 onChange={handleInputChangeName}
               >
               </StyledInput>
+              {!name && (
+                <ErrorMsg>이름을 입력해주세요</ErrorMsg>
+              )}
             </StyledWrapper>
           </StyledFieldset>
           {/* 현재 비밀번호 */}
