@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -95,7 +94,7 @@ export default function MyPageComp() {
 
   const confirmPasswordErrorMessage = passwordError ? '비밀번호가 일치하지 않습니다.' : '';
 
-  const isButtonEnable = password && (name || (newPassword && confirmPassword));
+  const isButtonEnable = password && (name !== '' && (newPassword && confirmPassword));
 
   const handleLogOut = () => {
     const auth = getAuth();
