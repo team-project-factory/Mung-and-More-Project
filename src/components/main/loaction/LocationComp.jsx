@@ -12,7 +12,7 @@ import style from "./loactioncomp.module.scss";
 // 함수형 컴포넌트에서 인식하지 못함
 // 따라서 아래와 같이 window에서 kakao 객체를 뽑아서 사용
 
-const { kakao } = window;
+const kakao  = window.kakao;
 
 export const LocationComp = () => {
   const [cafes, setCafes] = useState("");
