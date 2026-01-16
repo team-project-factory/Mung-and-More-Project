@@ -12,8 +12,6 @@ import style from "./loactioncomp.module.scss";
 // 함수형 컴포넌트에서 인식하지 못함
 // 따라서 아래와 같이 window에서 kakao 객체를 뽑아서 사용
 
-const kakao  = window.kakao;
-
 export const LocationComp = () => {
   const [cafes, setCafes] = useState("");
   const [pathes, setPathes] = useState("");
@@ -60,6 +58,8 @@ export const LocationComp = () => {
       changeMarker(type, map);
     }
   }, [map]);
+
+  const kakao  = window.kakao;
 
   // 산책로 마커가 표시될 좌표 배열
   const pathPositions = [
