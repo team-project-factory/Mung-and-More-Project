@@ -19,8 +19,10 @@ export const LocationComp = () => {
   const [type, setType] = useState("path");
 
   // 아래 내용은 firebase에 작성한 데이터를 불러와 사용하는 내용
-  
+
   const [map, setMap] = useState(null);
+  
+  const kakao  = window.kakao;
   
   useEffect(() => {
     if (!window.kakao || !window.kakao.maps) return;
@@ -57,9 +59,7 @@ export const LocationComp = () => {
       createCafeMarkers();
       changeMarker(type, map);
     }
-  }, [map]);
-
-  const kakao  = window.kakao;
+  }, [map, kakao]);
 
   // 산책로 마커가 표시될 좌표 배열
   const pathPositions = [
