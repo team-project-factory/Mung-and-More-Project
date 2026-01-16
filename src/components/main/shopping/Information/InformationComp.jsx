@@ -131,7 +131,7 @@ export default function InformationComp() {
       ref={outside}
       className={style.infor_back}
       onClick={(e) => {
-        if (e.target == outside.current) {
+        if (e.target === outside.current) {
           navigater(-1);
         }
       }}
@@ -186,7 +186,7 @@ export default function InformationComp() {
                     취소
                   </button>
                   <button onClick={buyBtn} className={style.BuyBtn}>
-                    구매하기
+                    장바구니
                   </button>
                 </div>
               </div>

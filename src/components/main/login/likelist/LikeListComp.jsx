@@ -5,14 +5,12 @@ import {
   getDoc,
   updateDoc,
   arrayUnion,
-  arrayRemove,
-  getDocs,
-  collection,
+  arrayRemove
 } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 
 // react
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // component
 
@@ -61,7 +59,6 @@ export const LikeListComp = () => {
     const cart = docSnap.data().likeList;
 
     if (docSnap.exists()) {
-      console.log("Document data:", cart);
       setCartList(cart);
     } else {
       // docSnap.data() will be undefined in this case
@@ -75,13 +72,8 @@ export const LikeListComp = () => {
     }
   }, [userUID]);
 
-  if (likeList) {
-    console.log(likeList);
-  }
-
   // 좋아요 버튼
   const likeBtn = (item) => {
-    console.log(item);
     if (userUID) {
       if (!item.like) {
         const setLikeList = async () => {
