@@ -21,28 +21,35 @@ export const LocationComp = () => {
   const [type, setType] = useState("path");
 
   // 아래 내용은 firebase에 작성한 데이터를 불러와 사용하는 내용
-  useEffect(() => {
-    const getLocationList = async () => {
-      const querySnapshot2 = await getDoc(doc(db, "location", "path"));
-      setPathes(querySnapshot2.data().pathList);
-      const querySnapshot3 = await getDoc(doc(db, "location", "hospital"));
-      setHospitals(querySnapshot3.data().hospitalList);
-      const querySnapshot1 = await getDoc(doc(db, "location", "cafe"));
-      setCafes(querySnapshot1.data().cafeList);
-    };
-    getLocationList();
-  }, []);
-
+  
   const [map, setMap] = useState(null);
-
+  
   useEffect(() => {
+    if (!window.kakao || !window.kakao.maps) return;
+    
     const container = document.getElementById("map");
     const options = {
       center: new kakao.maps.LatLng(35.154488, 129.059278),
       level: 8,
     };
+    
     const newMap = new kakao.maps.Map(container, options);
+    
     setMap(newMap);
+  }, []);
+  
+  useEffect(() => {
+    const getLocationList = async () => {
+      const querySnapshot2 = await getDoc(doc(db, "location", "path"));
+      const querySnapshot3 = await getDoc(doc(db, "location", "hospital"));
+      const querySnapshot1 = await getDoc(doc(db, "location", "cafe"));
+
+      setPathes(querySnapshot2.data().pathList);
+      setHospitals(querySnapshot3.data().hospitalList);
+      setCafes(querySnapshot1.data().cafeList);
+    };
+
+    getLocationList();
   }, []);
 
   useEffect(() => {
