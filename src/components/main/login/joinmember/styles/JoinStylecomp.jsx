@@ -1,4 +1,3 @@
-import { CheckBox } from '@mui/icons-material';
 import { TextField, IconButton, FilledInput, FormControlLabel, Box } from '@mui/material';
 import styled from 'styled-components';
 
