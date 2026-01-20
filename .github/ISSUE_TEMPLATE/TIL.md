@@ -19,35 +19,23 @@ Material-UI 오류 --> node 20 버전으로  npm i 진행하면서 5버전이 �
 (cmd)
 
 ~~~
-rmdir /s /q node_modules   <!-- nodemodule 삭제 -->
+rmdir /s /q node_modules   ( nodemodule 삭제 )
 
 
-del package-lock.json      
-
---> package-lock 삭제
+del package-lock.json    ( package-lock 삭제 )
 
 
-npm cache clean --force    
-
---> npm cache 삭제
+npm cache clean --force   ( npm cache 삭제 )
 
 
-npm install --legacy-peer-deps   
-
---> 충돌 무시
+npm install --legacy-peer-deps  (충돌 무시 설치)
 
 
-npx browserslist@latest --update-db 
-
--->  browserslist 업데이트
+npx browserslist@latest --update-db  ( browserslist 업데이트 )
 
 
-npm install @mui/styles --legacy-peer-deps  
+npm install @mui/styles --legacy-peer-deps  ( MUI 설치)
 
---> MUI 설치
-
-npm install ajv@6 ajv-keywords@3 --legacy-peer-deps 
-
---> ajv 6버전 설치
+npm install ajv@6 ajv-keywords@3 --legacy-peer-deps ( ajv 6버전 설치 )
 ~~~
 
