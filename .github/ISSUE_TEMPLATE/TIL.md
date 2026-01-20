@@ -16,7 +16,8 @@ Material-UI 오류 --> node 20 버전으로  npm i 진행하면서 5버전이 �
 
 - nvm 통해 node 20, npm 10 버전 설치
 
-(cmd) 
+(cmd)
+
 rmdir /s /q node_modules   -- nodemodule 삭제
 
 del package-lock.json      -- package-lock 삭제
