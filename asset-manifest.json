@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/Mung-and-More-Project/static/css/main.3fb549bc.css",
+    "main.js": "/Mung-and-More-Project/static/js/main.d4db3d58.js",
+    "static/js/453.e35c0169.chunk.js": "/Mung-and-More-Project/static/js/453.e35c0169.chunk.js",
+    "static/media/cart_dog.gif": "/Mung-and-More-Project/static/media/cart_dog.232db36f5e9b6133f219.gif",
+    "static/media/SUITE-Regular.ttf": "/Mung-and-More-Project/static/media/SUITE-Regular.3d2969701e37ae1248ea.ttf",
+    "static/media/SUITE-Medium.ttf": "/Mung-and-More-Project/static/media/SUITE-Medium.82c1a60423eb8bf63eaa.ttf",
+    "static/media/SUITE-SemiBold.ttf": "/Mung-and-More-Project/static/media/SUITE-SemiBold.746b4511349e3684f7ef.ttf",
+    "static/media/SUITE-Bold.ttf": "/Mung-and-More-Project/static/media/SUITE-Bold.9c8b349a44c589450a7a.ttf",
+    "static/media/basicprofile.png": "/Mung-and-More-Project/static/media/basicprofile.3d17152963f73fd034f0.png",
+    "static/media/slick.svg": "/Mung-and-More-Project/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/Mung-and-More-Project/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/Mung-and-More-Project/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/Mung-and-More-Project/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/Mung-and-More-Project/index.html",
+    "main.3fb549bc.css.map": "/Mung-and-More-Project/static/css/main.3fb549bc.css.map",
+    "main.d4db3d58.js.map": "/Mung-and-More-Project/static/js/main.d4db3d58.js.map",
+    "453.e35c0169.chunk.js.map": "/Mung-and-More-Project/static/js/453.e35c0169.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3fb549bc.css",
+    "static/js/main.d4db3d58.js"
+  ]
+}
