@@ -49,6 +49,6 @@
 or
 <p>우측 상단 Add file로 다운로드</p>
 <h4>터미널</h4>
-<pre><code> npm i --force </code></pre>
+<pre><code> npm install --legacy-peer-deps </code></pre>
 <pre><code> npm start </code></pre>
 
