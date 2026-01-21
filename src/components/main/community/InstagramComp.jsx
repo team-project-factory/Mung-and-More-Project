@@ -316,13 +316,16 @@ export default function InstagramComp() {
                       ></div>
                       <p className={style.userBox}>{c.name}</p>
                       <p className={style.userComment}>{c.comment}</p>
-                      <span
-                        onClick={() => {
-                          deleteBtn(c);
-                        }}
-                      >
-                        삭제
-                      </span>
+                      {
+                        uid === c.id && 
+                        <span
+                          onClick={() => {
+                            deleteBtn(c);
+                          }}
+                        >
+                          삭제
+                        </span>
+                      }
                     </li>
                   ))}
               </ul>

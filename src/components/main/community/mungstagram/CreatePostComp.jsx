@@ -119,7 +119,13 @@ export default function CreatePostComp() {
       });
       console.log("Document written with ID: ", docRef.id);
     }
-    setData();
+    if(inputTitle & inputDes){       
+      setData();
+    }
+    else{
+      alert('제목과 작성글 작성해달라 멍!');
+    }
+    
     /*const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
     } else {
@@ -155,46 +161,50 @@ export default function CreatePostComp() {
 
   return (
     <div>
-      <div className='create-container'>
-      <h2>New Post</h2>
-      <span>Title  </span>
-      <input
-      className='title-1'
-      placeholder='20자 이내로 입력'
-      type="text" value={inputTitle} onChange={handleTitleChange} /> <br />
-
-      <span>Sub Title  </span>
-      <input 
-      className='sub-title-1'
-      placeholder='50자 이내로 입력'
-      type="text" value={inputSub} onChange={handleSubChange} /> <br />
-
-      <span>Location  </span>
-      <input className='location-1'
-      placeholder='ex) 부산 / 서면 / 멍앤모어'
-      type="text" value={inputLocation} onChange={handleLocationChange} /> <br />
-
-      <span>Hashtag  </span>
-      <input 
-      placeholder='ex) #Mung #and #More'
-      className='hash-tag-1'
-      type="text" value={inputHash} onChange={handleHashChange} /> <br />
-
-      <span>Description  </span>
-      <textarea 
-      className='des-1'
-      type="text" value={inputDes} onChange={handleDesChange} /> <br />
-
-      <span>Pictures  </span>
-      <div className='pictures-wrap'>
-      <input 
-      className='img-1'
-      style={{height:'24px', borderColor:'transparent', padding:'0'}}
-      type="file" multiple={true} onChange={handleFile} /> <br />
-      </div>
-
-      </div>
-      <button className='complete-btn' onClick={addPost}>작성 완료</button>
+      {
+        isLoggedIn && <div>
+          <div className='create-container'>
+          <h2>New Post</h2>
+          <span>Title  </span>
+          <input
+          className='title-1'
+          placeholder='20자 이내로 입력'
+          type="text" value={inputTitle} onChange={handleTitleChange} /> <br />
+    
+          <span>Sub Title  </span>
+          <input 
+          className='sub-title-1'
+          placeholder='50자 이내로 입력'
+          type="text" value={inputSub} onChange={handleSubChange} /> <br />
+    
+          <span>Location  </span>
+          <input className='location-1'
+          placeholder='ex) 부산 / 서면 / 멍앤모어'
+          type="text" value={inputLocation} onChange={handleLocationChange} /> <br />
+    
+          <span>Hashtag  </span>
+          <input 
+          placeholder='ex) #Mung #and #More'
+          className='hash-tag-1'
+          type="text" value={inputHash} onChange={handleHashChange} /> <br />
+    
+          <span>Description  </span>
+          <textarea 
+          className='des-1'
+          type="text" value={inputDes} onChange={handleDesChange} /> <br />
+    
+          <span>Pictures  </span>
+          <div className='pictures-wrap'>
+          <input 
+          className='img-1'
+          style={{height:'24px', borderColor:'transparent', padding:'0'}}
+          type="file" multiple={true} onChange={handleFile} /> <br />
+          </div>
+    
+          </div>
+          <button className='complete-btn' onClick={addPost}>작성 완료</button>
+        </div>
+      }
     </div>
   );
 }
