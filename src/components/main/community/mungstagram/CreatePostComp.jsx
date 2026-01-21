@@ -119,7 +119,7 @@ export default function CreatePostComp() {
       });
       console.log("Document written with ID: ", docRef.id);
     }
-    if(inputTitle & inputDes){       
+    if(inputTitle && inputDes){       
       setData();
     }
     else{
