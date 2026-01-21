@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Mung-and-More-Project/static/css/main.3fb549bc.css",
-    "main.js": "/Mung-and-More-Project/static/js/main.d4db3d58.js",
+    "main.js": "/Mung-and-More-Project/static/js/main.5efef871.js",
     "static/js/453.e35c0169.chunk.js": "/Mung-and-More-Project/static/js/453.e35c0169.chunk.js",
     "static/media/cart_dog.gif": "/Mung-and-More-Project/static/media/cart_dog.232db36f5e9b6133f219.gif",
     "static/media/SUITE-Regular.ttf": "/Mung-and-More-Project/static/media/SUITE-Regular.3d2969701e37ae1248ea.ttf",
@@ -15,11 +15,11 @@
     "static/media/slick.woff": "/Mung-and-More-Project/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/Mung-and-More-Project/index.html",
     "main.3fb549bc.css.map": "/Mung-and-More-Project/static/css/main.3fb549bc.css.map",
-    "main.d4db3d58.js.map": "/Mung-and-More-Project/static/js/main.d4db3d58.js.map",
+    "main.5efef871.js.map": "/Mung-and-More-Project/static/js/main.5efef871.js.map",
     "453.e35c0169.chunk.js.map": "/Mung-and-More-Project/static/js/453.e35c0169.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3fb549bc.css",
-    "static/js/main.d4db3d58.js"
+    "static/js/main.5efef871.js"
   ]
 }
